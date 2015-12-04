@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi" lang="vi" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title><%=title%></title>
+<link rel="stylesheet" type="text/css" href="/css/scrum-master.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/scrum.role.css" media="all">
+<link href="/css/font/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+<link href="/css/time.scroll.css" rel="stylesheet" type="text/css">
+</head>
+<body class="crum-master-bg">
+    <div id="header">
+        <div class="table">
+            <div class="table-cell">
+                <a href="/"><img src="/image/kanban.png" alt="kanban"></a>
+            </div>
+            <% if(req.session.authenticated) { %>
+            <div class="table-cell">
+                <select role="localtion" name="project_id">
+                    <option>list project</option>
+                    <option value="/?pid=1">pro-cy</option>
+                    <option value="/?pid=2">pro-yk</option>
+                    <option value="/?pid=3">pro-csu</option>
+                </select>
+            </div>
+            <div class="table-cell">
+                <a class="boxpup" href="/task/create" ><i class="fa fa-plus-square"></i>&nbsp; add task</a>
+            </div>
+            <div class="table-cell">
+                <a href="#" class="trash" ><strong><i class="fa fa-trash-o"></i></strong></a>
+            </div>
+            <% } %>
+            <div class="table-cell free-cell"></div>
+            <% if(req.session.authenticated) { %>
+            <% if(res.locals.sysSprint) { %>
+            <div class="table-cell">
+                <select role="localtion" name="project_id">
+                  <% for(var i = 0 ; i < res.locals.sysSprint.length; i++) {%>
+                    <option <%if(res.locals.sysSid == res.locals.sysSprint[i]['id']) {%>selected="selected"<%}%> value="/?pid=<%=res.locals.sysPid%>&sid=<%=res.locals.sysSprint[i]['id']%>">Sprint <%=res.locals.sysSprint[i]['sprint_name']%></option>
+                  <%}%>
+                </select>
+            </div>
+            <div class="table-cell no-border">
+                
+            </div>
+            <%}%>
+            <div class="table-cell admin-menu">
+                <a href="javascript:void(0);" onclick="$(this).parents('.admin-menu').toggleClass('active').find('.menu-list').focus().blur(function() { var $this=$(this); setTimeout( function() { $this.parents('.admin-menu').removeClass('active'); }, 300); } );" ><i class="fa fa-plus-square"></i>&nbsp; new sprint</a>
+              <form method="POST" action="/project/addsprint">
+                <ul class="menu-list">
+                    <li><input class="datetime" type="text" placeholder="Ngày bắt đầu" name="start_date" /></li>
+                    <li><input class="datetime" type="text" placeholder="Ngày kết thúc" name="end_date" /></li>
+                    <li><button type="submit">Add</button>&nbsp;&nbsp;&nbsp;<button type="reset" onclick="$(this).parents('.admin-menu').removeClass('active');">Close</button></li>
+                </ul>
+                <input type="hidden" name="project_id" value="1" />
+              </form>
+            </div>
+            <%if(res.locals.isAdmin) { %>
+            <div class="table-cell admin-menu">
+                <a href="javascript:;" onclick="$(this).parents('.admin-menu').toggleClass('active').find('.menu-list').focus().blur(function() { var $this=$(this); setTimeout( function() { $this.parents('.admin-menu').removeClass('active'); }, 300); } );" ><i class="fa fa-cog"></i>&nbsp; Config dự án</a>
+                <ul class="menu-list" tabindex="100">
+                    <li><a href="/project/add"><i class="fa fa-users"></i>&nbsp; New Project</a></li>
+                    <li><a href="/user/join"><i class="fa fa-user"></i>&nbsp; New Member</a></li>
+                </ul>
+            </div>
+            <% } %>
+            <div class="table-cell">
+                <a href="/logout" ><i class="fa fa-sign-out"></i>&nbsp; logout</a>
+            </div>
+            <% } %>
+        </div>
+        <div id="butterbar" class="butterbar clearfix">
+            <div class="wrapper">
+            <%if(res.locals.message) {%>
+                <% for(var mess in res.locals.message) {%>
+                    <p class="alert"><%=res.locals.message[mess]%></p>
+                <% } %>
+            <%}%>
+            </div>
+            <a class="close"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+    <div class="wrapper">
+        <%- body %>
+    </div>
+    <overlay></overlay>
+</body>
+<script src="/js/jquery.min.js"></script>
+</html>

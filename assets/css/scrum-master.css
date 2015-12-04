@@ -1,0 +1,485 @@
+@CHARSET "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #f9f9f9;
+    color: rgb(0, 0, 0);
+    font-family: sans-serif,tahoma,verdana,arial;
+    font-size: 12px;
+}
+#header {
+    position: relative;
+    margin: 0 auto;
+}
+.clearfix:AFTER{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+.t {
+    transition: all 0.35s ease 0s;
+}
+.wrapper {
+    position: relative;
+    width: 1424px;
+    margin: 0 auto;
+}
+.wrapper2 {
+    position: relative;
+    width: 98%;
+    margin: 0 auto;
+    min-width: 1424px;
+}
+.project-title {
+    text-align: center;
+    font-size: 50px;
+}
+.task {
+    padding-top: 10px;
+}
+.task-item{
+    font-size: 15px;
+    box-shadow: 3px 3px 5px 1px rgba(16, 25, 34, 0.26);
+    border: solid 1px rgba(16, 25, 34, 0.16);
+    background-color: #00aeef;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 25px 5px 10px 5px;
+    font-size: 16px;
+    position: relative;
+    min-height: 150px;
+    margin-bottom: 5px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.task-item a{
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.task-item.green{
+    background-color: #00aeef;
+}
+.task-item.orange{
+    background-color: orange;
+}
+.task-item.red{
+    background-color: #fc0303;
+}
+.task-item .id-ticket{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-right: rgba(16, 25, 34, 0.26) solid 1px;
+    border-bottom: rgba(16, 25, 34, 0.26) solid 1px;
+    padding: 2px 6px;
+}
+.task-item .task-name{
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.task .task-item.sleep{
+    height: 0px;
+    overflow: hidden;
+    min-height: 0px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+.task-item.sleep .member-name{
+    padding-top: 20px;
+}
+.task-item.sleep .task-name{
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    left: 45px;
+    font-size: 13px;
+    height: 1em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 168px;
+    overflow: hidden;
+}
+.task-item.sleep .id-ticket{
+    font-size: 13px;
+}
+.task-item p{
+    padding: 5px 0px;
+}
+.first-cell{
+    position: relative;
+}
+.first-cell .author{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    white-space: nowrap;
+    line-height: 100%;
+    display: table;
+}
+.first-cell .author b{
+    display: table-cell;
+    vertical-align: middle;
+}
+table.scrum {
+    width: 100%;
+    border-collapse: collapse;
+}
+table.scrum th,
+table.scrum td {
+    width: 16.7%;
+    border: rgba(16, 25, 34, 0.26) solid 2px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+table.scrum th {
+    font-size: 26px;
+}
+table.scrum tr {
+    position: relative;
+}
+table.scrum tr .author{
+    position: absolute;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    vertical-align: middle;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 20px;
+    font-size: 150%;
+    border: none;
+    width: auto;
+}
+table.scrum td {
+    vertical-align: top;
+    padding-bottom: 20px;
+}
+/*Start Spriter*/
+.icon {
+    background-image: url(../image/preview_af_1.png);
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+/*End Spriter*/
+.task-item .tool{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    font-size: 14px;
+}
+.task-item .tool li{
+    list-style-type: none;
+}
+.task-item .tool > li{
+    float: left;
+    margin-left: 5px;
+}
+.task-item.sleep .tool{
+    display: none;
+}
+.task-item .tool .change-status ul{
+    box-shadow: 3px 3px 5px 1px rgba(16, 25, 34, 0.26);
+    border: solid 1px rgba(16, 25, 34, 0.16);
+    border-radius: 3px;
+    position: absolute;
+    top: 120%;
+    left: 0px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.task-item .tool .change-status ul li{
+    border-top: solid 1px rgba(16, 25, 34, 0.2);
+    border-bottom: solid 1px rgba(16, 25, 34, 0.2);
+    padding: 3px 5px;
+    background-color: #396a9a;
+}
+.task-item .tool .change-status ul li:HOVER{
+    background-color: #265787;
+}
+.task-item .tool .change-status {
+    position: relative;
+}
+/*#Start task form*/
+.task-form {
+    position: relative;
+    min-width: 300px;
+    min-height: 150px;
+    padding: 50px 3px 3px 3px;
+    font-size: 13px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.task-form .ticket_id{
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 50px;
+}
+input[type="email"],
+input[type="password"],
+input[type="text"]{
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    border-radius: 2px;
+    color: #555555;
+    padding: 3px 5px;
+    box-sizing: border-box;
+}
+button{
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    border-radius: 2px;
+    color: #555555;
+    box-sizing: border-box;
+    padding: 2px 6px;
+}
+button:FOCUS,
+input[type="email"]:FOCUS,
+input[type="password"]:FOCUS,
+input[type="text"]:FOCUS,
+input[type="email"]:FOCUS,
+textarea:FOCUS {
+    border-color: rgba(82, 168, 36, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset 0 0 8px rgba(82, 168, 236, 0.6);
+}
+.task-form .type {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+.task-form .type label{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.task-form .type label:FOCUS{
+    border-color: rgba(82, 168, 36, 0.8);
+    box-shadow: 5px 1px 1px rgba(0, 0, 0, 0.075) outset 3px 0 8px rgba(82, 168, 236, 0.6);
+}
+.task-form .type label input[type="radio"]{
+    visibility: visible;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.task-form.red,
+.task-form .type .red{
+    background-color: #fc0303;
+}
+.task-form.green,
+.task-form .type .green{
+    background-color: #00aeef;
+}
+.task-form.orange,
+.task-form .type .orange{
+    background-color: orange;
+}
+.task-form .task_name{
+    width: 100%;
+}
+.task-form .start_time,
+.task-form .end_time{
+    width: 120px;
+}
+/*#End task form*/
+.table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+#header{
+    padding: 5px 10px;
+    background-color: #dfecf9;
+    box-shadow: 0.5px 0.5px 0.5px rgba(108, 124, 139, 0.7);
+}
+#header .table{
+    white-space: nowrap;
+}
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+#header .table-cell:not(.no-border){
+    border-left: 1px #fff solid; 
+}
+#header .table-cell{
+    padding: 3px 10px;
+}
+#header .table-cell:FIRST-CHILD{
+    border-left: none; 
+}
+#header .table-cell.free-cell{
+    width: 100%;
+}
+.no-list li{
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: #3b5998;
+}
+select:HOVER,
+a:HOVER {
+    color: #002c88;
+    text-shadow: 0.3px 0.3px rgba(12, 75, 207, 0.5)
+}
+select{
+    color: #3b5998;
+    background-color: transparent;
+    border: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: 1px 10px 2px 6px;
+    cursor: pointer;
+    background: url('../image/select.png') no-repeat right center;
+}
+select option{
+    padding: 3px 5px 2px 6px;
+}
+#header .trash{
+    font-size: 20px;
+}
+.butterbar{
+    padding: 11px 50px 11px 50px;
+    position: absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background-color: #f9edbe;
+    border-color: #f0c36d;
+    color: #333;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 11px;
+    overflow: hidden;
+    text-align: center;
+    border-width: 1px;
+    opacity: 0;
+    -webkit-transition: height 0.5s;
+    visibility: hidden;
+    height: 0;
+    z-index: 9;
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -moz-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes alert {
+    0%   {background-color: #ffffff;}
+    100% {background-color: #f9edbe;}
+}
+
+/* Standard syntax */
+@keyframes alert {
+    0%   {background-color: #ffffff;}
+    100% {background-color: #f9edbe;}
+}
+.butterbar.active {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    -webkit-animation-name: alert; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 0.15s; /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: 5; /* Chrome, Safari, Opera */
+    -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
+    animation-name: alert;
+    animation-duration: 0.15s;
+    animation-iteration-count: 5;
+    animation-direction: alternate;
+}
+.butterbar .wrapper p{
+    text-align: left;
+    display: block;
+}
+.butterbar .close{
+    font-size: 15px;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 5px;
+}
+.butterbar .alert{
+    color: #f04124;
+}
+.butterbar .notice{
+    color: #43ac6a;
+}
+.login{
+    display: table;
+    position: relative;
+    margin: 0 auto;
+}
+.login fieldset{
+    padding: 35px 20px 10px 20px;
+    background-color: #dfecf9;
+    box-shadow: 1px 1px 0.5px -1.5px rgba(16, 25, 34, 0.26);
+    border: solid 1px rgba(16, 25, 34, 0.16);
+    color: rgba(16, 25, 34, 0.8);
+}
+.login legend{
+    padding: 35px 20px 10px 20px;
+    background-color: #dfecf9;
+    color: rgba(16, 25, 34, 0.8);
+    border: solid 1px rgba(16, 25, 34, 0.16);
+    border-radius: 3px;
+}
+.login fieldset td,
+.login fieldset th{
+    padding: 5px;
+}
+.login fieldset th{
+    text-align: right;
+}
+.login fieldset legend{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0px 3px;
+}
+.login select{
+    border: solid 1px rgba(16, 25, 34, 0.16);
+    padding: 1px 2px 1px;
+    background-origin: content-box;
+}
+table.border {
+	border-collapse: collapse;
+	width: 100%;
+}
+table.border tr:FIRST-CHILD{
+	background-color: #a4c7f6 !important;
+}
+table.border tr:nth-child(odd){
+	background-color: #d0d4b9;
+}
+table.border tr:nth-child(even){
+	background-color: #cbfadc;
+}
+table.border th,
+table.border td{
+	text-align: center;
+	border: solid 1px rgba(16, 25, 34, 0.16);
+}
