@@ -16,10 +16,5 @@ module.exports = {
         }
         res.view('admin/login');
     },
-    doLogin: function(req, res) {
-        var username = req.param("user_name");
-        var password = req.param("password");
-        res.view('admin/login');
-    },
 };
 

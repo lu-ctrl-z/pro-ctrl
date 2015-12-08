@@ -40,8 +40,8 @@ module.exports.routes = {
       }
   },
   'post /admin/login/': {
-      controller: 'AdminController',
-      action: 'doLogin',
+      controller: 'UserController',
+      action: 'doLoginAdmin',
       locals: {
           layout: 'layouts/admin_layout'
       }

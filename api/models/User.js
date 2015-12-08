@@ -43,5 +43,80 @@ module.exports = {
             defaultsTo: 1
         }
     },
+    getLoginAdmin: function($username, $password, cb) {
+        var data = User.findOne({
+            or : [
+                    { user_name: $username },
+                    { email: $username }
+                  ]
+        }, function(err, usr) {
+            if (err) {
+                cb({flag: false, message: 'DB Error!'});
+            } else if(usr) {
+                var bcrypt = require('bcrypt-nodejs');
+                var i = bcrypt.compare($password, usr.password, function(err, valid) {
+                    if(err || !valid) {
+                        cb({flag: false, message: 'username và password không đúng, hãy thử lại!'});
+                    } else {
+                        cb({flag: true, message: 'OK!', user: usr});
+                    }
+                });
+            } else {
+                cb({flag: false, message: 'username không đúng, hãy thử lại!'});
+            }
+        });
+        return;
+    },
+    searchUserNotInProject: function (user_name, email) {
+        var query = 'SELECT u.* FROM m_users u ';
+        query += ' LIMIT 1';
+        var data = [];
+        var param = [];
+        User.query(query, param, function(err, users) {
+            if (err) return console.log(err);
+            GLOBAL.data =  users;
+            return users;
+        });
+        return GLOBAL.data;
+    },
+    findallStudents:function (req,res) {
+		var id = req.param('id');
+		Student.findOne({stdid:id})
+				.then(function(stdData){
+						//If no student found
+						if(stdData===undefined)
+								return res.json({notFound:true});
+						// Store Class Data	
+						var classData = Classroom.findOne({classid:stdData.classroom})
+												 .then(function(classData){
+
+												 		var new_data = classData;
+												 				delete new_data.createdAt;
+												 				delete new_data.updatedAt;
+												 		return new_data;
+
+												 });
+						var std_data = Student.find({classroom:stdData.classroom})
+											  .then(function(allData){
+														var new_data = allData;
+												 				delete new_data.createdAt;
+												 				delete new_data.updatedAt;
+												 		return new_data;
+											  });
+						return [classData,std_data];					  	
+				})
+				.spread(function(classData,stdData){
+
+					var newJson = {};
+						newJson.classname = classData.name;
+						newJson.students = stdData;
+					return res.json({notFound:false, data:newJson});
+				})
+				.fail(function(err){
+					console.log(err);
+					res.json({notFound:true,error:err});
+				});
+
+	}
 };
 
