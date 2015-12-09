@@ -87,4 +87,35 @@ module.exports = {
         }, 6);
         return;
     },
+    /**
+     * login as auto login
+     * @params $token => values of auto login name 
+     * @params cd callback function
+     */
+    loginAsAutoLogin: function($token, cb) {
+        var $now = new Date();
+        AutoLogin.findOne({
+            token : $token,
+            expire : {
+                '>=' : $now
+            }
+        }, function(err, record) {
+            if (err) {
+                cb(false);
+            } else if (record) {
+                var $user_id = record.user_id;
+                User.findOne({
+                    id: $user_id
+                }, function(err, user) {
+                    if (err) {
+                        cb();
+                    } else if(user) {
+                        cb(user);
+                    }
+                });
+            } else {
+                cb(false);
+            }
+        });
+    },
 };

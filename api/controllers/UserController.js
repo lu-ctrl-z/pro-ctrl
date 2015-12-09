@@ -21,14 +21,18 @@ module.exports = {
                     else
                         return res.redirect('/');
                 }
-                AutoLogin.createAutoLogin($data.user.id, function($tokenData) {
-                    if($tokenData.token) {
-                        var now = new Date();
-                        var $maxAge = $tokenData.expire.getTime() - now.getTime();
-                        res.cookie(sails.config.common.auto_login_name, $tokenData.token, { maxAge: $maxAge});
-                    }
+                if($loginPre) {
+                    AutoLogin.createAutoLogin($data.user.id, function($tokenData) {
+                        if($tokenData.token) {
+                            var now = new Date();
+                            var $maxAge = $tokenData.expire.getTime() - now.getTime();
+                            res.cookie(sails.config.common.auto_login_name, $tokenData.token, { maxAge: $maxAge});
+                        }
+                        return redirect();
+                    });
+                } else {
                     return redirect();
-                });
+                }
                 //#########################
             } else {
                 res.view('admin/login', {
