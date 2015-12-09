@@ -9,10 +9,12 @@
 <form class="login" method="POST" action="/admin/login/">
     <fieldset>
         <!-- legend>Login</legend -->
+        <h1 class="headForm">Login <%=sails.config.common.site_name%></h1>
         <table>
-            <tr><th>User name :</th><td><input type="text" name="user_name" tabindex="1"></td></tr>
-            <tr><th>Password :</th><td><input type="password" name="password" tabindex="2"></td></tr>
-            <tr><th></th><td><button tabindex="3">Login</button></td></tr>
+            <tr><th><%-__('Username or email')%> :</th><td><input autofocus="autofocus" type="text" name="user_name" tabindex="1"></td></tr>
+            <tr><th><%=__('Password')%> :</th><td><input type="password" name="password" tabindex="2"></td></tr>
+            <tr><th></th><td><label class="uiLabelCheckbox"><input type="checkbox" name="rememberme" tabindex="3"><%=__('Keep me login')%></label></td></tr>
+            <tr><th></th><td><button tabindex="4"><%=__('Login')%></button></td></tr>
         </table>
     </fieldset>
 </form>

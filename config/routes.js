@@ -21,6 +21,10 @@
  */
 
 module.exports.routes = {
+  '*': function(req, res, next) {
+      res.setLocale((req.session.user && req.session.user.lang) || sails.config.i18n.defaultLocale); 
+      return next();
+  },
   '/': {
       controller: 'MainController',
       action: 'index'

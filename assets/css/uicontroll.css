@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+.uiLabelCheckbox{
+  position: relative;
+  padding-left: 18px;
+}
+.uiLabelCheckbox > input[type="checkbox"]{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
