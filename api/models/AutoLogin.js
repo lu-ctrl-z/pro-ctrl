@@ -118,4 +118,12 @@ module.exports = {
             }
         });
     },
+    /**
+     * disable autologin 
+     */
+    disableAutoLogin: function($token, cb) {
+        AutoLogin.destroy({token: $token}, function(err, ret) {
+            cb();
+        });
+    }
 };

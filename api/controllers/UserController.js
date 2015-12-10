@@ -10,16 +10,17 @@ module.exports = {
         var $username = req.param("user_name");
         var $password = req.param("password");
         var $loginPre = req.param("rememberme");
+        var $next = req.param("next");
         User.getLoginAdmin($username, $password, function($data) {
             if ($data.flag == true) {
                 req.session.authenticated = true;
                 req.session.user = $data.user;
                 //#########################
                 var redirect = function() {
-                    if ($data.user.auth_type == 2)
+                    if ($data.user.auth_type == 2 && !$next)
                         return res.redirect('/admin/');
                     else
-                        return res.redirect('/');
+                        return res.redirect($next);
                 }
                 if($loginPre) {
                     AutoLogin.createAutoLogin($data.user.id, function($tokenData) {
@@ -36,9 +37,24 @@ module.exports = {
                 //#########################
             } else {
                 res.view('admin/login', {
-                    message : res.i18n($data.message)
+                    message : res.i18n($data.message),
+                    next: $next
                 });
             }
         });
+    },
+    doLogout: function(req, res) {
+        var $token = req.cookies[sails.config.common.auto_login_name];
+        var doLogout = function() {
+            req.session.authenticated = false;
+            delete req.session.user;
+            res.cookie(sails.config.common.auto_login_name, $token, { maxAge: -1});
+            return res.redirect('/');
+        };
+        if($token) {
+            AutoLogin.disableAutoLogin($token, doLogout);
+        } else {
+            doLogout();
+        }
     },
 };

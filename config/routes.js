@@ -29,26 +29,58 @@ module.exports.routes = {
       controller: 'MainController',
       action: 'index'
   },
-  '/admin/': {
+  '/admin': {
       controller: 'AdminController',
       action: 'index',
       locals: {
           layout: 'layouts/admin_layout'
       }
   },
-  'get /admin/login/': {
+  'get /admin/login': {
       controller: 'AdminController',
       action: 'login',
       locals: {
           layout: 'layouts/admin_layout'
       }
   },
-  'post /admin/login/': {
+  'post /admin/login': {
       controller: 'UserController',
       action: 'doLoginAdmin',
       locals: {
           layout: 'layouts/admin_layout'
       }
   },
-  
+  '/logout': {
+      controller: 'UserController',
+      action: 'doLogout',
+  },
+  //create user in admin
+  'get /admin/user/create': {
+      controller: 'AdminController',
+      action: 'userForm',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  '/admin/user': {
+      controller: 'AdminController',
+      action: 'index',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'get /admin/user/add': {
+      controller: 'AdminController',
+      action: 'userForm',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'post /admin/user/add': {
+      controller: 'AdminController',
+      action: 'addUser',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
 };

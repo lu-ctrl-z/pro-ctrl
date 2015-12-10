@@ -1,0 +1,104 @@
+@CHARSET "UTF-8";
+.adminMainScreen {
+    position: relative;
+    width: 1350px;
+    margin: 0 auto;
+    padding-top: 8px;
+}
+ul,li{
+	list-style-type: none;
+}
+.mainMenu {
+    float: left;
+    width: 150px;
+    box-sizing: border-box;
+}
+.menu li > a {
+	font-size: 11px;
+	display: block;
+	color: #333;
+	border-radius: 2px;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 8px;
+}
+.menu li > a:HOVER {
+	background-color: #dcdee3;
+}
+.menu > li > a > i{
+	font-size: 16px;
+	margin-right: 4px;
+}
+.subMenu > li > a > i{
+	font-size: 12px;
+	margin-right: 4px;
+	margin-left: 18px;
+}
+.mainMenu .sub{
+	color: #9197a3;
+    font-size: 11px;
+    font-weight: bold;
+}
+.detailAction{
+	width: 1020px;
+	float: left;
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+.search input[type="search"] {
+	width: 100%;
+}
+.search-has-button{
+	position: relative;
+	width: 280px;
+}
+.search-has-button .button-submit{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	box-sizing: border-box;
+}
+.sub-right{
+	color: #3b5998;
+	font-size: 14px;
+	margin-bottom: 10px;
+	font-weight: normal;
+	background-color: #dcdee3;
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+.data-grid{
+	font-size: 11px;
+	margin-top: 20px;
+}
+.data-grid-table tr,
+.data-grid-table th,
+.data-grid-table td,
+.data-grid-table{
+	border: 1px solid #9197a3;
+	border-collapse: collapse;
+	padding: 4px;
+	text-align: center;
+}
+.data-grid-table tr:nth-child(even){
+	background-color: #dcdee5;
+}
+.data-grid-table{
+    width: 100%;
+}
+.data-form{
+	background-color: #fff;
+	padding: 15px 25px 10px 10px;
+	border-radius: 5px;
+}
+.data-form th{
+	text-align: right;
+	padding-right: 10px;
+	padding: 10px;
+}
+.data-form input[type="text"],
+.data-form input[type="email"],
+.data-form input[type="password"]{
+	width: 228px;
+}

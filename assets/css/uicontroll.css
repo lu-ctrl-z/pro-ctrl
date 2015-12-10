@@ -3,8 +3,16 @@
   position: relative;
   padding-left: 18px;
 }
-.uiLabelCheckbox > input[type="checkbox"]{
+.uiLabelCheckbox:HOVER{
+  cursor: pointer;
+}
+.uiLabelCheckbox > input[type="checkbox"],
+.uiLabelCheckbox > input[type="radio"]{
   position: absolute;
   top: 0;
   left: 0;
+}
+.errorMessage {
+  color: red;
+  list-style-type: none;
 }

@@ -1,0 +1,11 @@
+<%if(res.locals.message) {%> 
+  <%if(typeof res.locals.message == 'string') {%>
+	<ul class="errorMessage">
+		<li><%= res.locals.message%></li>
+	</ul>
+<%} else {%>
+<ul class="errorMessage">
+	<%for($mess in res.locals.message) {%>
+	<li><%= res.locals.message%></li> <%}%>
+</ul>
+<%}%> <%}%>

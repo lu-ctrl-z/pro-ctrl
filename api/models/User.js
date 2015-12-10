@@ -9,6 +9,11 @@
 module.exports = {
     // connection: 'mysql',
     tableName: 'm_users',
+    types: {
+        password: function(password) {
+            return password === req.param('repassword');
+        }
+    },
     attributes: {
         id : {
             type: 'integer',
@@ -27,7 +32,7 @@ module.exports = {
             required: true
         },
         email: {
-            type: 'string',
+            type: 'email',
             required: true,
             unique: true,
             maxLength: 60,
@@ -41,7 +46,8 @@ module.exports = {
         auth_type: {
             type: 'integer',
             required: false,
-            defaultsTo: 1
+            defaultsTo: 1,
+            in: [1,2]
         }
     },
     getLoginAdmin: function($username, $password, cb) {

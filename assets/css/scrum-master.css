@@ -231,6 +231,7 @@ table.scrum td {
 input[type="checkbox"],
 input[type="email"],
 input[type="password"],
+input[type="search"],
 input[type="text"]{
     background-color: #ffffff;
     border: 1px solid #cccccc;
@@ -254,6 +255,7 @@ button{
 button:FOCUS,
 input[type="checkbox"]:FOCUS,
 input[type="email"]:FOCUS,
+input[type="search"]:FOCUS,
 input[type="password"]:FOCUS,
 input[type="text"]:FOCUS,
 input[type="email"]:FOCUS,
@@ -492,4 +494,9 @@ table.border td{
 	border-bottom: 1px solid rgba(16, 25, 34, 0.16);
 	padding-bottom: 6px;
 	margin-bottom: 20px;
+}
+.welcome{
+    font-weight: normal;
+    font-style: italic;
+    padding-bottom: 10px;
 }
