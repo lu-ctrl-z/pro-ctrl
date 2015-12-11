@@ -6,6 +6,6 @@
 <%} else {%>
 <ul class="errorMessage">
 	<%for($mess in res.locals.message) {%>
-	<li><%= res.locals.message%></li> <%}%>
+	<li><%= res.locals.message[$mess]%></li> <%}%>
 </ul>
 <%}%> <%}%>

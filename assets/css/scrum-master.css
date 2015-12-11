@@ -500,3 +500,6 @@ table.border td{
     font-style: italic;
     padding-bottom: 10px;
 }
+.req {
+	color: red;
+}

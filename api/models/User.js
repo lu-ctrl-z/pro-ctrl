@@ -39,14 +39,13 @@ module.exports = {
             minLength: 4
         },
         member_type: {
-            type: 'integer',
             required: true,
-            in: [1,2,3,4,5,6]
+            in: [1,2,3,4,5,6],
+            type: 'integer'
         },
         auth_type: {
             type: 'integer',
             required: false,
-            defaultsTo: 1,
             in: [1,2]
         }
     },
