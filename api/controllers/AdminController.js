@@ -1,5 +1,5 @@
 /**
- * MainController
+ * AdminController
  * 
  * @description :: Server-side logic for managing users
  * @help :: See http://links.sailsjs.org/docs/controllers
@@ -46,12 +46,18 @@ module.exports = {
     },
     userFormEdit : function(req, res) {
         var $user_id = req.param('uid');
-        if($user_id) {
-            User.findOne({id: $user_id}, function(err, user) {
-                if(err) {
-                    res.view('admin/user/edit', {message: res.i18n('DB Error!')});
-                } else if(user) {
-                    res.view('admin/user/edit', {user: user});
+        if ($user_id) {
+            User.findOne({
+                id : $user_id
+            }, function(err, user) {
+                if (err) {
+                    res.view('admin/user/edit', {
+                        message : res.i18n('DB Error!')
+                    });
+                } else if (user) {
+                    res.view('admin/user/edit', {
+                        user : user
+                    });
                 } else {
                     res.redirect('/admin/');
                 }
@@ -85,22 +91,24 @@ module.exports = {
                 $password = hash;
             // Store hash in your password DB.
             var $dataInsert = {
-                    user_name : $username,
-                    password : $password,
-                    email : $email,
-                    member_type : $member_type,
-                    auth_type : $auth_type
-                };
+                user_name : $username,
+                password : $password,
+                email : $email,
+                member_type : $member_type,
+                auth_type : $auth_type
+            };
             User.validate($dataInsert, function(error) {
                 if (error) {
-                    var messages = message.of('user', error.ValidationError, res.i18n);
+                    var messages = message.of('user', error.ValidationError,
+                            res.i18n);
                     res.view('admin/user/form', {
                         message : messages
                     });
                 } else {
                     User.create($dataInsert, function(err, user) {
-                        if(err) {
-                            var messages = message.of('user', err.ValidationError, res.i18n);
+                        if (err) {
+                            var messages = message.of('user',
+                                    err.ValidationError, res.i18n);
                             res.view('admin/user/form', {
                                 message : messages
                             });
@@ -115,53 +123,88 @@ module.exports = {
     userEdit : function(req, res) {
         var $user_id = req.param('uid');
         var $userEdit = {
-                user_name: req.param('user_name'),
-                email: req.param('email'),
-                member_type: req.param('member_type'),
-                auth_type: req.param('auth_type'),
+            user_name : req.param('user_name'),
+            email : req.param('email'),
+            member_type : req.param('member_type'),
+            auth_type : req.param('auth_type'),
         };
         var canDelete = req.param('delete') == req.param('_csrf');
-        if($user_id) {
-            User.findOne({id: $user_id}, function(err, user) {
-                if(err) {
-                    res.view('admin/user/edit', {message: res.i18n('DB Error!'),
-                    user: $userEdit});
-                } else if(user) {
-                    if(canDelete) {
-                        User.destroy({id: $user_id}, function(err, ret) {
-                            if(err) {
-                                var messages = message.of('user', err.ValidationError, res.i18n);
+        if ($user_id) {
+            User.findOne({
+                id : $user_id
+            }, function(err, user) {
+                if (err) {
+                    res.view('admin/user/edit', {
+                        message : res.i18n('DB Error!'),
+                        user : $userEdit
+                    });
+                } else if (user) {
+                    if (canDelete) {
+                        User.destroy({
+                            id : $user_id
+                        }, function(err, ret) {
+                            if (err) {
+                                var messages = message.of('user',
+                                        err.ValidationError, res.i18n);
                                 res.view('admin/user/edit', {
                                     message : messages,
-                                    user: $userEdit
+                                    user : $userEdit
                                 });
                             } else {
                                 res.redirect('/admin/user/');
                             }
                         });
                     } else {
-                        User.update(
-                            {id: $user_id},
-                            $userEdit
-                        ).exec( function(err, updated) {
-                            if(err) {
-                                var messages = message.of('user', err.ValidationError, res.i18n);
-                                res.view('admin/user/edit', {
-                                    message : messages,
-                                    user: $userEdit
+                        User.update({
+                            id : $user_id
+                        }, $userEdit).exec(
+                                function(err, updated) {
+                                    if (err) {
+                                        var messages = message.of('user',
+                                                err.ValidationError, res.i18n);
+                                        res.view('admin/user/edit', {
+                                            message : messages,
+                                            user : $userEdit
+                                        });
+                                    } else {
+                                        res.redirect('/admin/user/');
+                                    }
                                 });
-                            } else {
-                                res.redirect('/admin/user/');
-                            }
-                        });
                     }
-                };
+                }
+                ;
             });
         } else {
-            res.view('admin/user/edit', {message: res.i18n('DB Error!'), user: null});
+            res.view('admin/user/edit', {
+                message : res.i18n('DB Error!'),
+                user : null
+            });
         }
     },
-    userDel: function(req, res) {
-        
+    //Project index
+    projectIndex: function(req, res) {
+        var $q = req.param('q');
+        var $cond = {};
+        if ($q) {
+            $cond = {
+                or : [ {
+                    project_name : {
+                        'contains' : $q
+                    }
+                }, {
+                    project_description : {
+                        'contains' : $q
+                    }
+                } ]
+            };
+        }
+        Project.find($cond, function(err, ret) {
+            if (err) {
+                console.log(err);
+            }
+            res.view('admin/project/index', {
+                AppData : ret
+            });
+        });
     }
 };

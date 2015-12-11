@@ -97,4 +97,11 @@ module.exports.routes = {
           layout: 'layouts/admin_layout'
       }
   },
+  'get /admin/project' : {
+      controller: 'AdminController',
+      action: 'projectIndex',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  }
 };

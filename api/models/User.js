@@ -10,9 +10,6 @@ module.exports = {
     // connection: 'mysql',
     tableName: 'm_users',
     types: {
-        password: function(password) {
-            return password === req.param('repassword');
-        }
     },
     attributes: {
         id : {
@@ -36,17 +33,36 @@ module.exports = {
             required: true,
             unique: true,
             maxLength: 60,
-            minLength: 4
+            minLength: 4,
         },
         member_type: {
             required: true,
             in: [1,2,3,4,5,6],
-            type: 'integer'
+            type: 'integer',
         },
         auth_type: {
             type: 'integer',
             required: false,
-            in: [1,2]
+            in: [1,2],
+        }
+    },
+    formAttr: {
+        user_name: {
+            form_type: sails.config.const.FORM_TYPE_TEXT
+        },
+        password: {
+            form_type: sails.config.const.FORM_TYPE_PASSWORD
+        },
+        email: {
+            form_type: sails.config.const.FORM_TYPE_TEXT
+        },
+        member_type: {
+            config_value: sails.config.common.memberType,
+            form_type: sails.config.const.FORM_TYPE_RADIO
+        },
+        auth_type: {
+            config_value: sails.config.common.authType,
+            form_type: sails.config.const.FORM_TYPE_RADIO
         }
     },
     getLoginAdmin: function($username, $password, cb) {

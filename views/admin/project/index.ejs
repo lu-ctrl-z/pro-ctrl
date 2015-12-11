@@ -1,0 +1,36 @@
+<div class="adminMainScreen clearfix">
+	<div class="mainMenu">
+	    <%include ../../element/_welcome%>
+	    <%include ../../element/_admin_menu%>
+	</div>
+	<div class="detailAction">
+       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Quản lý project</h2>
+       <div class="search">
+           <form action="/admin/project/" method="get" id="searchIn">
+               <div class="search-has-button">
+                   <input placeholder="Tìm" autofocus="autofocus" type="search" name="q" value="<%=req.param('q') || ''%>">
+                   <button type="submit" class="button-submit"><i class="fa fa-search"></i></button>
+               </div>
+           </form>
+       </div>
+       <div class="data-grid">
+           <table class="data-grid-table">
+               <tr>
+                   <th>ID</th>
+                   <th>Tên hiển thị</th>
+                   <th>Mô tả chung</th>
+                   <th>Người tạo</th>
+               </tr>
+               <%for(var i in res.locals.AppData) {%>
+               <%var project = res.locals.AppData[i];%>
+               <tr>
+                   <td><%=project.id%></td>
+                   <td><a href="/admin/project/edit/?pid=<%=project.id%>"><%=project.project_name%></a></td>
+                   <td><%=project.project_description%></td>
+                   <td><a href="/admin/user/?pid=<%=project.id%>">TinhBV</a></td>
+               </tr>
+               <%}%>
+           </table>
+       </div>
+    </div>
+</div>

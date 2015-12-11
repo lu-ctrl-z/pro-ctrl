@@ -46,8 +46,7 @@ module.exports = {
     doLogout: function(req, res) {
         var $token = req.cookies[sails.config.common.auto_login_name];
         var doLogout = function() {
-            req.session.authenticated = false;
-            delete req.session.user;
+            req.session.destroy();
             res.cookie(sails.config.common.auto_login_name, $token, { maxAge: -1});
             return res.redirect('/');
         };
