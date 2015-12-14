@@ -23,24 +23,26 @@
                         <th>Thành viên dự án:</th>
                         <td>
                         <%if(Object.keys(res.locals.AppUser).length) {
+                            var j = 0;
                             for(var i in res.locals.AppUser) {
+                            j++;
                             var user = res.locals.AppUser[i];%>
                             <span class="member">
                                 <a target="_blank" href="/admin/user/profile/?uid=<%=user.id%>"><%=user.user_name%></a>
                                 <a class="del" onclick="javascript: return confirm('xóa thành viên <%=user.user_name%> ra khỏi dự án?');" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=delete"><i class="fa fa-times"></i>
                                 </a>
-                            </span><br/>
+                            </span><%if(j%2==0) {%><br/><%}%>
                             <%}%>
                             <%if( !req.param('uname') ) {%>
-                            <span class="member" id="btnc" style="font-weight: normal;">thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
+                            <br/><span class="member" id="btnc" style="font-weight: normal;">thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
                             <%}%>
                         <%} else {%>
                             <%if( !req.param('uname') ) {%>
-                            <span class="member" id="btnc" style="font-weight: normal;">hiện tại chưa có thành viên nào.<br /> hãy thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
+                            <br/><span class="member" id="btnc" style="font-weight: normal;">hiện tại chưa có thành viên nào.<br /> hãy thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
                             <%}%>
                         <%}%>
                             <%if(req.param('uname')) {%>
-                            <span class="member" id="btnc" style="font-weight: normal;"><%=Object.keys(res.locals.AppUserSearch).length%> kết quả tìm kiếm với <i><%=req.param('uname')%></i> <a href="javascript:addUser('<%=req.param('uname') || ''%>');">Tìm lại </a></span>
+                            <br/><span class="member" id="btnc" style="font-weight: normal;"><%=Object.keys(res.locals.AppUserSearch).length%> kết quả tìm kiếm với <i><%=req.param('uname')%></i> <a href="javascript:addUser('<%=req.param('uname') || ''%>');">Tìm lại </a></span>
                             <%}%>
                             <div class="addnewmember" style="display: none;">
                                <div class="search-has-button">

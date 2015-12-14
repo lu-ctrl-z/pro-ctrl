@@ -44,9 +44,11 @@ module.exports = {
         }
     },
     //get all project with number user working in project
-    getListProject: function(cb) {
-        this.find().populate('userproject').exec(function(err, ret) {
-            
+    getListProjectByUser: function(user_id, cb) {
+        console.log(user_id);
+        this.find().populate('userproject', {'user_id': 1}).exec(function(err, ret) {
+            console.log(ret);
+            cb();
         });
     },
 };
