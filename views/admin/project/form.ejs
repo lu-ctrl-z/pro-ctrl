@@ -4,42 +4,22 @@
         <%include ../../element/_admin_menu%>
     </div>
     <div class="detailAction">
-       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Add user</h2>
+       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Add project</h2>
        <div class="search">
-           <form action="/admin/user/add" method="post" id="addIn">
+           <form action="/admin/project/add" method="post" id="addIn">
            <% include ../../element/_error %>
                <table class="data-form">
                     <tr>
-                        <th>Tên đăng nhập: <span class="req">*</span></th>
-                        <td><input autofocus="autofocus" type="text" name="user_name" value="<%=req.param('user_name') || ''%>"></td>
+                        <th>Tên hiển thị: <span class="req">*</span></th>
+                        <td><%-form.input(Project, 'project_name', req.param('project_name') || '', {autofocus: 'autofocus'})%></td>
                     </tr>
                     <tr>
-                        <th>Mật khẩu: <span class="req">*</span></th>
-                        <td><input type="password" name="password" value=""></td>
-                    </tr>
-                    <tr>
-                        <th>Mật khẩu<br/>Xác nhận: <span class="req">*</span></th>
-                        <td><input type="password" name="repassword" value=""></td>
-                    </tr>
-                    <tr>
-                        <th>Email: <span class="req">*</span></th>
-                        <td><input type="email" name="email" value="<%=req.param('email') || ''%>"></td>
-                    </tr>
-                    <tr>
-                        <th>Chọn phân loại: <span class="req">*</span></th>
-                        <td><%for(var i in sails.config.common.memberType) {%>
-                            <label class="uiLabelCheckbox"><input <%if(i == req.param('member_type')) {%>checked='checked'<%}%> name="member_type" type="radio" value="<%=i%>"><%=sails.config.common.memberType[i]%></label>
-                            <%}%>
-                    </tr>
-                    <tr>
-                        <th>Chọn quyền: <span class="req">*</span></th>
-                        <td><%for(var i in sails.config.common.authType) {%>
-                            <label class="uiLabelCheckbox"><input <%if(i == req.param('auth_type')) {%>checked='checked'<%}%>  name="auth_type" type="radio" value="<%=i%>"><%=sails.config.common.authType[i]%></label>
-                            <%}%></td>
+                        <th>Khái quát về dự án: <span class="req">*</span></th>
+                        <td><%-form.input(Project, 'project_description', req.param('project_description') || '', {class:'textarea'})%></td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td><button type="submit">Add</a></button></td>
+                        <td><button type="submit">Add</button></td>
                     </tr>
                </table>
                <input type='hidden' name='_csrf' value='<%= _csrf %>'>

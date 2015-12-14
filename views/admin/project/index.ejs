@@ -19,7 +19,7 @@
                    <th>ID</th>
                    <th>Tên hiển thị</th>
                    <th>Mô tả chung</th>
-                   <th>Người tạo</th>
+                   <th>Thành viên</th>
                </tr>
                <%for(var i in res.locals.AppData) {%>
                <%var project = res.locals.AppData[i];%>
@@ -27,7 +27,16 @@
                    <td><%=project.id%></td>
                    <td><a href="/admin/project/edit/?pid=<%=project.id%>"><%=project.project_name%></a></td>
                    <td><%=project.project_description%></td>
-                   <td><a href="/admin/user/?pid=<%=project.id%>">TinhBV</a></td>
+                   <td>
+                   <%if(project.userproject.length) {
+                        for(var u in project.userproject) {
+                            var user_id = project.userproject[u].user_id; %>
+                            <%if(user_id && res.locals.AppUser[user_id]) {%>
+                            <a href="/admin/user/profile/?uid=<%=user_id%>"><%=res.locals.AppUser[user_id].user_name%></a>&nbsp;
+                            <%}%>
+                        <%}
+                   }%>
+                   </td>
                </tr>
                <%}%>
            </table>

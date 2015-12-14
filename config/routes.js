@@ -103,5 +103,40 @@ module.exports.routes = {
       locals: {
           layout: 'layouts/admin_layout'
       }
-  }
+  },
+  'get /admin/project/edit' : {
+      controller: 'AdminController',
+      action: 'projectEdit',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'get /admin/project/add' : {
+      controller: 'AdminController',
+      action: 'projectAdd',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'post /admin/project/add' : {
+      controller: 'AdminController',
+      action: 'projectAddDo',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'post /admin/project/edit' : {
+      controller: 'AdminController',
+      action: 'projectEditDo',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  '/admin/project/user' : {
+      controller: 'AdminController',
+      action: 'projectUserModify',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
 };

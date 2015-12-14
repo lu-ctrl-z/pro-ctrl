@@ -8,28 +8,18 @@
 
 module.exports = {
     // connection: 'mysql',
-    tableName: 'm_project',
+    tableName: 't_user_project',
     attributes: {
         id : {
             type: 'integer',
             autoIncrement: true,
-            primaryKey: true,
+            primaryKey: true
         },
-        project_name: {
-            type: 'string',
-            required: true,
+        project_id: {
+            model: 'project'
         },
-        project_description: {
-            type: 'string',
-            required: true
-        },
-        create_user: {
-            type: 'integer',
-            model:'user'
-        },
-        userproject:{
-            collection: 'userproject',
-            via: 'project_id'
+        user_id: {
+            model: 'user'
         }
     },
     formAttr: {
@@ -42,12 +32,6 @@ module.exports = {
         project_description: {
             form_type: sails.config.const.FORM_TYPE_TEXTAREA
         }
-    },
-    //get all project with number user working in project
-    getListProject: function(cb) {
-        this.find().populate('userproject').exec(function(err, ret) {
-            
-        });
     },
 };
 

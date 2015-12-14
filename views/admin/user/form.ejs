@@ -11,11 +11,11 @@
                <table class="data-form">
                     <tr>
                         <th>Tên đăng nhập: <span class="req">*</span></th>
-                        <td><%-form.form_input(User, 'user_name', req.param('user_name') || '', {autofocus: 'autofocus'})%></td>
+                        <td><%-form.input(User, 'user_name', req.param('user_name') || '', {autofocus: 'autofocus'})%></td>
                     </tr>
                     <tr>
                         <th>Mật khẩu: <span class="req">*</span></th>
-                        <td><%-form.form_input(User, 'password', req.param('password') || '')%></td>
+                        <td><%-form.input(User, 'password', req.param('password') || '')%></td>
                     </tr>
                     <tr>
                         <th>Mật khẩu<br/>Xác nhận: <span class="req">*</span></th>
@@ -23,15 +23,15 @@
                     </tr>
                     <tr>
                         <th>Email: <span class="req">*</span></th>
-                        <td><%-form.form_input(User, 'email', req.param('email') || '')%></td>
+                        <td><%-form.input(User, 'email', req.param('email') || '')%></td>
                     </tr>
                     <tr>
                         <th>Chọn phân loại: <span class="req">*</span></th>
-                        <td><%-form.form_input(User, 'member_type', req.param('member_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
+                        <td><%-form.input(User, 'member_type', req.param('member_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
                     </tr>
                     <tr>
                         <th>Chọn quyền: <span class="req">*</span></th>
-                        <td><%-form.form_input(User, 'auth_type', req.param('auth_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
+                        <td><%-form.input(User, 'auth_type', req.param('auth_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
                     </tr>
                     <tr>
                         <th></th>

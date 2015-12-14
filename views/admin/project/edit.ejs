@@ -4,53 +4,82 @@
         <%include ../../element/_admin_menu%>
     </div>
     <div class="detailAction">
-       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Add user</h2>
+       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Edit project</h2>
        <div class="search">
-           <form action="/admin/user/edit" method="post" id="addIn" autocomplete="off">
-           <input type="hidden" name="uid" value="<%=req.param('uid') || ''%>">
+           <form action="/admin/project/edit" method="post" id="addIn">
+           <input type='hidden' name='pid' value="<%=req.param('pid') || res.locals.AppData.id%>">
            <% include ../../element/_error %>
+           <%if(res.locals.AppData){%>
                <table class="data-form">
                     <tr>
-                        <th>Tên đăng nhập: <span class="req">*</span></th>
-                        <td><input autofocus="autofocus" type="text" name="user_name" value="<%=req.param('user_name') || res.locals.user.user_name%>"></td>
-                    </tr>
-                    <%/*tr>
-                        <th>Mật khẩu: <span class="req">*</span></th>
-                        <td><input type="password" name="password" value="" autocomplete="off"></td>
+                        <th>Tên hiển thị: <span class="req">*</span></th>
+                        <td><%-form.input(Project, 'project_name', req.param('project_name') || res.locals.AppData.project_name, {autofocus: 'autofocus'})%></td>
                     </tr>
                     <tr>
-                        <th>Mật khẩu<br/>Xác nhận: <span class="req">*</span></th>
-                        <td><input type="password" name="repassword" value="" autocomplete="off"></td>
-                    </tr*/%>
-                    <tr>
-                        <th>Email: <span class="req">*</span></th>
-                        <td><input type="email" name="email" value="<%=req.param('email') || res.locals.user.email%>"></td>
+                        <th>Khái quát về dự án: <span class="req">*</span></th>
+                        <td><%-form.input(Project, 'project_description', req.param('project_description') || res.locals.AppData.project_description, {class:'textarea'})%></td>
                     </tr>
                     <tr>
-                        <th>Chọn phân loại: <span class="req">*</span></th>
-                        <td><%for(var i in sails.config.common.memberType) {%>
-                            <label class="uiLabelCheckbox">
-                            <input 
-                            <%if(req.param('member_type')) { 
-                                if(i == req.param('member_type')) {%>checked='checked'<%}} 
-                             else if(i == res.locals.user.member_type) {%>checked='checked'<%}%> name="member_type" type="radio" value="<%=i%>"><%=sails.config.common.memberType[i]%></label>
+                        <th>Thành viên dự án:</th>
+                        <td>
+                        <%if(Object.keys(res.locals.AppUser).length) {
+                            for(var i in res.locals.AppUser) {
+                            var user = res.locals.AppUser[i];%>
+                            <span class="member">
+                                <a target="_blank" href="/admin/user/profile/?uid=<%=user.id%>"><%=user.user_name%></a>
+                                <a class="del" onclick="javascript: return confirm('xóa thành viên <%=user.user_name%> ra khỏi dự án?');" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=delete"><i class="fa fa-times"></i>
+                                </a>
+                            </span><br/>
                             <%}%>
-                    </tr>
-                    <tr>
-                        <th>Chọn quyền: <span class="req">*</span></th>
-                        <td><%for(var i in sails.config.common.authType) {%>
-                            <label class="uiLabelCheckbox">
-                            <input 
-                            <%if(req.param('auth_type')) { 
-                            if(i == req.param('auth_type')) {%>checked='checked'<%}}
-                            else if(i == res.locals.user.auth_type){%> checked='checked'<%}%> name="auth_type" type="radio" value="<%=i%>"><%=sails.config.common.authType[i]%></label>
-                            <%}%></td>
+                            <%if( !req.param('uname') ) {%>
+                            <span class="member" id="btnc" style="font-weight: normal;">thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
+                            <%}%>
+                        <%} else {%>
+                            <%if( !req.param('uname') ) {%>
+                            <span class="member" id="btnc" style="font-weight: normal;">hiện tại chưa có thành viên nào.<br /> hãy thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
+                            <%}%>
+                        <%}%>
+                            <%if(req.param('uname')) {%>
+                            <span class="member" id="btnc" style="font-weight: normal;"><%=Object.keys(res.locals.AppUserSearch).length%> kết quả tìm kiếm với <i><%=req.param('uname')%></i> <a href="javascript:addUser('<%=req.param('uname') || ''%>');">Tìm lại </a></span>
+                            <%}%>
+                            <div class="addnewmember" style="display: none;">
+                               <div class="search-has-button">
+                                   <input placeholder="Tìm" autofocus="autofocus" type="search" id="uname" name="uname">
+                                   <button id="search" disabled="disabled" type="submit" class="button-submit" name="search"><i class="fa fa-search"></i></button>
+                               </div>
+                            </div>
+                            <script type="text/javascript">
+                            $(function() {
+                                addUser = function(uname) {
+                                    if(uname != '') {
+                                        $('#uname').val(uname);
+                                    }
+                                    $('.addnewmember').show();
+                                    $('#addIn').attr('method', 'get');
+                                    $('#btnc').remove();
+                                    $('#search').removeAttr('disabled');
+                                    $('#edit').attr('disabled', 'disabled').css('display', 'none');
+                                }
+                            });
+                            </script>
+                            <%if(res.locals.AppUserSearch) {
+                            for(var i in res.locals.AppUserSearch) {
+                            var user = res.locals.AppUserSearch[i];%>
+                                <br/><span class="member">
+	                                <a target="_blank" href="/admin/user/profile/?uid=<%=user.id%>"><%=user.user_name%></a>
+	                                <a class="del add" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=add"><i class="fa fa-plus-square"></i></i>
+	                                </a>
+	                            </span>
+                            <%}%>
+                            <%}%>
+                        </td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td><button type="submit">Edit</a></button>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<button onclick="javascript: return confirm('Are you sure ?')" name="delete" value="<%= _csrf %>" style="background-color: red; color: white;" type="submit">Delete</button></td>
+                        <td><button id="edit" type="submit">Edit</button></td>
                     </tr>
                </table>
+           <%}%>
                <input type='hidden' name='_csrf' value='<%= _csrf %>'>
            </form>
        </div>

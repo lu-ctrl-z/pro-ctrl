@@ -1,51 +1,51 @@
 module.exports = {
-    form_input: function(model, name, value, option) {
+    input: function(model, name, value, option) {
         var attr = model.formAttr[name];
         switch(attr.form_type) {
             case sails.config.const.FORM_TYPE_TEXT:
-                return this.form_text(name, value, option);
+                return this.text(name, value, option);
                 break;
             case sails.config.const.FORM_TYPE_PASSWORD:
-                return this.form_password(name, value, option);
+                return this.password(name, value, option);
                 break;
             case sails.config.const.FORM_TYPE_HIDDEN:
-                return this.form_hidden(name, value, option);
+                return this.hidden(name, value, option);
                 break;
             case sails.config.const.FORM_TYPE_SELECT:
                 var data = attr.config_value || {};
-                return this.form_select(data, name, value, option);
+                return this.select(data, name, value, option);
                 break;
             case sails.config.const.FORM_TYPE_TEXTAREA:
-                return this.form_textarea(name, value, option);
+                return this.textarea(name, value, option);
                 break;
             case sails.config.const.FORM_TYPE_CHECKBOX:
                 var data = attr.config_value || {};
-                return this.form_checkbox(data, name, value, option);
+                return this.checkbox(data, name, value, option);
                 break;
             case sails.config.const.FORM_TYPE_RADIO:
                 var data = attr.config_value || {};
-                return this.form_radio(data, name, value, option);
+                return this.radio(data, name, value, option);
                 break;
             default:
-                return this.form_text(name, value, option);
+                return this.text(name, value, option);
                 break;
         }
     },
-    form_hidden: function(name, value, option) {
+    hidden: function(name, value, option) {
         var ret = '<input type="hidden" name="#name" value="#value" #option >';
         value = this.escapeHtml(value);
         option = option || {};
         var strOpt = this.get_option(option);
         return ret.replace('#name', name).replace('#value', value).replace('#option', strOpt);
     },
-    form_password: function(name, value, option) {
+    password: function(name, value, option) {
         var ret = '<input type="password" name="#name" value="#value" #option >';
         value = this.escapeHtml(value);
         option = option || {};
         var strOpt = this.get_option(option);
         return ret.replace('#name', name).replace('#value', value).replace('#option', strOpt);
     },
-    form_radio: function(data, name, value, option) {
+    radio: function(data, name, value, option) {
         var $ret = "";
         var $baseRadioItem = '<label #option><input value="#checkvalue" type="radio" name="#basename" #checked>#checkname</label>';
         option = option || {};
@@ -69,7 +69,7 @@ module.exports = {
         return $ret;
     },
     //return string form input type checkbox
-    form_checkbox: function(data, name, value, option) {
+    checkbox: function(data, name, value, option) {
         var $ret = "";
         var $baseCheckItem = '<label for="#nameId"><input id="#nameId" value="#checkvalue" type="checkbox" name="#basename" #checked #option>#checkname</label>';
         option = option || {};
@@ -93,7 +93,7 @@ module.exports = {
         return $ret;
     },
     //return string form input type textarea
-    form_textarea: function(name, value, option) {
+    textarea: function(name, value, option) {
         var ret = '<textarea name="#name" #option>#value</textarea>';
         value = this.escapeHtml(value);
         option = option || {};
@@ -101,7 +101,7 @@ module.exports = {
         return ret.replace('#name', name).replace('#value', value).replace('#option', strOpt);
     },
     //return string form input type text
-    form_text: function(name, value, option){
+    text: function(name, value, option){
         var ret = '<input type="text" name="#name" value="#value" #option >';
         value = this.escapeHtml(value);
         option = option || {};
@@ -109,7 +109,7 @@ module.exports = {
         return ret.replace('#name', name).replace('#value', value).replace('#option', strOpt);
     },
     //return string form input type select
-    form_select: function(data, name, value, option) {
+    select: function(data, name, value, option) {
         var ret = '<select name="#name" #option >#selectoption</select>';
 
         var strSelectOption = "";
