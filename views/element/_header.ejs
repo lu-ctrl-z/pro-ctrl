@@ -12,10 +12,10 @@
     <%if(res.locals.app && res.locals.app.prOfUser) {%>
     <div class="table-cell">
         <select role="localtion" name="project_id">
-            <option>list project</option>
+            <option value="/">list project</option>
         <%for(var i in res.locals.app.prOfUser) {
         var pou = res.locals.app.prOfUser[i];%>
-            <option value="/?pid=<%=pou.project_id.id%>"><%=pou.project_id.project_name%></option>
+            <option <%if(req.session.user.currentProject==pou.project_id.id){%> selected="selected"<%}%> value="/?pid=<%=pou.project_id.id%>"><%=pou.project_id.project_name%></option>
         <%}%>
         </select>
     </div>

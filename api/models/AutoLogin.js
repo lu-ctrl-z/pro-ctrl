@@ -161,7 +161,7 @@ module.exports = {
             }
         });
     },
-    getData: function($cookie, name, cb) {
+    getData: function($cookie, cb) {
         if(!$cookie) return;
         this.findOne({token: $cookie}, function(err, ret) {
             if(err || !ret) cb();
@@ -171,7 +171,7 @@ module.exports = {
             } else {
                 try {
                     $data = JSON.parse($data);
-                    if($data[name]) cb($data[name])
+                    if($data) cb($data)
                     else cb();
                 } catch(e) {
                     cb();

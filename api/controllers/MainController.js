@@ -15,7 +15,7 @@ module.exports = {
             req.session.user.currentProject = $pid;
             var $aln = req.cookies[sails.config.common.auto_login_name];
             if($aln) {
-                AutoLogin.setData($aln, {currentProject2: $pid}, cb);
+                AutoLogin.setData($aln, {currentProject: $pid}, cb);
             } else {
                 cb();
             }

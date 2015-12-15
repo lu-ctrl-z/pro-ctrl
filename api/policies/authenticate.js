@@ -22,7 +22,10 @@ module.exports = function authenticate (req, res, next) {
             } else {
                 req.session.authenticated = true;
                 req.session.user = ret;
-                copyNext();
+                var data = AutoLogin.getData($aln, function(data) {
+                    req.session.user.currentProject = data.currentProject;
+                    copyNext();
+                });
             }
         });
     } else {
