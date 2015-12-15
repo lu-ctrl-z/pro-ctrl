@@ -28,6 +28,10 @@ module.exports = {
         expire : {
             type : 'datetime',
             required : true
+        },
+        data: {
+            type: 'string',
+            required: false
         }
     },
     createAutoLogin : function($user_id, cb) {
@@ -125,5 +129,86 @@ module.exports = {
         AutoLogin.destroy({token: $token}, function(err, ret) {
             cb();
         });
+    },
+    setData: function($cookie, $value, cb) {
+        if(!$cookie) cb();
+        this.findOne({token: $cookie}, function(err, ret) {
+            if(err || !ret) cb();
+            var $data = ret.data;
+            var update = function(data) {
+                try {
+                    data = JSON.stringify(data);
+                }  catch(e) {}
+                finally{
+                    AutoLogin.update({token: $cookie}, {data: data}).exec(function(err, ret) {
+                        cb();
+                    });
+                }
+            };
+            if($data) {
+                try {
+                    $data = JSON.parse($data);
+                    for(var i in $value) {
+                        $data[i] = $value[i];
+                    }
+                } catch(e) {}
+                finally{
+                    update($data);
+                }
+            } else {
+                $data = $value;
+                update($data);
+            }
+        });
+    },
+    getData: function($cookie, name, cb) {
+        if(!$cookie) return;
+        this.findOne({token: $cookie}, function(err, ret) {
+            if(err || !ret) cb();
+            var $data = ret.data;
+            if(!$data) {
+                cb()
+            } else {
+                try {
+                    $data = JSON.parse($data);
+                    if($data[name]) cb($data[name])
+                    else cb();
+                } catch(e) {
+                    cb();
+                }
+            }
+        });
+    },
+    removeData: function($cookie, name, cb) {
+        if(!$cookie) return;
+        this.findOne({token: $cookie}, function(err, ret) {
+            if(err || !ret) cb();
+            var $data = ret.data;
+            if(!$data) {
+                cb()
+            } else {
+                try {
+                    $data = JSON.parse($data);
+                    if($data[name]) {
+                        delete $data[name];
+                        var update = function(data) {
+                            try {
+                                data = JSON.stringify(data);
+                            }  catch(e) {}
+                            finally{
+                                AutoLogin.update({token: $cookie}, {data: data}).exec(function(err, ret) {
+                                    cb();
+                                });
+                            }
+                        };
+                        update($data);
+                    }
+                    else cb();
+                } catch(e) {
+                    cb();
+                }
+            }
+        });
     }
+    
 };

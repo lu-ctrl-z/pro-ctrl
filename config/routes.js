@@ -27,18 +27,11 @@ module.exports.routes = {
   },
   '/': {
       controller: 'MainController',
-      action: 'index'
+      action: 'index',
   },
   '/admin': {
       controller: 'AdminController',
       action: 'index',
-      locals: {
-          layout: 'layouts/admin_layout'
-      }
-  },
-  'get /admin/login': {
-      controller: 'AdminController',
-      action: 'login',
       locals: {
           layout: 'layouts/admin_layout'
       }
@@ -50,7 +43,7 @@ module.exports.routes = {
           layout: 'layouts/admin_layout'
       }
   },
-  'post /admin/login': {
+  'post /login': {
       controller: 'UserController',
       action: 'doLoginAdmin',
       locals: {

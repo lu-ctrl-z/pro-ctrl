@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+.mainScreen{
+	margin-top: 20px;
+}
+.leftSide {
+    width: 150px;
+    float: left;
+}
+.rightSide {
+    width: 1250px;
+    float: left;
+}
+.mainScreen .sub{
+    color: #9197a3;
+    font-size: 11px;
+    font-weight: bold;
+}

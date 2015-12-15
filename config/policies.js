@@ -37,5 +37,8 @@ module.exports.policies = {
     AdminController: {
         '*' : ['authenticate', 'isAdmin'],
         'login': ['authenticate'],
+    },
+    MainController: {
+        '*' : ['authenticate', 'isLogin']
     }
 };

@@ -33,5 +33,11 @@ module.exports = {
             form_type: sails.config.const.FORM_TYPE_TEXTAREA
         }
     },
+    //get all project with number user working in project
+    getListProjectByUser: function(user_id, cb) {
+        this.find().populateAll().where({user_id: user_id}).exec(function(err, ret) {
+            cb(ret);
+        });
+    },
 };
 

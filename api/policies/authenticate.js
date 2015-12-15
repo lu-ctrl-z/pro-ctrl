@@ -1,7 +1,15 @@
 module.exports = function authenticate (req, res, next) {
+    res.locals.app = res.locals.app || {};
     var copyNext = function() {
         if(req.session.authenticated) {
-            Project.getListProjectByUser(req.session.user.id, next)
+            UserProject.getListProjectByUser(req.session.user.id, function(projectOfUser) {
+                projectOfUser = projectOfUser || {};
+                res.locals.app.prOfUser = projectOfUser;
+                if(projectOfUser[0].project_id) {
+                    req.session.user.currentProject = req.session.user.currentProject || projectOfUser[0].project_id.id
+                }
+                next();
+            });
         } else {
             next();
         }

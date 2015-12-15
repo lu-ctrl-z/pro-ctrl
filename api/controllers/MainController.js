@@ -7,7 +7,21 @@
 
 module.exports = {
     index: function (req, res) {
-        res.view('homepage');
+        var cb = function() {
+            res.view('index');
+        };
+        var $pid = req.param('pid');
+        if($pid) {
+            req.session.user.currentProject = $pid;
+            var $aln = req.cookies[sails.config.common.auto_login_name];
+            if($aln) {
+                AutoLogin.setData($aln, {currentProject2: $pid}, cb);
+            } else {
+                cb();
+            }
+        } else {
+            cb();
+        }
     }
 };
 
