@@ -10,9 +10,9 @@
         %>
             <li>
             <%if(req.session.user.data.currentProject == pro.project_id.id) {%>
-            <a class="selected" href="/?apid=<%=pro.project_id.id%>"><i class="fa fa-dot-circle-o"></i><%=pro.project_id.project_name%></a>
+            <a class="selected" href="/?pid=<%=pro.project_id.id%>"><i class="fa fa-dot-circle-o"></i><%=pro.project_id.project_name%></a>
             <% } else {%>
-            <a href="/?apid=<%=pro.project_id.id%>"><i class="fa fa-circle-o"></i><%=pro.project_id.project_name%></a>
+            <a href="/?pid=<%=pro.project_id.id%>"><i class="fa fa-circle-o"></i><%=pro.project_id.project_name%></a>
             <%}%>
             </li>
         <%}%>
@@ -22,20 +22,9 @@
         </ul>
     </li>
     <li ><a href="#"><i class="fa fa-map-marker"></i> Sprint</a>
-        <ul class="subMenu">
-            <%if(res.locals.app && res.locals.app.sprOfUser) {
-                for(var i in res.locals.app.sprOfUser) {
-                    var spr = res.locals.app.sprOfUser[i];%>
-	            <li>
-	            <%if(req.session.user.data.currentSprint == spr.sprint_number) {%>
-	            <a class="selected" href="/?apid=<%=req.session.user.data.currentProject%>&asid=<%=spr.sprint_number%>"><i class="fa fa-dot-circle-o"></i>Sprint <%=spr.sprint_number%></a>
-	            <% } else {%>
-	            <a href="/?apid=<%=req.session.user.data.currentProject%>&asid=<%=spr.sprint_number%>"><i class="fa fa-circle-o"></i>Sprint <%=spr.sprint_number%></a>
-	            <%}%>
-	            </li>
-                <%}%>
-            <%}%>
-            <li class="li-marked"><a remove="yes" target="$(this).parent();" class="load-ajax" href="/sprint/add/?pid=<%=req.session.user.data.currentProject%>"><i class="fa fa-plus-square"></i>New sprint</a></li>
+        <ul id="list-sprint" class="subMenu">
+            <%include /sprint/list%>
+            <li class="li-marked"><a remove="yes" target="$(this).parents('#list-sprint');" class="load-ajax" href="/sprint/add/?pid=<%=req.session.user.data.currentProject%>"><i class="fa fa-plus-square"></i>New sprint</a></li>
         </ul>
     </li>
 </ul>

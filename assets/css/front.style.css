@@ -13,10 +13,12 @@
     width: 1240px;
     padding-left:10px;
     float: left;
-    height: 100px;
-    background-color: #dcdee3;
-    border-radius: 5px;
-    border: solid 1px #fff;
+}
+.kanban {
+	background-color: #dcdee3;
+	border-radius: 5px;
+    /*border: solid 1px #fff;
+    border: 1px solid rgba(16, 25, 34, 0.26);*/
 }
 .mainScreen .sub{
     color: #9197a3;
@@ -60,7 +62,7 @@ li.error:BEFORE{
 .subMenu > li{
     position: relative;
 }
-.subMenu > li .del{
+form.load-ajax .del{
     position: absolute;
     top: -4px;
     right: -4px;
@@ -93,4 +95,24 @@ form.load-ajax.loading #spinner {
     margin-top: -8px;
     line-height: 16px;
     color: black;
+}
+.bar {
+	font-weight: normal;
+	padding: 5px 10px;
+	color: #094b8d;
+	border-radius: 5px 5px 0px 0px;
+	background: linear-gradient(#dfecf9, #c1d5ea); /* Standard syntax */
+	/*box-shadow: 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.7);*/
+	border: solid 1px #fff;
+}
+.task-item.sleep .task-name {
+    width: 134px;
+}
+table.scrum th {
+    font-size: 16px;
+    font-weight: normal;
+}
+table.scrum th, table.scrum td {
+    /*border: 1px solid rgba(16, 25, 34, 0.26);*/
+    border: solid 1px #fff;
 }

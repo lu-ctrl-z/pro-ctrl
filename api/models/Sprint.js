@@ -58,7 +58,7 @@ module.exports = {
     getMaxSprintByProject: function($pid, cb) {
         this.findOne({project_id: $pid}).max('sprint_number').exec(cb);
     },
-    getListSprintByProject: function($pid, cb) {
-        this.find({project_id: $pid}).sort('sprint_number DESC').exec(cb);
+    getListSprintByProject: function($pid, $limit, $offset, cb) {
+        this.find({project_id: $pid}).sort('sprint_number DESC').limit($limit).skip($offset).exec(cb);
     }
 };

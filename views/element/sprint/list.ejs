@@ -1,0 +1,12 @@
+<%if(res.locals.app && res.locals.app.sprOfUser) {
+    for(var i in res.locals.app.sprOfUser) {
+        var spr = res.locals.app.sprOfUser[i];%>
+    <li>
+    <%if(req.session.user.data.currentSprint == spr.sprint_number) {%>
+    <a class="selected" href="/?pid=<%=req.session.user.data.currentProject%>&sid=<%=spr.sprint_number%>"><i class="fa fa-dot-circle-o"></i>Sprint <%=spr.sprint_number%></a>
+    <% } else {%>
+    <a href="/?pid=<%=req.session.user.data.currentProject%>&sid=<%=spr.sprint_number%>"><i class="fa fa-circle-o"></i>Sprint <%=spr.sprint_number%></a>
+    <%}%>
+    </li>
+    <%}%>
+<%}%>
