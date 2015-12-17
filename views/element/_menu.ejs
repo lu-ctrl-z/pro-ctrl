@@ -8,22 +8,34 @@
         <%for(var i in res.locals.app.prOfUser) {
         var pro = res.locals.app.prOfUser[i];
         %>
-            <li><a href="/?pid=<%=pro.project_id.id%>">
-            <%if(req.session.user.currentProject == pro.project_id.id) {%>
-            <i class="fa fa-dot-circle-o"></i>
+            <li>
+            <%if(req.session.user.data.currentProject == pro.project_id.id) {%>
+            <a class="selected" href="/?apid=<%=pro.project_id.id%>"><i class="fa fa-dot-circle-o"></i><%=pro.project_id.project_name%></a>
             <% } else {%>
-            <i class="fa fa-circle-o"></i>
+            <a href="/?apid=<%=pro.project_id.id%>"><i class="fa fa-circle-o"></i><%=pro.project_id.project_name%></a>
             <%}%>
-            <%=pro.project_id.project_name%></a></li>
+            </li>
         <%}%>
         <%} else {%>
             <li>Bạn chưa tham gia vào dự án nào.</li>
         <%}%>
         </ul>
     </li>
-    <li ><a href="/admin/sprint/"><i class="fa fa-map-marker"></i> Sprint</a>
+    <li ><a href="#"><i class="fa fa-map-marker"></i> Sprint</a>
         <ul class="subMenu">
-            <li><a href="/admin/sprint/add"><i class="fa fa-plus-square"></i>Add</a></li>
+            <%if(res.locals.app && res.locals.app.sprOfUser) {
+                for(var i in res.locals.app.sprOfUser) {
+                    var spr = res.locals.app.sprOfUser[i];%>
+	            <li>
+	            <%if(req.session.user.data.currentSprint == spr.sprint_number) {%>
+	            <a class="selected" href="/?apid=<%=req.session.user.data.currentProject%>&asid=<%=spr.sprint_number%>"><i class="fa fa-dot-circle-o"></i>Sprint <%=spr.sprint_number%></a>
+	            <% } else {%>
+	            <a href="/?apid=<%=req.session.user.data.currentProject%>&asid=<%=spr.sprint_number%>"><i class="fa fa-circle-o"></i>Sprint <%=spr.sprint_number%></a>
+	            <%}%>
+	            </li>
+                <%}%>
+            <%}%>
+            <li class="li-marked"><a remove="yes" target="$(this).parent();" class="load-ajax" href="/sprint/add/?pid=<%=req.session.user.data.currentProject%>"><i class="fa fa-plus-square"></i>New sprint</a></li>
         </ul>
     </li>
 </ul>

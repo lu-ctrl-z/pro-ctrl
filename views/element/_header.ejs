@@ -45,17 +45,6 @@
         
     </div>
     <%}%>
-    <div class="table-cell admin-menu">
-        <a href="javascript:void(0);" onclick="$(this).parents('.admin-menu').toggleClass('active').find('.menu-list').focus().blur(function() { var $this=$(this); setTimeout( function() { $this.parents('.admin-menu').removeClass('active'); }, 300); } );" ><i class="fa fa-plus-square"></i>&nbsp; new sprint</a>
-      <form method="POST" action="/project/addsprint">
-        <ul class="menu-list">
-            <li><input class="datetime" type="text" placeholder="Ngày bắt đầu" name="start_date" /></li>
-            <li><input class="datetime" type="text" placeholder="Ngày kết thúc" name="end_date" /></li>
-            <li><button type="submit">Add</button>&nbsp;&nbsp;&nbsp;<button type="reset" onclick="$(this).parents('.admin-menu').removeClass('active');">Close</button></li>
-        </ul>
-        <input type="hidden" name="project_id" value="1" />
-      </form>
-    </div>
     <%if(res.locals.isAdmin) { %>
     <div class="table-cell admin-menu">
         <a href="javascript:;" onclick="$(this).parents('.admin-menu').toggleClass('active').find('.menu-list').focus().blur(function() { var $this=$(this); setTimeout( function() { $this.parents('.admin-menu').removeClass('active'); }, 300); } );" ><i class="fa fa-cog"></i>&nbsp; Config dự án</a>

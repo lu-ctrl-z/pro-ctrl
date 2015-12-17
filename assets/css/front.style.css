@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+.menu{
+	font-size: 11px;
+}
 .mainScreen{
 	margin-top: 20px;
 }
@@ -7,11 +10,87 @@
     float: left;
 }
 .rightSide {
-    width: 1250px;
+    width: 1240px;
+    padding-left:10px;
     float: left;
+    height: 100px;
+    background-color: #dcdee3;
+    border-radius: 5px;
+    border: solid 1px #fff;
 }
 .mainScreen .sub{
     color: #9197a3;
     font-size: 11px;
     font-weight: bold;
+}
+.menu input{
+    box-sizing: border-box;
+}
+ul.form{
+	border: solid #fff 1px;
+	background-color: #dcdee3;
+	padding-left:0px;
+}
+ul.form input{
+	max-width: 100%;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+ul.form button{
+	background: green;
+	color: white;
+}
+ul.form li{
+	padding: 5px 5px 3px 13px;
+}
+li.error{
+	background-color: #f9edbe;
+	color: red;
+}
+li.error:BEFORE{
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f071";
+}
+.subMenu > li{
+    position: relative;
+}
+.subMenu > li .del{
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color:red;
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 1px 3px 2px;
+    line-height: 11px;
+}
+form.load-ajax {
+	position: relative;
+}
+form.load-ajax.loading:AFTER {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0.4;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "";
+}
+form.load-ajax.loading #spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+    line-height: 16px;
+    color: black;
 }

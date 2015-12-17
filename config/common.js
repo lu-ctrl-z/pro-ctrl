@@ -15,4 +15,5 @@ module.exports.common = {
         1: 'Member',
         2: 'Admin'
     },
+    limit_print: 5,
 };

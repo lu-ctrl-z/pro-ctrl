@@ -132,4 +132,18 @@ module.exports.routes = {
           layout: 'layouts/admin_layout'
       }
   },
+  '/sprint/add' : {
+      controller: 'MainController',
+      action: 'sprintForm',
+      locals: {
+          layout: null
+      }
+  },
+  '/sprint/doIt' : {
+      controller: 'MainController',
+      action: 'sprintDo',
+      locals: {
+          layout: null
+      }
+  }
 };

@@ -10,18 +10,151 @@ module.exports = {
         var cb = function() {
             res.view('index');
         };
-        var $pid = req.param('pid');
-        if($pid) {
-            req.session.user.currentProject = $pid;
-            var $aln = req.cookies[sails.config.common.auto_login_name];
-            if($aln) {
-                AutoLogin.setData($aln, {currentProject: $pid}, cb);
-            } else {
-                cb();
-            }
-        } else {
-            cb();
+        cb();
+    },
+    sprintForm: function(req, res) {
+        $pid = req.param('pid');
+        $act = req.param('act');
+        if($act == "cancel") {
+            return res.render('element/sprint/form', {act: $act}, function(err, html) {
+                if(err) console.log(err);
+                res.json(200, {
+                    status: "OK",
+                    message: "",
+                    content: html
+                });
+            });
         }
+        var onError = function() {
+            res.json(403, {
+                status: "NG",
+                message: "Forbidden!"
+            });
+        };
+        var onSuccess = function(data) {
+            data.message = false;
+            data.act = '';
+            res.render('element/sprint/form', data, function(err, html) {
+                if(err) return onError();
+                res.json(200, {
+                    status: "OK",
+                    message: "",
+                    content: html
+                });
+            })
+        };
+        var check = false;
+        var project_name = '';
+        var nextSprintNumber = 1;
+        var check = this.permissionProject(req, res, $pid);
+        if(check == false) {
+            return onError();
+        }
+        project_name = check;
+        Sprint.getMaxSprintByProject($pid, function(err, ret) {
+            if(err) {
+                onError();
+            } else {
+                if(ret.sprint_number) nextSprintNumber = ret.sprint_number + 1;
+                onSuccess({layout: null, pid: $pid, pname: project_name, nextNumber: nextSprintNumber, act: $act});
+            }
+        });
+    },
+    permissionProject: function(req, res, $pid) {
+        var check = false;
+        if(res.locals.app && res.locals.app.prOfUser) {
+            for(var i in res.locals.app.prOfUser) {
+                var pro = res.locals.app.prOfUser[i];
+                if(pro.project_id.id == $pid) {
+                    check = true;
+                    project_name = pro.project_id.project_name;
+                    break;
+                }
+            }
+        }
+        return check ? project_name: check;
+    },
+    sprintDo: function(req, res) {
+        var $dataInsert = {
+            project_id: req.param('pid'),
+            sprint_number: req.param('nextNumber'),
+            start_time: req.param('start_time'),
+            end_time: req.param('end_time')
+        };
+
+        var check = this.permissionProject(req, res, req.param('pid'));
+        if(check == false) {
+            return res.json(403, {
+                status: "NG",
+                message: "Forbidden!"
+            });
+        }
+
+        var project_name = check;
+        var onError = function(messages) {
+            var locals = $dataInsert;
+            locals.pid =  $dataInsert.project_id;
+            locals.nextNumber =  $dataInsert.sprint_number;
+            locals.message = messages;
+            locals.act = '';
+            locals.pname = project_name;
+            res.render('element/sprint/form', locals, function(err, html) {
+                if(err) {
+                    console.log(err);
+                    res.json(403, {
+                        status: "NG",
+                        message: "Forbidden!"
+                    });
+                } else {
+                    res.json(200, {
+                            status: "OK",
+                            message: messages,
+                            content: html});
+                }
+            });
+        };
+        var onSuccess = function(data) {
+            data.act = 'cancel';
+            data.pname = project_name;
+            data.pid = req.param('pid');
+            data.message = null;
+            res.render('element/sprint/form', data, function(err, html) {
+                if(err) return onError();
+                res.json(200, {
+                    status: "OK",
+                    message: "",
+                    content: html
+                });
+            })
+        };
+        Sprint.validate($dataInsert, function(err) {
+            if (err) {
+                var messages = message.of('sprint', err.ValidationError,
+                        res.i18n);
+                onError(messages);
+            } else {
+                Sprint.getMaxSprintByProject($dataInsert.project_id, function(err, ret) {
+                    if(err) onError();
+                    else {
+                        var nextSprintNumber = 1;
+                        if(ret.sprint_number) nextSprintNumber = ret.sprint_number + 1;
+                        if(nextSprintNumber != $dataInsert.sprint_number) {
+                            onError('Sprint has created!.');
+                        } else {
+                            Sprint.create($dataInsert, function(err, ret) {
+                                if(err) {
+                                    var messages = message.of('sprint', err.ValidationError,
+                                            res.i18n);
+                                    onError(messages);
+                                } else {
+                                    onSuccess({layout: null, nextNumber: nextSprintNumber});
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        });
     }
 };
 

@@ -39,6 +39,7 @@ module.exports.policies = {
         'login': ['authenticate'],
     },
     MainController: {
-        '*' : ['authenticate', 'isLogin']
+        '*' : ['authenticate', 'isLogin'],
+        'index': ['authdata', 'authenticate', 'isLogin'],
     }
 };

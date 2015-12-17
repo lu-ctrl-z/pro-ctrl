@@ -133,7 +133,9 @@ module.exports = {
     setData: function($cookie, $value, cb) {
         if(!$cookie) cb();
         this.findOne({token: $cookie}, function(err, ret) {
-            if(err || !ret) cb();
+            if(err || !ret) {
+                return cb();
+            }
             var $data = ret.data;
             var update = function(data) {
                 try {
@@ -141,7 +143,7 @@ module.exports = {
                 }  catch(e) {}
                 finally{
                     AutoLogin.update({token: $cookie}, {data: data}).exec(function(err, ret) {
-                        cb();
+                        return cb();
                     });
                 }
             };

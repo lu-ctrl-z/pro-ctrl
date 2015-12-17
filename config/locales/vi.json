@@ -17,6 +17,8 @@
   "project.project_name.required": "Tên dự án chưa đúng",
   "project.project_description.required": "chưa có mô tả chung dự án",
   "project.create_user.required": "có lỗi xẩy ra.",
+  "sprint.start_time.date": "Wrong! Start date invalid",
+  "sprint.end_time.end_time": "Wrong! End date invalid",
   "Welcome": "Chào mừng bạn đã ghé thăm XXX",
   "A brand new app.": "Một ứng dụng thương hiệu mới.",
   "Login XXX": "Đăng nhập XXX,",

@@ -1,0 +1,30 @@
+<%if(act == 'cancel') {%>
+<a href="/sprint/add/?pid=<%=req.session.user.currentProject%>" class="load-ajax" target="$(this).parent();" remove="yes"><i class="fa fa-plus-square"></i>New sprint</a>
+<%} else {%>
+<form target="$(this).parents('.li-marked');" method="get" action="/sprint/doIt" name="addsprint" class="load-ajax">
+<input type="hidden" name="nextNumber" value='<%=nextNumber || req.param("nextNumber")%>'>
+<input type="hidden" name="pid" value='<%=pid || req.param("pid")%>'>
+<ul class="form">
+    <%if(typeof message == 'string') {%>
+    <li class="error"><%=message%></li>
+    <%} else if(typeof message == 'object') {
+        for(var i in message) {%>
+    <li class="error"><%=message[i]%></li>
+        <%}%>
+    <%}%>
+    <li>dự án: <%=pname || req.param("pname")%></li>
+    <li>Sprint tiếp theo: <%=nextNumber%></li>
+    <li>Start date:</li>
+    <li><%-form.input(Sprint, 'start_time', req.param('start_time') || '', {class: 'datepicker'})%></li>
+    <li>End date:</li>
+    <li><%-form.input(Sprint, 'end_time', req.param('end_time') || '', {class: 'datepicker'})%></li>
+    <li><button type="submit"><i class="fa fa-plus-square"></i></button></li>
+</ul>
+<a class="del load-ajax" remove="yes" target="$(this).parents('.li-marked');" href="/sprint/add/?pid=<%=req.session.user.currentProject%>&act=cancel"><i class="fa fa-times"></i></a>
+<script type="text/javascript">
+$(function() {
+    $('.datepicker').datepicker();
+})
+</script>
+</form>
+<%}%>

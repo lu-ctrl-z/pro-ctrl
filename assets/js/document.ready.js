@@ -1,7 +1,9 @@
 /**
  * 
  */
-
+__ = function(a, s, cb) {
+    $('body').on(a, s, cb);
+};
 var displayError = function(error) {
     var $butterbar = $('#butterbar');
     $butterbar.removeClass('active').find('.wrapper').empty();
@@ -216,4 +218,63 @@ $(function() {
             $('#butterbar').addClass('active');
         }, 200);
     };
+    //load ajax
+    var getHref = function() {
+        var href = $(this).attr('href');
+        if(!href) return;
+        try{
+            var target = eval($(this).attr('target'));
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
+        var remove = $(this).attr('remove') || 'no';
+        $.get(href).done(function(respones) {
+            if(remove == 'yes') {
+                target.empty().append(respones.content);
+            } else {
+                target.append(respones.content);
+            }
+        });
+        return false;
+    };
+    var submitForm = function() {
+        var $this = $(this);
+        var start = function() {
+            $this.addClass('loading').append('<i id="spinner" class="fa fa-spinner fa-spin"></i>');
+        }();
+        var done = function() {
+            $this.removeClass('loading').find('i#spinner').remove();
+        };
+        try{
+            var target = eval($(this).attr('target'));
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
+        var action = $this.attr('action');
+        var method = $this.attr('method') || 'GET';
+        var params = {};
+        var frmparams = $this.serializeArray();
+        $.each(frmparams, function(i, el) {
+            params[el.name] = el.value;
+        });
+        $.ajax({
+            type    : method,
+            url     : action,
+            cache   : false,
+            data    : params,
+            success : function(respones) {
+                target.empty().append(respones.content);
+            },
+            error   : function(ex) {
+                
+            }
+        }).done(function() {
+            done();
+        });
+        return false;
+    };
+    __('click', 'a.load-ajax', getHref);
+    __('submit', 'form.load-ajax', submitForm);
 });

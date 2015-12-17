@@ -6,14 +6,23 @@ module.exports = function authenticate (req, res, next) {
                 projectOfUser = projectOfUser || {};
                 res.locals.app.prOfUser = projectOfUser;
                 if(projectOfUser[0].project_id) {
-                    req.session.user.currentProject = req.session.user.currentProject || projectOfUser[0].project_id.id
+                    req.session.user.data.currentProject = req.session.user.data.currentProject || projectOfUser[0].project_id.id
                 }
-                next();
+                if(req.session.user.data.currentProject) {
+                    Sprint.getListSprintByProject(req.session.user.data.currentProject, function(err, sprint) {
+                        res.locals.app.sprOfUser = sprint;
+                        req.session.user.data.currentSprint = req.session.user.data.currentSprint || sprint[0].sprint_number;
+                        return next();
+                    });
+                } else {
+                    return next();
+                }
             });
         } else {
-            next();
+            return next();
         }
-    }
+    };
+
     if (!req.session.authenticated && req.cookies[sails.config.common.auto_login_name]) {
         var $aln = req.cookies[sails.config.common.auto_login_name];
         AutoLogin.loginAsAutoLogin($aln, function(ret) {
@@ -23,7 +32,7 @@ module.exports = function authenticate (req, res, next) {
                 req.session.authenticated = true;
                 req.session.user = ret;
                 var data = AutoLogin.getData($aln, function(data) {
-                    req.session.user.currentProject = data.currentProject;
+                    req.session.user.data = data;
                     copyNext();
                 });
             }
