@@ -11,18 +11,6 @@ module.exports = {
     tableName: 't_sprint',
     autoCreatedAt: false,
     autoUpdatedAt: false,
-    types: {
-        end_time: function(date){
-          try{
-              date = new Date(date);
-              var start_time = new Date(this.start_time);
-              return date > start_time;
-          } catch(e) {
-              console.log(e);
-              return false;
-          }
-        }
-    },
     attributes: {
         id : {
             type: 'integer',
@@ -40,7 +28,7 @@ module.exports = {
             required: true
         },
         end_time: {
-            type: 'end_time',
+            type: 'date',
             required: true,
         }
     },

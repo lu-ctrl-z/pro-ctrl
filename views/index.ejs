@@ -5,6 +5,24 @@
 <div class="rightSide">
     <div class="kanban">
     <h2 class="bar"><i class="fa fa-file-text-o"></i> Dự án <a>Pro-cy</a> sprint 1</h2>
+    <ul class="action clearfix">
+        <li class="tool"><a id="showTaskForm" onclick="javascript:return false;" href="#"  ><i class="fa fa-tasks"></i> Add Task</a>
+        <div class="boxup menu-list">
+            <div class="input-data-form">
+                <%include /element/task/form%>
+            </div>
+        </div>
+        </li>
+        <li class="tool"><a href="#"><i class="fa fa-tasks"></i> Filter</a>
+        <div class="boxup menu-list" tabindex="1">
+            <div class="input-data-form">
+	            <form id="addTask" action="/task/create" method="post">
+	                <%-form.input(Task, 'ticket_id', '', {class: 'ticket_id'})%>
+	            </form>
+            </div>
+        </div>
+        </li>
+    </ul>
     <div class="data-area">
         <table class="scrum">
 		    <tr class="head">

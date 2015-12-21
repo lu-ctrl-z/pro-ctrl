@@ -145,5 +145,20 @@ module.exports.routes = {
       locals: {
           layout: null
       }
-  }
+  },
+  //for TaskController
+  'get /task/create' : {
+      controller: 'TaskController',
+      action: 'getCreate',
+      locals: {
+          layout: null
+      }
+  },
+  'post /task/create' : {
+      controller: 'TaskController',
+      action: 'postCreate',
+      locals: {
+          layout: null
+      }
+  },
 };

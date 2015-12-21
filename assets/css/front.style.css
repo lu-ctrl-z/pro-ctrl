@@ -101,9 +101,10 @@ form.load-ajax.loading #spinner {
 	padding: 5px 10px;
 	color: #094b8d;
 	border-radius: 5px 5px 0px 0px;
-	background: linear-gradient(#dfecf9, #c1d5ea); /* Standard syntax */
+	background: linear-gradient(#e1edf9, #dceaf9); /* Standard syntax */
 	/*box-shadow: 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.7);*/
-	border: solid 1px #fff;
+	border: solid 1px #aabccf;
+	font-size: 16px;
 }
 .task-item.sleep .task-name {
     width: 134px;
@@ -114,5 +115,132 @@ table.scrum th {
 }
 table.scrum th, table.scrum td {
     /*border: 1px solid rgba(16, 25, 34, 0.26);*/
-    border: solid 1px #fff;
+    border: solid 1px #aabccf;
+}
+.action {
+	background: linear-gradient( #e4effb, #f7fafe);
+	height: 25px;
+	border: solid 1px #aabccf;
+	border-top: none;
+	border-bottom: none;
+	padding-top: 2px;
+	margin-bottom: -1px;
+}
+.action .tool{
+    float: left;
+    color: #333;
+    position: relative;
+    margin-left: 5px;
+}
+.action .tool a{
+    color: inherit;
+    height: 25px;
+    display: block;
+    line-height: 25px;
+    padding: 0px 10px;
+    border-radius: 3px 3px 0px 0px;
+    border-top: #e4effb solid 1px;
+    border-left: #e4effb solid 1px;
+    border-right: #e4effb solid 1px;
+    cursor: default;
+    box-sizing: border-box;
+    outline: 0;
+}
+.boxup,
+.action .tool.active a,
+.action .tool a:HOVER{
+    border-top: #aabccf solid 1px;
+    border-left: #aabccf solid 1px;
+    border-right: #aabccf solid 1px;
+}
+.action .tool.active a{
+	border-bottom: #e4effb solid 1px;
+	z-index:4;
+	position: relative;
+}
+.action .tool.active .boxup{
+	display: block;
+}
+.boxup{
+    position: absolute;
+    left: 0px;
+    top: 24px;
+    background: linear-gradient( #e4effb, #f7fafe);
+    z-index: 3;
+    display: block;
+    box-shadow: 3px 3px 5px 1px rgba(16, 25, 34, 0.26);
+    display: none;
+    outline: 0;
+}
+#addTask{
+	width: 300px;
+}
+.input-data-form{
+	padding: 5px 3px 0px 0px;
+}
+.input-data-form input{
+	padding: 1px 3px 2px 3px;
+}
+.input-data-form table{
+	border-spacing: 10px;
+}
+.ticket_id {
+	width: 72px;
+}
+label.level > i{
+    font-size: 24px;
+}
+input[type='radio']:checked + i:BEFORE{
+	content: "\f058";
+}
+label.level{
+    position: relative;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+}
+label.level > input{
+	opacity: 0;
+	position: absolute;
+	top: 3px;
+	left: 2px;
+}
+label.green {
+	color: #00aeef;
+}
+label.orange {
+	color: orange;
+}
+label.red {
+	color: #fc0303;
+}
+select.status {
+	background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 1px 3px 2px;
+    background-position: 90% center;
+    height: 23px;
+}
+input.task_name {
+	width: 210px;
+}
+input.start_time,
+input.end_time {
+	width: 83px;
+}
+.common_error:BEFORE{
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f071";
+  margin-right: 5px;
+}
+.common_error{
+    background-color: #f9edbe;
+    color: red;
+    padding: 3px;
 }

@@ -90,42 +90,59 @@ module.exports = {
             });
         }
 
+        var getData = function(cb) {
+            if(req.session.user.data.currentProject) {
+                Sprint.getListSprintByProject(req.session.user.data.currentProject, sails.config.common.limit_print, 0, function(err, sprint) {
+                    if(sprint.length) {
+                        res.locals.app.sprOfUser = sprint;
+                        req.session.user.data.currentSprint = req.session.user.data.currentSprint || sprint[0].sprint_number;
+                    }
+                    cb();
+                });
+            } else {
+                cb();
+            }
+        };
         var project_name = check;
         var onError = function(messages) {
-            var locals = $dataInsert;
-            locals.pid =  $dataInsert.project_id;
-            locals.nextNumber =  $dataInsert.sprint_number;
-            locals.message = messages;
-            locals.act = '';
-            locals.pname = project_name;
-            res.render('element/sprint/form', locals, function(err, html) {
-                if(err) {
-                    console.log(err);
-                    res.json(403, {
-                        status: "NG",
-                        message: "Forbidden!"
-                    });
-                } else {
-                    res.json(200, {
-                            status: "OK",
-                            message: messages,
-                            content: html});
-                }
-            });
-        };
-        var onSuccess = function(data) {
-            data.act = 'cancel';
-            data.pname = project_name;
-            data.pid = req.param('pid');
-            data.message = null;
-            res.render('element/sprint/form', data, function(err, html) {
-                if(err) return onError();
-                res.json(200, {
-                    status: "OK",
-                    message: "",
-                    content: html
+            getData(function() {
+                var locals = $dataInsert;
+                locals.pid =  $dataInsert.project_id;
+                locals.nextNumber =  $dataInsert.sprint_number;
+                locals.message = messages;
+                locals.act = '';
+                locals.pname = project_name;
+                res.render('element/sprint/form', locals, function(err, html) {
+                    if(err) {
+                        console.log(err);
+                        res.json(403, {
+                            status: "NG",
+                            message: "Forbidden!"
+                        });
+                    } else {
+                        res.json(200, {
+                                status: "OK",
+                                message: messages,
+                                content: html});
+                    }
                 });
             })
+        };
+        var onSuccess = function(data) {
+            getData(function() {
+                data.act = 'cancel';
+                data.pname = project_name;
+                data.pid = req.param('pid');
+                data.message = null;
+                res.render('element/sprint/form', data, function(err, html) {
+                    if(err) return onError();
+                    res.json(200, {
+                        status: "OK",
+                        message: "",
+                        content: html
+                    });
+                })
+            });
         };
         Sprint.validate($dataInsert, function(err) {
             if (err) {
@@ -133,6 +150,11 @@ module.exports = {
                         res.i18n);
                 onError(messages);
             } else {
+                var startDate = new Date($dataInsert.start_time);
+                var endDate = new Date($dataInsert.end_time);
+                if(endDate <= startDate) {
+                    return onError(res.i18n('sprint.end_time.required'));
+                }
                 Sprint.getMaxSprintByProject($dataInsert.project_id, function(err, ret) {
                     if(err) onError();
                     else {

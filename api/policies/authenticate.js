@@ -11,8 +11,10 @@ module.exports = function authenticate (req, res, next) {
                 }
                 if(req.session.user.data.currentProject) {
                     Sprint.getListSprintByProject(req.session.user.data.currentProject, sails.config.common.limit_print, 0, function(err, sprint) {
-                        res.locals.app.sprOfUser = sprint;
-                        req.session.user.data.currentSprint = req.session.user.data.currentSprint || sprint[0].sprint_number;
+                        if(sprint.length) {
+                            res.locals.app.sprOfUser = sprint;
+                            req.session.user.data.currentSprint = req.session.user.data.currentSprint || sprint[0].sprint_number;
+                        }
                         return next();
                     });
                 } else {

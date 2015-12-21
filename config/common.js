@@ -16,4 +16,17 @@ module.exports.common = {
         2: 'Admin'
     },
     limit_print: 5,
+    taskLevel: {
+        1: '',
+        2: '',
+        3: ''
+    },
+    taskStatus: {
+        1: 'To do',
+        2: 'Doing',
+        3: 'Chờ review',
+        4: 'Review',
+        5: 'Done',
+        6: 'Tắc tị',
+    }
 };

@@ -120,7 +120,7 @@ body > .popup-box {
 .admin-menu {
     position: relative;
 }
-.admin-menu .menu-list{
+.menu-list{
     position: absolute;
     top: 100%;
     left: 0;

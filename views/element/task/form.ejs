@@ -1,0 +1,65 @@
+    <form class="load-ajax" target="$(this).parent()" id="addTask" action="/task/create" method="post">
+    <%if(req.session.authenticated && req.session.user.data) {%>
+    <input type="hidden" name="pid" value="<%=req.session.user.data.currentProject%>">
+    <input type="hidden" name="sid" value="<%=req.session.user.data.currentSprint%>">
+    <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+    <%}%>
+        <table>
+        <tr>
+            <td colspan="2"><%include ../_error%></td>
+        </tr>
+        <tr>
+            <th>Id ticket: <span class="req">*</span></th>
+            <td><%-form.input(Task, 'ticket_id', req.param('ticket_id') || '', {class: 'ticket_id', maxlength: '8', tabindex: 1})%></td>
+        </tr>
+        <tr>
+            <th>Tên task: <span class="req">*</span></th>
+            <td><%-form.input(Task, 'task_name', req.param('task_name') || '', {class: 'task_name', tabindex: 2})%></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+            <label class="green level" tabindex="3" >
+                <input type="radio" <%if(req.param('level') == 1 || !req.param('level')) {%>checked="checked"<%}%> name="level" value="1" />
+                <i class="fa fa-circle"></i>
+            </label>
+            <label class="orange level" tabindex="4" >
+                <input type="radio" <%if(req.param('level') == 2) {%>checked="checked"<%}%>  name="level" value="2" />
+                <i class="fa fa-circle"></i>
+            </label>
+            <label class="red level" tabindex="5" >
+                <input type="radio" <%if(req.param('level') == 3) {%>checked="checked"<%}%>  name="level" value="3" />
+                <i class="fa fa-circle"></i>
+            </label>
+        </tr>
+        <tr>
+            <th></th>
+            <td><%-form.input(Task, 'status', req.param('status') || '', {class: 'status', tabindex: 6})%></td>
+        </tr>
+        <tr>
+            <th>Start time:</th>
+            <td>
+            <%-form.input(Task, 'start_time', req.param('start_time') || '', {class: 'start_time datetime', placeholder:'mm/dd/yyyy', tabindex: 7 })%>
+            <input type="text" name="shh" placeholder="HH" value="<%=req.param('shh') || ''%>" style="width: 30px;" maxlength="2" tabindex="8" /> 
+            <input type="text" name="smm" placeholder="MM" value="<%=req.param('smm') || ''%>" style="width: 30px;" maxlength="2" tabindex="9" /> 
+            </td>
+        </tr>
+        <tr>
+            <th>End time:</th>
+            <td>
+            <%-form.input(Task, 'end_time', req.param('end_time') || '', {class: 'end_time datetime', placeholder:'mm/dd/yyyy', tabindex: 10})%>
+            <input type="text" name="ehh" value="<%=req.param('ehh') || ''%>"  placeholder="HH" style="width: 30px;" maxlength="2" tabindex="11" /> 
+            <input type="text" name="emm" value="<%=req.param('emm') || ''%>"  placeholder="MM" style="width: 30px;" maxlength="2" tabindex="12"/>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><button type="submit" name="add" tabindex="13">Add</button>&nbsp;&nbsp;&nbsp;<button onclick="return false;" name="cancel" tabindex="14">Close</button></td>
+        </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+    $(function() {
+        $('.start_time, .end_time').datepicker();
+    });
+    </script>

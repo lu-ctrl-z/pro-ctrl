@@ -275,6 +275,16 @@ $(function() {
         });
         return false;
     };
+    var boxupBlur = function() {
+        var $tool = $(this).parents('.tool');
+        if($tool.hasClass('active')) {
+            $('.tool').removeClass('active');
+        } else {
+            $('.tool').removeClass('active');
+            $tool.addClass('active').find('[tabindex="1"]').focus();
+        }
+    };
     __('click', 'a.load-ajax', getHref);
     __('submit', 'form.load-ajax', submitForm);
+    __('click', '.tool > a, .tool button[name="cancel"]', boxupBlur);
 });
