@@ -7,10 +7,42 @@
 
 module.exports = {
     index: function (req, res) {
+        var data = {};
         var cb = function() {
-            res.view('index');
+            res.view('index', {data: data, error: data.error});
         };
-        cb();
+        if(req.session.user.data && req.session.user.data.currentProject && req.session.user.data.currentSprint) {
+            for(var i in res.locals.app.prOfUser) {
+                var pro = res.locals.app.prOfUser[i].project_id;
+                if(pro.id == req.session.user.data.currentProject) {
+                    data.project_name = pro.project_name;
+                    break;
+                }
+            }
+            Sprint.findOne({
+                project_id: req.session.user.data.currentProject, 
+                sprint_number: req.session.user.data.currentSprint }, function(err, sprint) {
+                if(err || !sprint) {
+                    data.error = 'Không có sprint tương ứng.';
+                    return cb();
+                }
+                $sprint_id = sprint.id;
+                Task.find({sprint_id: $sprint_id}).populateAll().exec(function(err, listTask) {
+                    if(err) {
+                        return cb();
+                    } else if( listTask.length <= 0 ){
+                        data.error = 'Chưa có task';
+                        return cb();
+                    }
+                    console.log(listTask);
+                    data.listTask = listTask
+                    return cb();
+                });
+            });
+        } else {
+            data.error = 'hãy chọn sprint.';
+            return cb();
+        }
     },
     sprintForm: function(req, res) {
         $pid = req.param('pid');

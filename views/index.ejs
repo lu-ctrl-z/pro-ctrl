@@ -4,7 +4,8 @@
 </div>
 <div class="rightSide">
     <div class="kanban">
-    <h2 class="bar"><i class="fa fa-file-text-o"></i> Dự án <a>Pro-cy</a> sprint 1</h2>
+    <h2 class="bar"><i class="fa fa-file-text-o"></i> Dự án <a><%=res.locals.data.project_name%></a> sprint <%=req.session.user.data.currentSprint%></h2>
+    <%include element/_error2%>
     <ul class="action clearfix">
         <li class="tool"><a id="showTaskForm" onclick="javascript:return false;" href="#"  ><i class="fa fa-tasks"></i> Add Task</a>
         <div class="boxup menu-list">
@@ -35,104 +36,178 @@
 		    </tr>
 		    <tr class="l">
 		        <td class="task task-to-do" id="task-to-do-hunggk">
-		            <div class="task-item t green" id="1">
-		                <a class="id-ticket t">#89</a>
-		                <p class="task-name t">Code</p>
-		                <p class="member-name t"><b>HùngGK</b></p>
-		                <p class="start-time">2015/03/16 2:00 PM</p>
-		                <ul class="tool clearfix">
-		                    <li class="change-status">
-		                        <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
-		                        <ul tabindex="2" class="popup">
-		                            <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
-		                            <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
-		                            <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
-		                            <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
-		                            <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
-		                            <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
-		                        </ul>
-		                    </li>
-		                    <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
-		                    <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
-		                    <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
-		                </ul>
-		            </div>
-		            <div class="task-item t orange" id="2">
-		                <a class="id-ticket t">#89</a>
-		                <p class="task-name t">Code</p>
-		                <p class="member-name t"><b>HùngGK</b></p>
-		                <p class="start-time">2015/03/16 2:00 PM</p>
-		                <ul class="tool clearfix">
-		                    <li class="change-status">
-		                        <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
-		                        <ul tabindex="2" class="popup">
-		                            <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
-		                            <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
-		                            <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
-		                            <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
-		                            <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
-		                            <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
-		                        </ul>
-		                    </li>
-		                    <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
-		                    <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
-		                    <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
-		                </ul>
-		            </div>
-		            <div class="task-item t red" id="3">
-		                <a class="id-ticket t">#89</a>
-		                <p class="task-name t">Code</p>
-		                <p class="member-name t"><b>HùngGK</b></p>
-		                <p class="start-time">2015/03/16 2:00 PM</p>
-		                <ul class="tool clearfix">
-		                    <li class="change-status">
-		                        <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
-		                        <ul tabindex="2" class="popup">
-		                            <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
-		                            <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
-		                            <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
-		                            <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
-		                            <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
-		                            <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
-		                        </ul>
-		                    </li>
-		                    <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
-		                    <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
-		                    <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
-		                </ul>
-		            </div>
-		            <div class="task-item t green" id="4">
-		                <a class="id-ticket t">#89</a>
-		                <p class="task-name t">Code</p>
-		                <p class="member-name t"><b>HùngGK</b></p>
-		                <p class="start-time">2015/03/16 2:00 PM</p>
-		                <ul class="tool clearfix">
-		                    <li class="change-status">
-		                        <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
-		                        <ul tabindex="2" class="popup">
-		                            <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
-		                            <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
-		                            <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
-		                            <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
-		                            <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
-		                            <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
-		                        </ul>
-		                    </li>
-		                    <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
-		                    <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
-		                    <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
-		                </ul>
-		            </div>
+		            <%for(var i in res.locals.data.listTask) {
+		            var task = res.locals.data.listTask[i];
+		            if(task.status == 1) {%>
+		            <div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+                        <a class="id-ticket t"><%=task.ticket_id%></a>
+                        <p class="task-name t"><%=task.task_name%></p>
+                        <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+                        <p class="start-time"><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%></p>
+                        <p class="end-time"><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%></p>
+                        <ul class="tool clearfix">
+                            <li class="change-status">
+                                <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+                                <ul tabindex="2" class="popup">
+                                    <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                                    <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                                    <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                                    <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                                    <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                                    <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+                                </ul>
+                            </li>
+                            <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+                            <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
+                            <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+                        </ul>
+                    </div>
+		            <%}}%>
 		        </td>
 		        <td class="task task-doing" id="task-doing-hunggk">
+		        <%for(var i in res.locals.data.listTask) {
+                    var task = res.locals.data.listTask[i];
+                    if(task.status == 2) {%>
+                    <div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+                        <a class="id-ticket t"><%=task.ticket_id%></a>
+                        <p class="task-name t"><%=task.task_name%></p>
+                        <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+                        <p class="start-time"><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%></p>
+                        <p class="end-time"><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%></p>
+                        <ul class="tool clearfix">
+                            <li class="change-status">
+                                <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+                                <ul tabindex="2" class="popup">
+                                    <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                                    <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                                    <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                                    <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                                    <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                                    <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+                                </ul>
+                            </li>
+                            <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+                            <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
+                            <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+                        </ul>
+                    </div>
+                <%}}%>
 		        </td>
 		        <td class="task task-review-waiting" id="task-review-waiting-hunggk">
+		        <%for(var i in res.locals.data.listTask) {
+                    var task = res.locals.data.listTask[i];
+                    if(task.status == 3) {%>
+                    <div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+                        <a class="id-ticket t"><%=task.ticket_id%></a>
+                        <p class="task-name t"><%=task.task_name%></p>
+                        <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+                        <p class="start-time"><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%></p>
+                        <p class="end-time"><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%></p>
+                        <ul class="tool clearfix">
+                            <li class="change-status">
+                                <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+                                <ul tabindex="2" class="popup">
+                                    <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                                    <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                                    <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                                    <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                                    <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                                    <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+                                </ul>
+                            </li>
+                            <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+                            <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
+                            <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+                        </ul>
+                    </div>
+                <%}}%>
 		        </td>
 		        <td class="task task-review" id="task-review-hunggk">
+		        <%for(var i in res.locals.data.listTask) {
+                    var task = res.locals.data.listTask[i];
+                    if(task.status == 4) {%>
+                    <div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+                        <a class="id-ticket t"><%=task.ticket_id%></a>
+                        <p class="task-name t"><%=task.task_name%></p>
+                        <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+                        <p class="start-time"><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%></p>
+                        <p class="end-time"><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%></p>
+                        <ul class="tool clearfix">
+                            <li class="change-status">
+                                <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+                                <ul tabindex="2" class="popup">
+                                    <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                                    <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                                    <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                                    <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                                    <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                                    <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+                                </ul>
+                            </li>
+                            <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+                            <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
+                            <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+                        </ul>
+                    </div>
+                <%}}%>
 		        </td>
 		        <td class="task task-done" id="task-done-hunggk">
+		        <%for(var i in res.locals.data.listTask) {
+                    var task = res.locals.data.listTask[i];
+                    if(task.status == 5) {%>
+                    <div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+                        <a class="id-ticket t"><%=task.ticket_id%></a>
+                        <p class="task-name t"><%=task.task_name%></p>
+                        <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+                        <p class="start-time"><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%></p>
+                        <p class="end-time"><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%></p>
+                        <ul class="tool clearfix">
+                            <li class="change-status">
+                                <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+                                <ul tabindex="2" class="popup">
+                                    <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                                    <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                                    <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                                    <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                                    <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                                    <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+                                </ul>
+                            </li>
+                            <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+                            <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
+                            <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+                        </ul>
+                    </div>
+                <%}}%>
 		        </td>
 		        <td class="task task-suppend" id="task-suppend-hunggk">
+		        <%for(var i in res.locals.data.listTask) {
+                    var task = res.locals.data.listTask[i];
+                    if(task.status == 6) {%>
+                    <div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+                        <a class="id-ticket t"><%=task.ticket_id%></a>
+                        <p class="task-name t"><%=task.task_name%></p>
+                        <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+                        <p class="start-time"><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%></p>
+                        <p class="end-time"><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%></p>
+                        <ul class="tool clearfix">
+                            <li class="change-status">
+                                <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+                                <ul tabindex="2" class="popup">
+                                    <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                                    <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                                    <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                                    <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                                    <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                                    <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+                                </ul>
+                            </li>
+                            <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+                            <li class="t box" role="cmd-edit" data-title="edit task"><i class="fa fa-pencil-square-o"></i></li>
+                            <li class="t box" role="cmd-remove" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+                        </ul>
+                    </div>
+                <%}}%>
 		        </td>
 		    </tr>
 		    <tr class="l">

@@ -217,7 +217,7 @@ label.red {
 select.status {
 	background-color: #ffffff;
     border: 1px solid #cccccc;
-    padding: 1px 3px 2px;
+    padding: 1px 23px 2px 2px;
     background-position: 90% center;
     height: 23px;
 }
@@ -243,4 +243,8 @@ input.end_time {
     background-color: #f9edbe;
     color: red;
     padding: 3px;
+}
+.kanban > .errorMessage {
+	border:  1px solid #aabccf;
+	border-top:  none;
 }

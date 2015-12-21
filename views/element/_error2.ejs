@@ -1,0 +1,11 @@
+<%if(res.locals.error) {%> 
+  <%if(typeof res.locals.error == 'string') {%>
+	<ul class="errorMessage">
+		<li class="common_error"><%= res.locals.error%></li>
+	</ul>
+<%} else {%>
+<ul class="errorMessage">
+	<%for($mess in res.locals.error) {%>
+	<li class="common_error"><%= res.locals.error[$mess]%></li> <%}%>
+</ul>
+<%}%> <%}%>
