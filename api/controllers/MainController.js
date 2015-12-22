@@ -34,7 +34,6 @@ module.exports = {
                         data.error = 'Chưa có task';
                         return cb();
                     }
-                    console.log(listTask);
                     data.listTask = listTask
                     return cb();
                 });
