@@ -1,3 +1,8 @@
+<%if(res.locals.data.success == true) {%>
+<script type="text/javascript">
+location.href="/?pid="+<%=req.param('pid')%>+"&sid="+<%=req.param('sid')%>;
+</script>
+<%} else {%>
     <form class="load-ajax" target="$(this).parent()" id="addTask" action="/task/create" method="post">
     <%if(req.session.authenticated && req.session.user.data) {%>
     <input type="hidden" name="pid" value="<%=req.session.user.data.currentProject%>">
@@ -63,3 +68,4 @@
         $('.start_time, .end_time').datepicker();
     });
     </script>
+<%}%>

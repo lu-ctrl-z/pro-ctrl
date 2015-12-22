@@ -79,6 +79,7 @@ module.exports = {
                         app.message = messages;
                         return cb();
                     }
+                    app.success = true;
                     return cb();
                 });
             })
