@@ -1,4 +1,6 @@
-    <form class="load-ajax" target="$(this).parent()" id="addTask" action="/task/create" method="post">
+<div class="boxup menu-list">
+            <div class="input-data-form">
+    <form class="load-ajax editTask" target="$(this).parent()" action="/task/create" method="post">
     <%if(req.session.authenticated && req.session.user.data) {%>
     <input type="hidden" name="pid" value="<%=req.session.user.data.currentProject%>">
     <input type="hidden" name="sid" value="<%=req.session.user.data.currentSprint%>">
@@ -72,3 +74,6 @@ $(function() {
 })
 </script>
 <%}%>
+    
+            </div>
+        </div>

@@ -1,8 +1,35 @@
 /**
  * 
  */
-__ = function(a, s, cb) {
-    $('body').on(a, s, cb);
+/**
+ * 
+ */
+var Config = {
+    'TIMING' : {
+        'timing_delay' :  60,
+    },
+    'TASK' : {
+        1 : 'task-to-do',
+        2 : 'task-doing',
+        3 : 'task-review-waiting',
+        4 : 'task-review',
+        5 : 'task-done',
+        6 : 'task-suppend',
+    }
+}
+$(function() {
+    "user strict"
+    calHeight = function() {
+        $('body').css('min-height', $(window).height() + 'px');
+    };
+    $(window).resize(function() {
+        calHeight();
+    }).load(function() {
+        calHeight();
+    });
+});
+__d = function(a, b, c) {
+    $('body').on(a, b, c);
 };
 var displayError = function(error) {
     var $butterbar = $('#butterbar');
@@ -68,12 +95,17 @@ $.fn.sleepy = function() {
     });
     return this;
 };
-$.fn.taskRemove = function() {
-    var $task = $(this).parents('.task-item');
-    $task.addClass('wait-for-remove');
-    setTimeout( function() {
-        $task.remove();
-    }, 300)
+$.fn.enableEdit = function() {
+    var $this = $(this).parent();
+    var $loaded = $this.find('.editTask').length > 0 ? true: false;
+    $this.toggleClass('active');
+    if($loaded == false && $this.hasClass('active')) {
+        $.get($this.attr('href'), function(res) {
+            if(res.status == 'OK') {
+                $this.append(res.content);
+            }
+        });
+    };
 };
 $.fn.taskRecived = function($task) {
     $task.addClass('wait-for-remove');
@@ -136,51 +168,28 @@ $.fn.popup = function() {
 
 $(function() {
     $('[role^="cmd-"]').click(function() {
-        return false;
+        //return false;
     });
+
     $('.task-doing').taskProcessTiming();
+
     $('.boxpup').popup();
-    $('.task-item').sleepy().addClass('sleep');
-    $('[role="cmd-sleep"]').click(function() {
-        $(this).parents('.task-item').addClass('sleep');
-    });
-    $('[role="cmd-toggle"]').click(function() {
+
+    $('.task-item').addClass('sleep');
+
+    __d('click', '[role="cmd-toggle"]', function() {
         $(this).parents('.task-item').find('.popup').toggleClass('active').focus();
     });
-    $('[role="cmd-remove"]').click(function() {
-        $(this).taskRemove();
+
+    __d('click', '[role="cmd-sleep"]', function() {
+        $(this).parents('.task-item').addClass('sleep');
     });
-    $('[role="cmd-sendto-done"]').click(function() {
-        var $task = $(this).parents('.task-item');
-        var $todo = $(this).parents('tr').find('.task-done');
-        socket.emit( 'changeStatus', { task_id: $task.attr('id'), target: $todo.attr('id') } );
+
+    __d('click', '.task-item.sleep', function() {
+        $(this).removeClass('sleep').find('.popup').removeClass('active');
     });
-    $('[role="cmd-sendto-suppend"]').click(function() {
-        var $task = $(this).parents('.task-item');
-        var $suppend = $(this).parents('tr').find('.task-suppend');
-        socket.emit( 'changeStatus', { task_id: $task.attr('id'), target: $suppend.attr('id') } );
-    });
-    $('[role="cmd-sendto-review"]').click(function() {
-        var $task = $(this).parents('.task-item');
-        var $review = $(this).parents('tr').find('.task-review');
-        socket.emit( 'changeStatus', { task_id: $task.attr('id'), target: $review.attr('id') } );
-    });
-    $('[role="cmd-sendto-review-waiting"]').click(function() {
-        var $task = $(this).parents('.task-item');
-        var $waiting = $(this).parents('tr').find('.task-review-waiting');
-        socket.emit( 'changeStatus', { task_id: $task.attr('id'), target: $waiting.attr('id') } );
-    });
-    $('[role="cmd-sendto-doing"]').click(function() {
-        var $task = $(this).parents('.task-item');
-        var $doing = $(this).parents('tr').find('.task-doing');
-        socket.emit( 'changeStatus', { task_id: $task.attr('id'), target: $doing.attr('id') } );
-    });
-    $('[role="cmd-sendto-to-do"]').click(function() {
-        var $task = $(this).parents('.task-item');
-        var $to_do = $(this).parents('tr').find('.task-to-do');
-        socket.emit( 'changeStatus', { task_id: $task.attr('id'), target: $to_do.attr('id') } );
-    });
-    $('[role="cmd-edit"]').click(function() {
+
+    __d('click', '[role="cmd-edit"]', function() {
         $(this).enableEdit();
     });
     $('select[role="localtion"]').change(function() {
@@ -238,6 +247,8 @@ $(function() {
         });
         return false;
     };
+    __d('click', '.load-ajax', getHref);
+
     var submitForm = function() {
         var $this = $(this);
         var start = function() {
@@ -275,16 +286,23 @@ $(function() {
         });
         return false;
     };
+    __d('submit', 'form.load-ajax', submitForm);
+
     var boxupBlur = function() {
         var $tool = $(this).parents('.tool');
         if($tool.hasClass('active')) {
             $('.tool').removeClass('active');
         } else {
             $('.tool').removeClass('active');
-            $tool.addClass('active').find('[tabindex="1"]').focus();
+            var isLoaded = $tool.addClass('active').find('[tabindex="1"]');
+            if(isLoaded.length > 0) {
+                isLoaded.focus();
+            } else {
+                $.get($(this).attr('href'), function(res) {
+                    $tool.find('.input-data-form').append(res.content);
+                });
+            }
         }
     };
-    __('click', 'a.load-ajax', getHref);
-    __('submit', 'form.load-ajax', submitForm);
-    __('click', '.tool > a, .tool button[name="cancel"]', boxupBlur);
+    __d('click', '.tool > a, .tool button[name="cancel"]', boxupBlur);
 });

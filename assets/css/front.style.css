@@ -15,7 +15,7 @@
     float: right;
 }
 .kanban {
-	background-color: #dcdee3;
+	background:linear-gradient(#e4effb, #f7fafe);
 	border-radius: 5px;
     /*border: solid 1px #fff;
     border: 1px solid rgba(16, 25, 34, 0.26);*/
@@ -158,6 +158,7 @@ table.scrum th, table.scrum td {
 	z-index:4;
 	position: relative;
 }
+.box.active .boxup,
 .action .tool.active .boxup{
 	display: block;
 }
@@ -177,6 +178,8 @@ table.scrum th, table.scrum td {
 }
 .input-data-form{
 	padding: 5px 3px 0px 0px;
+	min-width: 200px;
+	min-height: 50px;
 }
 .input-data-form input{
 	padding: 1px 3px 2px 3px;

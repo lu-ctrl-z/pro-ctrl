@@ -6,13 +6,18 @@
  */
 
 module.exports = {
-    getCreate: function (req, res) {
-        var cb = function() {
-            res.view('element/task/form');
-        };
-        cb();
+    getCreate: function(req, res) {
+        return res.render('element/task/form', function(err, html) {
+            if(err) console.log(err);
+            res.json(200, {
+                status: "OK",
+                message: "",
+                content: html
+            });
+        });
     },
     postCreate: function(req, res) {
+        var $this = this;
         var app = {message: {}};
         var cb = function() {
             res.locals.message = app.message;
@@ -79,6 +84,9 @@ module.exports = {
                         app.message = messages;
                         return cb();
                     }
+                    //notification room task has created
+                    var roomName = req.param('pid') + '_' + req.param('sid');
+                    $this.showTask(res, roomName, created);
                     app.success = true;
                     return cb();
                 });
@@ -94,5 +102,60 @@ module.exports = {
                 return cb($id);
             });
         });
-    }
+    },
+    //for socket
+    /**
+     * show task html from task data
+     */
+    showTask: function(res, roomName, task) {
+        var task_id = task.id;
+        var app = {};
+        var cb = function() {
+            res.locals.task = app;
+            res.render('element/task/task_note', function(err, html) {
+                if(err) console.log(err);
+                var ret = {
+                        status: "OK",
+                        message: "",
+                        content: html,
+                        created: task
+                    };
+                sails.sockets.broadcast(roomName, 'taskCreated', ret);
+            });
+        };
+        Task.findOne({id: task_id}).populateAll().exec( function(err, task) {
+            if(err || !task) return;
+            app = task;
+            cb();
+        })
+    },
+    getEdit: function(req, res) {
+        var $this = this;
+        var app = {message: {}};
+        var cb = function() {
+            res.locals.message = app.message;
+            res.locals.data = app;
+            res.render('element/task/form_edit', function(err, html) {
+                if(err) console.log(err);
+                res.json(200, {
+                    status: "OK",
+                    message: "",
+                    content: html
+                });
+            });
+        };
+
+        this.checkPermission(req.param('pid'), req.param('sid'), req.session.user.id, function(ok) {
+            if(ok == false) {
+                app.message['permission'] = 'Permission denined.';
+                return cb()
+            }
+
+            Task.findOne({id: req.param('id')}).populateAll().exec( function(err, task) {
+                if(err || !task) return;
+                app = task;
+                cb();
+            })
+        });
+    },
 }

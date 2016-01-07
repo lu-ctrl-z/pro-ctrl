@@ -9,6 +9,7 @@
 module.exports = {
     // connection: 'mysql',
     tableName: 't_task',
+    autosubscribe: ['destroy', 'update', 'add', 'remove'],
     types: {
         ticket: function(ticket) {
             if(!ticket) 
@@ -82,5 +83,22 @@ module.exports = {
         end_time: {
             form_type: sails.config.const.FORM_TYPE_TEXT
         }
+    },
+    deleteTask: function(id, $user_id, cb) {
+        this.destroy({id: id, user_id: $user_id}).exec(function(err, ret) {
+            if(err || !ret) return cb(false);
+            return cb(true);
+        });
+    },
+    changeStatus: function($id, $status, $user_id, cb) {
+        this.update({
+            id : $id
+        }, {status: $status}).exec(
+                function(err, updated) {
+                    if (err || !updated) {
+                        return cb(false);
+                    }
+                    return cb(updated);
+                });
     }
 };

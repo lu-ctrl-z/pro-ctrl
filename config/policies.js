@@ -41,5 +41,7 @@ module.exports.policies = {
     MainController: {
         '*' : ['authenticate', 'isLogin'],
         'index': ['authdata', 'authenticate', 'isLogin'],
-    }
+    },
+    IOController: {
+    },
 };

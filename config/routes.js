@@ -161,4 +161,29 @@ module.exports.routes = {
           layout: null
       }
   },
+  'get /task/edit/:id' : {
+      controller: 'TaskController',
+      action: 'getEdit',
+      locals: {
+          layout: null
+      }
+  },
+  //for IOController
+  '/user/welcome' : {
+      controller: 'IOController',
+      action: 'welcome',
+  },
+  '/user/join' : {
+      controller: 'IOController',
+      action: 'joinRoom',
+  },
+  '/task/delete/:id': {
+      controller: 'IOController',
+      action: 'deleteTask',
+  },
+  '/task/change/:id/:status': {
+      controller: 'IOController',
+      action: 'changeTask',
+  }
+  //for TaskController
 };

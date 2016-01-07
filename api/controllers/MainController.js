@@ -31,7 +31,7 @@ module.exports = {
                     if(err) {
                         return cb();
                     } else if( listTask.length <= 0 ){
-                        data.error = 'Chưa có task';
+                        //data.error = 'Chưa có task';
                         return cb();
                     }
                     data.listTask = listTask

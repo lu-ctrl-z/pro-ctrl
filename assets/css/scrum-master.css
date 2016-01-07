@@ -146,7 +146,7 @@ table.scrum th {
     font-size: 26px;
 }
 table.scrum tr {
-    position: relative;
+    /*position: relative;*/
 }
 table.scrum tr .author{
     position: absolute;

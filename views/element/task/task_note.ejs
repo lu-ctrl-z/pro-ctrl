@@ -1,0 +1,23 @@
+<div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+    <a class="id-ticket t"><%=task.ticket_id%></a>
+    <p class="task-name t"><%=task.task_name%></p>
+    <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
+    <p class="start-time"><%if(task.start_time) {%><%=sails.moment(task.start_time).format('YYYY/MM/DD h:mm')%><%}%></p>
+    <p class="end-time"><%if(task.end_time) {%><%=sails.moment(task.end_time).format('YYYY/MM/DD h:mm')%><%}%></p>
+    <ul class="tool clearfix">
+        <li class="change-status">
+            <blockquote role="cmd-toggle" class="box t" data-title="đổi trạng thái task"><i class="fa fa-list"></i></blockquote>
+            <ul tabindex="2" class="popup">
+                <li class="t" role="cmd-sendto-to-do"><i class="fa fa-list"></i>&nbsp;to do</li>
+                <li class="t" role="cmd-sendto-doing"><i class="fa fa-smile-o"></i>&nbsp;doing</li>
+                <li class="t" role="cmd-sendto-review-waiting"><i class="fa fa-clock-o"></i>&nbsp;chờ review</li>
+                <li class="t" role="cmd-sendto-review"><i class="fa fa-cogs"></i>&nbsp;review</li>
+                <li class="t" role="cmd-sendto-done"><i class="fa fa-check-square-o"></i>&nbsp;done</li>
+                <li class="t" role="cmd-sendto-suppend"><i class="fa fa-frown-o"></i>&nbsp;tắc tị</li>
+            </ul>
+        </li>
+        <li class="t box" role="cmd-sleep" data-title="collapse"><i class="fa fa-caret-square-o-up"></i></li>
+        <li class="t box" style="display: none;" data-title="edit task" href="/task/edit/<%-task.id%>/?pid=<%=req.session.user.data.currentProject || ''%>&sid=<%=req.session.user.data.currentSprint || ''%>"><i role="cmd-edit" class="fa fa-pencil-square-o" ></i></li>
+        <li class="t box" role="cmd-remove" task-id="<%=task.id%>" data-title="delete task"><i class="fa fa-trash-o"></i></li>
+    </ul>
+</div>
