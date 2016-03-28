@@ -192,13 +192,27 @@ $(function() {
     __d('click', '[role="cmd-edit"]', function() {
         $(this).enableEdit();
     });
+    __d('click', '[role="cmd-show-detail"]', function() {
+        var $taskItem = $(this).parents('.task-item');
+        if($taskItem.hasClass('show-detail')) {
+            $taskItem.toggleClass('show-detail');
+            return false;
+        }
+        $taskItem.toggleClass('show-detail');
+        var $detailTask = $taskItem.find('.detail-task');
+        var $task_id = $taskItem.attr('id');
+        if($detailTask.length && !isNaN($task_id)) {
+            $.get('/task/duration/' + $task_id, function(res) {
+                $detailTask.html(res.content);
+            })
+        }
+    });
     $('select[role="localtion"]').change(function() {
         var $val = $(this).val();
         if($val) {
             location.href = $val;
         }
     });
-    
     $('overlay > *').click(function() {
         return false;
     });

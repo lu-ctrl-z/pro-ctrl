@@ -1,4 +1,5 @@
-<div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>" id="<%=task.id%>">
+<div class="task-item t <%if(task.level==1) {%>green<%} else if(task.level == 2) {%>orange<%} else if(task.level == 3) {%>red<%}%>"
+id="<%=task.id%>" show-time="<%if(task.totalTime > 0) {%><%=sails.moment.utc(task.totalTime).format("HH[h]:mm[m]")%><%}%>" timing="<%=parseInt(task.totalTime/1000) || 0%>">
     <a class="id-ticket t"><%=task.ticket_id%></a>
     <p class="task-name t"><%=task.task_name%></p>
     <p class="member-name t"><b><%=task.user_id.user_name%></b></p>
@@ -20,4 +21,6 @@
         <li class="t box" style="display: none;" data-title="edit task" href="/task/edit/<%-task.id%>/?pid=<%=req.session.user.data.currentProject || ''%>&sid=<%=req.session.user.data.currentSprint || ''%>"><i role="cmd-edit" class="fa fa-pencil-square-o" ></i></li>
         <li class="t box" role="cmd-remove" task-id="<%=task.id%>" data-title="delete task"><i class="fa fa-trash-o"></i></li>
     </ul>
+    <a class="detail-task-a" role="cmd-show-detail">chi tiết</a>
+    <ul class="detail-task"></ul>
 </div>

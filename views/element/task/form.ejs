@@ -34,26 +34,6 @@
         </tr>
         <tr>
             <th></th>
-            <td><%-form.input(Task, 'status', req.param('status') || '', {class: 'status', tabindex: 6})%></td>
-        </tr>
-        <tr>
-            <th>Start time:</th>
-            <td>
-            <%-form.input(Task, 'start_time', req.param('start_time') || '', {class: 'start_time datetime', placeholder:'mm/dd/yyyy', tabindex: 7 })%>
-            <input type="text" name="shh" placeholder="HH" value="<%=req.param('shh') || ''%>" style="width: 30px;" maxlength="2" tabindex="8" /> 
-            <input type="text" name="smm" placeholder="MM" value="<%=req.param('smm') || ''%>" style="width: 30px;" maxlength="2" tabindex="9" /> 
-            </td>
-        </tr>
-        <tr>
-            <th>End time:</th>
-            <td>
-            <%-form.input(Task, 'end_time', req.param('end_time') || '', {class: 'end_time datetime', placeholder:'mm/dd/yyyy', tabindex: 10})%>
-            <input type="text" name="ehh" value="<%=req.param('ehh') || ''%>"  placeholder="HH" style="width: 30px;" maxlength="2" tabindex="11" /> 
-            <input type="text" name="emm" value="<%=req.param('emm') || ''%>"  placeholder="MM" style="width: 30px;" maxlength="2" tabindex="12"/>
-            </td>
-        </tr>
-        <tr>
-            <th></th>
             <td><button type="submit" name="add" tabindex="13">Add</button>&nbsp;&nbsp;&nbsp;
             <button onclick="return false;" name="cancel" tabindex="14">Close</button></td>
         </tr>

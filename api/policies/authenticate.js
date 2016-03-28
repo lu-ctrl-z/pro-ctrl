@@ -6,7 +6,7 @@ module.exports = function authenticate (req, res, next) {
             UserProject.getListProjectByUser(req.session.user.id, function(projectOfUser) {
                 projectOfUser = projectOfUser || {};
                 res.locals.app.prOfUser = projectOfUser;
-                if(projectOfUser[0].project_id) {
+                if(projectOfUser[0] && projectOfUser[0].project_id) {
                     req.session.user.data.currentProject = req.session.user.data.currentProject || projectOfUser[0].project_id.id
                 }
                 if(req.session.user.data.currentProject) {

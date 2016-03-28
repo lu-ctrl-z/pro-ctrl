@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-    // connection: 'mysql',
+    connection: 'mysql',
     tableName : 't_auto_login',
     attributes : {
         id : {
