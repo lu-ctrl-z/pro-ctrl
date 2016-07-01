@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-    // connection: 'mysql',
+    connection: 'mysql',
     tableName: 't_task',
     autosubscribe: ['destroy', 'update', 'add', 'remove'],
     types: {
@@ -61,6 +61,10 @@ module.exports = {
         user_id: {
            model: 'user' 
         },
+        duration: {
+           collection: 'duration',
+           via: 'task_id'
+        }
     },
     formAttr: {
         ticket_id: {
@@ -86,19 +90,78 @@ module.exports = {
     },
     deleteTask: function(id, $user_id, cb) {
         this.destroy({id: id, user_id: $user_id}).exec(function(err, ret) {
-            if(err || !ret) return cb(false);
+            if(err || ret.length==0) return cb(false);
             return cb(true);
         });
     },
     changeStatus: function($id, $status, $user_id, cb) {
-        this.update({
-            id : $id
-        }, {status: $status}).exec(
-                function(err, updated) {
-                    if (err || !updated) {
+        this.findOne({id: $id}, function(err, task) {
+            if (err || task.length==0) {
+                return cb(false);
+            }
+            if($status == task.status) return cb(false);
+            if($status == 2 || $status == 4) {
+                if(task.status == 2 || task.status == 4) {
+                    Duration.update({
+                        task_id: $id,
+                        end_time: null,
+                        user_id: $user_id,
+                        status: task.status
+                    }, {
+                        end_time: Date()
+                    }).exec(function(err, updated) {
+                        
+                    })
+                }
+                Duration.create({
+                    task_id: $id, start_time: Date(), user_id: $user_id, status: $status
+                }).exec(function(err, duration) {
+                    if (err || !duration) {
                         return cb(false);
                     }
-                    return cb(updated);
+                    var TaskUpdate = {
+                        status: $status
+                    };
+                    if(task.start_time == null) {
+                        TaskUpdate.start_time = Date()
+                    }
+                    Task.update({
+                        id : $id
+                    }, TaskUpdate).exec(
+                            function(err, updated) {
+                                if (err || !updated.length) {
+                                    return cb(false);
+                                }
+                                return cb(updated);
+                            });
                 });
+            } else {
+                Duration.update({
+                    task_id: $id,
+                    end_time: null,
+                    user_id: $user_id,
+                    status: task.status
+                }, {
+                    end_time: Date()
+                }).exec(function(err, updated) {
+                    if (err) {
+                        return cb(false);
+                    }
+                    var TaskUpdate = { status: $status };
+                    if($status == 5) {
+                        TaskUpdate.end_time = Date()
+                    }
+                    Task.update({
+                        id : $id
+                    }, TaskUpdate).exec(
+                            function(err, updated) {
+                                if (err || !updated.length) {
+                                    return cb(false);
+                                }
+                                return cb(updated);
+                            });
+                });
+            }
+        })
     }
 };

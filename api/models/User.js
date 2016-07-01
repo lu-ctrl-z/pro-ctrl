@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-    // connection: 'mysql',
+    connection: 'mysql',
     tableName: 'm_users',
     types: {
     },

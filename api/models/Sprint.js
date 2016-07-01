@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-    // connection: 'mysql',
+    connection: 'mysql',
     tableName: 't_sprint',
     autoCreatedAt: false,
     autoUpdatedAt: false,

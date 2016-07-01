@@ -75,7 +75,7 @@
     position: absolute;
     content: attr(show-time);
     bottom: 0px;
-    right: 0px;
+    right: 40px;
     display: inline-block;
     background-color: transparent;
     color: #fff;
@@ -85,6 +85,41 @@
     font-size: 12px;
     font-weight: normal;
     line-height: 15px;
+}
+.show-detail .detail-task{
+	display: block;
+}
+.detail-task{
+	position: absolute;
+	top: 0px;
+	right: -18px;
+	bottom: 20px;
+	left: 0px;
+	background: linear-gradient( #e4effb, #f7fafe);
+	display: none;
+	overflow-y: scroll;
+	color: #333;
+	text-shadow: none;
+	font-size: 11px;
+}
+.detail-task li{
+	padding: 3px 5px;
+	border-bottom: #333 dotted 1px;
+}
+.task-item.show-detail{
+	overflow: hidden;
+}
+a.detail-task-a{
+	bottom: 3px;
+	right: 1px;
+	position: absolute;
+	font-size: 12px;
+}
+a.detail-task-a:HOVER {
+	color: black;
+}
+.task-item.sleep .detail-task-a{
+	display: none;
 }
 .task-item.sleep:BEFORE{
     display: none;

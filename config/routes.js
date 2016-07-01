@@ -184,6 +184,14 @@ module.exports.routes = {
   '/task/change/:id/:status': {
       controller: 'IOController',
       action: 'changeTask',
-  }
+  },
+  '/task/show/:id': {
+      controller: 'IOController',
+      action: 'showTask',
+  },
+  '/task/duration/:id': {
+      controller: 'TaskController',
+      action: 'showDuration',
+  },
   //for TaskController
 };

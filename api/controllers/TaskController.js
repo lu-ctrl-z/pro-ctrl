@@ -125,8 +125,23 @@ module.exports = {
         };
         Task.findOne({id: task_id}).populateAll().exec( function(err, task) {
             if(err || !task) return;
-            app = task;
-            cb();
+            Duration.find({task_id: task.id}).exec(function(err, list) {
+                var $totalTime = 0;
+                for(var j in list) {
+                    var $taskDuration = list[j];
+                    if($taskDuration.end_time) {
+                        var end = sails.moment($taskDuration.end_time);
+                    } else {
+                        var end = sails.moment(new Date());
+                    }
+                    var then = sails.moment($taskDuration.start_time);
+                    var timer = sails.moment(end,"DD/MM/YYYY HH:mm:ss").diff(sails.moment(then,"DD/MM/YYYY HH:mm:ss"));
+                    $totalTime += timer;
+                }
+                task.totalTime = $totalTime;
+                app = task;
+                return cb();
+            });
         })
     },
     getEdit: function(req, res) {
@@ -158,4 +173,18 @@ module.exports = {
             })
         });
     },
+    showDuration: function(req, res) {
+        var $id = req.param('id');
+        Duration.find({task_id: $id}).populate('user_id').exec(function(err, list) {
+            res.locals.list = list;
+            res.render('element/task/detail_task', function(err, html) {
+                if(err) console.log(err);
+                res.json(200, {
+                    status: "OK",
+                    message: "",
+                    content: html
+                });
+            });
+        });
+    }
 }

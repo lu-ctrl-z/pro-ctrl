@@ -1,0 +1,28 @@
+<%if(!res.locals.list.length) {%>
+<li><b>chưa thực hiện task</b></li>
+<%} else {%>
+<%
+var totalTime = 0;
+for(var i in res.locals.list) {
+var item = res.locals.list[i];%>
+<li class="clearfix">
+    <b style="display: inline-block;vertical-align: top;"><%=item.user_id.user_name%></b>
+    <blockquote style="display: inline-block;">
+    <i class="i1"><%if(item.start_time) {%><%=sails.moment(item.start_time).format('YYYY/MM/DD h:mm')%><%}%></i><br />
+    <i class="i2"><%if(item.end_time) {%><%=sails.moment(item.end_time).format('YYYY/MM/DD h:mm')%><%}%></i></blockquote>
+    <b style="display: inline-block;vertical-align: top; float:right;">
+        <%if(item.end_time) {
+            var now = sails.moment(item.end_time);
+        } else {
+            var now = sails.moment(new Date());
+        }
+        var then = sails.moment(item.start_time);
+        var timer = sails.moment(now,"DD/MM/YYYY HH:mm:ss").diff(sails.moment(then,"DD/MM/YYYY HH:mm:ss"));
+        totalTime += timer;
+        %>
+       <%=sails.moment.utc(timer).format("HH[h]:mm[m]")%>
+    </b>
+</li>
+<%}%>
+<li class="clearfix"><b style="display: inline-block;vertical-align: top; float:right;">Tổng: <%=sails.moment.utc(totalTime).format("HH[h]:mm[m]")%></b></li>
+<%}%>

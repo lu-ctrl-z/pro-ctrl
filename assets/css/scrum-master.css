@@ -92,6 +92,7 @@ body{
     padding-bottom: 15px;
     margin-bottom: 0;
     cursor: pointer;
+    margin-bottom: 3px;
 }
 .task-item.sleep .member-name{
     padding-top: 20px;

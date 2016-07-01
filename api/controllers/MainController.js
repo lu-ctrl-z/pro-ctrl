@@ -11,6 +11,14 @@ module.exports = {
         var cb = function() {
             res.view('index', {data: data, error: data.error});
         };
+        var arrayUnique = function(a) {
+            a = a || [];
+            return a.reduce(function(p, c) {
+                if (p.indexOf(c) < 0) p.push(c);
+                return p;
+            }, []);
+        };
+
         if(req.session.user.data && req.session.user.data.currentProject && req.session.user.data.currentSprint) {
             for(var i in res.locals.app.prOfUser) {
                 var pro = res.locals.app.prOfUser[i].project_id;
@@ -34,8 +42,43 @@ module.exports = {
                         //data.error = 'Chưa có task';
                         return cb();
                     }
-                    data.listTask = listTask
-                    return cb();
+                    var idsTask = [];
+                    for(var i in listTask) {
+                        idsTask.push(listTask[i].id);
+                    }
+                    Duration.find({task_id: idsTask}).populate('user_id').exec(function(err, list) {
+                        var $totalTime = {};
+                        var $totalName = {};
+                        for(var j in list) {
+                            var $taskDuration = list[j];
+                            var tsk_id = $taskDuration.task_id;
+                            if($taskDuration.end_time) {
+                                var end = sails.moment($taskDuration.end_time);
+                            } else {
+                                var end = sails.moment(new Date());
+                            }
+                            var then = sails.moment($taskDuration.start_time);
+                            var timer = sails.moment(end,"DD/MM/YYYY HH:mm:ss").diff(sails.moment(then,"DD/MM/YYYY HH:mm:ss"));
+                            $totalTime[tsk_id] = $totalTime[tsk_id] || 0;
+                            $totalTime[tsk_id] += timer;
+                            $totalName[tsk_id] = $totalName[tsk_id] || [];
+                            $totalName[tsk_id].push($taskDuration.user_id.user_name);
+                        }
+                        for(var i in listTask) {
+                            var taskItem = listTask[i];
+                            if($totalTime[taskItem.id]) {
+                                listTask[i].totalTime = $totalTime[taskItem.id];
+                            } else {
+                                listTask[i].totalTime = 0;
+                            }
+                            if(typeof $totalName[taskItem.id] !== 'undefined' &&  $totalName[taskItem.id].length > 0) {
+                                listTask[i].user_id.user_name = arrayUnique($totalName[taskItem.id]).join();
+                            }
+                        }
+                        data.listTask = listTask;
+                        data.totalTime = $totalTime;
+                        return cb();
+                    });
                 });
             });
         } else {
