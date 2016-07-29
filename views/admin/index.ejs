@@ -4,35 +4,37 @@
 	    <%include ../element/_admin_menu%>
 	</div>
 	<div class="detailAction">
-	   <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Quản lý user</h2>
-	   <div class="search">
-	       <form action="/admin/user/" method="get" id="searchIn">
-	           <div class="search-has-button">
-	               <input placeholder="Tìm" autofocus="autofocus" type="search" name="q" value="<%=req.param('q') || ''%>">
-	               <button type="submit" class="button-submit"><i class="fa fa-search"></i></button>
-	           </div>
-	       </form>
-	   </div>
-	   <div class="data-grid">
-	       <table class="data-grid-table">
-	           <tr>
-	               <th>ID</th>
-	               <th>Tên hiển thị</th>
-	               <th>Email</th>
-	               <th>Phân loại</th>
-	               <th>Quyền</th>
-	           </tr>
-	           <%for(var i in res.locals.AppData) {%>
-	           <%var user = res.locals.AppData[i];%>
-               <tr>
-                   <td><%=user.id%></td>
-                   <td><a href="/admin/user/edit/?uid=<%=user.id%>"><%=user.user_name%></a></td>
-                   <td><%=user.email%></td>
-                   <td><%=sails.config.common.memberType[user.member_type]%></td>
-                   <td><%=sails.config.common.authType[user.auth_type]%></td>
-               </tr>
-	           <%}%>
-	       </table>
+	   <div class="wrapper-main">
+		   <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Quản lý user</h2>
+		   <div class="search">
+		       <form action="/admin/user/" method="get" id="searchIn">
+		           <div class="search-has-button">
+		               <input placeholder="Tìm" autofocus="autofocus" type="search" name="q" value="<%=req.param('q') || ''%>">
+		               <button type="submit" class="button-submit"><i class="fa fa-search"></i></button>
+		           </div>
+		       </form>
+		   </div>
+		   <div class="data-grid">
+		       <table class="data-grid-table">
+		           <tr>
+		               <th>ID</th>
+		               <th>Tên hiển thị</th>
+		               <th>Email</th>
+		               <th>Phân loại</th>
+		               <th>Quyền</th>
+		           </tr>
+		           <%for(var i in res.locals.AppData) {%>
+		           <%var user = res.locals.AppData[i];%>
+	               <tr>
+	                   <td><%=user.id%></td>
+	                   <td><a href="/admin/user/edit/?uid=<%=user.id%>"><%=user.user_name%></a></td>
+	                   <td><%=user.email%></td>
+	                   <td><%=sails.config.common.memberType[user.member_type]%></td>
+	                   <td><%=sails.config.common.authType[user.auth_type]%></td>
+	               </tr>
+		           <%}%>
+		       </table>
+		   </div>
 	   </div>
 	</div>
 </div>

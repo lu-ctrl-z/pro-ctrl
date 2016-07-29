@@ -6,4 +6,5 @@ module.exports.const = {
   FORM_TYPE_RADIO:      5,
   FORM_TYPE_HIDDEN:     6,
   FORM_TYPE_PASSWORD:   7,
+  FORM_TYPE_FILE:       8,
 };

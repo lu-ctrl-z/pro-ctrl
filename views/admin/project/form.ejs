@@ -4,26 +4,28 @@
         <%include ../../element/_admin_menu%>
     </div>
     <div class="detailAction">
-       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Add project</h2>
-       <div class="search">
-           <form action="/admin/project/add" method="post" id="addIn">
-           <% include ../../element/_error %>
-               <table class="data-form">
-                    <tr>
-                        <th>Tên hiển thị: <span class="req">*</span></th>
-                        <td><%-form.input(Project, 'project_name', req.param('project_name') || '', {autofocus: 'autofocus'})%></td>
-                    </tr>
-                    <tr>
-                        <th>Khái quát về dự án: <span class="req">*</span></th>
-                        <td><%-form.input(Project, 'project_description', req.param('project_description') || '', {class:'textarea'})%></td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td><button type="submit">Add</button></td>
-                    </tr>
-               </table>
-               <input type='hidden' name='_csrf' value='<%= _csrf %>'>
-           </form>
+        <div class="wrapper-main">
+	       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Add project</h2>
+	       <div class="search">
+	           <form action="/admin/project/add" method="post" id="addIn">
+	           <% include ../../element/_error %>
+	               <table class="data-form">
+	                    <tr>
+	                        <th>Tên hiển thị: <span class="req">*</span></th>
+	                        <td><%-form.input(Project, 'project_name', req.param('project_name') || '', {autofocus: 'autofocus'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Khái quát về dự án: <span class="req">*</span></th>
+	                        <td><%-form.input(Project, 'project_description', req.param('project_description') || '', {class:'textarea'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th></th>
+	                        <td><button type="submit">Add</button></td>
+	                    </tr>
+	               </table>
+	               <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+	           </form>
+	       </div>
        </div>
     </div>
 </div>

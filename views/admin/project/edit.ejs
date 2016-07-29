@@ -4,86 +4,88 @@
         <%include ../../element/_admin_menu%>
     </div>
     <div class="detailAction">
-       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Edit project</h2>
-       <div class="search">
-           <form action="/admin/project/edit" method="post" id="addIn">
-           <input type='hidden' name='pid' value="<%=req.param('pid') || res.locals.AppData.id%>">
-           <% include ../../element/_error %>
-           <%if(res.locals.AppData){%>
-               <table class="data-form" style="width: 370px;">
-                    <tr>
-                        <th style="width: 100px;">Tên hiển thị: <span class="req">*</span></th>
-                        <td><%-form.input(Project, 'project_name', req.param('project_name') || res.locals.AppData.project_name, {autofocus: 'autofocus'})%></td>
-                    </tr>
-                    <tr>
-                        <th>Khái quát về dự án: <span class="req">*</span></th>
-                        <td><%-form.input(Project, 'project_description', req.param('project_description') || res.locals.AppData.project_description, {class:'textarea'})%></td>
-                    </tr>
-                    <tr>
-                        <th>Thành viên dự án:</th>
-                        <td>
-                        <%if(Object.keys(res.locals.AppUser).length) {
-                            var j = 0;
-                            for(var i in res.locals.AppUser) {
-                            j++;
-                            var user = res.locals.AppUser[i];%>
-                            <span class="member">
-                                <a target="_blank" href="/admin/user/profile/?uid=<%=user.id%>"><%=user.user_name%></a>
-                                <a class="del" onclick="javascript: return confirm('xóa thành viên <%=user.user_name%> ra khỏi dự án?');" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=delete"><i class="fa fa-times"></i>
-                                </a>
-                            </span>
-                            <%}%>
-                            <%if( !req.param('uname') ) {%>
-                            <br/><span class="member" id="btnc" style="font-weight: normal;">thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
-                            <%}%>
-                        <%} else {%>
-                            <%if( !req.param('uname') ) {%>
-                            <br/><span class="member" id="btnc" style="font-weight: normal;">hiện tại chưa có thành viên nào.<br /> hãy thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
-                            <%}%>
-                        <%}%>
-                            <%if(req.param('uname')) {%>
-                            <br/><span class="member" id="btnc" style="font-weight: normal;"><%=Object.keys(res.locals.AppUserSearch).length%> kết quả tìm kiếm với <i><%=req.param('uname')%></i> <a href="javascript:addUser('<%=req.param('uname') || ''%>');">Tìm lại </a></span>
-                            <%}%>
-                            <div class="addnewmember" style="display: none;">
-                               <div class="search-has-button">
-                                   <input placeholder="Tìm" autofocus="autofocus" type="search" id="uname" name="uname">
-                                   <button id="search" disabled="disabled" type="submit" class="button-submit" name="search"><i class="fa fa-search"></i></button>
-                               </div>
-                            </div><br/>
-                            <script type="text/javascript">
-                            $(function() {
-                                addUser = function(uname) {
-                                    if(uname != '') {
-                                        $('#uname').val(uname);
-                                    }
-                                    $('.addnewmember').show();
-                                    $('#addIn').attr('method', 'get');
-                                    $('#btnc').remove();
-                                    $('#search').removeAttr('disabled');
-                                    $('#edit').attr('disabled', 'disabled').css('display', 'none');
-                                }
-                            });
-                            </script>
-                            <%if(res.locals.AppUserSearch) {
-                            for(var i in res.locals.AppUserSearch) {
-                            var user = res.locals.AppUserSearch[i];%>
-                                <span class="member">
+        <div class="wrapper-main">
+	       <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Edit project</h2>
+	       <div class="search">
+	           <form action="/admin/project/edit" method="post" id="addIn">
+	           <input type='hidden' name='pid' value="<%=req.param('pid') || res.locals.AppData.id%>">
+	           <% include ../../element/_error %>
+	           <%if(res.locals.AppData){%>
+	               <table class="data-form" style="width: 370px;">
+	                    <tr>
+	                        <th style="width: 100px;">Tên hiển thị: <span class="req">*</span></th>
+	                        <td><%-form.input(Project, 'project_name', req.param('project_name') || res.locals.AppData.project_name, {autofocus: 'autofocus'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Khái quát về dự án: <span class="req">*</span></th>
+	                        <td><%-form.input(Project, 'project_description', req.param('project_description') || res.locals.AppData.project_description, {class:'textarea'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Thành viên dự án:</th>
+	                        <td>
+	                        <%if(Object.keys(res.locals.AppUser).length) {
+	                            var j = 0;
+	                            for(var i in res.locals.AppUser) {
+	                            j++;
+	                            var user = res.locals.AppUser[i];%>
+	                            <span class="member">
 	                                <a target="_blank" href="/admin/user/profile/?uid=<%=user.id%>"><%=user.user_name%></a>
-	                                <a class="del add" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=add"><i class="fa fa-plus-square"></i></i>
+	                                <a class="del" onclick="javascript: return confirm('xóa thành viên <%=user.user_name%> ra khỏi dự án?');" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=delete"><i class="fa fa-times"></i>
 	                                </a>
 	                            </span>
-                            <%}%>
-                            <%}%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td><button id="edit" type="submit">Edit</button></td>
-                    </tr>
-               </table>
-           <%}%>
-               <input type='hidden' name='_csrf' value='<%= _csrf %>'>
-           </form>
+	                            <%}%>
+	                            <%if( !req.param('uname') ) {%>
+	                            <br/><span class="member" id="btnc" style="font-weight: normal;">thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
+	                            <%}%>
+	                        <%} else {%>
+	                            <%if( !req.param('uname') ) {%>
+	                            <br/><span class="member" id="btnc" style="font-weight: normal;">hiện tại chưa có thành viên nào.<br /> hãy thêm thành viên tại <a href="javascript:addUser();">đây </a></span>
+	                            <%}%>
+	                        <%}%>
+	                            <%if(req.param('uname')) {%>
+	                            <br/><span class="member" id="btnc" style="font-weight: normal;"><%=Object.keys(res.locals.AppUserSearch).length%> kết quả tìm kiếm với <i><%=req.param('uname')%></i> <a href="javascript:addUser('<%=req.param('uname') || ''%>');">Tìm lại </a></span>
+	                            <%}%>
+	                            <div class="addnewmember" style="display: none;">
+	                               <div class="search-has-button">
+	                                   <input placeholder="Tìm" autofocus="autofocus" type="search" id="uname" name="uname">
+	                                   <button id="search" disabled="disabled" type="submit" class="button-submit" name="search"><i class="fa fa-search"></i></button>
+	                               </div>
+	                            </div><br/>
+	                            <script type="text/javascript">
+	                            $(function() {
+	                                addUser = function(uname) {
+	                                    if(uname != '') {
+	                                        $('#uname').val(uname);
+	                                    }
+	                                    $('.addnewmember').show();
+	                                    $('#addIn').attr('method', 'get');
+	                                    $('#btnc').remove();
+	                                    $('#search').removeAttr('disabled');
+	                                    $('#edit').attr('disabled', 'disabled').css('display', 'none');
+	                                }
+	                            });
+	                            </script>
+	                            <%if(res.locals.AppUserSearch) {
+	                            for(var i in res.locals.AppUserSearch) {
+	                            var user = res.locals.AppUserSearch[i];%>
+	                                <span class="member">
+		                                <a target="_blank" href="/admin/user/profile/?uid=<%=user.id%>"><%=user.user_name%></a>
+		                                <a class="del add" href="/admin/project/user/?pid=<%=req.param('pid')%>&uid=<%=user.id%>&mode=add"><i class="fa fa-plus-square"></i></i>
+		                                </a>
+		                            </span>
+	                            <%}%>
+	                            <%}%>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th></th>
+	                        <td><button id="edit" type="submit">Edit</button></td>
+	                    </tr>
+	               </table>
+	           <%}%>
+	               <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+	           </form>
+	       </div>
        </div>
     </div>
 </div>

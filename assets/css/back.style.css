@@ -10,8 +10,17 @@ ul,li{
 }
 .mainMenu {
     float: left;
-    width: 150px;
+    width: 200px;
     box-sizing: border-box;
+    padding: 15px 10px;
+    background-color: #fff;
+    box-shadow:  1px 3px 3px #888888
+}
+.wrapper-main{
+	background-color: #fff;
+    box-shadow:  1px 3px 3px #888888;
+    padding: 10px 10px 15px;
+    
 }
 .menu li > a {
 	font-size: 11px;
