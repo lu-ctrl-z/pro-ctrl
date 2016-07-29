@@ -44,4 +44,8 @@ module.exports.policies = {
     },
     IOController: {
     },
+    AdminController: {
+        '*' : ['authenticate', 'isAdmin'],
+        'login': ['authenticate'],
+    },
 };

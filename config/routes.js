@@ -194,4 +194,9 @@ module.exports.routes = {
       action: 'showDuration',
   },
   //for TaskController
+  //for ProductAdminController
+  '/product/admin': {
+      controller: 'product/admin/ProductAdminController',
+      action: 'index',
+  },
 };

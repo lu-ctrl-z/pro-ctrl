@@ -1,0 +1,29 @@
+<div class="data-grid">
+<%if(res.locals.AppData) {%>
+    <table class="data-grid-table">
+        <tr>
+            <%for(var h in identify) {%>
+            <th><%-identify[h].header%></th>
+            <%}%>
+        </tr>
+        <%for(var i in res.locals.AppData) {
+        var row = res.locals.AppData[i]; %>
+        <tr>
+            <%for(var h in identify) {%>
+            <td<%if(identify[h].hasOwnProperty('attr')) {%> <%-identify[h].attr%> <%}%>>
+            <%if(identify[h].hasOwnProperty('apply')) { %>
+              <%-identify[h].apply(row)%>
+            <%} else {%>
+              <%=row[h]%>
+            <%} }%>
+            </td>
+        </tr>
+        <%}%>
+    </table>
+    <ul class="pagginate">
+        
+    </ul>
+<%} else {%>
+    <p>Không tồn tại bản ghi</p>
+<%}%>
+</div>

@@ -1,0 +1,29 @@
+<div class="adminMainScreen clearfix">
+	<div class="mainMenu">
+	    <%include ../../element/_welcome%>
+	    <%include ../../element/_admin_menu%>
+	</div>
+	<div class="detailAction">
+	   <div class="wrapper-main">
+		   <h2 class="sub-right"><i style="margin-right: 10px;" class="fa fa-user"></i>Quản lý user</h2>
+		   <div class="search">
+		       <form action="/admin/user/" method="get" id="searchIn">
+		           <div class="search-has-button">
+		               <input placeholder="Tìm" autofocus="autofocus" type="search" name="q" value="<%=req.param('q') || ''%>">
+		               <button type="submit" class="button-submit"><i class="fa fa-search"></i></button>
+		           </div>
+		       </form>
+		   </div>
+		   <%var showListProduct = function() {
+		   var identify = {
+		                 "id": { header: "ID", attr:"style='text-align: center;'" }, 
+		                 "user_name": { header: "Tên hiển thị", apply: function(row) { return '<a href="'+ url.href('/admin/user/edit/', {uid: row.id}) + '">' + row.user_name + '</a>'; } },
+		                 "email": { header: "Email", attr:"style='text-align: left;'" },
+		                 "member_type": { header: "Phân loại", apply: function(row) { return sails.config.common.memberType[row.member_type]; } },
+		                 "auth_type":{ header: "Quyền", apply: function(row) { return sails.config.common.authType[row.auth_type]; } }, 
+		                 }; %>
+		   <%include ../../element/common/_data_table%>
+		   <%}()%>
+	   </div>
+	</div>
+</div>
