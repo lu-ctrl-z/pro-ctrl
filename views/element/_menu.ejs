@@ -1,7 +1,7 @@
 <%if(req.session.authenticated) {%>
-<p class="sub">Quản lý</p>
+<!-- p class="sub">Quản lý</p -->
 <ul class="menu">
-    <li><a href="/profile/"><i class="fa fa-user"></i><%=req.session.user.user_name%></a></li>
+    <li><a><i class="fa fa-user"></i><%=req.session.user.user_name%></a></li>
     <li ><a href="#"><i class="fa fa-file-text-o"></i>Project</a>
         <ul class="subMenu">
         <%if(res.locals.app && res.locals.app.prOfUser) {%>

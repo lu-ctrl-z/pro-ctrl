@@ -6,11 +6,17 @@
 	margin-top: 20px;
 }
 .leftSide {
-    width: 150px;
+    width: 200px;
     float: left;
+    background: #fff;
+    padding: 15px 8px;
+    box-sizing: border-box;
+    box-shadow: 0.2px 0.2px 0.2px rgba(108, 124, 139, 0.7);
+    border-radius: 5px 5px 0px 0px;
+    border: rgba(108, 124, 139, 0.7) solid 1px;
 }
 .rightSide {
-    width: 1240px;
+    width: 1190px;
     padding-left:10px;
     float: right;
 }
