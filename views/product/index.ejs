@@ -1,7 +1,7 @@
 <div class="adminMainScreen clearfix">
 	<div class="mainMenu">
-	    <%include ../../element/_welcome%>
-	    <%include ../../element/_admin_menu%>
+	    <%include ../element/_welcome%>
+	    <%include ../element/_admin_menu%>
 	</div>
 	<div class="detailAction">
 	   <div class="wrapper-main">
@@ -21,8 +21,10 @@
 		                 "email": { header: "Email", attr:"style='text-align: left;'" },
 		                 "member_type": { header: "Phân loại", apply: function(row) { return sails.config.common.memberType[row.member_type]; } },
 		                 "auth_type":{ header: "Quyền", apply: function(row) { return sails.config.common.authType[row.auth_type]; } }, 
-		                 }; %>
-		   <%include ../../element/common/_data_table%>
+		                 };
+           var pagger = res.locals.pagger;
+           %>
+		   <%include ../element/common/_data_table%>
 		   <%}()%>
 	   </div>
 	</div>

@@ -22,9 +22,14 @@ module.exports = {
             if (err) {
                 console.log(err);
             }
-            res.view('product/admin/index', {
-                AppData : ret
+            res.view('product/index', {
+                AppData : ret,
+                pagger: {total: 300, current: req.param('page') || 1, limit: req.param('limit') || 10}
             });
         });
     },
+    //hiển thị màn hình nhập kho
+    importProduct: function(req, res) {
+        res.view('product/import', { });
+    }
 };

@@ -7,7 +7,7 @@ body{
     background-color: #f9f9f9;
     color: rgb(0, 0, 0);
     font-family: sans-serif,tahoma,verdana,arial;
-    font-size: 12px;
+    font-size: 16px;
 }
 #header {
     position: relative;
@@ -26,7 +26,7 @@ body{
 }
 .wrapper {
     position: relative;
-    width: 1404px;
+    width: 1200px;
     margin: 0 auto;
 }
 .wrapper2 {
@@ -509,3 +509,56 @@ table.border td{
 .req {
 	color: red;
 }
+/*START pagginate*/
+.pagginate {
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+.pagginate .pagger{
+	display: inline-block;
+}
+.pagginate .pagger .item{
+	display: inline-block;
+	font-size: 13px;
+	margin: 0px 2px;
+}
+.pagginate .pagger .item span,
+.pagginate .pagger .item a{
+	display: inline-block;
+	min-width: 2em;
+	padding: 6px 0;
+	background-color: #dfecf9;
+	border-radius: 3px;
+}
+.pagginate .pagger .item span {
+	background-color: #dcdee5;
+}
+.pagginate .pagger .item.active a{
+	background-color: #dcdee5;
+}
+/*///////////////////////////////////////////////*/
+.newGrid{
+	padding: 20px;
+	border: 1px solid #aabccf;
+	min-height: 600px;
+}
+.main-form-data {
+	position: relative;
+}
+.barcode-scaner {
+	font-size: 18px;
+	width: 200px;
+	text-align: center;
+	border: #FE2E2E solid 1px !important;
+}
+td.number {
+	text-align: center !important;
+}
+td.text {
+	text-align: left !important;
+}
+input.sl {
+	width: 3em;
+}
+/*END*/

@@ -195,8 +195,12 @@ module.exports.routes = {
   },
   //for TaskController
   //for ProductAdminController
-  '/product/admin': {
-      controller: 'product/admin/ProductAdminController',
+  '/product': {
+      controller: 'product/ProductController',
       action: 'index',
+  },
+  '/product/import': {
+	  controller: 'product/ProductController',
+	  action: 'importProduct',
   },
 };

@@ -20,9 +20,11 @@
         </tr>
         <%}%>
     </table>
-    <ul class="pagginate">
-        
-    </ul>
+    <%if(typeof pagger != 'undefined') {%>
+      <div class="pagginate mt30">
+        <%-paginator.createLinks(pagger, 9, 'pagger')%>
+      </div>
+    <%}%>
 <%} else {%>
     <p>Không tồn tại bản ghi</p>
 <%}%>
