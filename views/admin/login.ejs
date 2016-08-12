@@ -7,7 +7,7 @@
             <tr><th><%-__('Username or email')%> :</th><td><input autofocus="autofocus" type="text" name="user_name" tabindex="1"></td></tr>
             <tr><th><%=__('Password')%> :</th><td><input type="password" name="password" tabindex="2"></td></tr>
             <tr><th></th><td><label class="uiLabelCheckbox"><input <%if(req.param('rememberme')) {%> checked="checked"<%}%> type="checkbox" name="rememberme" tabindex="3"><%=__('Keep me login')%></label></td></tr>
-            <tr><th></th><td><button tabindex="4"><%=__('Login')%></button></td></tr>
+            <tr><th></th><td><button class="rio-button-action" tabindex="4"><%=__('Login')%></button></td></tr>
         </table>
     </fieldset>
     <input type="hidden" name="next" value="<%=res.locals.next||''%>">

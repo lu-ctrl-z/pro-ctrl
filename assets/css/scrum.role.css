@@ -181,3 +181,14 @@ body > .popup-box {
     padding: 5px 10px;
     border-top: solid 1px rgba(16, 25, 34, 0.16);
 }
+.ico {
+    background-image: url('/image/lst.ico.png?v1');
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+}
+.ico.barcode {
+    height: 32px;
+    width: 32px;
+    background-position: -6px -3px;
+}

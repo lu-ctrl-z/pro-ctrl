@@ -16,3 +16,41 @@
   color: red;
   list-style-type: none;
 }
+.rio-button-action {
+    background-color: #427fed;
+    background-image: -moz-linear-gradient(center top , transparent, transparent);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    color: #fff;
+    cursor: default;
+    font-size: 11px;
+    font-weight: bold;
+    margin-right: 16px;
+    min-width: 54px;
+    outline: 4px solid transparent;
+    padding: 7px 12px;
+    text-align: center;
+    transition-duration: 0.218s;
+    transition-timing-function: ease-in-out;
+    white-space: nowrap;
+}
+.rio-button-action:hover {
+    background-color: #4285f4;
+    background-image: -moz-linear-gradient(center top , transparent, transparent);
+    border-bottom-color: #2f69c2;
+    box-shadow: 0 -2px 0 #2f69c2 inset;
+}
+#read-barcoder{
+	position: relative;
+	display: inline-block;
+}
+#read-barcoder .barcode{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	right: 0;
+}
+#read-barcoder .barcode-scaner{
+	padding-right: 35px;
+}
