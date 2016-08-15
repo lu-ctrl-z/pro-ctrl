@@ -229,7 +229,28 @@ table.scrum td {
     left: 3px;
     width: 50px;
 }
-textarea,
+.textbox01 {
+    background: #F1F1F1 url(http://html-generator.weebly.com/files/theme/input-text-40.png) no-repeat;
+    background-position: 5px -7px !important;
+    /* padding: 6px 10px 6px 25px; */
+    padding: 6px 10px 6px 10px;
+    border: 1px solid #CCC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #CCC inset, 0 1px 0 #FFF;
+    box-shadow: 0 1px 1px #CCC inset, 0 1px 0 #FFF;
+}
+.textbox01:focus {
+    background-color: #FFF;
+    border-color: #E8C291;
+    outline: none;
+    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+    -webkit-box-shadow: 0 0 0 1px #E8C291 inset;
+    box-shadow: 0 0 0 1px #E8C291 inset;
+}
+/* textarea,
 input[type="checkbox"],
 input[type="email"],
 input[type="password"],
@@ -243,6 +264,25 @@ input[type="text"]{
     color: #555555;
     padding: 3px 5px;
     box-sizing: border-box;
+} */
+textarea,
+input[type="checkbox"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="text"]{
+    background: #F1F1F1;
+    background-position: 5px -7px !important;
+    padding: 6px 10px 6px 10px;
+    /* padding: 10px 10px 10px 25px; */
+    /* width: 270px; */
+    border: 1px solid #CCC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #CCC inset, 0 1px 0 #FFF;
+    box-shadow: 0 1px 1px #CCC inset, 0 1px 0 #FFF;
 }
 button{
     background-color: #ffffff;
@@ -255,6 +295,21 @@ button{
     padding: 2px 6px;
 }
 textarea:FOCUS,
+input[type="checkbox"]:FOCUS,
+input[type="email"]:FOCUS,
+input[type="search"]:FOCUS,
+input[type="password"]:FOCUS,
+input[type="text"]:FOCUS,
+input[type="email"]:FOCUS,
+textarea:FOCUS {
+    background-color: #FFF;
+    border-color: #E8C291;
+    outline: none;
+    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+    -webkit-box-shadow: 0 0 0 1px #E8C291 inset;
+    box-shadow: 0 0 0 1px #E8C291 inset;
+}
+/* textarea:FOCUS,
 button:FOCUS,
 input[type="checkbox"]:FOCUS,
 input[type="email"]:FOCUS,
@@ -265,7 +320,7 @@ input[type="email"]:FOCUS,
 textarea:FOCUS {
     border-color: rgba(82, 168, 36, 0.8);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset 0 0 8px rgba(82, 168, 236, 0.6);
-}
+} */
 .task-form .type {
     position: absolute;
     right: 3px;

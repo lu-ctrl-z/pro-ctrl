@@ -190,5 +190,6 @@ body > .popup-box {
 .ico.barcode {
     height: 32px;
     width: 32px;
-    background-position: -6px -3px;
+    background-position: 0px 1px;
+    background-size: 250px auto;
 }

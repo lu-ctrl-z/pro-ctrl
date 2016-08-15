@@ -1,91 +1,144 @@
 <div class="mainScreen clearfix">
-<div class="leftSide menu">
-<%include ../element/_menu%>
-</div>
-<div class="rightSide">
-    <div class="kanban">
-    <h2 class="bar"><i class="fa fa-file-text-o"></i> Nhập kho</h2>
-    <ul class="action clearfix">
-        <li class="tool"><a id="showTaskForm" onclick="javascript:return false;" href="/task/create/"  ><i class="fa fa-tasks"></i> Nhập kho</a>
-        <div class="boxup menu-list">
-            <div class="input-data-form">
-                
-            </div>
-        </div>
-        </li>
-        <li class="tool"><a href="#"><i class="fa fa-tasks"></i> Filter</a>
-        <div class="boxup menu-list" tabindex="1">
-            <div class="input-data-form">
-            </div>
-        </div>
-        </li>
-    </ul>
-    <div class="data-area newGrid">
-        <div class="main-form-data">
-            <form >
-                <div align="center">
-                    <div id="read-barcoder">
-                    <input style="vertical-align: bottom;" id="main-barcoder" type="text" class="form-input barcode-scaner" placeholder="Mã vạch">
-                    <label class="ico barcode" for="main-barcoder"></label>
-                    </div>
-                </div>
-                <br />
-                <br />
-                <p class="note">Hãy nhập số lượng cho các sản phẩm</p>
-                <table class="data-grid-table">
-			        <tr>
-			            <th style="width: 5%;"></th>
-			            <th style="width: 15%;">barcode</th>
-			            <th style="width: 50%;">tên</th>
-			            <th style="width: 20%;">loại</th>
-			            <th style="width: 12%;">số lượng</th>
-			        </tr>
-			        <tr>
-			            <td class="number"><input type="checkbox" name="ck[]"></td>
-			            <td class="number">MD-10080001</td>
-			            <td class="text">Model thời trang Rayban 3055</td>
-			            <td class="number">Model Nam</td>
-			            <td class="number"><input name="sl[]" value="1" class="sl" type="text"></td>
-			        </tr>
-			        <tr>
-			            <td class="number"><input type="checkbox" name="ck[]"></td>
-			            <td class="number">MD-10080001</td>
-			            <td class="text">Model thời trang Rayban 3055</td>
-			            <td class="number">Model Nam</td>
-			            <td class="number"><input name="sl[]" value="1" class="sl" type="text"></td>
-			        </tr>
-			        <tr>
-			            <td class="number"><input type="checkbox" name="ck[]"></td>
-			            <td class="number">MD-10080001</td>
-			            <td class="text">Model thời trang Rayban 3055</td>
-			            <td class="number">Model Nam</td>
-			            <td class="number"><input name="sl[]" value="1" class="sl" type="text"></td>
-			        </tr>
-			        <tr>
-			            <td class="number"><input type="checkbox" name="ck[]"></td>
-			            <td class="number">MD-10080001</td>
-			            <td class="text">Model thời trang Rayban 3055</td>
-			            <td class="number">Model Nam</td>
-			            <td class="number"><input name="sl[]" value="1" class="sl" type="text"></td>
-			        </tr>
-			        <tr>
-			            <td class="number"><input type="checkbox" name="ck[]"></td>
-			            <td class="number">MD-10080001</td>
-			            <td class="text">Model thời trang Rayban 3055</td>
-			            <td class="number">Model Nam</td>
-			            <td class="number"><input name="sl[]" value="1" class="sl" type="text"></td>
-			        </tr>
-			        <tr>
-			            <td class="number"><input type="checkbox" name="ck[]"></td>
-			            <td class="number">MD-10080001</td>
-			            <td class="text">Model thời trang Rayban 3055</td>
-			            <td class="number">Model Nam</td>
-			            <td class="number"><input name="sl[]" value="1" class="sl" type="text"></td>
-			        </tr>
-			    </table>
-            </form>
-        </div>
-    </div>
-    </div>
-</div>
+	<div class="leftSide menu"><%include ../element/_menu%></div>
+	<div class="rightSide">
+		<div class="kanban">
+			<h2 class="bar">
+				<i class="fa fa-file-text-o"></i> Nhập kho
+			</h2>
+			<ul class="action clearfix">
+				<li class="tool"><a id="showTaskForm"
+					onclick="javascript:return false;" href="/task/create/"><i
+						class="fa fa-tasks"></i> Nhập kho</a>
+					<div class="boxup menu-list">
+						<div class="input-data-form"></div>
+					</div></li>
+				<li class="tool"><a href="#"><i class="fa fa-tasks"></i>
+						Filter</a>
+					<div class="boxup menu-list" tabindex="1">
+						<div class="input-data-form"></div>
+					</div></li>
+				<li class="tool"><a href="#"><i class="fa fa-question"
+						aria-hidden="true"></i> Hướng dẫn sử dụng</a>
+					<div class="boxup menu-list" tabindex="1">
+						<div class="input-data-form"></div>
+					</div></li>
+			</ul>
+			<div class="data-area newGrid">
+				<div class="main-form-data">
+					<form>
+						<div align="center">
+							<div id="read-barcoder">
+								<input style="vertical-align: bottom;" id="main-barcoder"
+									type="text" class="form-input barcode-scaner"
+									placeholder="Mã vạch"> <label class="ico barcode"
+									for="main-barcoder"></label>
+							</div>
+							<br />
+						</div>
+						<br /> <br />
+						<p class="note">Hãy nhập số lượng cho các sản phẩm</p>
+						<table class="data-grid-table" id="lstProduct">
+							<tr>
+								<th style="width: 5%;"></th>
+								<th style="width: 15%;">barcode</th>
+								<th style="width: 50%;">tên</th>
+								<th style="width: 20%;">loại</th>
+								<th style="width: 12%;">số lượng</th>
+							</tr>
+							<tr>
+								<td class="number"><input type="checkbox" name="ck[]"></td>
+								<td class="number">MD-10080001</td>
+								<td class="text">Model thời trang Rayban 3055</td>
+								<td class="number">Model Nam</td>
+								<td class="number"><input name="sl[]" value="1" class="sl"
+									type="text"></td>
+							</tr>
+							<tr>
+								<td class="number"><input type="checkbox" name="ck[]"></td>
+								<td class="number">MD-10080001</td>
+								<td class="text">Model thời trang Rayban 3055</td>
+								<td class="number">Model Nam</td>
+								<td class="number"><input name="sl[]" value="1" class="sl"
+									type="text"></td>
+							</tr>
+							<tr>
+								<td class="number"><input type="checkbox" name="ck[]"></td>
+								<td class="number">MD-10080001</td>
+								<td class="text">Model thời trang Rayban 3055</td>
+								<td class="number">Model Nam</td>
+								<td class="number"><input name="sl[]" value="1" class="sl"
+									type="text"></td>
+							</tr>
+							<tr>
+								<td class="number"><input type="checkbox" name="ck[]"></td>
+								<td class="number">MD-10080001</td>
+								<td class="text">Model thời trang Rayban 3055</td>
+								<td class="number">Model Nam</td>
+								<td class="number"><input name="sl[]" value="1" class="sl"
+									type="text"></td>
+							</tr>
+							<tr>
+								<td class="number"><input type="checkbox" name="ck[]"></td>
+								<td class="number">MD-10080001</td>
+								<td class="text">Model thời trang Rayban 3055</td>
+								<td class="number">Model Nam</td>
+								<td class="number"><input name="sl[]" value="1" class="sl"
+									type="text"></td>
+							</tr>
+							<tr>
+								<td class="number"><input type="checkbox" name="ck[]"></td>
+								<td class="number">MD-10080001</td>
+								<td class="text">Model thời trang Rayban 3055</td>
+								<td class="number">Model Nam</td>
+								<td class="number"><input name="sl[]" value="1" class="sl"
+									type="text"></td>
+							</tr>
+						</table>
+					</form>
+					<form method="post" id="post-product">
+						<table class="data-grid-table">
+							<tr>
+								<th style="width: 5%;"><button class="buttonClick w100pc"
+										type="submit">lưu</button></th>
+								<th style="width: 15%;"><input class="textbox01 w100pc"
+									type="text" name="input_code" /></th>
+								<th style="width: 50%;"><input class="textbox01 w100pc"
+									type="text" name="input_name" /></th>
+								<th style="width: 20%;"><label class="webkit"
+									style="vertical-align: top;"> <select name="cat" class="w100pc">
+											<option>Danh mục</option>
+											<option>Kính TT nam</option>
+											<option>Kính TT nữ</option>
+									</select>
+								</label></th>
+								<th style="width: 12%;"><input name="sl[]" value="1"
+									class="sl" type="text"></th>
+							</tr>
+						</table>
+					</form>
+					<script type="text/javascript">
+					   $(function() {
+					       $("#post-product").submit( function() {
+					           var str = '<tr> \
+	                                <td class="number"><input type="checkbox" checked="checked" name="ck[]"></td> \
+	                                <td class="number">${BARCODE}</td> \
+	                                <td class="text">${NAME}</td> \
+	                                <td class="number">${CAT}</td> \
+	                                <td class="number"><input name="sl[]" value="${SL}" class="sl" \
+	                                    type="text"></td> \
+	                            </tr>';
+	                            str = str.replace('${BARCODE}', $(this).find('input[name="input_code"]').val());
+	                            str = str.replace('${NAME}', $(this).find('input[name="input_name"]').val());
+	                            str = str.replace('${CAT}', $(this).find('select[name="cat"] option:selected').text());
+	                            str = str.replace('${SL}', $(this).find('input[name="sl[]"]').val());
+	                            $('#lstProduct').append(str);
+	                            document.getElementById("post-product").reset();
+	                            return false;
+					       });
+					   })
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
