@@ -172,7 +172,7 @@ label.webkit:before {
 }
 .ceditable {
 	background-color: transparent;
-	padding: 0;
+	padding: 3px;
 	margin: 0px;
 	width: 100%;
 	height: 100%;

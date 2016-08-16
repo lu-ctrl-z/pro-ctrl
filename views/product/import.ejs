@@ -1,121 +1,127 @@
 <div class="mainScreen clearfix">
-	<div class="leftSide menu"><%include ../element/_menu%></div>
-	<div class="rightSide">
-		<div class="kanban">
-			<h2 class="bar">
-				<i class="fa fa-file-text-o"></i> Nhập kho
-			</h2>
-			<ul class="action clearfix">
-				<li class="tool"><a id="showTaskForm"
-					onclick="javascript:return false;" href="/task/create/"><i
-						class="fa fa-tasks"></i> Nhập kho</a>
-					<div class="boxup menu-list">
-						<div class="input-data-form"></div>
-					</div></li>
-				<li class="tool"><a href="#"><i class="fa fa-tasks"></i>
-						Filter</a>
-					<div class="boxup menu-list" tabindex="1">
-						<div class="input-data-form"></div>
-					</div></li>
-				<li class="tool"><a href="#"><i style="color: red;" class="fa fa-question"
-						aria-hidden="true"></i> Hướng dẫn sử dụng</a>
-					<div class="boxup menu-list" tabindex="1">
-						<div class="input-data-form textnote">
-						  <%include ../static/help_product_import%>
-						</div>
-					</div></li>
-			</ul>
-			<div class="data-area newGrid">
-				<div class="main-form-data">
-					<form>
-						<div align="center">
-							<div id="read-barcoder">
-								<input style="vertical-align: bottom;" id="main-barcoder"
-									type="text" class="form-input barcode-scaner"
-									placeholder="Mã vạch"> <label class="ico barcode"
-									for="main-barcoder"></label>
-							</div>
-							<br />
-						</div>
-						<br /> <br />
-						<!-- <p class="note">Hãy nhập số lượng cho các sản phẩm</p> -->
-						<table class="data-grid-table" id="lstProduct">
-							<tr>
-								<th style="width: 5%;"><input type="checkbox" name="ckall[]"></th>
-								<th style="width: 15%;">BARCODE</th>
-								<th style="width: 35%;">TÊN</th>
-								<th style="width: 20%;">DANH MỤC</th>
-								<th style="width: 10%;">SỐ LƯỢNG</th>
-								<th style="width: 15%;">GIÁ BÁN<br/>VND</th>
-							</tr>
-							<tr>
-								<td class="number"><input name="ck[]" type="checkbox"></td>
-								<td class="number"><input name="code[]" class="ceditable" value="MD-10080001" maxlength="14" type="text"></td>
-								<td class="text">  <input name="name[]" class="ceditable" value="Model thời trang Rayban 3055" type="text"></td>
-								<td class="number"><input name="cat[]" class="ceditable" value="Model Nam" type="text"></td>
-								<td class="number"><input name="sl[]" value="1" class="ceditable" type="text"></td>
-								<td class="number"><input name="price[]" value="1.250.000" class="ceditable" type="text"></td>
-							</tr>
-						</table>
-					</form>
-					<table class="data-grid-table">
-						<tr>
-							<th style="width: 70%; text-align: left;" colspan="3">
-							    <button id="import-delete" class="rio-button-action remover btn-disable" type="submit"><i class="fa fa-times-circle" aria-hidden="true"></i> Xóa bản ghi được đánh dấu</button> &nbsp;
-							    <button id="import-add" class="rio-button-action" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Thêm</button>
-							</th>
-							<!--<th style="width: 20%;"> <label class="webkit"
-								style="vertical-align: top;">
-								<select name="cat" class="w100pc">
-									<option>Danh mục</option>
-									<option>Kính TT nam</option>
-									<option>Kính TT nữ</option>
-								</select>
-							</label> </th>-->
-							<th style="width: 32%;text-align: right;" colspan="2">
-							    <button id="import-save"  class="rio-button-action" style="margin: 0;" type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Hoàn thành & Lưu</button>
-							</th>
-						</tr>
-					</table>
-					<script type="text/javascript">
-					   $(function() {
-					       $('body').on('change', 'input[name="ck[]"]', function() {
-					           if($('input[name="ck[]"]:checked').length) {
-					               $('#import-delete').removeClass('btn-disable');
-					           } else {
-					               $('#import-delete').addClass('btn-disable');
-					           }
-					       })
-					       $('body').on('change', 'input[name="ckall[]"]', function() {
-					           $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
-					       })
-					       $("#import-add").click( function() {
-					           var str = '<tr class="im-new-member">\
-	                                <td class="number"><input name="ck[]" type="checkbox" checked="checked"></td>\
-	                                <td class="number"><input name="code[]" class="ceditable" value="MD-10080001" maxlength="14" type="text"></td>\
-	                                <td class="text">  <input name="name[]" class="ceditable" value="Model thời trang Rayban 3055" type="text"></td>\
-	                                <td class="number"><input name="cat[]" class="ceditable" value="Model Nam" type="text"></td>\
-	                                <td class="number"><input name="sl[]" value="1" class="ceditable" type="text"></td>\
-	                                <td class="number"><input name="price[]" value="1.250.000" class="ceditable" type="text"></td>\
-	                            </tr>';
-	                            str = str.replace('${BARCODE}', $(this).find('input[name="input_code"]').val());
-	                            str = str.replace('${NAME}', $(this).find('input[name="input_name"]').val());
-	                            str = str.replace('${CAT}', $(this).find('select[name="cat"] option:selected').text());
-	                            str = str.replace('${SL}', $(this).find('input[name="sl[]"]').val());
-	                            $('#lstProduct .im-new-member').removeClass('im-new-member');
-	                            $('#lstProduct').append(str).find('.im-new-member').find('input[name="code[]"]').focus();
-	                            $('#lstProduct').find('.im-new-member').find('input[name="ck[]"]').trigger('change');
-	                            return false;
-					       });
-					       $("#import-delete").click( function() {
-					           $('input[name="ck[]"]:checked').each(function() {
-					               $(this).parents('tr').remove();
-					           })
-					       });
-					   })
-					</script>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="leftSide menu"><%include ../element/_menu%></div>
+    <div class="rightSide">
+        <div class="kanban">
+            <h2 class="bar">
+                <i class="fa fa-file-text-o"></i> Nhập kho
+            </h2>
+            <ul class="action clearfix">
+                <li class="tool"><a id="showTaskForm"
+                    onclick="javascript:return false;" href="/task/create/"><i
+                        class="fa fa-tasks"></i> Nhập kho</a>
+                    <div class="boxup menu-list">
+                        <div class="input-data-form"></div>
+                    </div></li>
+                <li class="tool"><a href="#"><i class="fa fa-tasks"></i>
+                        Filter</a>
+                    <div class="boxup menu-list" tabindex="1">
+                        <div class="input-data-form"></div>
+                    </div></li>
+                <li class="tool"><a href="#"><i style="color: red;" class="fa fa-question"
+                        aria-hidden="true"></i> Hướng dẫn sử dụng</a>
+                    <div class="boxup menu-list" tabindex="1">
+                        <div class="input-data-form textnote">
+                          <%include ../static/help_product_import%>
+                        </div>
+                    </div></li>
+            </ul>
+            <div class="data-area newGrid">
+                <div class="main-form-data">
+                    <form>
+                        <div align="center">
+                            <div id="read-barcoder">
+                                <input style="vertical-align: bottom;" id="main-barcoder"
+                                    type="text" class="form-input barcode-scaner"
+                                    placeholder="Mã vạch"> <label class="ico barcode"
+                                    for="main-barcoder"></label>
+                            </div>
+                            <br />
+                        </div>
+                        <br /> <br />
+                        <!-- <p class="note">Hãy nhập số lượng cho các sản phẩm</p> -->
+                        <table class="data-grid-table" id="lstProduct">
+                            <tr>
+                                <th style="width: 5%;"><input type="checkbox" name="ckall[]"></th>
+                                <th style="width: 15%;">BARCODE</th>
+                                <th style="width: 35%;">TÊN</th>
+                                <th style="width: 20%;">DANH MỤC</th>
+                                <th style="width: 10%;">SỐ LƯỢNG</th>
+                                <th style="width: 15%;">GIÁ BÁN<br/>VND</th>
+                            </tr>
+                        </table>
+                    </form>
+                    <table class="data-grid-table">
+                        <tr>
+                            <th style="width: 70%; text-align: left; border-right: none;" colspan="3">
+                                <button id="import-delete" class="rio-button-action remover btn-disable" type="submit"><i class="fa fa-times-circle" aria-hidden="true"></i> Xóa bản ghi được đánh dấu</button> &nbsp;
+                                <button id="import-add" class="rio-button-action" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Thêm</button>
+                            </th>
+                            <!--<th style="width: 20%;"> 
+                            <label class="webkit" style="vertical-align: top;">
+                                <select name="cat" class="w100pc">
+                                    <option>Danh mục</option>
+                                    <option>Kính TT nam</option>
+                                    <option>Kính TT nữ</option>
+                                </select>
+                            </label> </th>-->
+                            <th style="width: 32%;text-align: right; border-left: none;" colspan="2">
+                                <button id="import-save"  class="rio-button-action" style="margin: 0;" type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Hoàn thành & Lưu</button>
+                            </th>
+                        </tr>
+                    </table>
+                    <script type="text/javascript">
+                       $(function() {
+                           $('body').on('change', 'input[name="ck[]"]', function() {
+                               if($('input[name="ck[]"]:checked').length) {
+                                   $('#import-delete').removeClass('btn-disable');
+                               } else {
+                                   $('#import-delete').addClass('btn-disable');
+                               }
+                           })
+                           $('body').on('change', 'input[name="ckall[]"]', function() {
+                               $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
+                           })
+                           $("#import-add").click( function() {
+                               var str = '<tr class="im-new-member">\
+                                    <td class="number"><input name="ck[]" type="checkbox"></td>\
+                                    <td class="number"><input name="code[]" class="ceditable" value="" maxlength="14" type="text"></td>\
+                                    <td class="text">  <input name="name[]" class="ceditable" value="" type="text"></td>\
+                                    <td class="number"><label class="webkit" style="vertical-align: top;">\
+							                                <select name="cat" class="w100pc">\
+							                                    <option>Danh mục</option>\
+							                                    <option>Kính TT nam</option>\
+							                                    <option>Kính TT nữ</option>\
+							                                </select>\
+							                            </label></td>\
+                                    <td class="number"><input name="sl[]" value="1" class="ceditable" type="text"></td>\
+                                    <td class="number"><input name="price[]" value="" class="ceditable" type="text"></td>\
+                                </tr>';
+                                str = str.replace('${BARCODE}', $(this).find('input[name="input_code"]').val());
+                                str = str.replace('${NAME}', $(this).find('input[name="input_name"]').val());
+                                str = str.replace('${CAT}', $(this).find('select[name="cat"] option:selected').text());
+                                str = str.replace('${SL}', $(this).find('input[name="sl[]"]').val());
+                                $('#lstProduct .im-new-member').removeClass('im-new-member');
+                                $('#lstProduct').append(str).find('.im-new-member').find('input[name="code[]"]').focus();
+                                $('#lstProduct').find('.im-new-member').find('input[name="ck[]"]').trigger('change');
+                                return false;
+                           });
+                           $("#import-delete").click( function() {
+                               if(confirm('Bạn muốn xóa bản ghi?')) {
+                                   $('input[name="ck[]"]:checked').each(function() {
+                                       $(this).parents('tr').remove();
+                                   });
+                                   $('#import-delete').addClass('btn-disable');
+                               }
+                           });
+                           $(window).on('beforeunload', function(){
+                               if($('input[name="ck[]"]').length) {
+                                   return 'Are you sure you want to leave?';
+                               }
+                           });
+                       })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
