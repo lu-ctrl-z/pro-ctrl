@@ -17,10 +17,12 @@
 					<div class="boxup menu-list" tabindex="1">
 						<div class="input-data-form"></div>
 					</div></li>
-				<li class="tool"><a href="#"><i class="fa fa-question"
+				<li class="tool"><a href="#"><i style="color: red;" class="fa fa-question"
 						aria-hidden="true"></i> Hướng dẫn sử dụng</a>
 					<div class="boxup menu-list" tabindex="1">
-						<div class="input-data-form"></div>
+						<div class="input-data-form textnote">
+						  <%include ../static/help_product_import%>
+						</div>
 					</div></li>
 			</ul>
 			<div class="data-area newGrid">
@@ -36,104 +38,79 @@
 							<br />
 						</div>
 						<br /> <br />
-						<p class="note">Hãy nhập số lượng cho các sản phẩm</p>
+						<!-- <p class="note">Hãy nhập số lượng cho các sản phẩm</p> -->
 						<table class="data-grid-table" id="lstProduct">
 							<tr>
-								<th style="width: 5%;"></th>
-								<th style="width: 15%;">barcode</th>
-								<th style="width: 50%;">tên</th>
-								<th style="width: 20%;">loại</th>
-								<th style="width: 12%;">số lượng</th>
+								<th style="width: 5%;"><input type="checkbox" name="ckall[]"></th>
+								<th style="width: 15%;">BARCODE</th>
+								<th style="width: 35%;">TÊN</th>
+								<th style="width: 20%;">DANH MỤC</th>
+								<th style="width: 10%;">SỐ LƯỢNG</th>
+								<th style="width: 15%;">GIÁ BÁN<br/>VND</th>
 							</tr>
 							<tr>
-								<td class="number"><input type="checkbox" name="ck[]"></td>
-								<td class="number">MD-10080001</td>
-								<td class="text">Model thời trang Rayban 3055</td>
-								<td class="number">Model Nam</td>
-								<td class="number"><input name="sl[]" value="1" class="sl"
-									type="text"></td>
-							</tr>
-							<tr>
-								<td class="number"><input type="checkbox" name="ck[]"></td>
-								<td class="number">MD-10080001</td>
-								<td class="text">Model thời trang Rayban 3055</td>
-								<td class="number">Model Nam</td>
-								<td class="number"><input name="sl[]" value="1" class="sl"
-									type="text"></td>
-							</tr>
-							<tr>
-								<td class="number"><input type="checkbox" name="ck[]"></td>
-								<td class="number">MD-10080001</td>
-								<td class="text">Model thời trang Rayban 3055</td>
-								<td class="number">Model Nam</td>
-								<td class="number"><input name="sl[]" value="1" class="sl"
-									type="text"></td>
-							</tr>
-							<tr>
-								<td class="number"><input type="checkbox" name="ck[]"></td>
-								<td class="number">MD-10080001</td>
-								<td class="text">Model thời trang Rayban 3055</td>
-								<td class="number">Model Nam</td>
-								<td class="number"><input name="sl[]" value="1" class="sl"
-									type="text"></td>
-							</tr>
-							<tr>
-								<td class="number"><input type="checkbox" name="ck[]"></td>
-								<td class="number">MD-10080001</td>
-								<td class="text">Model thời trang Rayban 3055</td>
-								<td class="number">Model Nam</td>
-								<td class="number"><input name="sl[]" value="1" class="sl"
-									type="text"></td>
-							</tr>
-							<tr>
-								<td class="number"><input type="checkbox" name="ck[]"></td>
-								<td class="number">MD-10080001</td>
-								<td class="text">Model thời trang Rayban 3055</td>
-								<td class="number">Model Nam</td>
-								<td class="number"><input name="sl[]" value="1" class="sl"
-									type="text"></td>
+								<td class="number"><input name="ck[]" type="checkbox"></td>
+								<td class="number"><input name="code[]" class="ceditable" value="MD-10080001" maxlength="14" type="text"></td>
+								<td class="text">  <input name="name[]" class="ceditable" value="Model thời trang Rayban 3055" type="text"></td>
+								<td class="number"><input name="cat[]" class="ceditable" value="Model Nam" type="text"></td>
+								<td class="number"><input name="sl[]" value="1" class="ceditable" type="text"></td>
+								<td class="number"><input name="price[]" value="1.250.000" class="ceditable" type="text"></td>
 							</tr>
 						</table>
 					</form>
-					<form method="post" id="post-product">
-						<table class="data-grid-table">
-							<tr>
-								<th style="width: 5%;"><button class="buttonClick w100pc"
-										type="submit">lưu</button></th>
-								<th style="width: 15%;"><input class="textbox01 w100pc"
-									type="text" name="input_code" /></th>
-								<th style="width: 50%;"><input class="textbox01 w100pc"
-									type="text" name="input_name" /></th>
-								<th style="width: 20%;"><label class="webkit"
-									style="vertical-align: top;"> <select name="cat" class="w100pc">
-											<option>Danh mục</option>
-											<option>Kính TT nam</option>
-											<option>Kính TT nữ</option>
-									</select>
-								</label></th>
-								<th style="width: 12%;"><input name="sl[]" value="1"
-									class="sl" type="text"></th>
-							</tr>
-						</table>
-					</form>
+					<table class="data-grid-table">
+						<tr>
+							<th style="width: 70%; text-align: left;" colspan="3">
+							    <button id="import-delete" class="rio-button-action remover btn-disable" type="submit"><i class="fa fa-times-circle" aria-hidden="true"></i> Xóa bản ghi được đánh dấu</button> &nbsp;
+							    <button id="import-add" class="rio-button-action" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Thêm</button>
+							</th>
+							<!--<th style="width: 20%;"> <label class="webkit"
+								style="vertical-align: top;">
+								<select name="cat" class="w100pc">
+									<option>Danh mục</option>
+									<option>Kính TT nam</option>
+									<option>Kính TT nữ</option>
+								</select>
+							</label> </th>-->
+							<th style="width: 32%;text-align: right;" colspan="2">
+							    <button id="import-save"  class="rio-button-action" style="margin: 0;" type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Hoàn thành & Lưu</button>
+							</th>
+						</tr>
+					</table>
 					<script type="text/javascript">
 					   $(function() {
-					       $("#post-product").submit( function() {
-					           var str = '<tr> \
-	                                <td class="number"><input type="checkbox" checked="checked" name="ck[]"></td> \
-	                                <td class="number">${BARCODE}</td> \
-	                                <td class="text">${NAME}</td> \
-	                                <td class="number">${CAT}</td> \
-	                                <td class="number"><input name="sl[]" value="${SL}" class="sl" \
-	                                    type="text"></td> \
+					       $('body').on('change', 'input[name="ck[]"]', function() {
+					           if($('input[name="ck[]"]:checked').length) {
+					               $('#import-delete').removeClass('btn-disable');
+					           } else {
+					               $('#import-delete').addClass('btn-disable');
+					           }
+					       })
+					       $('body').on('change', 'input[name="ckall[]"]', function() {
+					           $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
+					       })
+					       $("#import-add").click( function() {
+					           var str = '<tr class="im-new-member">\
+	                                <td class="number"><input name="ck[]" type="checkbox" checked="checked"></td>\
+	                                <td class="number"><input name="code[]" class="ceditable" value="MD-10080001" maxlength="14" type="text"></td>\
+	                                <td class="text">  <input name="name[]" class="ceditable" value="Model thời trang Rayban 3055" type="text"></td>\
+	                                <td class="number"><input name="cat[]" class="ceditable" value="Model Nam" type="text"></td>\
+	                                <td class="number"><input name="sl[]" value="1" class="ceditable" type="text"></td>\
+	                                <td class="number"><input name="price[]" value="1.250.000" class="ceditable" type="text"></td>\
 	                            </tr>';
 	                            str = str.replace('${BARCODE}', $(this).find('input[name="input_code"]').val());
 	                            str = str.replace('${NAME}', $(this).find('input[name="input_name"]').val());
 	                            str = str.replace('${CAT}', $(this).find('select[name="cat"] option:selected').text());
 	                            str = str.replace('${SL}', $(this).find('input[name="sl[]"]').val());
-	                            $('#lstProduct').append(str);
-	                            document.getElementById("post-product").reset();
+	                            $('#lstProduct .im-new-member').removeClass('im-new-member');
+	                            $('#lstProduct').append(str).find('.im-new-member').find('input[name="code[]"]').focus();
+	                            $('#lstProduct').find('.im-new-member').find('input[name="ck[]"]').trigger('change');
 	                            return false;
+					       });
+					       $("#import-delete").click( function() {
+					           $('input[name="ck[]"]:checked').each(function() {
+					               $(this).parents('tr').remove();
+					           })
 					       });
 					   })
 					</script>

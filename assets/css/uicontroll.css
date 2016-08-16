@@ -16,6 +16,21 @@
   color: red;
   list-style-type: none;
 }
+.rio-button-action .fa{
+	font-size: 120%;
+}
+.rio-button-action.remover {
+	background-color: #d14836;
+}
+.rio-button-action.btn-disable {
+	opacity: 0.5;
+	pointer-events: none;
+}
+.rio-button-action.remover:hover {
+	background-color: #d14836;
+	box-shadow: 0 -2px 0 #b73a2a inset;
+	border-bottom-color: #b73a2a;
+}
 .rio-button-action {
     background-color: #427fed;
     background-image: -moz-linear-gradient(center top , transparent, transparent);
@@ -154,3 +169,17 @@ label.webkit:before {
     width:20px; height:20px;
     background:#f8f8f8;
     position:absolute;
+}
+.ceditable {
+	background-color: transparent;
+	padding: 0;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	display: block;
+	border: none;
+	box-shadow:none;
+	box-sizing: border-box;
+	text-align: inherit;
+	font-size: inherit;
+}
