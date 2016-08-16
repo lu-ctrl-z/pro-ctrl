@@ -146,6 +146,10 @@ label.webkit select {
     appearance:none;
     cursor:pointer;
 }
+label.webkit.onlist:BEFORE,
+label.webkit.onlist:AFTER {
+	display: none;
+}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     label.webkit select{padding-right:18px}
 }
@@ -170,9 +174,16 @@ label.webkit:before {
     background:#f8f8f8;
     position:absolute;
 }
+label.webkit.onlist select {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    cursor:default;
+}
+label.webkit.onlist select,
 .ceditable {
 	background-color: transparent;
-	padding: 3px;
+	padding: 3px !important;
 	margin: 0px;
 	width: 100%;
 	height: 100%;
