@@ -127,6 +127,11 @@
 	width: 100%;
 	box-sizing: border-box;
 }
+.im-new-member label.webkit.onlist select{
+	padding:3px 5px 1px !important;
+    font-size: 13px;
+}
+.im-new-member label.webkit.onlist select,
 label.webkit select {
     padding:3px 5px 1px;
     margin: 0;
@@ -145,15 +150,22 @@ label.webkit select {
     -moz-appearance:none;
     appearance:none;
     cursor:pointer;
+    font-size: 13px;
+    text-align: left;
 }
 label.webkit.onlist:BEFORE,
 label.webkit.onlist:AFTER {
-	display: none;
+	visibility: hidden;
+}
+.im-new-member label.webkit.onlist:BEFORE,
+.im-new-member label.webkit.onlist:AFTER {
+	visibility: visible;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     label.webkit select{padding-right:18px}
 }
 label.webkit {position:relative}
+
 label.webkit:after {
     content:'<>';
     font:13px "Consolas", monospace;

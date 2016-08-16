@@ -81,6 +81,9 @@
                            __d('change', 'input[name="ckall[]"]', function() {
                                $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
                            });
+                           __d('click', '.ceditable', function() {
+                               this.setSelectionRange(0, this.value.length);
+                           });
                            __d('focus', '.onlist select', function() {
                                $(this).parent().removeClass('onlist');
                                $(this).blur(function() {
@@ -94,7 +97,7 @@
                                     <td class="text">  <input name="name[]" class="ceditable" value="" type="text"></td>\
                                     <td class="number"><label class="webkit onlist t" style="vertical-align: top;">\
 							                                <select name="cat" class="w100pc t">\
-							                                    <option value="0">Danh mục</option>\
+							                                    <option value="0">-------</option>\
 							                                    <option value="1">Kính TT nam</option>\
 							                                    <option value="2">Kính TT nữ</option>\
 							                                    <option value="-1">Thêm danh mục</option>\
