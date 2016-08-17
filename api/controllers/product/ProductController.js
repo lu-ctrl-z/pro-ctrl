@@ -30,6 +30,11 @@ module.exports = {
     },
     //hiển thị màn hình nhập kho
     importProduct: function(req, res) {
+        var asysn = {
+                cat: false,
+                product: false,
+        };
+        
         res.view('product/import', { });
     }
 };

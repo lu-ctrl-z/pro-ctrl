@@ -19,5 +19,8 @@ module.exports = {
             type: 'string',
             required: true,
         },
+        com_cd: {
+            model: 'Comporation' 
+        },
     },
 };

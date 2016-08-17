@@ -44,7 +44,12 @@ module.exports = {
             type: 'integer',
             required: false,
             in: [1,2],
+        },
+        //#001 Start
+        com_cd : {
+            model: 'Comporation'
         }
+        //#001 End
     },
     formAttr: {
         user_name: {
