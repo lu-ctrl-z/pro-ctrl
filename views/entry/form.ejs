@@ -1,42 +1,33 @@
-<div class="adminMainScreen clearfix">
-    <div class="detailAction">
-        <div class="wrapper-main">
-	       <h2 ><i style="margin-right: 10px;" class="fa fa-user"></i>Đăng ký</h2>
-	       <div class="search">
-	           <form action="/admin/user/add" method="post" id="addIn">
-	               <table class="data-form">
-	                    <tr>
-	                        <th>Tên đăng nhập: <span class="req">*</span></th>
-	                        <td><%-form.input(User, 'user_name', req.param('user_name') || '', {autofocus: 'autofocus'})%></td>
-	                    </tr>
-	                    <tr>
-	                        <th>Mật khẩu: <span class="req">*</span></th>
-	                        <td><%-form.input(User, 'password', req.param('password') || '')%></td>
-	                    </tr>
-	                    <tr>
-	                        <th>Mật khẩu<br/>Xác nhận: <span class="req">*</span></th>
-	                        <td><input type="password" name="repassword" value=""></td>
-	                    </tr>
-	                    <tr>
-	                        <th>Email: <span class="req">*</span></th>
-	                        <td><%-form.input(User, 'email', req.param('email') || '')%></td>
-	                    </tr>
-	                    <tr>
-	                        <th>Chọn phân loại: <span class="req">*</span></th>
-	                        <td><%-form.input(User, 'member_type', req.param('member_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
-	                    </tr>
-	                    <tr>
-	                        <th>Chọn quyền: <span class="req">*</span></th>
-	                        <td><%-form.input(User, 'auth_type', req.param('auth_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
-	                    </tr>
-	                    <tr>
-	                        <th></th>
-	                        <td><button type="submit">Add</a></button></td>
-	                    </tr>
-	               </table>
-	               <input type='hidden' name='_csrf' value='<%= _csrf %>'>
-	           </form>
-	       </div>
-       </div>
-    </div>
-</div>
+<form class="login" method="POST" action="/login/">
+    <fieldset style="padding: 30px 45px;">
+        <h1 class="headForm"><i class="fa fa-lock" aria-hidden="true"></i> Đăng ký tài khoản và thông tin công ty, cửa hàng</h1>
+        <% include ../element/_error %>
+        <table class="fulltd" style=" font-size: 13px; width: 100%;">
+            <tr><th style="font-size: 15px; text-align: left;" colspan="2">1. Thông tin cá nhân</th></tr>
+            <tr><th style="font-weight: normal;"><%-__('Username')%> <span class="req">*</span>:</th><td style="width: 250px;"><input autofocus="autofocus" type="text" name="user_name" tabindex="1"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Password')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('RePassword')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Email')%> <span class="req">*</span>:</th><td><input type="text" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Tel')%> :</th><td><input type="text" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-size: 15px; text-align: left;" colspan="2">2. Thông tin công ty, cửa hàng</th></tr>
+            <tr><th style="font-weight: normal;"><%-__('ComporationName')%> <span class="req">*</span>:</th><td style="width: 250px;"><input autofocus="autofocus" type="text" name="user_name" tabindex="1"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('ContactAddress')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('ContactTel')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('ContactEmail')%> <span class="req">*</span>:</th><td><input type="text" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Logo')%> :</th><td><input type="text" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-size: 12px; text-align: left;" colspan="2">3. Điều khoản sử dụng</th></tr>
+            <tr>
+            <td style="font-size: 12px; text-align: left;" colspan="2">
+                <ul>
+                <li></li>
+                </ul>
+            </td>
+            </tr>
+            <tr><th></th><td><label class="uiLabelCheckbox"><input <%if(req.param('rememberme')) {%> checked="checked"<%}%> type="checkbox" name="rememberme" tabindex="3"><%=__('Đồng ý điều khoản sử dụng, chính sách bảo mật')%></label></td></tr>
+            <tr><th></th><td><button class="rio-button-action" tabindex="4"><%=__('Entry')%></button></td></tr>
+            <tr><th></th><td><a href="/recover">Quên tài khoản?</a></td></tr>
+        </table>
+    </fieldset>
+    <input type="hidden" name="next" value="<%=res.locals.next||''%>">
+    <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+</form>

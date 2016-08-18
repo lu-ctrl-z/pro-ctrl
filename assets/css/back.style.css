@@ -21,6 +21,14 @@ ul,li{
     box-shadow:  1px 3px 3px #888888;
     padding: 10px 10px 15px;
 }
+.wrapper-main.entry {
+	padding-left: 30px;
+	padding-top: 30px;
+	background-color: #dfecf9;
+}
+.wrapper-main.entry .data-form{
+	background-color: transparent;
+}
 .menu li > a {
 	font-size: 11px;
 	display: block;
@@ -139,4 +147,9 @@ textarea,
 }
 .addnewmember .search-has-button{
     width: 228px;
+}
+.fulltd td input[type="password"],
+.fulltd td input[type="text"]{
+    width: 100%;
+    box-sizing: border-box;
 }
