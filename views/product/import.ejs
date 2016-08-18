@@ -3,7 +3,7 @@
     <div class="rightSide">
         <div class="kanban">
             <h2 class="bar">
-                <i class="fa fa-file-text-o"></i> Nhập kho
+                <i class="fa fa-file-text-o"></i> <a href="/?pid=<%=req.session.user.currentCom.com_cd%>"><%=req.session.user.currentCom.comporation_name%></a> >> Nhập kho
             </h2>
             <ul class="action clearfix">
                 <li class="tool"><a id="showTaskForm"
@@ -124,7 +124,9 @@
                                }
                            });
                            __d('change', 'select[name="cat"]', function() {
-                               if($(this).val() == "-1") alert("hello")
+                               if($(this).val() == "-1") {
+                                   alert("hello");
+                               }
                            });
                            $(window).on('beforeunload', function(){
                                if($('input[name="ck[]"]').length) {

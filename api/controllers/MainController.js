@@ -19,11 +19,11 @@ module.exports = {
             }, []);
         };
 
-        if(req.session.user.data && req.session.user.data.currentProject && req.session.user.data.currentSprint) {
-            for(var i in res.locals.app.prOfUser) {
-                var pro = res.locals.app.prOfUser[i].project_id;
-                if(pro.id == req.session.user.data.currentProject) {
-                    data.project_name = pro.project_name;
+        if( req.session.user.data && req.session.user.data.currentCom ) {
+            for(var i in res.locals.app.comOfUser) {
+                var com = res.locals.app.comOfUser[i].com_cd;
+                if(com.com_cd == req.session.user.data.currentCom) {
+                    data.comporation_name = com.comporation_name;
                     break;
                 }
             }

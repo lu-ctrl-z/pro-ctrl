@@ -1,44 +1,44 @@
 <div id="header">
     <div class="table">
     <div class="table-cell">
-        <a href="/"><img src="/image/kanban.png" alt="kanban"></a>
+        <%if(req.session.user && req.session.user.currentCom.com_cd) {%>
+            <a href="/pid=<%=req.session.user.currentCom.com_cd%>"><img src="<%=req.session.user.currentCom.logo || '/image/logo_d2t.jpg' %> " height="30px;" alt="Chi nhánh <%=req.session.user.currentCom.comporation_name%>"></a>
+        <%} else {%>
+            <a href="/"><img src="/image/logo_d2t.jpg" height="30px;" alt="kanban"></a>
+        <%}%>
     </div>
     <%if(req.session.authenticated && req.session.user.auth_type == 2) {%>
     <div class="table-cell">
-        <a href="/admin"><i class="fa fa-cogs"></i> admin</a>
+        <a href="/admin"><i class="fa fa-cogs"></i> Quản trị</a>
     </div>
     <%}%>
     <% if(req.session.authenticated) { %>
-    <%if(res.locals.app && res.locals.app.prOfUser) {%>
+    <%if(res.locals.app && res.locals.app.comOfUser) {%>
     <div class="table-cell">
         <select role="localtion" name="project_id">
-            <option value="/">list project</option>
-        <%for(var i in res.locals.app.prOfUser) {
-        var pou = res.locals.app.prOfUser[i];%>
-            <option <%if(req.session.user.currentProject==pou.project_id.id){%> selected="selected"<%}%> value="/?pid=<%=pou.project_id.id%>"><%=pou.project_id.project_name%></option>
+        <%for(var i in res.locals.app.comOfUser) {
+        var pou = res.locals.app.comOfUser[i];%>
+            <option <%if(req.session.user.currentCom.com_cd==pou.com_cd.com_cd){%> selected="selected"<%}%> value="/?pid=<%=pou.com_cd.com_cd%>"><%=pou.com_cd.comporation_name%></option>
         <%}%>
+        <option value="/">Thêm chi nhánh</option>
         </select>
     </div>
+    <%if(req.session.authenticated) {%>
+    <div class="table-cell">
+        <a href="/product/import" class="rio-button-action remover" style="margin: 0;"><i class="fa fa-file-text-o"></i> Nhập kho</a>
+    </div>
+    <div class="table-cell">
+        <a href="/product/export" class="rio-button-action" style="margin: 0;"><i class="fa fa-file-text-o"></i> Xuất bán</a>
+    </div>
+    <%}%>
     <%}%>
     <%} else {%>
     <div class="table-cell">
-        <a href="/login/?via=front" ><i class="fa fa-plus-square"></i>&nbsp; Login</a>
+        <a href="/login/?via=front&rememberme=yes" ><i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <%=__('Login')%></a>
     </div>
     <%}%>
     <div class="table-cell free-cell"></div>
     <% if(req.session.authenticated) { %>
-    <% if(res.locals.sysSprint) { %>
-    <div class="table-cell">
-        <select role="localtion" name="project_id">
-          <% for(var i = 0 ; i < res.locals.sysSprint.length; i++) {%>
-            <option <%if(res.locals.sysSid == res.locals.sysSprint[i]['id']) {%>selected="selected"<%}%> value="/?pid=<%=res.locals.sysPid%>&sid=<%=res.locals.sysSprint[i]['id']%>">Sprint <%=res.locals.sysSprint[i]['sprint_name']%></option>
-          <%}%>
-        </select>
-    </div>
-    <div class="table-cell no-border">
-        
-    </div>
-    <%}%>
     <%if(res.locals.isAdmin) { %>
     <div class="table-cell admin-menu">
         <a href="javascript:;" onclick="$(this).parents('.admin-menu').toggleClass('active').find('.menu-list').focus().blur(function() { var $this=$(this); setTimeout( function() { $this.parents('.admin-menu').removeClass('active'); }, 300); } );" ><i class="fa fa-cog"></i>&nbsp; Config dự án</a>
@@ -49,7 +49,7 @@
         </div>
         <% } %>
         <div class="table-cell">
-            <a href="/logout" ><i class="fa fa-sign-out"></i>&nbsp; logout</a>
+            <a href="/logout" ><i class="fa fa-sign-out"></i>&nbsp; <%=__('Logout')%></a>
         </div>
         <% } %>
     </div>

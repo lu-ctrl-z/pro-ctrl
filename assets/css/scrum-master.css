@@ -5,7 +5,8 @@
 }
 body{
     background-color: #f9f9f9;
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
+    color: #1d2129;
     font-family: sans-serif,tahoma,verdana,arial;
     font-size: 16px;
 }

@@ -8,29 +8,19 @@
 
 module.exports = {
     connection: 'mysql',
-    tableName: 'm_project',
+    tableName: 't_user_comporation',
     attributes: {
         id : {
             type: 'integer',
             autoIncrement: true,
-            primaryKey: true,
+            primaryKey: true
         },
-        project_name: {
-            type: 'string',
-            required: true,
+        com_cd: {
+            model: 'Comporation',
         },
-        project_description: {
-            type: 'string',
-            required: true
-        },
-        create_user: {
-            type: 'integer',
-            model:'user'
-        },
-        /*userproject:{
-            collection: 'userproject',
-            via: 'project_id'
-        }*/
+        user_id: {
+            model: 'User'
+        }
     },
     formAttr: {
         id: {
@@ -42,6 +32,12 @@ module.exports = {
         project_description: {
             form_type: sails.config.const.FORM_TYPE_TEXTAREA
         }
+    },
+    //get all cửa hàng with number user working in project
+    getListComporationByUser: function(user_id, cb) {
+        this.find().populateAll().where({user_id: user_id}).exec(function(err, ret) {
+            cb(ret);
+        });
     },
 };
 

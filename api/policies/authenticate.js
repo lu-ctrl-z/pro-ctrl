@@ -3,23 +3,13 @@ module.exports = function authenticate (req, res, next) {
     var copyNext = function() {
         if(req.session.authenticated) {
             req.session.user.data = req.session.user.data || {};
-            UserProject.getListProjectByUser(req.session.user.id, function(projectOfUser) {
-                projectOfUser = projectOfUser || {};
-                res.locals.app.prOfUser = projectOfUser;
-                if(projectOfUser[0] && projectOfUser[0].project_id) {
-                    req.session.user.data.currentProject = req.session.user.data.currentProject || projectOfUser[0].project_id.id
+            UserComporation.getListComporationByUser(req.session.user.id, function(comOfUser) {
+                comOfUser = comOfUser || {};
+                res.locals.app.comOfUser = comOfUser;
+                if(comOfUser[0] && comOfUser[0].com_cd) {
+                    req.session.user.currentCom = req.session.user.currentCom || comOfUser[0].com_cd;
                 }
-                if(req.session.user.data.currentProject) {
-                    Sprint.getListSprintByProject(req.session.user.data.currentProject, sails.config.common.limit_print, 0, function(err, sprint) {
-                        if(sprint.length) {
-                            res.locals.app.sprOfUser = sprint;
-                            req.session.user.data.currentSprint = req.session.user.data.currentSprint || sprint[0].sprint_number;
-                        }
-                        return next();
-                    });
-                } else {
-                    return next();
-                }
+                return next();
             });
         } else {
             return next();

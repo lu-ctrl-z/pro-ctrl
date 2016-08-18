@@ -25,6 +25,8 @@
   "Username or email": "Tên đăng nhập<br/> hoặc email",
   "Password": "Mật khẩu",
   "Login": "Đăng nhập",
+  "Logout": "Đăng xuất",
+  "Entry": "Đăng ký",
   "Username or password in correct": "Tên đăng nhập hoặc mật khẩu không đúng.",
   "DB Error!": "Lỗi DB!",
   "Username in correct": "Tên đăng nhập không đúng.",

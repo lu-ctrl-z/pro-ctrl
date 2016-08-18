@@ -30,6 +30,7 @@
 	background-color: #d14836;
 	box-shadow: 0 -2px 0 #b73a2a inset;
 	border-bottom-color: #b73a2a;
+	color: #fff;
 }
 .rio-button-action {
     background-color: #427fed;
@@ -55,6 +56,7 @@
     background-image: -moz-linear-gradient(center top , transparent, transparent);
     border-bottom-color: #2f69c2;
     box-shadow: 0 -2px 0 #2f69c2 inset;
+    color: #fff;
 }
 #read-barcoder{
 	position: relative;

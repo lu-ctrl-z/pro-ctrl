@@ -1,6 +1,6 @@
 module.exports.common = {
-    site_name: 'Kanban',
-    site_title: 'Kanban is good jobs!',
+    site_name: 'Hệ thống quản lý kính mắt',
+    site_title: 'Quản lý công ty, cửa hàng kính mắt!',
     //90 days auto login
     auto_login_name: 'aln',
     auto_login_expire: 90,

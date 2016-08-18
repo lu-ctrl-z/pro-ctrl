@@ -1,0 +1,42 @@
+<div class="adminMainScreen clearfix">
+    <div class="detailAction">
+        <div class="wrapper-main">
+	       <h2 ><i style="margin-right: 10px;" class="fa fa-user"></i>Đăng ký</h2>
+	       <div class="search">
+	           <form action="/admin/user/add" method="post" id="addIn">
+	               <table class="data-form">
+	                    <tr>
+	                        <th>Tên đăng nhập: <span class="req">*</span></th>
+	                        <td><%-form.input(User, 'user_name', req.param('user_name') || '', {autofocus: 'autofocus'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Mật khẩu: <span class="req">*</span></th>
+	                        <td><%-form.input(User, 'password', req.param('password') || '')%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Mật khẩu<br/>Xác nhận: <span class="req">*</span></th>
+	                        <td><input type="password" name="repassword" value=""></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Email: <span class="req">*</span></th>
+	                        <td><%-form.input(User, 'email', req.param('email') || '')%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Chọn phân loại: <span class="req">*</span></th>
+	                        <td><%-form.input(User, 'member_type', req.param('member_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th>Chọn quyền: <span class="req">*</span></th>
+	                        <td><%-form.input(User, 'auth_type', req.param('auth_type') || '', {class: 'uiLabelCheckbox', style:'margin-right:6px;'})%></td>
+	                    </tr>
+	                    <tr>
+	                        <th></th>
+	                        <td><button type="submit">Add</a></button></td>
+	                    </tr>
+	               </table>
+	               <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+	           </form>
+	       </div>
+       </div>
+    </div>
+</div>

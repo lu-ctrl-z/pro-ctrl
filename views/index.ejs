@@ -4,7 +4,7 @@
 </div>
 <div class="rightSide">
     <div class="kanban">
-    <h2 class="bar"><i class="fa fa-file-text-o"></i> Dự án <a><%=res.locals.data.project_name%></a> sprint <%=req.session.user.data.currentSprint%></h2>
+    <h2 class="bar"><i class="fa fa-file-text-o"></i> Dự án <a><%=res.locals.data.currentComName%></a> sprint <%=req.session.user.data.currentSprint%></h2>
     <%include element/_error2%>
     <ul class="action clearfix">
         <li class="tool"><a id="showTaskForm" onclick="javascript:return false;" href="/task/create/"  ><i class="fa fa-tasks"></i> Add Task</a>

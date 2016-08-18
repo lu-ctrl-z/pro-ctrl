@@ -34,7 +34,10 @@ module.exports = {
                 cat: false,
                 product: false,
         };
-        
         res.view('product/import', { });
+    },
+    // hiển thị form thêm categories bằng popup
+    saveCategory: function(req, res) {
+        res.view('product/jaddcat', { });
     }
 };

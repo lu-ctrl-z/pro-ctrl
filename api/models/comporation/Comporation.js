@@ -28,10 +28,10 @@ module.exports = {
         contact_email: {
             type: 'string',
         },
-        image_default: {
+        logo: {
             type: 'string',
         },
-        user_id: {
+        create_user: {
            model: 'user' 
         },
     },
