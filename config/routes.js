@@ -29,9 +29,17 @@ module.exports.routes = {
       controller: 'MainController',
       action: 'index',
   },
-  '/newentry': {
+  '/entry': {
       controller: 'EntryController',
-      action: 'newentryForm',
+      action: 'entryForm',
+  },
+  '/entry.do': {
+      controller: 'EntryController',
+      action: 'entryDo',
+  },
+  '/entry.done': {
+      controller: 'EntryController',
+      action: 'entryDone',
   },
   '/admin': {
       controller: 'AdminController',

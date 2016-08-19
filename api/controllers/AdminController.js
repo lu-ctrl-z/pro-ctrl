@@ -77,8 +77,8 @@ module.exports = {
             return;
         }
         var $email = req.param("email");
+        var $tel = req.param("tel");
         var $member_type = req.param("member_type");
-        var $auth_type = req.param("auth_type");
         var bcrypt = require('bcrypt-nodejs');
         bcrypt.hash($password, null, null, function(err, hash) {
             if (err) {
@@ -94,7 +94,8 @@ module.exports = {
                 user_name : $username,
                 password : $password,
                 email : $email,
-                member_type : $member_type,
+                tel : $tel,
+                member_type : 2,
                 auth_type : $auth_type
             };
             User.validate($dataInsert, function(error) {

@@ -22,11 +22,12 @@ module.exports = {
             unique: true,
             required: true,
             maxLength: 45,
-            minLength: 3,
+            minLength: 4,
         },
         password: {
             type: 'string',
-            required: true
+            required: true,
+            minLength: 6,
         },
         email: {
             type: 'email',
@@ -35,15 +36,13 @@ module.exports = {
             maxLength: 60,
             minLength: 4,
         },
-        member_type: {
-            required: true,
-            in: [1,2,3,4,5,6],
-            type: 'integer',
+        tel: {
+            type: 'string',
         },
         auth_type: {
             type: 'integer',
             required: false,
-            in: [1,2],
+            in: [1,2,3],
         },
         //#001 Start
         com_cd : {
@@ -61,14 +60,14 @@ module.exports = {
         email: {
             form_type: sails.config.const.FORM_TYPE_TEXT
         },
-        member_type: {
-            config_value: sails.config.common.memberType,
-            form_type: sails.config.const.FORM_TYPE_RADIO
+        tel: {
+            form_type: sails.config.const.FORM_TYPE_TEXT
         },
         auth_type: {
             config_value: sails.config.common.authType,
             form_type: sails.config.const.FORM_TYPE_RADIO
-        }
+        },
+        
     },
     getLoginAdmin: function($username, $password, cb) {
         this.findOne({

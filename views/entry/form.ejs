@@ -1,20 +1,40 @@
-<form class="login" method="POST" action="/login/">
-    <fieldset style="padding: 30px 45px;">
-        <h1 class="headForm"><i class="fa fa-lock" aria-hidden="true"></i> Đăng ký tài khoản và thông tin công ty, cửa hàng</h1>
+<form class="login" method="POST" action="/entry.do" enctype="mutilpart/formdata">
+    <fieldset style="padding: 30px 45px; max-width: 540px;">
+        <h1 class="headForm uppercase" style="text-align: center;"><i class="fa fa-lock" aria-hidden="true"></i> Đăng ký tài khoản <br /> thông tin công ty, cửa hàng</h1>
         <% include ../element/_error %>
         <table class="fulltd" style=" font-size: 13px; width: 100%;">
+            <tr><td style="font-weight: normal; text-align: left;" colspan="2">
+                <ol class="you-are-know" style="">
+                    <li style="margin-top: 15px;">Tài khoản bạn đăng ký tại đây là tài khoản quản trị, bạn có thể thêm những tài khoản với quyền sử dụng sau khi đăng nhập bằng tài khoản này.</li>
+                    <li>Tài khoản bạn đăng ký tại đây là tài khoản quản trị, bạn có thể thêm những tài khoản với quyền sử dụng sau khi đăng nhập bằng tài khoản này.</li>
+                </ol>
+            </td></tr>
             <tr><th style="font-size: 15px; text-align: left;" colspan="2">1. Thông tin cá nhân</th></tr>
-            <tr><th style="font-weight: normal;"><%-__('Username')%> <span class="req">*</span>:</th><td style="width: 250px;"><input autofocus="autofocus" type="text" name="user_name" tabindex="1"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('Password')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('RePassword')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('Email')%> <span class="req">*</span>:</th><td><input type="text" name="password" tabindex="2"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('Tel')%> :</th><td><input type="text" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal;"><%-__('Username')%> <span class="req">*</span>:</th>
+                <td style="width: 250px;"><%-form.input(User, 'user_name', req.param('user_name') || '', {autofocus: 'autofocus', tabindex: 1})%>
+                
+                </td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Password')%> <span class="req">*</span>:</th>
+                <td><%-form.input(User, 'password', req.param('password') || '', {tabindex: 2})%></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('RePassword')%> <span class="req">*</span>:</th>
+                <td><input type="password" name="repassword" tabindex="3"></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Email')%> <span class="req">*</span>:</th>
+                <td><%-form.input(User, 'email', req.param('email') || '', {tabindex: 4})%></td></tr>
+            <tr><th style="font-weight: normal;"><%=__('Tel')%> :</th>
+                <td><%-form.input(User, 'tel', req.param('tel') || '', {tabindex: 5})%></td></tr>
             <tr><th style="font-size: 15px; text-align: left;" colspan="2">2. Thông tin công ty, cửa hàng</th></tr>
-            <tr><th style="font-weight: normal;"><%-__('ComporationName')%> <span class="req">*</span>:</th><td style="width: 250px;"><input autofocus="autofocus" type="text" name="user_name" tabindex="1"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('ContactAddress')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('ContactTel')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('ContactEmail')%> <span class="req">*</span>:</th><td><input type="text" name="password" tabindex="2"></td></tr>
-            <tr><th style="font-weight: normal;"><%=__('Logo')%> :</th><td><input type="text" name="password" tabindex="2"></td></tr>
+            <tr><th style="font-weight: normal; vertical-align: top; padding-top: 13px;"><%-__('ComporationName')%> <span class="req">*</span>:</th>
+                <td><%-form.input(Comporation, 'comporation_name', req.param('comporation_name') || '', {tabindex: 6})%></td></tr>
+            <tr><th style="font-weight: normal; vertical-align: top; padding-top: 13px;"><%=__('ContactAddress')%> <span class="req">*</span>:</th>
+                <td><%-form.input(Comporation, 'contact_address', req.param('contact_address') || '', {tabindex: 7})%></td></tr>
+            <tr><th style="font-weight: normal; vertical-align: top; padding-top: 13px;"><%=__('ContactTel')%> :</th>
+                <td><%-form.input(Comporation, 'contact_tel', req.param('contact_tel') || '', {tabindex: 8})%> </td></tr>
+            <tr><th style="font-weight: normal; vertical-align: top; padding-top: 13px;"><%=__('ContactEmail')%> :</th>
+                <td><%-form.input(Comporation, 'contact_email', req.param('contact_email') || '', {tabindex: 9})%></td></tr>
+            <tr><th style="font-weight: normal; vertical-align: top; padding-top: 13px;"><%=__('Logo')%> :</th>
+                <td><input type="file" name="logo" tabindex="10">
+                <%-__('NoteComporationName')%>
+            </td></tr>
             <tr><th style="font-size: 12px; text-align: left;" colspan="2">3. Điều khoản sử dụng</th></tr>
             <tr>
             <td style="font-size: 12px; text-align: left;" colspan="2">
@@ -23,9 +43,9 @@
                 </ul>
             </td>
             </tr>
-            <tr><th></th><td><label class="uiLabelCheckbox"><input <%if(req.param('rememberme')) {%> checked="checked"<%}%> type="checkbox" name="rememberme" tabindex="3"><%=__('Đồng ý điều khoản sử dụng, chính sách bảo mật')%></label></td></tr>
-            <tr><th></th><td><button class="rio-button-action" tabindex="4"><%=__('Entry')%></button></td></tr>
-            <tr><th></th><td><a href="/recover">Quên tài khoản?</a></td></tr>
+            <tr><th></th><td><label class="uiLabelCheckbox"><input <%if(req.param('rememberme')) {%> checked="checked"<%}%> type="checkbox" name="rememberme" tabindex="11"><%=__('Đồng ý điều khoản sử dụng, chính sách bảo mật')%></label></td></tr>
+            <tr><th></th><td><button class="rio-button-action" tabindex="12"><%=__('Entry')%></button></td></tr>
+            <tr><th></th><td><a href="#" tabindex="14" href="/recover">Quên tài khoản?</a></td></tr>
         </table>
     </fieldset>
     <input type="hidden" name="next" value="<%=res.locals.next||''%>">

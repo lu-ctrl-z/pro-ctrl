@@ -208,3 +208,7 @@ label.webkit.onlist select,
 	text-align: inherit;
 	font-size: inherit;
 }
+i.smaller{
+	font-size: 10px;
+	color: #505050;
+}

@@ -8,7 +8,7 @@
             <tr><th style="font-weight: normal;"><%=__('Password')%> <span class="req">*</span>:</th><td><input type="password" name="password" tabindex="2"></td></tr>
             <tr><th></th><td><label class="uiLabelCheckbox"><input <%if(req.param('rememberme')) {%> checked="checked"<%}%> type="checkbox" name="rememberme" tabindex="3"><%=__('Keep me login')%></label></td></tr>
             <tr><th></th><td><button class="rio-button-action" tabindex="4"><%=__('Login')%></button></td></tr>
-            <tr><th></th><td><a href="/recover">Quên tài khoản?</a> hoặc <a href="/newentry" class="rio-button-action3" tabindex="4"><%=__('Entry')%></a></td></tr>
+            <tr><th></th><td><a href="/recover">Quên tài khoản?</a> hoặc <a href="/entry" class="rio-button-action3" tabindex="4"><%=__('Entry')%></a></td></tr>
         </table>
     </fieldset>
     <input type="hidden" name="next" value="<%=res.locals.next||''%>">

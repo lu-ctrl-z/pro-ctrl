@@ -37,7 +37,8 @@
   "Email": "Email",
   "ComporationName": "Tên công ty, cửa hàng",
   "ContactAddress": "Địa chỉ",
-  "ContactTel": "Số điện thoại",
+  "ContactTel": "Số điện thoại liên hệ",
   "ContactEmail": "Email liên hệ",
-  "Logo": "Ảnh đại diện"
+  "Logo": "Logo, ảnh đại diện",
+  "NoteComporationName": "<i class='smaller'>※ Bạn có biết? các thông tin trên sẽ được dùng khi in hóa đơn, bảo hành sản phẩm, việc cung cấp đầy đủ thông tin sẽ tạo được uy tín với KH của bạn!</i>"
 }

@@ -3,11 +3,20 @@
     margin: 0;
     padding: 0;
 }
+.uppercase {
+text-transform: uppercase;
+}
+.lowercase {
+text-transform: lowercase;
+}
+.capitalize {
+text-transform: capitalize;
+}
 body{
     background-color: #f9f9f9;
     /* color: rgb(0, 0, 0); */
     color: #1d2129;
-    font-family: sans-serif,tahoma,verdana,arial;
+    font-family: Roboto,sans-serif,tahoma,verdana,arial;
     font-size: 16px;
 }
 #header {

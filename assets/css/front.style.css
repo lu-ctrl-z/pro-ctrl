@@ -257,3 +257,12 @@ input.end_time {
 	border:  1px solid #aabccf;
 	border-top:  none;
 }
+.you-are-know {
+	padding: 15px 15px 20px 25px;
+	border:  1px solid #aabccf;
+	font-size: 12px;
+	height: 150px;
+}
+.you-are-know li{
+	list-style-type: decimal;
+}

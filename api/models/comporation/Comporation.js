@@ -36,13 +36,19 @@ module.exports = {
         },
     },
     formAttr: {
-        cat_id: {
-            form_type: sails.config.const.FORM_TYPE_SELECT
+        comporation_name: {
+            form_type: sails.config.const.FORM_TYPE_TEXT,
         },
-        product_name: {
-            form_type: sails.config.const.FORM_TYPE_TEXT
+        contact_address: {
+            form_type: sails.config.const.FORM_TYPE_TEXT,
         },
-        image_default: {
+        contact_tel: {
+            form_type: sails.config.const.FORM_TYPE_TEXT,
+        },
+        contact_email: {
+            form_type: sails.config.const.FORM_TYPE_TEXT,
+        },
+        logo: {
             form_type: sails.config.const.FORM_TYPE_FILE,
         },
     }
