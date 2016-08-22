@@ -9,6 +9,7 @@
 module.exports = {
     connection: 'mysql',
     tableName: 'm_comporation',
+    types: sails.config.ModelTypes,
     attributes: {
         com_cd : {
             type: 'integer',
@@ -21,12 +22,13 @@ module.exports = {
         },
         contact_address: {
             type: 'string',
+            required: true,
         },
         contact_tel: {
-            type: 'string',
+            type: 'phone',
         },
         contact_email: {
-            type: 'string',
+            type: 'email',
         },
         logo: {
             type: 'string',

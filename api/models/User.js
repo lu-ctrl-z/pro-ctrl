@@ -9,8 +9,7 @@
 module.exports = {
     connection: 'mysql',
     tableName: 'm_users',
-    types: {
-    },
+    types: sails.config.ModelTypes,
     attributes: {
         id : {
             type: 'integer',
@@ -37,7 +36,7 @@ module.exports = {
             minLength: 4,
         },
         tel: {
-            type: 'string',
+            type: 'phone',
         },
         auth_type: {
             type: 'integer',

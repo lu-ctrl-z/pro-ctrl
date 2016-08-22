@@ -16,9 +16,25 @@ module.exports = {
         res.view('entry/done', {});
     },
     entryDo: function(req, res) {
-        this._validateEntry(req, res, function(ok, messages) {
+        // Store hash in your password DB.
+        var $postUser = {
+            user_name : req.param("user_name"),
+            password : req.param("password"),
+            repassword : req.param("repassword"),
+            email : req.param("email"),
+            tel : req.param("tel"),
+            auth_type : 2, // default is admin,
+        };
+        var $postCompany = {
+                comporation_name : req.param("comporation_name"),
+                contact_address : req.param("contact_address"),
+                contact_tel : req.param("contact_tel"),
+                contact_email : req.param("contact_email"),
+                logo : req.param("logo")
+        };
+        this._validateEntry(req, res, $postUser, $postCompany, function(ok, messages) {
             if(ok == true) {
-                User.create($dataInsert, function(err, user) {
+                User.create($dataUser, function(err, user) {
                     if (err) {
                         var messages = message.of('user',
                                 err.ValidationError, res.i18n);
@@ -38,42 +54,56 @@ module.exports = {
     },
     //validate thông tin user đăng ký
     //@return true: OK, false : NG and set error message
-    _validateEntry: function(req, res, cb) {
+    _validateEntry: function(req, res, $postUser, $postCompany, cb) {
+        var asyn = {
+                validateUser: false,
+                validateCompany: false,
+        };
+        var next = function(callback) {
+            var f = false;
+            for(var k in asyn) {
+                if(asyn[k] == false) {
+                    return ;
+                }
+            }
+            callback();
+        };
         var $error = {};
-        var $password = req.param("password");
-        var $repassword = req.param("repassword");
         //check password match
-        if ($password !== $repassword) {
-            error.repassword = res.i18n('user.password.notmatched');
+        if ($postUser.password !== $postUser.repassword) {
+            $error.repassword = res.i18n('user.password.notmatched');
         }
-        
-        var $auth_type = 2; // default is admin
+
         var bcrypt = require('bcrypt-nodejs');
+        var $password = $postUser.password;
         bcrypt.hash($password, null, null, function(err, hash) {
             if (err) {
-                error.dberror = res.i18n('DB Error!');
-                cb(false, {});
-                return;
+                $error.dberror = res.i18n('DB Error!');
+                asyn.validateUser = true;
+                return next( function() {cb(false, {})} );
             }
             if ($password)
                 $password = hash;
-            // Store hash in your password DB.
-            var $dataInsert = {
-                user_name : req.param("user_name"),
-                password : $password,
-                email : req.param("email"),
-                tel : req.param("tel"),
-                auth_type : $auth_type
-            };
-            User.validate($dataInsert, function(error) {
+            User.validate($postUser, function(error) {
+                asyn.validateUser = true;
                 if (error) {
-                    var messages = message.of('user', error.ValidationError,
-                            res.i18n);
-                    cb(false, messages);
+                    message.of('user', error.ValidationError,
+                            res.i18n, $error);
+                    return next( function() {cb(false, $error)} );
                 } else {
-                    cb(true, messages);
+                    return next( function() {cb(true, $error)} );
                 }
             });
+        });
+        Comporation.validate($postCompany, function(error) {
+            asyn.validateCompany = true;
+            if (error) {
+                message.of('comporation', error.ValidationError,
+                        res.i18n, $error);
+                return next( function() {cb(false, $error)} );
+            } else {
+                return next( function() {cb(true, $error)} );
+            }
         });
     }
 };

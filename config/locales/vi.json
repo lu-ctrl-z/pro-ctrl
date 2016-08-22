@@ -1,15 +1,15 @@
 {
-  "user.user_name.required": "Tên đăng nhập chưa đúng",
-  "user.user_name.unique": "Tên đăng nhập đã có",
+  "user.user_name.required": "Tên đăng nhập bắt buộc",
+  "user.user_name.unique": "Tên đăng nhập đã được sử dụng",
   "user.user_name.maxLength": "Tên đăng nhập tối đa 45 ký tự",
   "user.user_name.minLength": "Tên đăng nhập tối thiểu phải 3 ký tự",
-  "user.password.required": "Mật khẩu nhập chưa đúng",
-  "user.password.notmatched": "Mật khẩu nhập không matched",
-  "user.email.required": "Email nhập chưa đúng",
+  "user.password.required": "Mật khẩu bắt buộc",
+  "user.password.notmatched": "Nhập lại mật khẩu xác nhận",
+  "user.email.required": "Email bắt buộc",
   "user.email.email": "Không đúng định dạng email",
-  "user.email.unique": "Email nhập vào đã có",
-  "user.email.maxLength": "Tên đăng nhập tối đa 60 ký tự",
-  "user.email.minLength": "Tên đăng nhập tối thiểu phải 4 ký tự",
+  "user.email.unique": "Email đã được sử dụng",
+  "user.email.maxLength": "Email tối đa 60 ký tự",
+  "user.email.minLength": "Email tối thiểu phải 4 ký tự",
   "user.member_type.required": "Phân loại chưa đúng",
   "user.member_type.in": "Phân loại chưa đúng",
   "user.auth_type.required": "Phân loại chưa nhập",
@@ -40,5 +40,5 @@
   "ContactTel": "Số điện thoại liên hệ",
   "ContactEmail": "Email liên hệ",
   "Logo": "Logo, ảnh đại diện",
-  "NoteComporationName": "<i class='smaller'>※ Bạn có biết? các thông tin trên sẽ được dùng khi in hóa đơn, bảo hành sản phẩm, việc cung cấp đầy đủ thông tin sẽ tạo được uy tín với KH của bạn!</i>"
+  "NoteComporationName": "<i class='smaller'>※Những thông tin trên sẽ được dùng khi in hóa đơn, bảo hành sản phẩm !</i>"
 }

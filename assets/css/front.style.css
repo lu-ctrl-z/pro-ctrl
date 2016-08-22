@@ -249,9 +249,11 @@ input.end_time {
   margin-right: 5px;
 }
 .common_error{
-    background-color: #f9edbe;
+    /* background-color: #f9edbe; */
     color: red;
     padding: 3px;
+    font-size: 12px;
+    line-height: 1em;
 }
 .kanban > .errorMessage {
 	border:  1px solid #aabccf;

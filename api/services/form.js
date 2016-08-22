@@ -1,4 +1,11 @@
 module.exports = {
+    msg: function(name, res){
+        if(typeof res.locals.message != 'undefined' && res.locals.message.hasOwnProperty(name) ) {
+             return '<p class="common_error">' + res.locals.message[name] + '</p>'
+        } else {
+             return "";
+        }
+    },
     input: function(model, name, value, option) {
         var attr = model.formAttr[name];
         switch(attr.form_type) {
