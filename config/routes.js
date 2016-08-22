@@ -41,6 +41,9 @@ module.exports.routes = {
       controller: 'EntryController',
       action: 'entryDone',
   },
+  '/entry.thanks': {
+      view: 'entry/complete',
+  },
   '/admin': {
       controller: 'AdminController',
       action: 'index',

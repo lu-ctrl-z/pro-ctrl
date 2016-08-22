@@ -16,7 +16,6 @@ module.exports = {
         res.view('entry/done', {});
     },
     entryDo: function(req, res) {
-        // Store hash in your password DB.
         var $postUser = {
             user_name : req.param("user_name"),
             password : req.param("password"),
@@ -32,24 +31,60 @@ module.exports = {
                 contact_email : req.param("contact_email"),
                 logo : req.param("logo")
         };
-        this._validateEntry(req, res, $postUser, $postCompany, function(ok, messages) {
-            if(ok == true) {
-                User.create($dataUser, function(err, user) {
-                    if (err) {
-                        var messages = message.of('user',
-                                err.ValidationError, res.i18n);
-                        res.view('entry/form', {
-                            message : messages
+        this._validateEntry(req, res, $postUser, $postCompany, function(messages) {
+            if(Object.keys(messages).length === 0) {
+                try {
+                    // Start the transaction
+                    User.query("START TRANSACTION;", function(err) {
+                        if (err) { throw new Error(err); }
+
+                        var bcrypt = require('bcrypt-nodejs');
+                        var $password = $postUser.password;
+                        bcrypt.hash($password, null, null, function(err, hash) {
+                            $postUser.password = hash;
+                            User.create($postUser, function(err, user) {
+                                if (err) {
+                                    throw new Error(err);
+                                } else {
+                                    $postCompany.create_user = user.id;
+                                    Comporation.create($postCompany, function(err, com) {
+                                        if (err) {
+                                            throw new Error(err);
+                                        }
+                                        User.update({
+                                            id : user.id
+                                        }, {com_cd: com.com_cd}).exec(function(err, updated) {
+                                            if (err) {
+                                                throw new Error(err);
+                                            }
+                                            UserComporation.create({com_cd: com.com_cd, user_id: user.id}, function(err, ins) {
+                                                if (err) {
+                                                    throw new Error(err);
+                                                }
+                                                User.query("COMMIT;");
+                                                Comporation.query("COMMIT;");
+                                                UserComporation.query("COMMIT;");
+                                                res.redirect('/entry.thanks');
+                                            })
+                                        });
+                                    });
+                                }
+                            });
                         });
-                    } else {
-                        res.redirect('/entry.thanks');
-                    }
-                });
+                    });
+                } catch(e) {
+                    User.query("ROLLBACK;", function(err) {
+                        // The rollback failed--Catastrophic error!
+                        if(err){ console.log(err)}
+                        console.log(e);
+                        return res.serverError(e.message);
+                    });
+                }
             } else {
                 res.view('entry/form', {
                     message : messages
                 });
-            }
+            };
         });
     },
     //validate thông tin user đăng ký
@@ -80,7 +115,7 @@ module.exports = {
             if (err) {
                 $error.dberror = res.i18n('DB Error!');
                 asyn.validateUser = true;
-                return next( function() {cb(false, {})} );
+                return next( function() {cb($error)} );
             }
             if ($password)
                 $password = hash;
@@ -89,9 +124,9 @@ module.exports = {
                 if (error) {
                     message.of('user', error.ValidationError,
                             res.i18n, $error);
-                    return next( function() {cb(false, $error)} );
+                    return next( function() {cb($error)} );
                 } else {
-                    return next( function() {cb(true, $error)} );
+                    return next( function() {cb($error)} );
                 }
             });
         });
@@ -100,9 +135,9 @@ module.exports = {
             if (error) {
                 message.of('comporation', error.ValidationError,
                         res.i18n, $error);
-                return next( function() {cb(false, $error)} );
+                return next( function() {cb($error)} );
             } else {
-                return next( function() {cb(true, $error)} );
+                return next( function() {cb($error)} );
             }
         });
     }

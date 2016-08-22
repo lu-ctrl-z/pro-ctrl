@@ -10,6 +10,8 @@ module.exports = {
     connection: 'mysql',
     tableName: 'm_users',
     types: sails.config.ModelTypes,
+    uniqueEmail: false,
+    uniqueUserName: false,
     attributes: {
         id : {
             type: 'integer',
@@ -22,6 +24,7 @@ module.exports = {
             required: true,
             maxLength: 45,
             minLength: 4,
+            uniqueUserName: true,
         },
         password: {
             type: 'string',
@@ -34,9 +37,10 @@ module.exports = {
             unique: true,
             maxLength: 60,
             minLength: 4,
+            uniqueEmail: true,
         },
         tel: {
-            type: 'phone',
+            type: 'phone2',
         },
         auth_type: {
             type: 'integer',
@@ -48,6 +52,18 @@ module.exports = {
             model: 'Comporation'
         }
         //#001 End
+    },
+    /**
+     * Lifecycle Callbacks
+     */
+    beforeValidate: function(values, cb) {
+        User.findOne({user_name: values.user_name}).exec(function (err, record) {
+            uniqueUserName = !err && !record;
+            User.findOne({email: values.email}).exec(function (err, record) {
+                uniqueEmail = !err && !record;
+                cb();
+            });
+        });
     },
     formAttr: {
         user_name: {

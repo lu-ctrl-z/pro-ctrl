@@ -25,7 +25,7 @@ module.exports = {
             required: true,
         },
         contact_tel: {
-            type: 'phone',
+            type: 'phone2',
         },
         contact_email: {
             type: 'email',
@@ -34,7 +34,7 @@ module.exports = {
             type: 'string',
         },
         create_user: {
-           model: 'user' 
+           model: 'user'
         },
     },
     formAttr: {
