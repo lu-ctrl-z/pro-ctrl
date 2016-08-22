@@ -38,6 +38,6 @@ module.exports = {
     },
     // hiển thị form thêm categories bằng popup
     saveCategory: function(req, res) {
-        res.view('product/jaddcat', { });
+        res.view('product/jaddcat', {});
     }
 };

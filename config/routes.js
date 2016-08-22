@@ -215,7 +215,12 @@ module.exports.routes = {
       action: 'index',
   },
   '/product/import': {
-	  controller: 'product/ProductController',
-	  action: 'importProduct',
+      controller: 'product/ProductController',
+      action: 'importProduct',
+  },
+  '/product/cat.new': {
+      controller: 'product/ProductController',
+      action: 'saveCategory',
+      view: 'product/jaddcat',
   },
 };
