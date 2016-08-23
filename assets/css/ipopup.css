@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.ipopupContainer {
+    min-width: 250px;
+    min-height: 25px;
+    padding: 0;
+    z-index: 1999999997;
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: medium none;
+    overflow: visible;
+}

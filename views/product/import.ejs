@@ -125,7 +125,7 @@
                            });
                            __d('change', 'select[name="cat"]', function() {
                                if($(this).val() == "-1") {
-                                   alert("hello");
+                                   $(this).ipopup('/product/cat.new');
                                }
                            });
                            $(window).on('beforeunload', function(){

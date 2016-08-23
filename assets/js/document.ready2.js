@@ -1,6 +1,22 @@
 /**
  * 
  */
+/**
+ * 
+ */
+var Config = {
+    'TIMING' : {
+        'timing_delay' :  60,
+    },
+    'TASK' : {
+        1 : 'task-to-do',
+        2 : 'task-doing',
+        3 : 'task-review-waiting',
+        4 : 'task-review',
+        5 : 'task-done',
+        6 : 'task-suppend',
+    }
+}
 $(function() {
     "user strict"
     calHeight = function() {
@@ -69,6 +85,56 @@ $.fn.sendData = function(success, error, done) {
             return false;
     });
 };
+$.fn.sleepy = function() {
+    $(this).click(function() {
+        var $this = $(this);
+        var $is_sleep = $this.hasClass('sleep');
+        var $task = $this.parents('.task');
+        $task.find('.task-item').addClass('sleep');
+        $this.removeClass('sleep').find('.popup').removeClass('active');
+    });
+    return this;
+};
+$.fn.enableEdit = function() {
+    var $this = $(this).parent();
+    var $loaded = $this.find('.editTask').length > 0 ? true: false;
+    $this.toggleClass('active');
+    if($loaded == false && $this.hasClass('active')) {
+        $.get($this.attr('href'), function(res) {
+            if(res.status == 'OK') {
+                $this.append(res.content);
+            }
+        });
+    };
+};
+$.fn.taskRecived = function($task) {
+    $task.addClass('wait-for-remove');
+    var $this = $(this);
+    $this.append($task);
+    $task.click();
+    setTimeout( function() {
+        $task.removeClass('wait-for-remove');
+    }, 300)
+};
+$.fn.taskProcessTiming = function() {
+    var $this = $(this);
+    setInterval(function() {
+        $this.find('.task-item').each(function() {
+            var $task = $(this);
+            try{
+                $done = $task.attr('timing') ? $task.attr('timing') : 0;
+            } catch(e) {
+                var $done = 0;
+            }
+            $task.attr('timing', ++$done);
+            if($done%Config.TIMING.timing_delay == 0) {
+                var hour = parseInt($done/3600);
+                var minus = ($done-(hour*3600))/60;
+                $task.attr('show-time', hour + "h " + minus + 'm');
+            }
+        });
+    }, 1000);
+};
 $.fn.lockScreen = function () {
     $('body').addClass('lock');
     var $popup = $('body > .popup-box');
@@ -105,10 +171,62 @@ $(function() {
         //return false;
     });
 
+    $('.task-doing').taskProcessTiming();
+
     $('.boxpup').popup();
 
+    $('.task-item').addClass('sleep');
+
+    __d('click', '[role="cmd-toggle"]', function() {
+        $(this).parents('.task-item').find('.popup').toggleClass('active').focus();
+    });
+
+    __d('click', '[role="cmd-sleep"]', function() {
+        $(this).parents('.task-item').addClass('sleep');
+    });
+
+    __d('click', '.task-item.sleep', function() {
+        $(this).removeClass('sleep').find('.popup').removeClass('active');
+    });
+
+    __d('click', '[role="cmd-edit"]', function() {
+        $(this).enableEdit();
+    });
+    __d('click', '[role="cmd-show-detail"]', function() {
+        var $taskItem = $(this).parents('.task-item');
+        if($taskItem.hasClass('show-detail')) {
+            $taskItem.toggleClass('show-detail');
+            return false;
+        }
+        $taskItem.toggleClass('show-detail');
+        var $detailTask = $taskItem.find('.detail-task');
+        var $task_id = $taskItem.attr('id');
+        if($detailTask.length && !isNaN($task_id)) {
+            $.get('/task/duration/' + $task_id, function(res) {
+                $detailTask.html(res.content);
+            })
+        }
+    });
+    $('select[role="localtion"]').change(function() {
+        var $val = $(this).val();
+        if($val) {
+            location.href = $val;
+        }
+    });
     $('overlay > *').click(function() {
         return false;
+    });
+    $('body').on('change', '.task-form input[name="type"]', function() {
+        var $val = $(this).val();
+        var $class = 'task-form ';
+        if($val == 1) {
+            $class += 'green';
+        } else if($val == 2) {
+            $class += 'orange';
+        } else if($val == 3) {
+            $class += 'red';
+        }
+        $(this).parents('.task-form').attr('class', '').addClass($class);
     });
     //#send data form with ajax request
     $('.via-form-send').sendData(displaySuccess, displayError, function() {});
