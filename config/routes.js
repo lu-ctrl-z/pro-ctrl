@@ -222,5 +222,8 @@ module.exports.routes = {
       controller: 'product/ProductController',
       action: 'saveCategory',
       view: 'product/jaddcat',
+      locals: {
+          layout: null
+      }
   },
 };

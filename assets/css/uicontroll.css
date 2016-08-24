@@ -26,6 +26,7 @@
 	opacity: 0.5;
 	pointer-events: none;
 }
+.rio-button-action.remover:focus,
 .rio-button-action.remover:hover {
 	background-color: #d14836;
 	box-shadow: 0 -2px 0 #b73a2a inset;
@@ -51,6 +52,7 @@
     transition-timing-function: ease-in-out;
     white-space: nowrap;
 }
+.rio-button-action:focus,
 .rio-button-action:hover {
     background-color: #4285f4;
     background-image: -moz-linear-gradient(center top , transparent, transparent);
@@ -154,6 +156,7 @@ label.webkit select {
     cursor:pointer;
     font-size: 13px;
     text-align: left;
+    height: 30px;
 }
 label.webkit.onlist:BEFORE,
 label.webkit.onlist:AFTER {
@@ -166,7 +169,7 @@ label.webkit.onlist:AFTER {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     label.webkit select{padding-right:18px}
 }
-label.webkit {position:relative}
+label.webkit {position:relative; height: 30px; display: block;}
 
 label.webkit:after {
     content:'<>';
@@ -175,7 +178,7 @@ label.webkit:after {
     -moz-transform:rotate(90deg);
     -ms-transform:rotate(90deg);
     transform:rotate(90deg);
-    right:8px; top:0px;
+    right:8px; top:6px;
     padding:0 0 2px;
     border-bottom:1px solid #ddd;
     position:absolute;
@@ -183,7 +186,7 @@ label.webkit:after {
 }
 label.webkit:before {
     content:'';
-    right:6px; top:0px;
+    right:6px; top:6px;
     width:20px; height:20px;
     background:#f8f8f8;
     position:absolute;

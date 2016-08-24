@@ -1,0 +1,8 @@
+<script type="text/javascript">
+var $null = null;
+<%if(req.session.user && req.session.user.currentCom && req.session.user.currentCom.com_cd) {%>
+COM_CD = '<%=req.session.user.currentCom.com_cd%>';
+<%} else {%>
+COM_CD = $null;
+<%}%>
+</script>

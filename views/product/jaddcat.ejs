@@ -1,3 +1,21 @@
-<div class="ipopupContainer model-add-cat" data-expanded="true">
-
+<div id="add-cate-container" tabindex="-1" class="ipopupContainer model-add-cat" data-expanded="true">
+    <form method="post" action="/product/cat.new" class="load-ajax">
+    <input type="hidden" name="act" value="crt">
+    <div class="hide-on-create-pl-panel">
+        <h3>Thêm danh mục</h3>
+    </div>
+    <div class="catlists">
+    </div>
+    <div class="menu-panel create-playlist-panel active-panel">
+        <div class="addto-create-cat-section">
+            <input name="catname" class="yt-uix-form-input-text" type="text" >
+        </div>
+    </div>
+    <div class="addto-create-catlist-section addto-create-cat-section clearfix">
+        <div class="create-catlist-buttons">
+            <button type="submit" class="yt-uix-button yt-uix-button-primary">Tạo</button>
+        </div>
+    </div>
+        <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+    </form>
 </div>

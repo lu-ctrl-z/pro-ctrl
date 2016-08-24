@@ -9,4 +9,59 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     outline: medium none;
     overflow: visible;
+    position: absolute;
+}
+.focusout > .ipopupContainer {
+	display: none;
+}
+.ipopupContainer h3 {
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 15px 15px 5px;
+}
+.addto-create-cat-section{
+    padding: 15px;
+}
+.yt-uix-form-input-text {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.05) inset !important;
+    background-color: #fff  !important;
+}
+.ipopupContainer .catlists {
+    border-bottom: 1px solid #ccc;
+    max-height: 245px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 10px;
+    width: 260px;
+}
+.addto-create-catlist-section {
+	padding-top: 0px;
+}
+.create-catlist-buttons {
+    float: right;
+}
+.yt-uix-button {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    height: 28px;
+    line-height: normal;
+    outline: 0 none;
+    padding: 0 10px;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+.yt-uix-button-primary {
+    background: #167ac6 none repeat scroll 0 0;
+    border-color: #167ac6;
+    color: #fff;
 }
