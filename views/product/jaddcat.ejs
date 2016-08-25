@@ -31,3 +31,9 @@
 <%if(req.param('act') != 'crt' && req.param('catname') != '') {%>
 </div>
 <%}%>
+<%if(res.locals.Close) {%>
+<script type="text/javascript">
+$(ICONFIG.IPOPUP_SELECTOR).remove();
+$(ICONFIG.IPOPUP_CURRENT.target).val('<%-res.locals.Created%>');
+</script>
+<%}%>

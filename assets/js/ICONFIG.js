@@ -4,4 +4,5 @@ ICONFIG = {
     ISTORAGE_CAT: 'CtrlCatOf_' + COM_CD,
     CAT_NULL: JSON.stringify([]),
     IPOPUP_SELECTOR: '.ipopupContainer',
+    IPOPUP_CURRENT: {},
 }

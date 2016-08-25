@@ -116,7 +116,7 @@
                                    $('#import-delete').addClass('btn-disable');
                                }
                            });
-                           __d('click', 'select[name="cat[]"]', function() {
+                           __d('click, change', 'select[name="cat[]"]', function() {
                                if($(this).val() == "00") {
                                    Ctrl.showAddCat(this);
                                    $(this).val("0");

@@ -64,11 +64,12 @@ Ctrl =
                     success : function(r) {
                         if(r.status == STATUS_OK) {
                             obj = r.content;
+                            localStorage.setItem(ICONFIG.ISTORAGE_CAT, JSON.stringify(obj));
                         } else {
                             obj = '';
                         }
                     }
-                 });
+                });
                 return this._buildCate(name, obj);
             }
         } catch (e) {
@@ -78,6 +79,7 @@ Ctrl =
     showAddCat: function(where) {
         $.get('/product/cat.new', function(r) {
             if(r.status == STATUS_OK) {
+                ICONFIG.IPOPUP_CURRENT.target = where;
                 $('body').find('#add-cate-container').remove();
                 $('body').append(r.content).find("#add-cate-container")
                     .css('top', $(where).offset().top + $(where).height() + 'px')

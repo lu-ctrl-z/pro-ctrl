@@ -66,6 +66,8 @@ module.exports = {
                                   content: ""
                               });
                           } else {
+                              res.locals.Created = created.cat_id;
+                              res.locals.Close = true;
                               showList(true);
                           }
                       })
