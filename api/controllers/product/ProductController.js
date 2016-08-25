@@ -39,7 +39,7 @@ module.exports = {
     // hiển thị form thêm categories bằng popup
     saveCategory: function(req, res) {
         var showList = function(notify) {
-            Categories.find({com_cd: req.session.user.currentCom.com_cd}).exec(function(err, lst) {
+            Categories.find({com_cd: req.session.user.currentCom.com_cd}, {select: ['cat_id', 'cat_name']}).exec(function(err, lst) {
                 res.locals.list = lst;
                 if(notify) {
                     sails.sockets.broadcast(req.session.user.currentCom.com_cd, 'catChanged', lst);
@@ -76,7 +76,7 @@ module.exports = {
         }
     },
     getCat: function(req, res) {
-        Categories.find({com_cd: req.session.user.currentCom.com_cd}).exec(function(err, lst) {
+        Categories.find({com_cd: req.session.user.currentCom.com_cd}, {select: ['cat_id', 'cat_name']}).exec(function(err, lst) {
             if(err) console.log(err);
             res.json(200, {
                 status: sails.config.const.STATUS_OK,
