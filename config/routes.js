@@ -221,7 +221,10 @@ module.exports.routes = {
   '/product/cat.new': {
       controller: 'product/ProductController',
       action: 'saveCategory',
-      view: 'product/jaddcat',
+  },
+  '/cat.data' : {
+      controller: 'product/ProductController',
+      action: 'getCat',
       locals: {
           layout: null
       }

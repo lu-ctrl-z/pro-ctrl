@@ -38,6 +38,49 @@ module.exports = {
     },
     // hiển thị form thêm categories bằng popup
     saveCategory: function(req, res) {
-        res.view('product/jaddcat', {});
-    }
+        var showList = function(notify) {
+            Categories.find({com_cd: req.session.user.currentCom.com_cd}).exec(function(err, lst) {
+                res.locals.list = lst;
+                if(notify) {
+                    sails.sockets.broadcast(req.session.user.currentCom.com_cd, 'catChanged', lst);
+                }
+                res.render('product/jaddcat', function(err, html) {
+                    if(err) console.log(err);
+                    res.json(200, {
+                        status: sails.config.const.STATUS_OK,
+                        message: "",
+                        content: html
+                    });
+                });
+            })
+        };
+
+        if(req.param('act') == 'crt' && req.param('catname') != '') {
+            //insert cat
+            Categories.create({cat_name: req.param('catname'), com_cd: req.session.user.currentCom.com_cd})
+                      .exec(function(err, created) {
+                          if (err) {
+                              res.json(200, {
+                                  status: sails.config.const.STATUS_NG,
+                                  message: "DB Error!",
+                                  content: ""
+                              });
+                          } else {
+                              showList(true);
+                          }
+                      })
+        } else {
+            showList();
+        }
+    },
+    getCat: function(req, res) {
+        Categories.find({com_cd: req.session.user.currentCom.com_cd}).exec(function(err, lst) {
+            if(err) console.log(err);
+            res.json(200, {
+                status: sails.config.const.STATUS_OK,
+                message: "",
+                content: lst
+            });
+        });
+    },
 };

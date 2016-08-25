@@ -65,3 +65,15 @@
     border-color: #167ac6;
     color: #fff;
 }
+.to-catlist-item:HOVER {
+	background-color: #eee;
+} 
+.to-catlist-item {
+    color: #333;
+    cursor: pointer;
+    display: block;
+    line-height: 25px;
+    padding: 0 10px 0 25px;
+    position: relative;
+    white-space: nowrap;
+    font-size: 13px;

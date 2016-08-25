@@ -11,7 +11,7 @@ module.exports = {
     joinRoom: function(req, res) {
         if(req.isSocket != true || !req.session.user) return;
 
-        var room = req.session.user.data.currentProject + '_' + req.session.user.data.currentSprint;
+        var room = req.session.user.currentCom.com_cd;
         sails.sockets.join(req.socket, room);
         res.json({
           message: 'Subscribed to a fun room !'

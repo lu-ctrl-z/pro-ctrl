@@ -20,7 +20,23 @@ $(function() {
     //Submit
     __d('submit', 'form.load-ajax', Ctrl.submitForm);
 });
-
+$.fn.refreshCat = function() {
+    var opt = '';
+    try {
+        var obj = localStorage.getItem(ICONFIG.ISTORAGE_CAT);
+        if(obj) {
+            opt = Ctrl._buildOption(JSON.parse(obj));
+        } else {
+            opt = Ctrl._buildOption(JSON.parse(ICONFIG.CAT_NULL));
+        }
+    } catch (e) {
+        opt = Ctrl._buildOption(JSON.parse(ICONFIG.CAT_NULL));
+    }
+    $(this).each(function(i, el) {
+        var v = $(el).val();
+        $(el).empty().append(opt).val(v);
+    });
+}
 
 $(document).mouseup(function (e) {
     var container = $(ICONFIG.IPOPUP_SELECTOR);
@@ -36,40 +52,66 @@ Ctrl =
         return x.value = x.value.toString().replace(/\./g, "").replace(ICONFIG.PATTEN_REPLACE_CURRENCY, ".");
     },
     getCategory: function(name) {
-        var obj = localStorage.getItem(ICONFIG.ISTORAGE_CAT);
-        if(obj) return this._buildCate(name, obj);
-        return this._buildCate(name, ICONFIG.CAT_NULL);
+        try {
+            var obj = localStorage.getItem(ICONFIG.ISTORAGE_CAT);
+            if(obj) {
+                return this._buildCate(name, JSON.parse(obj));
+            } else {
+                $.ajax({
+                    url : '/cat.data',
+                    type : "get",
+                    async: false,
+                    success : function(r) {
+                        if(r.status == STATUS_OK) {
+                            obj = r.content;
+                        } else {
+                            obj = '';
+                        }
+                    }
+                 });
+                return this._buildCate(name, obj);
+            }
+        } catch (e) {
+            return this._buildCate(name, JSON.parse(ICONFIG.CAT_NULL));
+        }
     },
     showAddCat: function(where) {
         $.get('/product/cat.new', function(r) {
-            /*if(!r.error) {*/
+            if(r.status == STATUS_OK) {
                 $('body').find('#add-cate-container').remove();
-                $('body').append(r).find("#add-cate-container")
+                $('body').append(r.content).find("#add-cate-container")
                     .css('top', $(where).offset().top + $(where).height() + 'px')
-                    .css('left', $(where).offset().left + 'px');
-            /*}*/
+                    .css('left', $(where).offset().left + 'px').find('[autofocus="autofocus"]').first().focus();
+            } else {
+                alert(r.message);
+            }
         });
     },
     _buildCate: function(name, j, g) {
-        var strCat = '<label class="webkit onlist t" style="vertical-align: top;"><select name="' + name + '" class="w100pc t">';
+        var strCat = '<select data-refcat name="' + name + '" class="w100pc t">';
+        strCat += this._buildOption(j, g);
+        return strCat;
+    },
+    _buildOption: function(j, g) {
+        var strOpt = '<option value="0">------</option>';
         if( g ) {
-            strCat = '<optgroup label="' + j.name + '">';
+            strOpt = '<optgroup label="' + j.cat_name + '">';
             j = j.value;
         }
-        for(var k in j) {
+        for(var k = 0; k < j.length; k++) {
             var i = j[k];
-            if(typeof i == 'object') {
-                strCat += this._buildCate(name, i, true);
+            if(Array.isArray(i)) {
+                strOpt += this._buildOption(i, true);
             } else {
-                strCat += '<option value="' + k + '">' + i + '</option>';
+                strOpt += '<option value="' + i.cat_id + '">' + i.cat_name + '</option>';
             }
         }
         if( g ) {
-            strCat += '</optgroup>';
+            strOpt += '</optgroup>';
         } else {
-            strCat += '</select></label>';
+            strOpt += '<option value="00">Thêm danh mục</option></select>';
         }
-        return strCat;
+        return strOpt;
     },
     submitForm : function() {
         var $this = $(this);

@@ -22,7 +22,7 @@
 .rio-button-action.remover {
 	background-color: #d14836;
 }
-.rio-button-action.btn-disable {
+.btn-disable {
 	opacity: 0.5;
 	pointer-events: none;
 }

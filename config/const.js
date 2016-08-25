@@ -7,4 +7,6 @@ module.exports.const = {
   FORM_TYPE_HIDDEN:     6,
   FORM_TYPE_PASSWORD:   7,
   FORM_TYPE_FILE:       8,
+  STATUS_OK:            "OK",
+  STATUS_NG:            "NG",
 };
