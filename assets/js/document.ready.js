@@ -19,6 +19,7 @@ $(function() {
     });
     //Submit
     __d('submit', 'form.load-ajax', Ctrl.submitForm);
+    __d('keydown', '[contenteditable]', Ctrl._eKeycodePrevent);
 });
 $.fn.refreshCat = function() {
     var opt = '';
@@ -77,15 +78,19 @@ Ctrl =
         }
     },
     showAddCat: function(where) {
-        $.get('/product/cat.new', function(r) {
-            if(r.status == STATUS_OK) {
-                ICONFIG.IPOPUP_CURRENT.target = where;
-                $('body').find('#add-cate-container').remove();
-                $('body').append(r.content).find("#add-cate-container")
-                    .css('top', $(where).offset().top + $(where).height() + 'px')
-                    .css('left', $(where).offset().left + 'px').find('[autofocus="autofocus"]').first().focus();
-            } else {
-                alert(r.message);
+        $.ajax({
+            url : '/product/cat.new',
+            type : "get",
+            success : function(r) {
+                if(r.status == STATUS_OK) {
+                    ICONFIG.IPOPUP_CURRENT.target = where;
+                    $('body').find('#add-cate-container').remove();
+                    $('body').append(r.content).find("#add-cate-container")
+                        .css('top', $(where).offset().top + $(where).height() + 'px')
+                        .css('left', $(where).offset().left + 'px').find('[autofocus="autofocus"]').first().focus();
+                } else {
+                    $('body').find('#add-cate-container').remove();
+                }
             }
         });
     },
@@ -145,12 +150,30 @@ Ctrl =
                 target.empty().append(respones.content);
             },
             error   : function(ex) {
-
             }
         }).done(function() {
             done();
         });
         return false;
+    },
+    editCat: function(e) {
+        var $e = $(e), $li = $e.parents('li'), $ul = $e.parents('ul');
+        if($li.hasClass('enableEdit')) {
+            alert('Bạn muốn lưu thay đổi?');
+        } else {
+            $ul.find('> li').removeClass('enableEdit');
+            $ul.find('> li > span').removeAttr('contenteditable');
+            $ul.addClass('lock');
+            var cat_name = $li.addClass('enableEdit').find('span').attr('contenteditable', true).focus();
+        }
+    },
+    _eKeycodePrevent: function(e, next) {
+        var code = e.which; // recommended to use e.which, it's normalized across browsers
+        var next = next || function() {};
+        if(code==13) {
+            next();
+            return false;
+        }
     },
 };
 

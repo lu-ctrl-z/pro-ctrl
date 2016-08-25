@@ -11,7 +11,7 @@
         <ul class="yt-uix-kbd-nav-list">
             <%for(var i in res.locals.list) {
                 var cat = res.locals.list[i]; %>
-            <li class="to-catlist-item" data-lst-id="<%-cat.cat_id%>"><%-cat.cat_name%></li>
+            <li class="to-catlist-item" data-lst-id="<%=cat.cat_id%>"><span><%=cat.cat_name%></span><a class="cmd-edit-cat" href="javascript:;" onclick="Ctrl.editCat(this)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
             <%}%>
             </ul>
         <%}%>

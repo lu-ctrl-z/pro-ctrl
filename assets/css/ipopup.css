@@ -47,7 +47,7 @@
     border: 1px solid transparent;
     border-radius: 2px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-    cursor: pointer;
+    /* cursor: pointer; */
     display: inline-block;
     font-size: 11px;
     font-weight: bold;
@@ -65,15 +65,60 @@
     border-color: #167ac6;
     color: #fff;
 }
+.to-catlist-item.enableEdit,
 .to-catlist-item:HOVER {
 	background-color: #eee;
-} 
+}
+.lock .to-catlist-item:not(.enableEdit):HOVER {
+	background-color: transparent;
+}
 .to-catlist-item {
     color: #333;
-    cursor: pointer;
+    /* cursor: pointer; */
     display: block;
     line-height: 25px;
     padding: 0 10px 0 25px;
     position: relative;
     white-space: nowrap;
     font-size: 13px;
+}
+.to-catlist-item.enableEdit .cmd-edit-cat,
+.to-catlist-item:HOVER .cmd-edit-cat {
+	display: block;
+}
+.to-catlist-item.enableEdit .fa-pencil-square-o:before {
+  content: "\f0c7";
+}
+.lock .to-catlist-item:not(.enableEdit):HOVER .cmd-edit-cat {
+    display: none;
+}
+.cmd-edit-cat {
+	position: absolute;
+	top: 5px;
+	right: 15px;
+	font-size: 13px;
+	line-height: 25px;
+	display: none;
+	color: #333 !important;
+}
+.cmd-edit-cat:HOVER {
+	color: #333 !important;
+}
+.to-catlist-item span:BEFORE {
+	content: ".";
+	visibility: hidden;
+}
+.to-catlist-item span {
+	min-width: 25px;
+	display: inline-block;
+	height: 16px;
+	line-height: 16px;
+	padding: 1.5px 10px 1.5px 5px;
+	content: "";
+}
+
+.to-catlist-item span[contenteditable] {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	
+}

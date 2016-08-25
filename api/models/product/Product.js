@@ -26,6 +26,9 @@ module.exports = {
             type: 'string',
             required: true,
         },
+        quantity: {
+            type: 'integer'
+        },
         image_default: {
             type: 'string',
         },
