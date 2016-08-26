@@ -229,4 +229,11 @@ module.exports.routes = {
           layout: null
       }
   },
+  '/barcode.data' : {
+      controller: 'product/ProductController',
+      action: 'getBarcode',
+      locals: {
+          layout: null
+      }
+  },
 };

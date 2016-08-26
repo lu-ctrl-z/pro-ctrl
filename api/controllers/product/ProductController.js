@@ -71,6 +71,22 @@ module.exports = {
                               showList(true);
                           }
                       })
+        } else if( req.param('act') == 'edt' && req.param('ecatname') != '' && req.param('eid') != '' ) {
+            //Update cat
+            Categories.update({cat_id: req.param('eid')}, {cat_name: req.param('ecatname')})
+                      .exec(function(err, updated) {
+                          if (err) {
+                              res.json(200, {
+                                  status: sails.config.const.STATUS_NG,
+                                  message: "DB Error!",
+                                  content: ""
+                              });
+                          } else {
+                              res.locals.Created = req.param('eid');
+                              res.locals.Close = true;
+                              showList(true);
+                          }
+                      })
         } else {
             showList();
         }
@@ -82,6 +98,21 @@ module.exports = {
                 status: sails.config.const.STATUS_OK,
                 message: "",
                 content: lst
+            });
+        });
+    },
+    getBarcode: function(req, res) {
+        Product.getMaxBarcodeByComCD(req.session.user.currentCom.com_cd, function(err, data) {
+            if(err) console.log(err);
+            var code = 100000;
+            console.log(data.barcode);
+            if(data && (data.barcode.toString().indexOf(req.session.user.currentCom.com_cd) === 0) ) {
+                code = data.barcode.toString().replace(req.session.user.currentCom.com_cd, '');
+            }
+            res.json(200, {
+                status: sails.config.const.STATUS_OK,
+                message: "",
+                content: code
             });
         });
     },

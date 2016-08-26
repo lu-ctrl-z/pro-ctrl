@@ -4,14 +4,15 @@
     <form method="post" target="$('#add-cate-container')" action="/product/cat.new" class="load-ajax">
     <input type="hidden" name="act" value="crt">
     <div class="hide-on-create-pl-panel">
-        <h3>Thêm danh mục</h3>
+        <h3>Thêm/Sửa danh mục</h3>
+        <p class="static-note">Chú ý: không xóa được danh mục khi có sản phẩm liên kết</p>
     </div>
     <div class="catlists">
         <%if(res.locals.list) {%>
         <ul class="yt-uix-kbd-nav-list">
             <%for(var i in res.locals.list) {
                 var cat = res.locals.list[i]; %>
-            <li class="to-catlist-item" data-lst-id="<%=cat.cat_id%>"><span><%=cat.cat_name%></span><a class="cmd-edit-cat" href="javascript:;" onclick="Ctrl.editCat(this)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+            <li class="to-catlist-item ctrl-parent"><span><%=cat.cat_name%></span><a class="cmd-edit-cat ctrl-cmd-ok" data-ctrl-content='{"eid":"<%=cat.cat_id%>", "_csrf":"<%= _csrf %>"}' href="javascript:;" onclick="Ctrl.editCat(this)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
             <%}%>
             </ul>
         <%}%>

@@ -19,7 +19,7 @@ $(function() {
     });
     //Submit
     __d('submit', 'form.load-ajax', Ctrl.submitForm);
-    __d('keydown', '[contenteditable]', Ctrl._eKeycodePrevent);
+    __d('keydown', '.ctrl-ediable-input', Ctrl._eKeycodePrevent);
 });
 $.fn.refreshCat = function() {
     var opt = '';
@@ -116,7 +116,7 @@ Ctrl =
         if( g ) {
             strOpt += '</optgroup>';
         } else {
-            strOpt += '<option value="00">Thêm danh mục</option></select>';
+            strOpt += '<option value="00">Thêm/Sửa danh mục</option></select>';
         }
         return strOpt;
     },
@@ -156,24 +156,102 @@ Ctrl =
         });
         return false;
     },
+    getBarCode: function() {
+        try {
+            var obj = localStorage.getItem(ICONFIG.ISTORAGE_BCODE);
+            var barcode = '';
+            if(obj) {
+                barcode = JSON.parse(obj);
+                return parseInt(barcode);
+            } else {
+                $.ajax({
+                    url : '/barcode.data',
+                    type : "get",
+                    async: false,
+                    success : function(r) {
+                        if(r.status == STATUS_OK) {
+                            localStorage.setItem(ICONFIG.ISTORAGE_BCODE, JSON.stringify(r.content));
+                            barcode = r.content;
+                        }
+                    },
+                    error:  function(e) {
+                        console.log(e);
+                    }
+                });
+                return parseInt(barcode);
+            }
+        } catch (e) {
+            return parseInt(barcode);
+        }
+    },
+    getNextCode: function() {
+        var curentCode = this.getBarCode();
+        if(!isNaN(curentCode)) {
+            localStorage.setItem(ICONFIG.ISTORAGE_BCODE, JSON.stringify(curentCode + 1));
+            return curentCode + 1;
+        } else {
+            return '';
+        }
+    },
     editCat: function(e) {
         var $e = $(e), $li = $e.parents('li'), $ul = $e.parents('ul');
+        Ctrl.nextCmd = function() {
+            $(e).trigger('click');
+        };
         if($li.hasClass('enableEdit')) {
-            alert('Bạn muốn lưu thay đổi?');
+            var params = Ctrl._getDataCtrlOf(e);
+            params['ecatname'] = $li.find('.ctrl-ediable-input').val();
+            params['act'] = 'edt';
+            $.ajax({
+                url: '/product/cat.new',
+                type    : "POST",
+                data    : params,
+                success : function(r) {
+                    $('#add-cate-container').empty().append(r.content);
+                },
+                error:  function(e) {
+                    $('#add-cate-container').remove();
+                }
+            });
         } else {
             $ul.find('> li').removeClass('enableEdit');
-            $ul.find('> li > span').removeAttr('contenteditable');
             $ul.addClass('lock');
-            var cat_name = $li.addClass('enableEdit').find('span').attr('contenteditable', true).focus();
+            var $inputTmp = $('<input type="text" class="ceditable ctrl-ediable-input" />');
+            var span = $li.addClass('enableEdit').find('span');
+            var oldName = span.html();
+            $li.addClass('enableEdit').find('span').replaceWith($inputTmp.val(span.html()));
+            $inputTmp.focus().val();
+            Ctrl.escapeCmd = function() {
+                $inputTmp.replaceWith($('<span />').html(oldName));
+                $ul.find('> li').removeClass('enableEdit');
+                $ul.removeClass('lock');
+            }
         }
     },
-    _eKeycodePrevent: function(e, next) {
-        var code = e.which; // recommended to use e.which, it's normalized across browsers
-        var next = next || function() {};
-        if(code==13) {
-            next();
+    _eKeycodePrevent: function(e) {
+        var code = e.which;
+        if(code == 13) {
+            Ctrl.nextCmd();
+            Ctrl._resetFunction();
             return false;
+        } else if (code === 27) {
+            Ctrl.escapeCmd();
+            Ctrl._resetFunction();
         }
     },
+    _resetFunction: function() {
+        var nullFunction = function() {};
+        Ctrl.nextCmd   = nullFunction;
+        Ctrl.escapeCmd = nullFunction;
+    },
+    _getDataCtrlOf: function(e) {
+        var data = '';
+        try {
+            data = JSON.parse($(e).attr('data-ctrl-content'));
+        } catch(ex) { }
+        return data;
+    },
+    nextCmd: function() {},
+    escapeCmd: function() {},
 };
 

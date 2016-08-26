@@ -17,7 +17,9 @@ module.exports = {
             primaryKey: true,
         },
         barcode: {
-            type: 'string'
+            type: 'integer',
+            max: 10,
+            unique: true,
         },
         cat_id: {
             type: 'integer'
@@ -40,6 +42,9 @@ module.exports = {
         user_id: {
            model: 'user' 
         },
+        com_cd: {
+            model: 'comporation'
+        }
     },
     formAttr: {
         cat_id: {
@@ -51,5 +56,8 @@ module.exports = {
         image_default: {
             form_type: sails.config.const.FORM_TYPE_FILE,
         },
-    }
+    },
+    getMaxBarcodeByComCD: function(com_cd, cb) {
+        this.findOne({com_cd: com_cd}).max('barcode').exec(cb);
+    },
 };

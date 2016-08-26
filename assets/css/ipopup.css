@@ -40,6 +40,14 @@
 .addto-create-catlist-section {
 	padding-top: 0px;
 }
+.hide-on-create-pl-panel {
+	width: 260px;
+}
+.static-note {
+	font-size: 10px;
+	padding: 0px 15px 5px;
+    box-sizing: border-box;
+}
 .create-catlist-buttons {
     float: right;
 }
@@ -117,8 +125,9 @@
 	content: "";
 }
 
-.to-catlist-item span[contenteditable] {
+.to-catlist-item .ceditable {
 	background-color: #fff;
 	border: 1px solid #ccc;
-	
+	box-shadow: none !important;
+	padding-right: 20px !important;
 }

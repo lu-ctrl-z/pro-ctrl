@@ -307,7 +307,7 @@ button{
     box-sizing: border-box;
     padding: 2px 6px;
 }
-.im-new-member .ceditable,
+.im-new-member .ceditable:not([name="code[]"]),
 textarea:FOCUS,
 input[type="checkbox"]:FOCUS,
 input[type="email"]:FOCUS,
