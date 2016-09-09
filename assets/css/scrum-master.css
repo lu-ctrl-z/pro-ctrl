@@ -307,13 +307,13 @@ button{
     box-sizing: border-box;
     padding: 2px 6px;
 }
-.im-new-member .ceditable:not([name="code[]"]),
+.im-new-member .ceditable:not([readonly]),
 textarea:FOCUS,
 input[type="checkbox"]:FOCUS,
 input[type="email"]:FOCUS,
 input[type="search"]:FOCUS,
 input[type="password"]:FOCUS,
-input[type="text"]:FOCUS,
+input[type="text"]:not([readonly]):FOCUS,
 input[type="email"]:FOCUS,
 textarea:FOCUS {
     background-color: #FFF;

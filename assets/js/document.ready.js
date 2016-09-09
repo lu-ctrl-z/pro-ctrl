@@ -184,6 +184,9 @@ Ctrl =
             return parseInt(barcode);
         }
     },
+    emitBarCode: function(code) {
+        
+    },
     getNextCode: function() {
         var curentCode = this.getBarCode();
         if(!isNaN(curentCode)) {

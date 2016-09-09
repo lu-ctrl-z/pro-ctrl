@@ -106,7 +106,7 @@ module.exports = {
             if(err) console.log(err);
             var code = 100000;
             console.log(data.barcode);
-            if(data && (data.barcode.toString().indexOf(req.session.user.currentCom.com_cd) === 0) ) {
+            if(data && data.barcode && (data.barcode.toString().indexOf(req.session.user.currentCom.com_cd) === 0) ) {
                 code = data.barcode.toString().replace(req.session.user.currentCom.com_cd, '');
             }
             res.json(200, {

@@ -3,6 +3,7 @@ CtrlIO =
     init: function() {
         io.socket.on('catChanged', this.catChanged);
         io.socket.on('requiredLogin', this.requiredLogin);
+        io.socket.on('requiredLogin', this.requiredLogin);
     },
     destroy: function() {
         io.socket.off('catChanged', this.catChanged);
@@ -15,6 +16,9 @@ CtrlIO =
     requiredLogin : function() {
         alert('bạn phải đăng nhập để tiếp tục.');
         location.href = '/';
+    },
+    subscribeBarcode: function() {
+        
     }
 };
 

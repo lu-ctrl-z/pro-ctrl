@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html id="printP" dir="ltr" mozdisallowselectionprint moznomarginboxes>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <title>In giá kính mắt(author-TinhBV)</title>
+    <style type="text/css">
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+.float_l {
+    float:left;
+}
+.float_r {
+    float:right;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #f6f6f6;
+    /* font-family: helvetica,arial,sans-serif; */
+    font-size: 13px;
+    line-height: 1.05em;
+}
+#wrapper {
+    width: 932px;
+    position: relative;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-top: none;
+}
+#printP-form {
+    padding: 10px;
+}
+#printP-form th{
+    text-align: right;
+}
+#printP-form input{
+    text-align: right;
+}
+#printP-content {
+    background-color: #f6f6f6;
+    border: 1px solid green;
+    padding: 7px;
+    position: relative;
+    margin: -1px;
+}
+#previewer {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+#previewer th,#previewer td{
+    width: 20%;
+}
+.item{
+    height:45px;
+    width: 100%;
+    border: #ccc solid 1px;
+    border-radius:6px;
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:4px;
+    padding-right:4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.item * {
+    white-space: nowrap;
+    text-overflow: hidden;
+}
+.item  .named{
+    line-height: 1.05em;
+}
+.clearfix:AFTER {
+    display: table;
+    content: "";
+    clear: both;
+}
+.my_name{
+    font-size: 8px;
+    width: 75px;
+}
+.barcode {
+    font-family: "Free 3 of 9";
+    font-size: 35px;
+    height: 28px;
+    letter-spacing: 2px;
+    overflow: hidden;
+    width: 65px;
+    line-height: 21px;
+}
+.text1 {
+    font-size: 10px;
+    padding-left: 10px;
+}
+.text2 {
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+.price::after {
+    content: " đ";
+}
+.price {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+}
+.my_name {
+    margin-bottom: -1px;
+}
+input[type="text"]{
+    padding: 3px 10px;
+}
+</style>
+<style type="text/css">
+@media print {
+	body #printP-form,
+	body #footer {
+	    display: none;
+	    visibility: hidden;
+	}
+	#printP-content,
+	.item{
+	    border-color: transparent;
+	}
+	#previewer {
+	   position: relative;
+	   overflow: visible;
+	}
+	body {
+	    background: transparent none;
+	    overflow-x: inherit !important;
+	    -ms-overflow-x: inherit !important;
+    }
+    #printP-content {
+        padding-left: 20px;
+        padding-top: 2px;
+    }
+}
+</style>
+    <script type="text/javascript">
+    var preview = function() {
+        var name = document.getElementById("name").value;
+        if(!name) {
+            name = "ĐH-Kính Mắt Hà Nội";
+        }
+        var masp = document.getElementById("code_product").value;
+        if(!masp) {
+            masp = "678910";
+        }
+        var price = document.getElementById("price_product").value;
+        if(!price) {
+            alert("chưa nhập giá tiền !");
+            return;
+        }
+        var ary_name = document.getElementsByClassName("my_name");
+        for(var i=0; i<ary_name.length; i++) {
+            ary_name[i].innerHTML = name;
+        }
+        var barcode = document.getElementsByClassName("barcode");
+        for(var i=0; i < barcode.length; i++) {
+            barcode[i].innerHTML = masp;
+        }
+        var price_ary = document.getElementsByClassName("price");
+        for(var i=0; i < price_ary.length; i++) {
+            price_ary[i].innerHTML = price;
+        }
+        document.getElementById("print_btn").removeAttribute('disabled');
+    }
+    
+    var f_print = function() {
+        window.print();
+    }
+    numberWithDot = function(x) {
+        return x.value = x.value.toString().replace(/\./g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+    </script>
+  </head>
+  <body tabindex="1">
+    <div id="wrapper">
+        <div id="printP-form">
+            <form name="input" action="#" >
+                <table>
+                    <tr>
+                        <th>Tên Sản phẩm :</th>
+                        <td><input type='text' id="name" name="name" placeholder="ĐH-KÍnh Mắt Hà Nội"></td>
+                    </tr>
+                    <tr>
+                        <th>Mã Sản Phẩm :</th>
+                        <td><input type='text' id="code_product" name="code_product" placeholder="678910" /></td>
+                    </tr>
+                    <tr>
+                        <th>$ :</th>
+                        <td><input type='text' id="price_product" name="price_product" onkeyup="numberWithDot(this)" /></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><button type="submit" style="padding: 5px 15px;" onclick="preview(); return false;" name="print">preview</button></td>
+                    </tr>
+                </table>
+            </form>
+            <div class="print_btn" align="right">
+	            <button type="submit" id="print_btn" style="padding: 5px 15px;" onclick="f_print(); return false;" disabled="disabled">Print</button>
+	        </div>
+        </div>
+        <div id="printP-content">
+            <table id="previewer" >
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item clearfix">
+                            <div class="float_l info">
+                                <p class="my_name">Rayban 3025 cyber</p>
+                                <p class="barcode">1234567890</p>
+                            </div>
+                            <div class="float_r named">
+                                <p class="text1"><i>ĐH-Kính Mắt</i></p>
+                                <p class="text2">Hà Nội</p>
+                                <p class="price">1.990.000</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="footer" style="height: 300px;"></div>
+    </div>
+  </body>
+</html>

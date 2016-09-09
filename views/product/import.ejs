@@ -93,7 +93,7 @@
                            $("#import-add").click( function() {
                                var str = '<tr class="im-new-member">\
                                     <td class="number"><input name="ck[]" tabindex="-1" type="checkbox"></td>\
-                                    <td class="number"><input name="code[]" class="ceditable t" value="' + Ctrl.getNextCode() + '" maxlength="14" type="text"></td>\
+                                    <td class="number"><input name="code[]" class="ceditable t" readonly="readonly" value="' + Ctrl.getNextCode() + '" maxlength="14" type="text"></td>\
                                     <td class="text">  <input name="name[]" class="ceditable t" value="" type="text"></td>\
                                     <td class="number"><label class="webkit onlist t" style="vertical-align: top;">' + Ctrl.getCategory("cat[]") + '</label></td>\
                                     <td class="number"><input name="sl[]" value="1" class="ceditable t" type="text"></td>\
