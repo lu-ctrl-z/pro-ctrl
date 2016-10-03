@@ -115,22 +115,72 @@ module.exports = {
             });
         });
     },
-    importProductDo: function(req, res) {
+    _validate: function(req, res, cb) {
         var data = req.param('import');
-        console.log(data)
-        if(data && data.length > 0) {
-            for(var i in data) {
-                var productItem = data[i];
-                
-            }
+        var com_cd = req.session.user.currentCom.com_cd;
+        if(! (data && data.length > 0)) {
+            return cb(false);
         }
-        res.render('product/importForm', function(err, html) {
-            if(err) console.log(err);
-            res.json(200, {
-                status: sails.config.const.STATUS_OK,
-                message: "",
-                content: html
-            });
+        Product.find( {
+                com_cd : com_cd,
+                delete_flg : 0 },
+                { select: ['id', 'quantity'] }
+                , function(err, listProduct) {
+                if (err) {
+                    return cb(false);
+                } else if (listProduct) {
+                    var lstProductIds = [];
+                    for(var j in listProduct) {
+                        lstProductIds.push(listProduct[j].id);
+                    }
+                    for(var i in data) {
+                        var productItem = data[i];
+                        if(productItem.id && !util.in_array(productItem.id, lstProductIds)) {
+                            return cb(false);
+                        }
+                    }
+                }
         });
+
+        //return cb(true);
+    },
+    importProductDo: function(req, res) {
+       this._validate(req, res, function(ok) {
+           res.render('product/importForm', function(err, html) {
+               if(err) console.log(err);
+               res.json(200, {
+                   status: sails.config.const.STATUS_OK,
+                   message: "",
+                   content: html
+               });
+           });
+       })
+        /*var data = req.param('import');
+        var com_cd = req.session.user.currentCom.com_cd;
+        Product.query("START TRANSACTION;", function(err) {
+            if (err) { throw new Error(err); }
+            if(data && data.length > 0) {
+                for(var i in data) {
+                    var productItem = data[i];
+                    Product.create({
+                        barcode: com_cd.toString() + productItem.code.toString(),
+                        cat_id: productItem.cat,
+                        product_name: productItem.name,
+                        quantity: productItem.sl,
+                        price: productItem.price,
+                        delete_flg: 0,
+                        user_id: req.session.user.user_id,
+                        com_cd: com_cd
+                    }, function(err, inserted) {
+                        if (err) {
+                            throw new Error(err);
+                        } else {
+                            
+                        }
+                    }
+                }
+            }
+        });*/
+        
     }
 };
