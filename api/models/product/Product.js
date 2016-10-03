@@ -22,14 +22,25 @@ module.exports = {
             unique: true,
         },
         cat_id: {
-            type: 'integer'
+            type: 'integer',
+            model: 'categories'
         },
         product_name: {
             type: 'string',
             required: true,
         },
         quantity: {
-            type: 'integer'
+            type: 'integer',
+            required: true,
+        },
+        price: {
+            type: 'integer',
+            required: true,
+            max: 99999999999
+        },
+        privatePrice: {
+            type: 'integer',
+            max: 99999999999
         },
         image_default: {
             type: 'string',

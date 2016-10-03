@@ -1,4 +1,7 @@
 <script type="text/javascript">
+function updateToken(token) {
+    localStorage.setItem(ICONFIG.CSRF_TOKEN, token);
+}
 var $null = null;
 var STATUS_OK = '<%=sails.config.const.STATUS_OK%>';
 var STATUS_NG = '<%=sails.config.const.STATUS_NG%>';

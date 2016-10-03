@@ -27,7 +27,7 @@
             <button type="submit" class="yt-uix-button yt-uix-button-primary">Tạo</button>
         </div>
     </div>
-        <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+        <%include ../_csrf %>
     </form>
 <%if(req.param('act') != 'crt' && req.param('catname') != '') {%>
 </div>

@@ -6,4 +6,5 @@ ICONFIG = {
     CAT_NULL: JSON.stringify([]),
     IPOPUP_SELECTOR: '.ipopupContainer',
     IPOPUP_CURRENT: {},
+    CSRF_TOKEN: '_csrf',
 }

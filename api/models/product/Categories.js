@@ -8,7 +8,7 @@
 
 module.exports = {
     connection: 'mysql',
-    tableName: 'm_category',
+    tableName: 'm_categories',
     attributes: {
         cat_id : {
             type: 'integer',
@@ -20,7 +20,7 @@ module.exports = {
             required: true,
         },
         com_cd: {
-            model: 'Comporation' 
+            model: 'Comporation'
         },
     },
 };

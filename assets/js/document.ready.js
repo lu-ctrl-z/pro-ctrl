@@ -1,6 +1,16 @@
 __d = function(a, b, c) {
     $('body').on(a, b, c);
 };
+__d('submit', 'form[data-form-csrf]', function() {
+    var inputToken = $(this).find('input[name="' + ICONFIG.CSRF_TOKEN + '"]');
+    if(inputToken.length > 0) {
+        inputToken.val( localStorage.getItem(ICONFIG.CSRF_TOKEN) )
+    } else {
+        inputToken = '<input name="' + ICONFIG.CSRF_TOKEN + '" value="' 
+                     + localStorage.getItem(ICONFIG.CSRF_TOKEN) + '">';
+        $(this).append(inputToken);
+    }
+})
 /**
  * 
  */
@@ -50,7 +60,7 @@ $(document).mouseup(function (e) {
 Ctrl = 
 {
     numberWithDot: function(x) {
-        return x.value = x.value.toString().replace(/\./g, "").replace(ICONFIG.PATTEN_REPLACE_CURRENCY, ".");
+        return x.value = x.value.toString().replace(/\./g, "").replace(/^0+/, '').replace(ICONFIG.PATTEN_REPLACE_CURRENCY, ".");
     },
     getCategory: function(name) {
         try {
@@ -95,7 +105,7 @@ Ctrl =
         });
     },
     _buildCate: function(name, j, g) {
-        var strCat = '<select data-refcat name="' + name + '" class="w100pc t">';
+        var strCat = '<select data-refcat name="' + name + '" class="w100pc t js-cat">';
         strCat += this._buildOption(j, g);
         return strCat;
     },
@@ -136,6 +146,10 @@ Ctrl =
         }
         var action = $this.attr('action');
         var method = $this.attr('method') || 'GET';
+        if($this.is('[data-form-validate]') && !$this.validationEngine('validate')) {
+            done();
+            return false;
+        }
         var params = {};
         var frmparams = $this.serializeArray();
         $.each(frmparams, function(i, el) {

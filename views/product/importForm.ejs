@@ -1,0 +1,45 @@
+<div class="main-form-data">
+    <form class="load-ajax" target="$('#mainImportForm')" method="post" action="/product/import" data-form-csrf data-form-validate>
+    <%include ../_csrf %>
+        <div align="center">
+            <div id="read-barcoder">
+                <input style="vertical-align: bottom;" id="main-barcoder"
+                    type="text" class="form-input barcode-scaner"
+                    placeholder="Mã vạch"> <label class="ico barcode"
+                    for="main-barcoder"></label>
+            </div>
+            <br />
+        </div>
+        <br /> <br />
+        <!-- <p class="note">Hãy nhập số lượng cho các sản phẩm</p> -->
+        <table class="data-grid-table" id="lstProduct">
+            <tr>
+                <th style="width: 5%;"><input type="checkbox" name="ckall[]"></th>
+                <th style="width: 15%;">BARCODE</th>
+                <th style="width: 35%;">TÊN</th>
+                <th style="width: 20%;">DANH MỤC</th>
+                <th style="width: 10%;">SỐ LƯỢNG</th>
+                <th style="width: 15%;">GIÁ BÁN<br/>VND</th>
+            </tr>
+        </table>
+        <table class="data-grid-table">
+            <tr>
+                <th style="width: 70%; text-align: left; border-right: none;" colspan="3">
+                    <button id="import-delete" class="rio-button-action remover btn-disable" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i> Xóa bản ghi được đánh dấu</button> &nbsp;
+                    <button id="import-add" class="rio-button-action" type="button"><i class="fa fa-plus-square" aria-hidden="true"></i> Thêm</button>
+                </th>
+                <!--<th style="width: 20%;"> 
+                <label class="webkit" style="vertical-align: top;">
+                    <select name="cat" class="w100pc">
+                        <option>Danh mục</option>
+                        <option>Kính TT nam</option>
+                        <option>Kính TT nữ</option>
+                    </select>
+                </label> </th>-->
+                <th style="width: 32%;text-align: right; border-left: none;" colspan="2">
+                    <button id="import-save"  class="rio-button-action" style="margin: 0;" type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Hoàn thành & Lưu</button>
+                </th>
+            </tr>
+        </table>
+    </form>
+</div>

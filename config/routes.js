@@ -214,9 +214,13 @@ module.exports.routes = {
       controller: 'product/ProductController',
       action: 'index',
   },
-  '/product/import': {
+  'GET /product/import': {
       controller: 'product/ProductController',
       action: 'importProduct',
+  },
+  'POST /product/import': {
+      controller: 'product/ProductController',
+      action: 'importProductDo',
   },
   '/product/cat.new': {
       controller: 'product/ProductController',

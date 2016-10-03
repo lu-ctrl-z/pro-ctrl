@@ -105,7 +105,6 @@ module.exports = {
         Product.getMaxBarcodeByComCD(req.session.user.currentCom.com_cd, function(err, data) {
             if(err) console.log(err);
             var code = 100000;
-            console.log(data.barcode);
             if(data && data.barcode && (data.barcode.toString().indexOf(req.session.user.currentCom.com_cd) === 0) ) {
                 code = data.barcode.toString().replace(req.session.user.currentCom.com_cd, '');
             }
@@ -116,4 +115,22 @@ module.exports = {
             });
         });
     },
+    importProductDo: function(req, res) {
+        var data = req.param('import');
+        console.log(data)
+        if(data && data.length > 0) {
+            for(var i in data) {
+                var productItem = data[i];
+                
+            }
+        }
+        res.render('product/importForm', function(err, html) {
+            if(err) console.log(err);
+            res.json(200, {
+                status: sails.config.const.STATUS_OK,
+                message: "",
+                content: html
+            });
+        });
+    }
 };
