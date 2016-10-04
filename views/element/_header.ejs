@@ -9,7 +9,7 @@
     </div>
     <%if(req.session.authenticated && req.session.user.auth_type == 2) {%>
     <div class="table-cell">
-        <a href="/admin"><i class="fa fa-cogs"></i> Quản trị</a>
+        <a href="/admin"><span class="glyphicons glyphicons-cogwheel"></span> Quản trị</a>
     </div>
     <%}%>
     <% if(req.session.authenticated) { %>
@@ -25,16 +25,16 @@
     </div>
     <%if(req.session.authenticated) {%>
     <div class="table-cell">
-        <a href="/product/import" class="rio-button-action remover" style="margin: 0;"><i class="fa fa-file-text-o"></i> Nhập kho</a>
+        <a href="/product/import" class="rio-button-action remover" style="margin: 0;"><span class="glyphicons glyphicons-more-items"></span> Nhập kho</a>
     </div>
     <div class="table-cell">
-        <a href="/product/export" class="rio-button-action" style="margin: 0;"><i class="fa fa-file-text-o"></i> Xuất bán</a>
+        <a href="/product/export" class="rio-button-action" style="margin: 0;"><span class="glyphicons glyphicons-file-export"></span> Xuất bán</a>
     </div>
     <%}%>
     <%}%>
     <%} else {%>
     <div class="table-cell">
-        <a href="/login/?via=front&rememberme=yes" ><i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <%=__('Login')%></a>
+        <a href="/login/?via=front&rememberme=yes" class="rio-button-action"><span class="glyphicons glyphicons-log-in"></span>&nbsp; <%=__('Login')%></a>
     </div>
     <%}%>
     <div class="table-cell free-cell"></div>
@@ -49,7 +49,7 @@
         </div>
         <% } %>
         <div class="table-cell">
-            <a href="/logout" ><i class="fa fa-sign-out"></i>&nbsp; <%=__('Logout')%></a>
+            <a href="/logout" class="rio-button-action"><span class="glyphicons glyphicons-log-out"></span>&nbsp; <%=__('Logout')%></a>
         </div>
         <% } %>
     </div>

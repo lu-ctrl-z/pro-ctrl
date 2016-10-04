@@ -52,6 +52,11 @@
     transition-timing-function: ease-in-out;
     white-space: nowrap;
 }
+.rio-button-action > .glyphicons {
+    position: relative;
+    font-size: 150%;
+    margin: -0px 0 -3px -2px;
+}
 .rio-button-action:focus,
 .rio-button-action:hover {
     background-color: #4285f4;

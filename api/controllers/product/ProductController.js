@@ -18,7 +18,7 @@ module.exports = {
                 } ]
             };
         }
-        User.find($cond, function(err, ret) {
+        Product.find($cond, function(err, ret) {
             if (err) {
                 console.log(err);
             }
@@ -118,34 +118,38 @@ module.exports = {
     _validate: function(req, res, cb) {
         var data = req.param('import');
         var com_cd = req.session.user.currentCom.com_cd;
-        if(! (data && data.length > 0)) {
+        if(! (data && data.length > 0) ) {
+            res.locals.message.noDataPost = res.i18n('global.empty');
             return cb(false);
         }
-        Product.find( {
-                com_cd : com_cd,
-                delete_flg : 0 },
-                { select: ['id', 'quantity'] }
+        Product.find( { com_cd : com_cd, delete_flg : 0 },
+                      { select: ['id', 'quantity'] }
                 , function(err, listProduct) {
                 if (err) {
+                    res.locals.message.empty = res.i18n('global.error');
                     return cb(false);
-                } else if (listProduct) {
+                } else {
                     var lstProductIds = [];
                     for(var j in listProduct) {
                         lstProductIds.push(listProduct[j].id);
                     }
                     for(var i in data) {
                         var productItem = data[i];
-                        if(productItem.id && !util.in_array(productItem.id, lstProductIds)) {
+                        if(productItem.id && !Util.in_array(productItem.id, lstProductIds)) {
+                            res.locals.message.noPermision = res.i18n('global.noPermision');
                             return cb(false);
                         }
                     }
+                    res.locals.App.listProduct = listProduct;
+                    res.locals.App.lstProductIds = lstProductIds;
+                    return cb(true, listProduct);
                 }
         });
-
         //return cb(true);
     },
     importProductDo: function(req, res) {
-       this._validate(req, res, function(ok) {
+       res.locals.message = res.locals.App = {};
+       function renderView() {
            res.render('product/importForm', function(err, html) {
                if(err) console.log(err);
                res.json(200, {
@@ -154,33 +158,67 @@ module.exports = {
                    content: html
                });
            });
-       })
-        /*var data = req.param('import');
-        var com_cd = req.session.user.currentCom.com_cd;
-        Product.query("START TRANSACTION;", function(err) {
-            if (err) { throw new Error(err); }
-            if(data && data.length > 0) {
-                for(var i in data) {
-                    var productItem = data[i];
-                    Product.create({
-                        barcode: com_cd.toString() + productItem.code.toString(),
-                        cat_id: productItem.cat,
-                        product_name: productItem.name,
-                        quantity: productItem.sl,
-                        price: productItem.price,
-                        delete_flg: 0,
-                        user_id: req.session.user.user_id,
-                        com_cd: com_cd
-                    }, function(err, inserted) {
-                        if (err) {
-                            throw new Error(err);
-                        } else {
-                            
-                        }
-                    }
-                }
-            }
-        });*/
-        
+       }
+       try {
+           this._validate(req, res, function(ok) {
+               if(ok) {
+                   var data = req.param('import');
+                   var com_cd = req.session.user.currentCom.com_cd;
+                   var user_id = req.session.user.id;
+                   Product.getMaxBarcodeByComCD(com_cd, function(err, maxCode) {
+                       if(err) throw new Error(err);
+                       var code = 100000;
+                       if(maxCode && maxCode.barcode && (maxCode.barcode.toString().indexOf(com_cd) === 0) ) {
+                           code = maxCode.barcode.toString().replace(com_cd, '');
+                       }
+                       Product.query("START TRANSACTION;", function(err) {
+                           if (err) { 
+                               throw new Error(err);
+                           }
+                           var listProduct = res.locals.App.listProduct,
+                           lstProductIds = res.locals.App.lstProductIds,
+                           lstAdd = [], lstUpdate = [];
+                           for(var i in data) {
+                               var item = data[i];
+                               if(item.id && Util.in_array(item.id, lstProductIds)) {
+                                   lstUpdate.push({
+                                       id: item.id,
+                                       quantity: item.sl,
+                                   })
+                               } else {
+                                   ++code
+                                   lstAdd.push({
+                                       barcode: com_cd.toString() + code.toString(),
+                                       cat_id: item.cat,
+                                       quantity: item.sl,
+                                       product_name: item.name,
+                                       price: Util.money2Number(item.price),
+                                       user_id: user_id,
+                                       com_cd: com_cd
+                                   })
+                               }
+                           }
+                           if(!Util.empty(lstAdd)) {
+                               Product.create(lstAdd, function(err, added) {
+                                   if(err)  { 
+                                       throw new Error(err);
+                                   }
+                                   Product.query("COMMIT;");
+                                   res.redirect('/product.list');
+                               })
+                           }
+                       })
+                   })
+               } else {
+                   throw new Error('Lỗi validate!');
+               }
+           })
+       } catch(e) {
+           Product.query("ROLLBACK;", function(err) {
+               // The rollback failed--Catastrophic error!
+               console.log(e);
+               return renderView();
+           });
+       }
     }
 };

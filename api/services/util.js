@@ -28,3 +28,16 @@ exports.in_array = function(needle, haystack) {
     }
     return false;
 }
+exports.empty = function(v) {
+    if( typeof v == undefined ) return true;
+    if( v == '' ) return true;
+    if( v == 0 ) return true;
+    if( typeof v == 'object' && Object.keys(v).length === 0) return true;
+    return false;
+}
+exports.money2Number = function(v) {
+    return v.replace(/\./g, "").replace(/^0+/, '');
+}
+exports.number2Money = function(v) {
+    return v.replace(/\./g, "").replace(/^0+/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}

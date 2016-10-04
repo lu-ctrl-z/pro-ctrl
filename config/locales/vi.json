@@ -1,4 +1,7 @@
 {
+  "global.error": "Có lỗi xẩy ra, vui lòng liên hệ với quản trị",
+  "global.empty": "Không có thông tin xử lý",
+  "global.noPermision": "Bạn không có quyền với dữ liệu này",
   "user.user_name.required": "Tên đăng nhập bắt buộc",
   "user.user_name.unique": "Tên đăng nhập đã được sử dụng",
   "user.user_name.maxLength": "Tên đăng nhập tối đa 45 ký tự",

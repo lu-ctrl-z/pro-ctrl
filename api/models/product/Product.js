@@ -18,7 +18,6 @@ module.exports = {
         },
         barcode: {
             type: 'integer',
-            max: 10,
             unique: true,
         },
         cat_id: {
@@ -38,7 +37,7 @@ module.exports = {
             required: true,
             max: 99999999999
         },
-        privatePrice: {
+        private_price: {
             type: 'integer',
             max: 99999999999
         },
