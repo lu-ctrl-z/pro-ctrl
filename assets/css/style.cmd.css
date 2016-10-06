@@ -1,0 +1,40 @@
+.isHideSideRight #RightSidebarContainer,
+.isFullScreen #LeftSidebarContainer,.isFullScreen #RightSidebarContainer{
+	display: none !important;
+}
+.isFullScreen .Hsplit{
+	left: 0px !important;
+}
+.isFullScreen #cmdFullScreen .glyphicons-fit-image-to-frame::BEFORE{
+	content: "";
+	color: #bc2328;
+}
+.isFullScreen #MainContainer{
+	left: 8px !important;
+	right: 0px !important;
+}
+.isHideSideRight #MainContainer{
+	right: 0px !important;
+}
+.isHideSideRight #cmdHideSideRight .glyphicons-bring-forward::BEFORE{
+	content: "";
+	color: #bc2328;
+}
+.isMinHeader #cmdMinHeader .glyphicons-arrow-up::BEFORE{
+	content: "";
+	color: #bc2328;
+}
+.isMinHeader .TopPicPath,
+.isMinHeader #LogoStore{
+	display: none;
+}
+.isMinHeader .Menubar{
+	padding-left: 5px;
+	top: 0px;
+}
+.isMinHeader .ToolbarContainer{
+	top: 29px;
+}
+.isMinHeader .MainContainer,.isMinHeader .Hsplit,.isMinHeader .SidebarContainer{
+	top: 65px;
+}

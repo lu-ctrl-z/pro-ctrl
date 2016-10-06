@@ -7,13 +7,18 @@
 <title><%=sails.config.common.site_title%></title>
 <link href="/css/font/glyphicons/glyphicons.css" rel="stylesheet" type="text/css">
 <link href="/css/style.css" rel="stylesheet" type="text/css">
+<link href="/css/style.cmd.css" rel="stylesheet" type="text/css">
+<%include ../element/_init%>
+<script src="/js/ICONFIG.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/__d.js"></script>
 </head>
-<body class="appManager">
+<body id="appManager" class="appManager">
 <%include MenubarContainer%>
 <%include ToolbarContainer%>
 <%include LeftSidebarContainer%>
 <%include RightSidebarContainer%>
-<div class="MainContainer" style="right: 240px; left: 318px; top: 95px; bottom: 0px; overflow: auto; cursor: default;">
+<div id="MainContainer" class="MainContainer tran" style="right: 240px; left: 318px;">
     <%- body %>
 </div>
 </body>

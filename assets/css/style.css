@@ -5,7 +5,36 @@
     margin: 0;
 }
 .MenubarContainer {
-	background-color: #fff;
+    background-color: #fff;
+    top: 0px; left: 0px; right: 0px; height: 60px;
+}
+.MenubarContainer .Menubar{
+    position: absolute; padding-left: 52px; box-sizing: border-box; top: 29px;
+}
+.Avatar {
+	display: block;
+	position: absolute;
+	width: 40px;
+	background-color: rgb(241, 136, 8);
+	height: 60px;
+	transition: all 125ms linear 0s;
+	cursor: default;
+	font-size: 36px;
+	color: #fff !important;
+	text-align: center;
+	line-height: 60px;
+	font-weight: bold;
+}
+.TopPicPath {
+	position: absolute;
+	right: 120px;
+	left: 50px;
+	top: 6px;
+	height: 26px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	visibility: visible;
 }
 .MenubarContainer, .ToolbarContainer, .MainContainer, .SidebarContainer, .FooterContainer, .Hsplit, .geVsplit {
     cursor: default;
@@ -34,6 +63,27 @@
 .SidebarContainer .Title, .Sidebar .Item, .mxPopupMenuItem {
     transition: all 0.1s ease-in-out 0s;
 }
+.tran {
+	transition: all 0.1s ease-in-out 0s;
+}
+.MainContainer,
+.Hsplit,
+.SidebarContainer {
+	top: 95px;
+}
+#LeftSidebarContainer {
+	bottom: 36px;
+	left: 0px;
+}
+#RightSidebarContainer {
+	bottom: 0px;
+	right: 0px;
+	background-color: whiteSmoke;
+	overflow-x: hidden;
+	overflow-y: auto;
+	font-size: 12px;
+	width: 240px;
+}
 .MenubarContainer .Item, .Toolbar .Item {
     cursor: default;
     padding: 6px 8px;
@@ -47,6 +97,12 @@
 .ToolbarContainer {
     background: whiteSmoke none repeat scroll 0 0;
     border-bottom: 1px solid #e0e0e0;
+    left: 0px;
+    right: 0px;
+    top: 60px;
+    height: 34px;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 1px 0 0 #fff inset;
 }
 .geToolbar {
     border-top: 1px solid #e0e0e0;
@@ -57,16 +113,6 @@
     display: block;
     white-space: nowrap;
     width: 100%;
-}
-.ToolbarContainer .Button {
-    border: 1px solid transparent;
-    cursor: pointer;
-    float: left;
-    height: 20px;
-    margin: 2px;
-    opacity: 0.6;
-    padding: 0 2px 4px;
-    width: 20px;
 }
 .SidebarContainer {
     background: #ffffff;
@@ -102,14 +148,17 @@
 }
 .Hsplit {
     background-color: #e5e5e5;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHBAMAAADdS/HjAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAHUlEQVQImWMQEGAQFWUQFmYQF2cQEmIQE2MQEQEACy4BF67hpEwAAAAASUVORK5CYII=");
+    background-image: url("/image/resize4x7.png");
     background-position: center center;
     background-repeat: no-repeat;
     cursor: col-resize;
+    width: 8px;
+    bottom: 0px; 
 }
 .MainContainer {
     background-color: #ffffff;
     outline: medium none;
+    bottom: 0px; overflow: auto; cursor: default;
 }
 .MenubarContainer {
 	z-index: 1;
@@ -128,4 +177,34 @@
 }
 .MainContainer {
 	z-index: 2;
+}
+.ToolbarContainer .Button:hover {
+    border: 1px solid gray;
+    border-radius: 2px;
+    filter: none !important;
+    opacity: 1;
+}
+.ToolbarContainer .Button {
+    border: 1px solid transparent;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+    opacity: 0.6;
+    padding: 0 2px 4px;
+    line-height: 1em;
+}
+.ToolbarContainer .button-right {
+	position: absolute;
+	display: inline-block;
+	top: 5px;
+	padding: 2px;
+	font-size: 14px;
+	width: 16px;
+	height: 16px;
+}
+.Button > .glyphicons{
+	color: #000000;
+	margin: 1px;
 }
