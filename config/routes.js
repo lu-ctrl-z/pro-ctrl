@@ -217,6 +217,9 @@ module.exports.routes = {
   'GET /product/import': {
       controller: 'product/ProductController',
       action: 'importProduct',
+      locals: {
+          layout: 'layouts/layout'
+      }
   },
   'POST /product/import': {
       controller: 'product/ProductController',

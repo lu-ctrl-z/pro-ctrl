@@ -1,0 +1,131 @@
+.appManager {
+    border: medium none;
+    font-family: Helvetica Neue,Helvetica,Arial Unicode MS,Arial;
+    font-size: 10pt;
+    margin: 0;
+}
+.MenubarContainer {
+	background-color: #fff;
+}
+.MenubarContainer, .ToolbarContainer, .MainContainer, .SidebarContainer, .FooterContainer, .Hsplit, .geVsplit {
+    cursor: default;
+    overflow: hidden;
+    position: absolute;
+}
+.Menubar {
+    padding: 0 2px;
+    vertical-align: middle;
+}
+.Menubar {
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+}
+.SidebarContainer a,
+.MenubarContainer a, .Toolbar a {
+    color: #000000;
+    text-decoration: none;
+}
+.Item {
+    display: inline-block;
+    vertical-align: top;
+}
+.MenubarContainer .Item, .Toolbar .Button, .Toolbar .Label, .Sidebar,
+.SidebarContainer .Title, .Sidebar .Item, .mxPopupMenuItem {
+    transition: all 0.1s ease-in-out 0s;
+}
+.MenubarContainer .Item, .Toolbar .Item {
+    cursor: default;
+    padding: 6px 8px;
+}
+.MenubarContainer .Item, .Toolbar .Button, .Toolbar .Label, .SidebarContainer .Title {
+    cursor: pointer !important;
+}
+.MenubarContainer .Item:hover, .ToolbarContainer .Item:hover {
+    background: #eeeeee;
+}
+.ToolbarContainer {
+    background: whiteSmoke none repeat scroll 0 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+.geToolbar {
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 1px 0 0 #fff inset;
+    padding: 1px 0 0 6px;
+}
+.geMenubar, .geToolbar {
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+}
+.ToolbarContainer .Button {
+    border: 1px solid transparent;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    margin: 2px;
+    opacity: 0.6;
+    padding: 0 2px 4px;
+    width: 20px;
+}
+.SidebarContainer {
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    overflow: auto;
+    position: absolute;
+}
+.Sidebar {
+    background: whiteSmoke none repeat scroll 0 0;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+    padding: 5px 5px 12px;
+}
+.SidebarContainer .Title {
+    color: #505050;
+}
+.SidebarContainer .Title {
+    background: #eeeeee;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: default;
+    display: block;
+    font-size: 9pt;
+    font-weight: normal;
+    line-height: 1.4em;
+    margin: 0;
+    overflow: hidden;
+    padding: 6px 0 6px 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.SidebarContainer .Title:HOVER {
+	background: #e5e5e5;
+}
+.Hsplit {
+    background-color: #e5e5e5;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHBAMAAADdS/HjAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAHUlEQVQImWMQEGAQFWUQFmYQF2cQEmIQE2MQEQEACy4BF67hpEwAAAAASUVORK5CYII=");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: col-resize;
+}
+.MainContainer {
+    background-color: #ffffff;
+    outline: medium none;
+}
+.MenubarContainer {
+	z-index: 1;
+}
+.ToolbarContainer {
+	z-index: 2;
+}
+.SidebarContainer {
+	z-index: 3;
+}
+.Hsplit {
+	z-index: 99;
+}
+.SidebarContainer {
+	z-index: 6;
+}
+.MainContainer {
+	z-index: 2;
+}

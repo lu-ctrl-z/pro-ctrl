@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi" lang="vi" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title><%=sails.config.common.site_title%></title>
+<link href="/css/font/glyphicons/glyphicons.css" rel="stylesheet" type="text/css">
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body class="appManager">
+<%include MenubarContainer%>
+<%include ToolbarContainer%>
+<%include LeftSidebarContainer%>
+<%include RightSidebarContainer%>
+<div class="MainContainer" style="right: 240px; left: 318px; top: 95px; bottom: 0px; overflow: auto; cursor: default;">
+    <%- body %>
+</div>
+</body>
+</html>

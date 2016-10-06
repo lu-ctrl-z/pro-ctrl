@@ -16,11 +16,11 @@
 		   </div>
 		   <%var showListProduct = function() {
 		   var identify = {
-		                 "id": { header: "ID", attr:"style='text-align: center;'" }, 
-		                 "user_name": { header: "Tên hiển thị", apply: function(row) { return '<a href="'+ url.href('/admin/user/edit/', {uid: row.id}) + '">' + row.user_name + '</a>'; } },
-		                 "email": { header: "Email", attr:"style='text-align: left;'" },
-		                 "member_type": { header: "Phân loại", apply: function(row) { return sails.config.common.memberType[row.member_type]; } },
-		                 "auth_type":{ header: "Quyền", apply: function(row) { return sails.config.common.authType[row.auth_type]; } }, 
+		                 "barcode": { header: "Mã", attr:"style='text-align: center;'" }, 
+		                 "product_name": { header: "Tên hàng", apply: function(row) { return '<a href="'+ url.href('/admin/user/edit/', {uid: row.id}) + '">' + row.product_name + '</a>'; } },
+		                 "quantity": { header: "Số lượng", attr:"style='text-align: left;'" },
+                         "price": { header: "Giá"},
+                         "cat_id": { header: "Thuộc danh mục"},
 		                 };
            var pagger = res.locals.pagger;
            %>

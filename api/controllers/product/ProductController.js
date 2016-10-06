@@ -24,7 +24,7 @@ module.exports = {
             }
             res.view('product/index', {
                 AppData : ret,
-                pagger: {total: 300, current: req.param('page') || 1, limit: req.param('limit') || 10}
+                pagger: {total: ret.length, current: req.param('page') || 1, limit: req.param('limit') || 10}
             });
         });
     },

@@ -70,4 +70,17 @@ module.exports = {
     getMaxBarcodeByComCD: function(com_cd, cb) {
         this.findOne({com_cd: com_cd}).max('barcode').exec(cb);
     },
+    searchProduct: function(com_cd, condition) {
+        this.query({
+            text: 'SELECT p.barcode, p.cat_id, m.cat_name p.product_name, p.quantity, p.price, p.user_id \
+                   FROM t_product p \
+                   INNER JOIN m_categories m ON m.cat_id = p.cat_id \
+                   WHERE p.delete_flg = 0 \
+                     AND p.com_cd = $1',
+            values: [ "dog" ]
+          }, function(err, results) {
+            if (err) return res.serverError(err);
+            return res.json(results.rows);
+          });
+    }
 };
