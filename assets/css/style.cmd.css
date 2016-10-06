@@ -1,5 +1,5 @@
 .isHideSideRight #RightSidebarContainer,
-.isFullScreen #LeftSidebarContainer,.isFullScreen #RightSidebarContainer{
+.isFullScreen #LeftSidebarContainer{
 	display: none !important;
 }
 .isFullScreen .Hsplit{
