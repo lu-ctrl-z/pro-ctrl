@@ -27,19 +27,21 @@ $(function() {
         document.documentElement.addEventListener('mousemove', doDrag, false);
         document.documentElement.addEventListener('mouseup', stopDrag, false);
     }
-    var fn_resizer = false;
     function doDrag(e) {
-        if(fn_resizer) clearTimeout(fn_resizer);
-        fn_resizer = setTimeout(function() {
             $(Resizer.el).css("left", e.clientX);
             $('#LeftSidebarContainer').css('width', e.clientX);
             $('#MainContainer').css('left', e.clientX + 8);
-        }, 0);
     }
     function stopDrag(e) {
         document.documentElement.removeEventListener('mousemove', doDrag, false);
         document.documentElement.removeEventListener('mouseup', stopDrag, false);
     }
     __d('mousedown', '#Hsplit',  initDrag);
+    __d('dblclick', '#Hsplit',  function() {
+        var width = 250;
+        $(this).css("left", width);
+        $('#LeftSidebarContainer').css('width', width);
+        $('#MainContainer').css('left', width + 8);
+    });
     /*End Process Resize left container*/
 })

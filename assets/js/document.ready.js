@@ -105,7 +105,7 @@ Ctrl =
         });
     },
     _buildCate: function(name, j, g) {
-        var strCat = '<select data-refcat name="' + name + '" class="w100pc t js-cat">';
+        var strCat = '<select data-refcat name="' + name + '" class="w100pc t js-cat form-control">';
         strCat += this._buildOption(j, g);
         return strCat;
     },

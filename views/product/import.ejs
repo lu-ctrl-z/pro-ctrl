@@ -1,91 +1,80 @@
-<div class="mainScreen clearfix">
-    <div class="leftSide menu"><%include ../element/_menu%></div>
-    <div class="rightSide">
-        <div class="kanban">
-            <h2 class="bar">
-                <i class="fa fa-file-text-o"></i> <a href="/?pid=<%=req.session.user.currentCom.com_cd%>"><%=req.session.user.currentCom.comporation_name%></a> >> Nhập kho
-            </h2>
-            <ul class="action clearfix">
-                <li class="tool"><a id="showTaskForm"
-                    onclick="javascript:return false;" href="/task/create/"><i
-                        class="fa fa-tasks"></i> Nhập kho</a>
-                    <div class="boxup menu-list">
-                        <div class="input-data-form"></div>
-                    </div></li>
-                <li class="tool"><a href="#"><i class="fa fa-tasks"></i>
-                        Filter</a>
-                    <div class="boxup menu-list" tabindex="1">
-                        <div class="input-data-form"></div>
-                    </div></li>
-                <li class="tool"><a href="#"><i style="color: red;" class="fa fa-question"
-                        aria-hidden="true"></i> Hướng dẫn sử dụng</a>
-                    <div class="boxup menu-list" tabindex="1">
-                        <div class="input-data-form textnote">
-                          <%include ../static/help_product_import%>
-                        </div>
-                    </div></li>
-            </ul>
-            <div class="data-area newGrid" id="mainImportForm">
-                <%include importForm%>
-            </div>
-        <script type="text/javascript">
-           $(function() {
-               __d('change', 'input[name="ck[]"]', function() {
-                   if($('input[name="ck[]"]:checked').length) {
-                       $('#import-delete').removeClass('btn-disable').attr('tabindex', "auto");
-                   } else {
-                       $('#import-delete').addClass('btn-disable').attr('tabindex', "-1");
-                   }
-               });
-               __d('change', 'input[name="ckall[]"]', function() {
-                   $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
-               });
-               __d('focus', '.ceditable', function() {
-                   this.setSelectionRange(0, this.value.length);
-               });
-               __d('focus', '.onlist select', function() {
-                   $(this).parent().removeClass('onlist');
-                   $(this).blur(function() {
-                       $(this).parent().addClass('onlist');
-                   })
-               });
-               var STT = 0;
-               __d('click', '#import-add', function() {
-                   var str = '<tr class="im-new-member">\
-                        <td class="number"><input name="ck[]" tabindex="-1" type="checkbox"></td>\
-                        <td class="number"><input name="import[' + STT + '][code]" class="ceditable t" readonly="readonly" value="' + Ctrl.getNextCode() + '" maxlength="14" type="text"></td>\
-                        <td class="text">  <input name="import[' + STT + '][name]" class="ceditable t validate[required]" value="" type="text"></td>\
-                        <td class="number"><label class="webkit onlist t" style="vertical-align: top;">' + Ctrl.getCategory("import[" + STT + "][cat]") + '</label></td>\
-                        <td class="number"><input name="import[' + STT + '][sl]" value="0" class="ceditable t validate[required,custom[number]]" type="text"></td>\
-                        <td class="number"><input name="import[' + STT + '][price]" value="" onkeyup="Ctrl.numberWithDot(this)" class="ceditable t validate[required,custom[money]]" maxlength="14" type="text"></td>\
-                    </tr>';
-                    $('#lstProduct .im-new-member').removeClass('im-new-member');
-                    $('#lstProduct').append(str).find('.im-new-member').find('input[name="import[' + STT + '][name]"]').focus();
-                    $('#lstProduct').find('.im-new-member').find('input[name="ck[]"]').trigger('change');
-                    STT ++;
-                    return false;
-               });
-               __d('click', '#import-delete', function() {
-                   if(confirm('Bạn muốn xóa bản ghi?')) {
-                       $('input[name="ck[]"]:checked').each(function() {
-                           $(this).parents('tr').remove();
-                       });
-                       $('#import-delete').addClass('btn-disable');
-                   }
-               });
-               __d('change', 'select.js-cat', function() {
-                   if($(this).val() == "00") {
-                       Ctrl.showAddCat(this);
-                       $(this).val("0");
-                   }
-               });
-               $(window).on('beforeunload', function(){
-                   if($('input[name="ck[]"]').length) {
-                       return 'Are you sure you want to leave?';
-                   }
-               });
-           })
-        </script>
+<div class="panel panel-default">
+	<div class="panel-heading"><strong><span class="glyphicons glyphicons-show-big-thumbnails"></span> Panel Heading</strong></div>
+	<div class="panel-body">
+	    <div class="pagegrid"></div>
+        <div class="table-responsive">
+            <table id="lstProduct" class="table table-tripped table-bordered">
+                <tbody>
+                    <tr>
+		                <th class="size-1"><input type="checkbox" name="ckall[]"></th>
+		                <th class="size-3">BARCODE</th>
+		                <th class="size-7">TÊN</th>
+		                <th class="size-4">DANH MỤC</th>
+		                <th class="size-2">SỐ LƯỢNG</th>
+		                <th class="size-3">GIÁ BÁN</th>
+		            </tr>
+                </tbody>
+            </table>
+            <button id="import-delete" class="btn btn-danger remover btn-disable" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i> Xóa bản ghi được đánh dấu</button> &nbsp;
+            <button id="import-add" class="btn btn-primary" type="button"><i class="fa fa-plus-square" aria-hidden="true"></i> Thêm</button>
         </div>
-    </div>
+	</div>
+<script type="text/javascript">
+   $(function() {
+       __d('change', 'input[name="ck[]"]', function() {
+           if($('input[name="ck[]"]:checked').length) {
+               $('#import-delete').removeClass('btn-disable').attr('tabindex', "auto");
+           } else {
+               $('#import-delete').addClass('btn-disable').attr('tabindex', "-1");
+           }
+       });
+       __d('change', 'input[name="ckall[]"]', function() {
+           $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
+       });
+       __d('focus', '.ceditable', function() {
+           this.setSelectionRange(0, this.value.length);
+       });
+       __d('focus', '.onlist select', function() {
+           $(this).parent().removeClass('onlist');
+           $(this).blur(function() {
+               $(this).parent().addClass('onlist');
+           })
+       });
+       var STT = 0;
+       __d('click', '#import-add', function() {
+           var str = '<tr class="im-new-member">\
+                <td class="number"><input name="ck[]" tabindex="-1" type="checkbox"></td>\
+                <td class="number"><input name="import[' + STT + '][code]" class="form-control ceditable t" readonly="readonly" value="' + Ctrl.getNextCode() + '" maxlength="14" type="text"></td>\
+                <td class="text">  <input name="import[' + STT + '][name]" class="form-control ceditable t validate[required]" value="" type="text"></td>\
+                <td class="number"><label class="webkit onlist t" style="vertical-align: top;">' + Ctrl.getCategory("import[" + STT + "][cat]") + '</label></td>\
+                <td class="number"><input name="import[' + STT + '][sl]" value="0" class="form-control ceditable t validate[required,custom[number]]" type="text"></td>\
+                <td class="number"><input name="import[' + STT + '][price]" value="" onkeyup="Ctrl.numberWithDot(this)" class="form-control ceditable t validate[required,custom[money]]" maxlength="14" type="text"></td>\
+            </tr>';
+            $('#lstProduct .im-new-member').removeClass('im-new-member');
+            $('#lstProduct').append(str).find('.im-new-member').find('input[name="import[' + STT + '][name]"]').focus();
+            $('#lstProduct').find('.im-new-member').find('input[name="ck[]"]').trigger('change');
+            STT ++;
+            return false;
+       });
+       __d('click', '#import-delete', function() {
+           if(confirm('Bạn muốn xóa bản ghi?')) {
+               $('input[name="ck[]"]:checked').each(function() {
+                   $(this).parents('tr').remove();
+               });
+               $('#import-delete').addClass('btn-disable');
+           }
+       });
+       __d('change', 'select.js-cat', function() {
+           if($(this).val() == "00") {
+               Ctrl.showAddCat(this);
+               $(this).val("0");
+           }
+       });
+       $(window).on('beforeunload', function(){
+           if($('input[name="ck[]"]').length) {
+               return 'Are you sure you want to leave?';
+           }
+       });
+   })
+</script>
 </div>

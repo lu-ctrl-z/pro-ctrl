@@ -11,6 +11,8 @@
 }
 .isFullScreen #MainContainer{
 	left: 8px !important;
+}
+.isFullScreen.isHideSideRight #MainContainer{
 	right: 0px !important;
 }
 .isHideSideRight #MainContainer{
@@ -35,6 +37,12 @@
 .isMinHeader .ToolbarContainer{
 	top: 32px;
 }
+.isMinHeader .MenubarContainer{
+	height: 32px;
+}
 .isMinHeader .MainContainer,.isMinHeader .Hsplit,.isMinHeader .SidebarContainer{
 	top: 68px;
+}
+[role-clone] {
+	display: none;
 }

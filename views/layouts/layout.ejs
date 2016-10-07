@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <title><%=sails.config.common.site_title%></title>
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/bootstrap/css/bootstrap.min.css?v2" rel="stylesheet" type="text/css">
 <link href="/css/style.css" rel="stylesheet" type="text/css">
 <link href="/css/style.cmd.css" rel="stylesheet" type="text/css">
 <%include ../element/_init%>
@@ -14,13 +14,15 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/__d.js"></script>
 <script src="/js/__c.js"></script>
+<script src="/js/__c.js"></script>
+<script src="/js/document.ready.js"></script>
 </head>
 <body id="appManager" class="appManager">
 <%include MenubarContainer%>
 <%include ToolbarContainer%>
 <%include LeftSidebarContainer%>
 <%include RightSidebarContainer%>
-<div id="MainContainer" class="MainContainer tran" style="right: 240px; left: 318px;">
+<div id="MainContainer" class="MainContainer tran" style="right: 240px; left: 258px;">
     <%- body %>
 </div>
 </body>
