@@ -9,7 +9,7 @@
     top: 0px; left: 0px; right: 0px; height: 60px;
 }
 .MenubarContainer .Menubar{
-    position: absolute; padding-left: 52px; box-sizing: border-box; top: 29px;
+    position: absolute; padding-left: 52px; box-sizing: border-box; top: 28px;
 }
 .Avatar {
 	display: block;
@@ -69,7 +69,7 @@
 .MainContainer,
 .Hsplit,
 .SidebarContainer {
-	top: 95px;
+	top: 96px;
 }
 #LeftSidebarContainer {
 	bottom: 36px;
@@ -100,7 +100,7 @@
     left: 0px;
     right: 0px;
     top: 60px;
-    height: 34px;
+    height: 36px;
     border-top: 1px solid #e0e0e0;
     box-shadow: 0 1px 0 0 #fff inset;
 }
@@ -130,7 +130,7 @@
     color: #505050;
 }
 .SidebarContainer .Title {
-    background: #eeeeee;
+    background-color: #eeeeee;
     border-bottom: 1px solid #e5e5e5;
     cursor: default;
     display: block;
@@ -144,7 +144,7 @@
     white-space: nowrap;
 }
 .SidebarContainer .Title:HOVER {
-	background: #e5e5e5;
+	background-color: #e5e5e5;
 }
 .Hsplit {
     background-color: #e5e5e5;
@@ -193,18 +193,23 @@
     margin: 2px;
     opacity: 0.6;
     padding: 0 2px 4px;
-    line-height: 1em;
+    line-height: 14px;
 }
 .ToolbarContainer .button-right {
 	position: absolute;
 	display: inline-block;
-	top: 5px;
+	top: 6px;
 	padding: 2px;
 	font-size: 14px;
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
 }
 .Button > .glyphicons{
 	color: #000000;
-	margin: 1px;
+	top: 0px;
+}
+.has-icon-right {
+	background-image: url("/image/icon-right.gif");
+	background-repeat: no-repeat;
+	background-position: 0% 50%;
 }
