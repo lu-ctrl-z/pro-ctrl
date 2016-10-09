@@ -1,3 +1,32 @@
+/*common code*/
+.stt, .number, .code, .align-center {
+	text-align: center;
+}
+.money {
+	text-align: right;
+	padding-right: 1em !important;
+}
+.stt {
+	font-size: 11px;
+}
+.string {
+	text-align: left;
+}
+.ico-delete {
+	color: #d9534f;
+}
+.ico-edit {
+	color: #31c0be;
+}
+.table .ico-delete,
+.table .ico-add {
+	font-size: 16px;
+}
+.table .ico-edit {
+	font-size: 18px;
+	margin-top: -2px;
+}
+/*common code*/
 .appManager {
     border: medium none;
     font-family: Helvetica Neue,Helvetica,Arial Unicode MS,Arial;
@@ -10,6 +39,7 @@
 }
 .MenubarContainer .Menubar{
     position: absolute; padding-left: 52px; box-sizing: border-box; top: 28px;
+    background-color: #fff;
 }
 .Avatar {
 	display: block;
@@ -217,13 +247,13 @@
 .MainContainer {
 	z-index: 2;
 }
-.ToolbarContainer .Button:hover {
+.Button:hover {
     border: 1px solid gray;
     border-radius: 2px;
     filter: none !important;
     opacity: 1;
 }
-.ToolbarContainer .Button {
+.Button {
     border: 1px solid transparent;
     cursor: pointer;
     float: left;
@@ -231,10 +261,11 @@
     width: 20px;
     margin: 2px;
     opacity: 0.6;
-    padding: 0 2px 4px;
+    padding: 2px;
     line-height: 14px;
+    font-size: 14px;
 }
-.ToolbarContainer .button-right {
+.button-right {
 	position: absolute;
 	display: inline-block;
 	top: 6px;
@@ -262,10 +293,22 @@
 	vertical-align: middle;
 }
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-	padding: 5px;
+	padding: 2px 3px;
+	height: 26px;
+}
+.table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+	border-bottom-width: 1px;
+}
+.table {
+	font-size: 12px;
 }
 .table th {
 	text-align: center;
+	color: #333;
+	background-color: #f6f6f6;
+}
+.table td {
+	color: #767676;
 }
 .size-1{width:5%}.size-2{width:10%}.size-3{width:15%}.size-4{width:20%}.size-5{width:25%}.size-6{width:30%}.size-7{width:35%}.size-8{width:40%}.size-9{width:45%}.size-10{width:50%}.size-11{width:55%}.size-12{width:60%}.size-13{width:65%}.size-14{width:70%}.size-15{width:75%}.size-16{width:80%}.size-17{width:85%}.size-18{width:90%}.size-19{width:95%}.size-20{width:100%}
 .table-layout-fixed {
@@ -276,4 +319,21 @@
 }
 .panel-body {
     padding: 10px;
+}
+.no-padding {
+    padding: 0px;
+}
+.no-padding .table-responsive {
+	margin-top: -1px;
+	margin-right: -1px;
+	margin-left: -1px;
+	position: relative;
+}
+.panel-heading {
+	position: relative;
+}
+.window-toolbar {
+	position: absolute;
+	top: 4px; right: 5px;
+	height: 21px;
 }

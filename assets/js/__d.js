@@ -3,6 +3,12 @@ __d = function(a, b, c) {
 };
 
 $(function() {
+	minifyW = function(el) {
+		$(el).parents('.panel').addClass('isMinify');
+	}
+	closeW = function(el) {
+		$(el).parents('.panel').addClass('isClose');
+	}
     __d('click', '#cmdFullScreen', function() {
         if(!$('#appManager').hasClass('isFullScreen')) {
             $('#appManager').addClass('isHideSideRight');

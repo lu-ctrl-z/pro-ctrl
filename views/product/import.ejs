@@ -1,18 +1,147 @@
 <div class="panel panel-default">
-	<div class="panel-heading"><strong><span class="glyphicons glyphicons-show-big-thumbnails"></span> Panel Heading</strong></div>
-	<div class="panel-body">
+	<div class="panel-heading"><strong><span class="glyphicons glyphicons-show-big-thumbnails"></span> 
+	Nhập mắt kính</strong>
+	<%include ../element/toolbar%>
+	</div>
+	<div class="panel-body no-padding">
 	    <div class="pagegrid"></div>
         <div class="table-responsive">
             <table id="lstProduct" class="table table-tripped table-bordered">
+                <thead>
+                    <tr>
+		                <th class="size-1">STT</th>
+		                <th class="size-1">Thêm</th>
+		                <th class="size-1">Sửa</th>
+		                <th class="size-1">Xóa</th>
+		                <th class="size-2">Mã vạch</th>
+		                <th class="size-2">Số độ</th>
+		                <th class="size-2">Loại</th>
+		                <th class="size-6">Tên</th>
+		                <th class="size-2">Số lượng</th>
+		                <th class="size-3">Giá bán</th>
+		            </tr>
+                </thead>
                 <tbody>
                     <tr>
-		                <th class="size-1"><input type="checkbox" name="ckall[]"></th>
-		                <th class="size-3">BARCODE</th>
-		                <th class="size-7">TÊN</th>
-		                <th class="size-4">DANH MỤC</th>
-		                <th class="size-2">SỐ LƯỢNG</th>
-		                <th class="size-3">GIÁ BÁN</th>
-		            </tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
+                    <tr>
+                        <td class="stt">1</td>
+                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code">100110001</td>
+                        <td class="code">-0.25</td>
+                        <td class="string">Mắt 1.56</td>
+                        <td class="string">Mắt cận loại thường</td>
+                        <td class="number">10 (đôi)</td>
+                        <td class="money">180.000</td>
+                    </tr>
                 </tbody>
             </table>
             <button id="import-delete" class="btn btn-danger remover btn-disable" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i> Xóa bản ghi được đánh dấu</button> &nbsp;
