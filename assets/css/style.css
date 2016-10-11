@@ -33,7 +33,9 @@
 	border-radius: 10px 10px 0 0;
 	border-bottom-color: transparent;
 }
-
+.hide-el {
+    display: none;
+}
 /*common code*/
 .appManager {
     border: medium none;
@@ -346,8 +348,9 @@
 }
 .window{
     transform: translate(0px, 0px) scale(1) translate(0px, 0px);
-	transform-origin: left bottom 0;
-	transition: all 333ms ease-in-out 0s;
+	transform-origin: left top 0;
+	transition: all 100ms ease-in-out 0s;
+	z-index: 9;
 }
 .window-toolbar {
 	position: absolute;
@@ -382,6 +385,10 @@
     z-index: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    white-space: nowrap;
+}
+.iTabs-item .window-toolbar{
+	z-index: 10;
 }
 .iTabs-item:FIRST-CHILD {
 	margin-left: 15px;
@@ -414,4 +421,14 @@
 	right: -1px;
 	border-right: #f5f5f5 solid 1px;
 	border-left: #f5f5f5 solid 1px;
+}
+.iTabs-item .Minus{
+    display: none;
+}
+.iTabs-item strong{
+    white-space: nowrap;
+    width: 170px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
 }

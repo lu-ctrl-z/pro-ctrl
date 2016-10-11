@@ -18,7 +18,7 @@
 <script src="/js/__ui.js"></script>
 <script src="/js/document.ready.js"></script>
 </head>
-<body id="app" class="appManager" data-ng-app="app">
+<body id="appManager" class="appManager" data-ng-app="app">
 <%include MenubarContainer%>
 <%include ToolbarContainer%>
 <%include LeftSidebarContainer%>
@@ -27,7 +27,7 @@
     <div id="tabsList" class="tabsList" style="right: 240px; left: 258px;">
         <ul class="iTabs clearfix" data-ng-if="tabs.length > 0">
             <li class="iTabs-item" data-ng-repeat="tab in tabs" data-ng-class="{isActive: tab.isActive}"
-                ng-bind-html="tab.name"
+                ng-bind-html="tab.name + addElement()" data-ng-click="setActive(tab)"
             >
             </li>
         </ul>

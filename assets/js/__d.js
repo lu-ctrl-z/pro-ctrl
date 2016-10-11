@@ -4,7 +4,7 @@ __d = function(a, b, c) {
 
 $(function() {
 	minifyW = function(el) {
-		$(el).parents('.panel').toggleClass('isMinify');
+		$(el).parents('.panel').addClass('isMinify');
 	}
 	closeW = function(el) {
 		$(el).parents('.panel').addClass('isClose');
