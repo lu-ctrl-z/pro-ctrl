@@ -4,7 +4,7 @@ __d = function(a, b, c) {
 
 $(function() {
 	minifyW = function(el) {
-		$(el).parents('.panel').addClass('isMinify');
+		$(el).parents('.panel').toggleClass('isMinify');
 	}
 	closeW = function(el) {
 		$(el).parents('.panel').addClass('isClose');
@@ -37,6 +37,7 @@ $(function() {
             $(Resizer.el).css("left", e.clientX);
             $('#LeftSidebarContainer').css('width', e.clientX);
             $('#MainContainer').css('left', e.clientX + 8);
+            $('#tabsList').css('left', e.clientX + 8);
     }
     function stopDrag(e) {
         document.documentElement.removeEventListener('mousemove', doDrag, false);
@@ -48,6 +49,7 @@ $(function() {
         $(this).css("left", width);
         $('#LeftSidebarContainer').css('width', width);
         $('#MainContainer').css('left', width + 8);
+        $('#tabsList').css('left', width + 8);
     });
     /*End Process Resize left container*/
 })

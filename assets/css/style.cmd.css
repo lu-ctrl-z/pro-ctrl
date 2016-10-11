@@ -9,14 +9,16 @@
 	content: "";
 	color: #bc2328;
 }
+.isFullScreen #tabsList,
 .isFullScreen #MainContainer{
 	left: 8px !important;
 }
-.isFullScreen.isHideSideRight #MainContainer{
+.isFullScreen.isHideSideRight #MainContainer,
+.isHideSideRight #MainContainer {
 	right: 0px !important;
 }
-.isHideSideRight #MainContainer{
-	right: 0px !important;
+.isFullScreen.isHideSideRight #tabsList,.isHideSideRight #tabsList{
+    right: 240px !important;
 }
 .isHideSideRight #cmdHideSideRight .glyphicons-bring-forward::BEFORE{
 	content: "";
@@ -43,6 +45,14 @@
 .isMinHeader .MainContainer,.isMinHeader .Hsplit,.isMinHeader .SidebarContainer{
 	top: 68px;
 }
-[role-clone] {
-	display: none;
+.isMinHeader .tabsList{
+	top: 33px;
+}
+.window.isMinify{
+    transform: translate(0px, 0px) scale(0.25) translate(0px, 0px);
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+.window.isMinify > .panel-heading{
 }

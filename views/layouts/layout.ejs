@@ -11,19 +11,30 @@
 <%include ../element/_init%>
 <script src="/js/ICONFIG.js"></script>
 <script src="/js/jquery.min.js"></script>
+<script src="/js/angular.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/__d.js"></script>
 <script src="/js/__c.js"></script>
-<script src="/js/__c.js"></script>
+<script src="/js/__ui.js"></script>
 <script src="/js/document.ready.js"></script>
 </head>
-<body id="appManager" class="appManager">
+<body id="app" class="appManager" data-ng-app="app">
 <%include MenubarContainer%>
 <%include ToolbarContainer%>
 <%include LeftSidebarContainer%>
 <%include RightSidebarContainer%>
-<div id="MainContainer" class="MainContainer tran" style="right: 240px; left: 258px;">
-    <%- body %>
+<div data-ng-controller="tabsCtrl" id="tabsCtrl">
+    <div id="tabsList" class="tabsList" style="right: 240px; left: 258px;">
+        <ul class="iTabs clearfix" data-ng-if="tabs.length > 0">
+            <li class="iTabs-item" data-ng-repeat="tab in tabs" data-ng-class="{isActive: tab.isActive}"
+                ng-bind-html="tab.name"
+            >
+            </li>
+        </ul>
+    </div>
+    <div id="MainContainer" class="MainContainer tran" style="right: 240px; left: 258px;">
+        <%- body %>
+    </div>
 </div>
 </body>
 </html>
