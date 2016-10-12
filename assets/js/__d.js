@@ -3,12 +3,12 @@ __d = function(a, b, c) {
 };
 
 $(function() {
-	minifyW = function(el) {
-		$(el).parents('.panel').addClass('isMinify');
-	}
-	closeW = function(el) {
-		$(el).parents('.panel').addClass('isClose');
-	}
+    minifyW = function(index) {
+        angular.element(document.getElementById('tabsCtrl')).scope().setMinus(index);
+    }
+    closeW = function(index) {
+        angular.element(document.getElementById('tabsCtrl')).scope().setClose(index);
+    }
     __d('click', '#cmdFullScreen', function() {
         if(!$('#appManager').hasClass('isFullScreen')) {
             $('#appManager').addClass('isHideSideRight');
@@ -45,7 +45,7 @@ $(function() {
     }
     __d('mousedown', '#Hsplit',  initDrag);
     __d('dblclick', '#Hsplit',  function() {
-        var width = 250;
+        var width = 200;
         $(this).css("left", width);
         $('#LeftSidebarContainer').css('width', width);
         $('#MainContainer').css('left', width + 8);

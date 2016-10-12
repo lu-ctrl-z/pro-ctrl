@@ -37,6 +37,10 @@
     display: none;
 }
 /*common code*/
+body, html {
+    min-width: 1200px;
+    position: relative;
+}
 .appManager {
     border: medium none;
     font-family: Helvetica Neue,Helvetica,Arial Unicode MS,Arial;

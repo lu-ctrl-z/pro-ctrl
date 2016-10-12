@@ -10,10 +10,11 @@
           $scope.tabs = []; // deleted all tabs
           $('#' + $scope.container).find('> .window').each(function(i, el) {
               if($(el).find('> .panel-heading').length > 0) {
+                  var index = $(el).attr('id') || i;
                   var btnMinus = $(el).find('> .panel-heading .window-toolbar .Minus');
                   var btnRemove = $(el).find('> .panel-heading .window-toolbar .Remove');
-                  btnMinus.attr('onclick', 'minifyW(' + i + ')')
-                  btnRemove.attr('onclick', 'closeW(' + i + ')')
+                  btnMinus.attr('onclick', 'minifyW(' + index + ')')
+                  btnRemove.attr('onclick', 'closeW(' + index + ')')
               }
               var tab = {
                   id: $(el).attr('id') || i,
@@ -33,10 +34,23 @@
           tab.isActive = true;
           $(tab.target).removeClass('isMinify');
       }
-      $scope.setMinus = function(i) {
-          if($scope.tabs.indexOf(i) != -1) {
-              $scope.tabs[i].isActive = false;
-              $($scope.tabs[i].target).addClass('isMinify');
+      $scope.setMinus = function(index) {
+          for(var i in $scope.tabs) {
+              if(index == $scope.tabs[i].id) {
+                  $scope.tabs[i].isActive = false;
+                  $($scope.tabs[i].target).addClass('isMinify');
+                  break;
+              }
+          }
+      }
+      $scope.setClose = function(index) {
+          for(var i in $scope.tabs) {
+              if(index == $scope.tabs[i].id) {
+                  $($scope.tabs[i].target).remove();
+                  $scope.tabs.splice(i, 1);
+                  $scope.$apply();
+                  break;
+              }
           }
       }
       if($scope.tabs.length > 0)
