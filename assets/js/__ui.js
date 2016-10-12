@@ -3,24 +3,22 @@
   angular.module("app.tabs", ["ngSanitize"]).controller("tabsCtrl", ["$scope", "$sce", function($scope, $sce) {
       $scope.tabs = [];
       $scope.container = 'MainContainer';
-      $scope.addElement = function() {
-          return "<span class='iTabs-clean'></span>";
+      $scope.addElement = function(tab) {
+          return tab.name + "<span class='iTabs-clean'></span>";
       }
       $scope.init = function() {
           $scope.tabs = []; // deleted all tabs
           $('#' + $scope.container).find('> .window').each(function(i, el) {
               if($(el).find('> .panel-heading').length > 0) {
                   var index = $(el).attr('id') || i;
-                  var btnMinus = $(el).find('> .panel-heading .window-toolbar .Minus');
-                  var btnRemove = $(el).find('> .panel-heading .window-toolbar .Remove');
-                  btnMinus.attr('onclick', 'minifyW(' + index + ')')
-                  btnRemove.attr('onclick', 'closeW(' + index + ')')
+                  $(el).find('> .panel-heading .window-toolbar .Minus').attr('onclick', 'minifyW(' + index + ')');
+                  $(el).find('> .panel-heading .window-toolbar .Remove').attr('onclick', 'closeW(' + index + ')');
               }
               var tab = {
                   id: $(el).attr('id') || i,
                   target: el,
                   name:  $(el).find('> .panel-heading').length > 0 ? 
-                            $(el).find('> .panel-heading').clone().html() : "Không có tiêu đề",
+                            $(el).find('> .panel-heading').html() : "Không có tiêu đề",
                   isActive: !$(el).hasClass('isMinify'),
               };
               $scope.tabs.push(tab);
@@ -39,6 +37,7 @@
               if(index == $scope.tabs[i].id) {
                   $scope.tabs[i].isActive = false;
                   $($scope.tabs[i].target).addClass('isMinify');
+                  $scope.$apply();
                   break;
               }
           }
@@ -48,6 +47,13 @@
               if(index == $scope.tabs[i].id) {
                   $($scope.tabs[i].target).remove();
                   $scope.tabs.splice(i, 1);
+                  if($scope.tabs[i] != undefined) {
+                      $scope.tabs[i].isActive = true;
+                      $($scope.tabs[i].target).removeClass('isMinify');
+                  } else if ( $scope.tabs[i - 1] != undefined) {
+                      $scope.tabs[i-1].isActive = true;
+                      $($scope.tabs[i-1].target).removeClass('isMinify');
+                  }
                   $scope.$apply();
                   break;
               }
@@ -60,6 +66,10 @@
         "use strict";
         angular.module("app", ["app.tabs"]).config([function() {
             
+        }]).filter('NE', ['$sce', function($sce){
+            return function(text) {
+                return $sce.trustAsHtml(text);
+            };
         }])
   }.call(this)
 }).call(this);
