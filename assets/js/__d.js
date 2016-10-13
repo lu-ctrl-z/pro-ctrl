@@ -24,6 +24,7 @@ $(function() {
         $('#appManager').toggleClass('isMinHeader')
     });
     /*Process Resize left container*/
+    var defaultWidth = $('.LeftSidebarContainer').width();
     var Resizer = {startX: null, stopX: null, el: null};
     function initDrag(e) {
         var appManager = $('#appManager');
@@ -35,7 +36,7 @@ $(function() {
     }
     function doDrag(e) {
             $(Resizer.el).css("left", e.clientX);
-            $('#LeftSidebarContainer').css('width', e.clientX);
+            $('.LeftSidebarContainer').css('width', e.clientX);
             $('#MainContainer').css('left', e.clientX + 8);
             $('#tabsList').css('left', e.clientX + 8);
     }
@@ -45,11 +46,10 @@ $(function() {
     }
     __d('mousedown', '#Hsplit',  initDrag);
     __d('dblclick', '#Hsplit',  function() {
-        var width = 200;
-        $(this).css("left", width);
-        $('#LeftSidebarContainer').css('width', width);
-        $('#MainContainer').css('left', width + 8);
-        $('#tabsList').css('left', width + 8);
+        $(this).css("left", defaultWidth);
+        $('.LeftSidebarContainer').css('width', defaultWidth);
+        $('#MainContainer').css('left', defaultWidth + 8);
+        $('#tabsList').css('left', defaultWidth + 8);
     });
     /*End Process Resize left container*/
 })

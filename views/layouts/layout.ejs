@@ -21,10 +21,10 @@
 <body id="appManager" class="appManager" data-ng-app="app">
 <%include MenubarContainer%>
 <%include ToolbarContainer%>
-<%include LeftSidebarContainer%>
+<%include LeftSideMainFormControl%>
 <%include RightSidebarContainer%>
 <div data-ng-controller="tabsCtrl" id="tabsCtrl">
-    <div id="tabsList" class="tabsList" style="right: 240px; left: 208px;">
+    <div id="tabsList" class="tabsList default-left" style="right: 240px;">
         <ul class="iTabs clearfix" data-ng-if="tabs.length > 0">
             <li class="iTabs-item" data-ng-repeat="tab in tabs" data-ng-class="{isActive: tab.isActive}"
                 ng-bind-html="addElement(tab) | NE" data-ng-click="setActive(tab)"
@@ -32,7 +32,7 @@
             </li>
         </ul>
     </div>
-    <div id="MainContainer" class="MainContainer tran" style="right: 240px; left: 208px;">
+    <div id="MainContainer" class="MainContainer tran default-left" style="right: 240px;">
         <%- body %>
     </div>
 </div>
