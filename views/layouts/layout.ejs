@@ -12,6 +12,7 @@
 <script src="/js/ICONFIG.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/angular.js"></script>
+<script src="/js/ngStorage.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/__d.js"></script>
 <script src="/js/__c.js"></script>
@@ -24,7 +25,7 @@
 <%include LeftSideMainFormControl%>
 <%include RightSidebarContainer%>
 <div data-ng-controller="tabsCtrl" id="tabsCtrl">
-    <div id="tabsList" class="tabsList default-left" style="right: 240px;">
+    <div id="tabsList" class="tabsList default-left" style="right: 240px; left: 208px;">
         <ul class="iTabs clearfix" data-ng-if="tabs.length > 0">
             <li class="iTabs-item" data-ng-repeat="tab in tabs" data-ng-class="{isActive: tab.isActive}"
                 ng-bind-html="addElement(tab) | NE" data-ng-click="setActive(tab)"
@@ -32,7 +33,7 @@
             </li>
         </ul>
     </div>
-    <div id="MainContainer" class="MainContainer tran default-left" style="right: 240px;">
+    <div id="MainContainer" class="MainContainer tran default-left" style="right: 240px; left: 208px;">
         <%- body %>
     </div>
 </div>

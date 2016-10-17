@@ -2,10 +2,15 @@
 .stt, .number, .code, .align-center {
 	text-align: center;
 }
-.align
 .money {
 	text-align: right;
 	padding-right: 1em !important;
+}
+.align-right {
+	text-align: right;
+}
+.align-left {
+	text-align: left;
 }
 .stt {
 	font-size: 11px;
@@ -36,6 +41,33 @@
 }
 .hide-el {
     display: none;
+}
+.control-label {
+    white-space: nowrap;
+    overflow: hidden;
+}
+.control-input[class*="w-"],
+.control-label[class*="w-"] {
+    float: left;
+}
+.w-55px {
+    width: 55px;
+}
+.control-input{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.control-input.w-55px {
+	width: calc(100% - 55px);
+}
+.control-input input[type="text"] {
+	width: 100%;
+}
+.table-striped > tbody > tr:nth-of-type(2n) {
+	background-color: #f9f9f9;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+	background-color: transparent;
 }
 /*common code*/
 body, html {
@@ -279,6 +311,7 @@ body, html {
 .MainContainer {
 	z-index: 2;
 }
+.sort .icon-sort:HOVER,
 .Button:hover {
     border: 1px solid gray;
     border-radius: 2px;
@@ -334,10 +367,13 @@ body, html {
 .table {
 	font-size: 12px;
 }
+.table-footer,
 .table th {
-	text-align: center;
 	color: #333;
 	background-color: #f6f6f6;
+}
+.table th {
+	text-align: center;
 }
 .table td {
 	color: #767676;
@@ -451,8 +487,79 @@ body, html {
     overflow: hidden;
     display: inline-block;
 }
-#LeftSideMainFormControl .panel{
+.LeftSidebarContainer .panel{
 	background-color: transparent;
 	border: none;
 	box-shadow: none;
+}
+.LeftSidebarContainer .panel > .panel-heading{
+    padding: 0;
+    border: none;
+    border-color: rgb(192, 192, 192);
+    border-style: solid;
+    border-width: 0 0 1px;
+    height: 30px;
+    overflow: hidden;
+    padding-top: 8px;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+}
+.LeftSidebarContainer {
+	background-color: whiteSmoke;
+	color: rgb(112, 112, 112);
+}
+.LeftSidebarContainer .row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.table-footer {
+	padding: 2px 5px;
+	border-top: 1px solid #ddd;
+}
+.table-footer .pagination {
+	margin: 0px;
+	float: right;
+}
+.table-footer .info {
+	float: left;
+}
+.table-footer .pagination-sm > li > a, .table-footer .pagination-sm > li > span {
+	padding: 2px 8px;
+}
+.sort {
+    position: relative;
+}
+.table th .sort {
+	margin: -2px -3px;
+}
+.table-info {
+	height: 20px;
+	font-size: 11px;
+}
+input.table-info {
+	width: 100px;
+}
+.sort .icon-sort {
+	position: absolute;
+	right: 1px;
+	font-size: 8px; 
+	line-height: 8px;
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	border: transparent solid 1px;
+	color: #767676;
+	opacity: 0.3;
+}
+.sort .icon-sort:HOVER,
+.sort .icon-sort.active {
+	color: #bc2328;
+	opacity: 1;
+}
+.sort .glyphicons-chevron-up {
+	top: -1px;
+}
+.sort .glyphicons-chevron-down{
+	top: 8px;
 }
