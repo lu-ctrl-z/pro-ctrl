@@ -1,10 +1,13 @@
 @CHARSET "UTF-8";
+.ipopupContainer * {
+	margin: 0px;
+}
 .ipopupContainer {
     min-width: 250px;
     min-height: 25px;
     padding: 0;
     z-index: 1999999997;
-    background: #fff none repeat scroll 0 0;
+    background-color: whiteSmoke;
     border: 1px solid #d3d3d3;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     outline: medium none;
@@ -26,8 +29,6 @@
 .yt-uix-form-input-text {
     width: 100%;
     box-sizing: border-box;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.05) inset !important;
-    background-color: #fff  !important;
 }
 .ipopupContainer .catlists {
     border-bottom: 1px solid #ccc;

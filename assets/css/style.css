@@ -1,5 +1,6 @@
 /*common code*/
-.stt, .number, .code, .align-center {
+.stt, .number, .code, .align-center,
+.stt input, .number  input, .code  input, .align-center  input {
 	text-align: center;
 }
 .money {

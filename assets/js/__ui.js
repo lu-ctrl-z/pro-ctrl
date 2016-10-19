@@ -73,59 +73,20 @@
               showIndex: true,
           };
           $scope.stores = [{
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
+        	  code: Ctrl.getNextCode(),
+              cycl: "",
+              kind: "",
+              desciption: "",
+              number: "",
+              price: "",
               showAdd: true,
-              showEdit: true,
-              showDelete: false,
-            }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-              showAdd: true,
-              showEdit: true,
-              showDelete: false,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-              showAdd: true,
-              showEdit: true,
-              showDelete: false,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-              showAdd: true,
-              showEdit: true,
-              showDelete: false,
-          }, {
-              code: "100110054",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-              showAdd: true,
-              showEdit: true,
-              showDelete: false,
-          }];
+              showEdit: false,
+              showDelete: true,
+              editable: true,
+            }];
           $scope.addRow = function() {
               $scope.stores.push({
-                  code: "",
+                  code: Ctrl.getNextCode(),
                   cycl: "",
                   kind: "",
                   desciption: "",
@@ -139,6 +100,9 @@
               $scope.search($scope.currentPage);
           }
           $scope.removeRow = function(store) {
+              if($scope.stores.length <= 1) {
+                  return;
+              }
               var index = $scope.stores.indexOf(store);
               $scope.stores.splice(index, 1);
               $scope.search($scope.currentPage);
@@ -161,6 +125,7 @@
                       $scope.currentPageStores = [];
                       for(var i = 0; i < $scope.filteredStores.length; i++) {
                           if($scope.filteredStores[i].editable == true) {
+                              $scope.stores[i].stt = i+1;
                               $scope.currentPageStores.push($scope.stores[i]);
                           }
                       }

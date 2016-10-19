@@ -9,6 +9,7 @@
   "button.cancel": "<span class='glyphicons glyphicons-remove' title='Hủy thao tác (Ctrl+Shift+D)'></span> Hủy thao tác (Ctrl+Shift+D)",
   "req": "<font color='#d9534f' size='2'>*</font>",
   "select.chosen": "--Chọn--",
+  "select.option": "Tùy chỉnh",
   "button.save": "<span class='glyphicons glyphicons-floppy-saved'></span>",
   "toolbar.minify": "<span class='glyphicons glyphicons-minus' title='Thu gọn'></span>",
   "toolbar.close": "<span class='glyphicons glyphicons-remove' title='Đóng'></span>",

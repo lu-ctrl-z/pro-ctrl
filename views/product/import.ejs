@@ -1,20 +1,20 @@
 <div class="panel panel-default window">
-	<div class="panel-heading"><strong><span class="glyphicons glyphicons-show-big-thumbnails"></span> 
-	Nhập mắt kính cận</strong>
-	<%include ../element/toolbar%>
-	</div>
-	<div class="panel-body no-padding" data-ng-controller="tableCtrl">
+    <div class="panel-heading"><strong><span class="glyphicons glyphicons-show-big-thumbnails"></span> 
+    Nhập mắt kính cận</strong>
+    <%include ../element/toolbar%>
+    </div>
+    <div class="panel-body no-padding" data-ng-controller="tableCtrl">
         <div class="table-responsive min-height-table">
             <table id="lstProduct" class="table form-table table-striped table-bordered">
                 <thead>
                     <tr>
-		                <th class="size-1">STT</th>
-		                <th class="size-1">Thêm</th>
-		                <th class="size-1">Sửa</th>
-		                <th class="size-1">Xóa</th>
-		                <th class="size-2">
-		                  <div class="sort">Mã vạch
-		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
+                        <th class="size-1">STT</th>
+                        <th class="size-1">Thêm</th>
+                        <th class="size-1">Sửa</th>
+                        <th class="size-1">Xóa</th>
+                        <th class="size-2">
+                          <div class="sort">Mã vạch
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
                               data-ng-click=" order('code', 'asc') "
                               data-ng-class="{active: row == 'code' && type == 'asc'}"
                           ></span>
@@ -22,11 +22,11 @@
                               data-ng-click=" order('code', 'desc') "
                               data-ng-class="{active: row == 'code' && type == 'desc'}"
                               ></span>
-		                  </div>
-		                </th>
-		                <th class="size-2">
-		                  <div class="sort">Số độ
-		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
+                          </div>
+                        </th>
+                        <th class="size-2">
+                          <div class="sort">Số độ
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
                               data-ng-click=" order('cycl', 'asc') "
                               data-ng-class="{active: row == 'cycl' && type == 'asc'}"
                           ></span>
@@ -36,9 +36,9 @@
                               ></span>
                           </div>
                         </th>
-		                <th class="size-2">
-		                  <div class="sort">Loại
-		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
+                        <th class="size-2">
+                          <div class="sort">Loại
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
                               data-ng-click=" order('kind', 'asc') "
                               data-ng-class="{active: row == 'kind' && type == 'asc'}"
                           ></span>
@@ -47,10 +47,10 @@
                               data-ng-class="{active: row == 'kind' && type == 'desc'}"
                               ></span>
                           </div>
-	                    </th>
-		                <th class="size-6">
-		                  <div class="sort">Mô tả
-		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
+                        </th>
+                        <th class="size-6">
+                          <div class="sort">Mô tả
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
                               data-ng-click=" order('desciption', 'asc') "
                               data-ng-class="{active: row == 'desciption' && type == 'asc'}"
                           ></span>
@@ -59,10 +59,10 @@
                               data-ng-class="{active: row == 'desciption' && type == 'desc'}"
                               ></span>
                           </div>
-		                </th>
-		                <th class="size-2">
-		                  <div class="sort">Số lượng
-		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
+                        </th>
+                        <th class="size-2">
+                          <div class="sort">Số lượng
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
                               data-ng-click=" order('number', 'asc') "
                               data-ng-class="{active: row == 'number' && type == 'asc'}"
                           ></span>
@@ -71,20 +71,20 @@
                               data-ng-class="{active: row == 'number' && type == 'desc'}"
                               ></span>
                           </div>
-		                </th>
-		                <th class="size-3">
-		                  <div class="sort">Giá bán
-		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
-		                      data-ng-click=" order('price', 'asc') "
+                        </th>
+                        <th class="size-3">
+                          <div class="sort">Giá bán
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
+                              data-ng-click=" order('price', 'asc') "
                               data-ng-class="{active: row == 'price' && type == 'asc'}"
-		                  ></span>
+                          ></span>
                           <span class="glyphicons icon-sort glyphicons-chevron-down"
                               data-ng-click=" order('price', 'desc') "
                               data-ng-class="{active: row == 'price' && type == 'desc'}"
                               ></span>
                           </div>
-		                </th>
-		            </tr>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="store in currentPageStores">
@@ -98,13 +98,23 @@
                         <td class="code" data-ng-if="! store.editable">{{store.cycl}}</td>
                         <td class="code" data-ng-if="store.editable"><input type="text" data-ng-model="store.cycl" /></td>
                         <td class="string" data-ng-if="! store.editable">{{store.kind}}</td>
-                        <td class="string" data-ng-if="store.editable"><input type="text" data-ng-model="store.kind" /></td>
+                        <td class="string" data-ng-if="store.editable">
+                            <select class="js-cat" data-ng-model="store.kind">
+                                <option value=""><%-__("select.chosen")%></option>
+                                <% _.each(sysCatClass, function(sysCat){ %>
+                                  <option value=<%= sysCat.id %> >
+                                    <%= sysCat.name %>
+                                  </option>
+                                <% }) %>
+                                <option value="00"><%-__("select.option")%></option>
+                            </select>
+                        </td>
                         <td class="string" data-ng-if="! store.editable">{{store.desciption}}</td>
                         <td class="string" data-ng-if="store.editable"><input type="text" data-ng-model="store.desciption" /></td>
                         <td class="number" data-ng-if="! store.editable">{{store.number}}</td>
                         <td class="number" data-ng-if="store.editable"><input type="text" data-ng-model="store.number" /></td>
                         <td class="money" data-ng-if="! store.editable">{{store.price}}</td>
-                        <td class="money" data-ng-if="store.editable"><input type="text" data-ng-model="store.price" /></td>
+                        <td class="money" data-ng-if="store.editable"><input type="text" data-ng-model="store.price"  onkeyup="Ctrl.numberWithDot(this)" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -134,25 +144,6 @@
 </div>
 <script type="text/javascript">
    $(function() {
-       __d('change', 'input[name="ck[]"]', function() {
-           if($('input[name="ck[]"]:checked').length) {
-               $('#import-delete').removeClass('btn-disable').attr('tabindex', "auto");
-           } else {
-               $('#import-delete').addClass('btn-disable').attr('tabindex', "-1");
-           }
-       });
-       __d('change', 'input[name="ckall[]"]', function() {
-           $('input[name="ck[]"]').prop('checked', $(this).prop('checked')).trigger('change');
-       });
-       __d('focus', '.ceditable', function() {
-           this.setSelectionRange(0, this.value.length);
-       });
-       __d('focus', '.onlist select', function() {
-           $(this).parent().removeClass('onlist');
-           $(this).blur(function() {
-               $(this).parent().addClass('onlist');
-           })
-       });
        var STT = 0;
        __d('click', '#import-add', function() {
            var str = '<tr class="im-new-member">\

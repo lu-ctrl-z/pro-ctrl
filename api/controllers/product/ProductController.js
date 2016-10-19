@@ -29,17 +29,25 @@ module.exports = {
         });
     },
     //hiển thị màn hình nhập kho
-    importProduct: function(req, res) {
-        var asysn = {
-                cat: false,
-                product: false,
-        };
-        res.view('product/import', { });
+    importProduct: function(req, res, catId) {
+        var kindId = sails.config.Constants.OPTIC_KIND;
+        var com_cd = req.session.user.currentCom.com_cd;
+        SysCat.getByType(kindId, com_cd, function(err, data) {
+            if(err) {
+                console.log(err);
+            }
+            res.view('product/import', { sysCatClass : data, catId: catId});
+        });
+    },
+    //hiển thị màn hình nhập kho mat can
+    importMatCan: function(req, res) {
+        var catId = 1; // Mắt cận
+        this.importProduct(req, res, catId);
     },
     // hiển thị form thêm categories bằng popup
     saveCategory: function(req, res) {
         var showList = function(notify) {
-            Categories.find({com_cd: req.session.user.currentCom.com_cd}, {select: ['cat_id', 'cat_name']}).exec(function(err, lst) {
+            SysCat.find({com_cd: req.session.user.currentCom.com_cd, is_system: false}, {select: ['id', 'name']}).exec(function(err, lst) {
                 res.locals.list = lst;
                 if(notify) {
                     sails.sockets.broadcast(req.session.user.currentCom.com_cd, 'catChanged', lst);
@@ -57,7 +65,8 @@ module.exports = {
 
         if(req.param('act') == 'crt' && req.param('catname') != '') {
             //insert cat
-            Categories.create({cat_name: req.param('catname'), com_cd: req.session.user.currentCom.com_cd})
+            Categories.create({name: req.param('catname'), com_cd: req.session.user.currentCom.com_cd,
+                sys_cat_type: req.param('catType') })
                       .exec(function(err, created) {
                           if (err) {
                               res.json(200, {
@@ -66,7 +75,7 @@ module.exports = {
                                   content: ""
                               });
                           } else {
-                              res.locals.Created = created.cat_id;
+                              res.locals.Created = created.id;
                               res.locals.Close = true;
                               showList(true);
                           }

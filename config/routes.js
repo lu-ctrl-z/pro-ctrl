@@ -214,6 +214,13 @@ module.exports.routes = {
       controller: 'product/ProductController',
       action: 'index',
   },
+  'GET /nhapkho/matcan' : {
+      controller: 'product/ProductController',
+      action: 'importMatCan',
+      locals: {
+          layout: 'layouts/layout'
+      }
+  },
   'GET /product/import': {
       controller: 'product/ProductController',
       action: 'importProduct',
