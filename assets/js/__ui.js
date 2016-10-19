@@ -71,17 +71,17 @@
               push: "/push/",
               commit: "",
               showIndex: true,
-              canAdd: true,
-              canEdit: true,
-              canDelete: true,
           };
-          return $scope.stores = [{
+          $scope.stores = [{
               code: "100110001",
               cycl: -0.25,
               kind: "Mắt 1.56",
               desciption: "Mắt cận loại thường",
               number: 20,
               price: 180000,
+              showAdd: true,
+              showEdit: true,
+              showDelete: false,
             }, {
               code: "100110001",
               cycl: -0.25,
@@ -89,6 +89,9 @@
               desciption: "Mắt cận loại thường",
               number: 20,
               price: 180000,
+              showAdd: true,
+              showEdit: true,
+              showDelete: false,
           }, {
               code: "100110001",
               cycl: -0.25,
@@ -96,6 +99,9 @@
               desciption: "Mắt cận loại thường",
               number: 20,
               price: 180000,
+              showAdd: true,
+              showEdit: true,
+              showDelete: false,
           }, {
               code: "100110001",
               cycl: -0.25,
@@ -103,6 +109,9 @@
               desciption: "Mắt cận loại thường",
               number: 20,
               price: 180000,
+              showAdd: true,
+              showEdit: true,
+              showDelete: false,
           }, {
               code: "100110054",
               cycl: -0.25,
@@ -110,126 +119,52 @@
               desciption: "Mắt cận loại thường",
               number: 20,
               price: 180000,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-        	  code: "100110001",
-        	  cycl: -0.25,
-        	  kind: "Mắt 1.56",
-        	  desciption: "Mắt cận loại thường",
-        	  number: 20,
-        	  price: 180000,
-          }, {
-              code: "100110001",
-              cycl: -0.25,
-              kind: "Mắt 1.56",
-              desciption: "Mắt cận loại thường",
-              number: 20,
-              price: 1800001,
-          } ],
-              $scope.searchKeywords = "",
+              showAdd: true,
+              showEdit: true,
+              showDelete: false,
+          }];
+          $scope.addRow = function() {
+              $scope.stores.push({
+                  code: "",
+                  cycl: "",
+                  kind: "",
+                  desciption: "",
+                  number: "",
+                  price: "",
+                  showAdd: true,
+                  showEdit: false,
+                  showDelete: true,
+                  editable: true,
+              })
+              $scope.search($scope.currentPage);
+          }
+          $scope.removeRow = function(store) {
+              var index = $scope.stores.indexOf(store);
+              $scope.stores.splice(index, 1);
+              $scope.search($scope.currentPage);
+          }
+          $scope.editRow = function(store) {
+              store.editable = true;
+              store.showEdit = false;
+          }
+          $scope.saveRow = function(store) {
+              
+          };
+          return  $scope.searchKeywords = "",
               $scope.filteredStores = [],
               $scope.row = "", $scope.type = "",
               $scope.select = function(page) {
                   var end, start;
                   if($scope.numPerPage == "tất cả") {
                      start = 0, end = $scope.filteredStores.length;
+                  } else if($scope.numPerPage == "chưa lưu") {
+                      $scope.currentPageStores = [];
+                      for(var i = 0; i < $scope.filteredStores.length; i++) {
+                          if($scope.filteredStores[i].editable == true) {
+                              $scope.currentPageStores.push($scope.stores[i]);
+                          }
+                      }
+                      return $scope.currentPageStores;
                   } else {
                      start = (page - 1) * $scope.numPerPage,
                      end = start + $scope.numPerPage;
@@ -257,8 +192,8 @@
                          ? ($scope.row = rowName, $scope.type = type, 
                             $scope.filteredStores = $filter("orderBy")($scope.stores, rowName, $scope.type == "desc" ? true : false), $scope.onOrderChange()) : void 0
               },
-              $scope.numPerPageOpt = [10, 15, 20, "tất cả"],
-              $scope.numPerPage = $scope.numPerPageOpt[1],
+              $scope.numPerPageOpt = [10, 15, 20, "tất cả", "chưa lưu"],
+              $scope.numPerPage = $scope.numPerPageOpt[2],
               $scope.currentPage = 1,
               $scope.currentPageStores = [],
               (init = function() {

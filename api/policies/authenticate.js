@@ -9,6 +9,9 @@ module.exports = function authenticate (req, res, next) {
                 if(comOfUser[0] && comOfUser[0].com_cd) {
                     req.session.user.currentCom = req.session.user.currentCom || comOfUser[0].com_cd;
                 }
+                //thông tin common syscat
+                //res.locals.app["OPTIC_C_CYCL"] = sails.config.Constrants.OPTIC_C_CYCL;
+                //res.locals.app["OPTIC_L_CYCL"] = sails.config.Constrants.OPTIC_L_CYCL;
                 return next();
             });
         } else {

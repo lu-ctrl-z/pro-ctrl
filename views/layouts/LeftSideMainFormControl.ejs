@@ -1,20 +1,51 @@
-<div id="LeftSidebarContainer" class="SidebarContainer LeftSidebarContainer" style="width: 200px;">
-<div id="FormController" >
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Thông tin sản phẩm
+<div id="LeftSidebarContainer" class="SidebarContainer LeftSidebarContainer">
+    <div class="panel-left">
+        <div class="header-left" > Thông tin mắt kính thêm mới
+            <a class="Button close-button-right" title="Ẩn (ESC)"><span class="glyphicons glyphicons-remove"></span></a>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <label class="control-label w-55px">Mã vạch</label>
-                
-            </div>
-            <div class="row">
-                <div class="control-input w-55px"><input type="text" name="barcode"></div>
-            </div>
+        <div class="formdata">
+        <table class="form-table">
+            <tr>
+                <th><label>Mã vạch: </label></th>
+                <td colspan="2"><input id="add_code" size="9" type="text"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Loại mắt<%-__("req")%>: </th>
+                <td><select>
+	                <option value=""><%=__("select.chosen")%></option>
+	                <option value="legal">Mắt 1.56 TC</option>
+	                <option value="tabloid">Mắt 1.56 PQ</option>
+	                <option value="a3">Mắt 1.60</option>
+	                <option value="a4">Mắt kính màu</option>
+	                <option value="custom">Tùy chỉnh</option>
+	                </select>
+                </td>
+                <th>Độ cận<%-__("req")%>: </th>
+                <td>
+                <input placeholder="-1.75" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th>Số lượng<%-__("req")%>:</th>
+                <td><input type="text"></td>
+                <th>Giá bán<%-__("req")%>: </th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th>Mô tả: </th>
+                <td colspan="3"><input type="text"></td>
+            </tr>
+        </table>
+        </div>
+        <div class="button-area"
+            style="padding: 12px 0px 12px 18px; border-bottom: 1px solid rgb(192, 192, 192);">
+            <button class="cmd btn-add" title="Thêm mới (Ctrl+Shift+A)"
+                style="width: 202px; margin-bottom: 2px;"><%-__("button.add")%></button>
+            <br>
+            <button class="cmd btn-cancel" title="Hủy thao tác (Ctrl+Shift+D)"
+                style="width: 202px;"><%-__("button.cancel")%></button>
         </div>
     </div>
 </div>
-</div>
-
-<div id="Hsplit" class="Hsplit resizer" title="Thu gọn/Mở rộng" style="left: 200px;"></div>
+<div id="Hsplit" class="Hsplit resizer" title="Thu gọn/Mở rộng" style="left: 260px;"></div>

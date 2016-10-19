@@ -6,6 +6,7 @@
 	text-align: right;
 	padding-right: 1em !important;
 }
+.form-table th,
 .align-right {
 	text-align: right;
 }
@@ -24,10 +25,14 @@
 .ico-edit {
 	color: #31c0be;
 }
+.ico-save {
+	color: #bc2328;
+}
 .table .ico-delete,
 .table .ico-add {
 	font-size: 16px;
 }
+.table .ico-save,
 .table .ico-edit {
 	font-size: 18px;
 	margin-top: -2px;
@@ -46,22 +51,11 @@
     white-space: nowrap;
     overflow: hidden;
 }
-.control-input[class*="w-"],
-.control-label[class*="w-"] {
-    float: left;
+.min-height-table {
+	min-height: 300px;
 }
 .w-55px {
     width: 55px;
-}
-.control-input{
-	padding-left: 5px;
-	padding-right: 5px;
-}
-.control-input.w-55px {
-	width: calc(100% - 55px);
-}
-.control-input input[type="text"] {
-	width: 100%;
 }
 .table-striped > tbody > tr:nth-of-type(2n) {
 	background-color: #f9f9f9;
@@ -165,9 +159,13 @@ body, html {
 #LeftSideMainFormControl {
 	bottom: 36px;
 	left: 0px;
+	font-size: 12px;
+    width: 260px;
 }
 #LeftSideMainFormControl {
 	background-color: whiteSmoke;
+	font-size: 12px;
+	width: 260px;
 }
 #RightSidebarContainer {
 	bottom: 0px;
@@ -525,7 +523,7 @@ body, html {
 	float: left;
 }
 .table-footer .pagination-sm > li > a, .table-footer .pagination-sm > li > span {
-	padding: 2px 8px;
+	padding: 1px 6px;
 }
 .sort {
     position: relative;
@@ -562,4 +560,92 @@ input.table-info {
 }
 .sort .glyphicons-chevron-down{
 	top: 8px;
+}
+.header-left {
+	border-bottom: rgb(192, 192, 192) solid 1px;
+	text-align: center;
+	font-weight: bold;
+	overflow: hidden;
+	padding-top: 8px;
+	height: 30px;
+	width: 100%;
+}
+.close-button-right {
+	position: absolute;
+	display: block;
+	right: 0px;
+	top: 8px;
+	cursor: pointer;
+	margin-top: 1px;
+	margin-right: 17px;
+	border: 1px solid transparent;
+	padding: 1px;
+	font-size: 10px;
+	height: 15px;
+	width: 15px;
+	opacity: 0.3;
+}
+.close-button-right > .glyphicons {
+	color: #767676;
+}
+.panel-left {
+	white-space: nowrap;
+	color: rgb(112, 112, 112);
+	text-align: left;
+	cursor: default;
+}
+.panel-body-left {
+	padding: 12px 18px 12px 18px;
+	border-bottom: 1px solid rgb(192, 192, 192);
+}
+.label-heading {
+	padding: 0px 0px 6px;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 200px;
+	font-weight: bold;
+}
+.control-input input[type="text"]{
+	width: 202px;
+	margin: 0px 6px 0px 0px;
+	height: 19px;
+}
+.control-input .label-left {
+	float: left;
+}
+.control-input .input-right {
+	float: right;
+}
+label[for] {
+	cursor: pointer;
+}
+.form-table {
+	width: 100%;
+	position: relative;
+}
+.form-table,
+.form-table td,
+.form-table th{
+	padding: 5px 5px ;
+}
+.form-table tr {
+	border-bottom: 1px solid #fff;
+}
+.form-table th {
+	font-weight: normal;
+}
+.form-table td select,
+.form-table td input[type="text"] {
+	width: 100%;
+	min-width: 0;
+	height: 22px;
+}
+.formdata {
+	padding: 10px 5px;
+}
+.button-area {
+	text-align: center;
+}
+.cmd {
+	
 }

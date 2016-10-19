@@ -1,11 +1,11 @@
 <div class="panel panel-default window">
-	<div class="panel-heading"><strong><span class="glyphiconss glyphiconss-show-big-thumbnails"></span> 
-	Nhập mắt kính</strong>
+	<div class="panel-heading"><strong><span class="glyphicons glyphicons-show-big-thumbnails"></span> 
+	Nhập mắt kính cận</strong>
 	<%include ../element/toolbar%>
 	</div>
 	<div class="panel-body no-padding" data-ng-controller="tableCtrl">
-        <div class="table-responsive">
-            <table id="lstProduct" class="table table-striped table-bordered">
+        <div class="table-responsive min-height-table">
+            <table id="lstProduct" class="table form-table table-striped table-bordered">
                 <thead>
                     <tr>
 		                <th class="size-1">STT</th>
@@ -49,7 +49,7 @@
                           </div>
 	                    </th>
 		                <th class="size-6">
-		                  <div class="sort">Tên
+		                  <div class="sort">Mô tả
 		                  <span class="glyphicons icon-sort glyphicons-chevron-up"
                               data-ng-click=" order('desciption', 'asc') "
                               data-ng-class="{active: row == 'desciption' && type == 'asc'}"
@@ -89,15 +89,22 @@
                 <tbody>
                     <tr data-ng-repeat="store in currentPageStores">
                         <td class="stt">{{store.stt}}</td>
-                        <td class="align-center"><a onclick="addRow();" href="javascript:void(0);"><%-__('table.add')%></a></td>
-                        <td class="align-center"><a onclick="editRow();" href="javascript:void(0);"><%-__('table.edit')%></a></td>
-                        <td class="align-center"><a onclick="removeRow();" href="javascript:void(0);"><%-__('table.delete')%></a></td>
-                        <td class="code">{{store.code}}</td>
-                        <td class="code">{{store.cycl}}</td>
-                        <td class="string">{{store.kind}}</td>
-                        <td class="string">{{store.desciption}}</td>
-                        <td class="number">{{store.number}}</td>
-                        <td class="money">{{store.price}}</td>
+                        <td class="align-center"><a data-ng-if="store.showAdd" data-ng-click="addRow();" title="Thêm mới mắt kính" href="javascript:void(0);"><%-__('table.add')%></a></td>
+                        <td class="align-center" data-ng-if="store.showEdit"><a data-ng-click="editRow(store);" title="Sửa mắt kính" href="javascript:void(0);"><%-__('table.edit')%></a></td>
+                        <td class="align-center" data-ng-if="store.editable"><a data-ng-click="saveRow(store);" title="Lưu lại" href="javascript:void(0);"><%-__('table.save')%></a></td>
+                        <td class="align-center"><a data-ng-if="store.showDelete" data-ng-click="removeRow(store);" title="Xóa mắt kính" href="javascript:void(0);"><%-__('table.delete')%></a></td>
+                        <td class="code" data-ng-if="! store.editable">{{store.code}}</td>
+                        <td class="code" data-ng-if="store.editable"><input type="text" data-ng-model="store.code" /></td>
+                        <td class="code" data-ng-if="! store.editable">{{store.cycl}}</td>
+                        <td class="code" data-ng-if="store.editable"><input type="text" data-ng-model="store.cycl" /></td>
+                        <td class="string" data-ng-if="! store.editable">{{store.kind}}</td>
+                        <td class="string" data-ng-if="store.editable"><input type="text" data-ng-model="store.kind" /></td>
+                        <td class="string" data-ng-if="! store.editable">{{store.desciption}}</td>
+                        <td class="string" data-ng-if="store.editable"><input type="text" data-ng-model="store.desciption" /></td>
+                        <td class="number" data-ng-if="! store.editable">{{store.number}}</td>
+                        <td class="number" data-ng-if="store.editable"><input type="text" data-ng-model="store.number" /></td>
+                        <td class="money" data-ng-if="! store.editable">{{store.price}}</td>
+                        <td class="money" data-ng-if="store.editable"><input type="text" data-ng-model="store.price" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -106,14 +113,14 @@
         </div>
         <div class="table-footer clearfix">
             <div class="info">
-                <input class="table-info" data-ng-model="searchKeywords" data-ng-keyup="search()" placeholder="Lọc kết quả theo"> 
+                <input class="table-info" data-ng-model="searchKeywords" data-ng-keyup="search()" placeholder="Lọc bản ghi theo"> 
                 <span class="table-info">Hiển thị</span>
                 <select class="table-info" ng-model="numPerPage" data-ng-change="onNumPerPageChange()">
                     <option data-ng-repeat="opt in numPerPageOpt" data-ng-selected="opt == numPerPage">{{opt}}</option>
                 </select>
                 <span class="table-info">trong {{filteredStores.length}} bản ghi</span>
             </div>
-            <ul data-uib-pagination 
+            <ul data-uib-pagination
                 data-total-items="filteredStores.length" 
                 data-ng-model="currentPage"
                 data-ng-change="select(currentPage)" 
