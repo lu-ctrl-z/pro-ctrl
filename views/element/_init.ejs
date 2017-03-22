@@ -7,10 +7,6 @@ var STATUS_OK = '<%=sails.config.const.STATUS_OK%>';
 var STATUS_NG = '<%=sails.config.const.STATUS_NG%>';
 <%if(req.session.user && req.session.user.currentCom && req.session.user.currentCom.com_cd) {%>
 COM_CD = '<%=req.session.user.currentCom.com_cd%>';
-document.ready = function() {
-    localStorage.removeItem(ICONFIG.ISTORAGE_CAT);
-    localStorage.removeItem(ICONFIG.ISTORAGE_BCODE);
-}
 <%} else {%>
 COM_CD = $null;
 <%}%>

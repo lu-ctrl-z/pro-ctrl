@@ -64,33 +64,22 @@
   }]),
   function() {
       "use strict";
-      angular.module("app.tables", ['ngStorage']).controller("tableCtrl", ["$scope", "$filter", "$localStorage", function($scope, $filter, $localStorage) {
+      angular.module("app.tables", ['ngStorage']).controller("tableCtrl", ["$scope", "$filter", "$localStorage", "$http", function($scope, $filter, $localStorage, $http) {
           var init;
           $scope.config = {
-              pull: "/pull/",
-              push: "/push/",
+              pull: "/pull/matcan",
+              push: "/nhapkho/matcan",
               commit: "",
               showIndex: true,
           };
-          $scope.stores = [{
-        	  code: Ctrl.getNextCode(),
-              cycl: "",
-              kind: "",
-              desciption: "",
-              number: "",
-              price: "",
-              showAdd: true,
-              showEdit: false,
-              showDelete: true,
-              editable: true,
-            }];
+          $scope.stores = [];
           $scope.addRow = function() {
               $scope.stores.push({
                   code: Ctrl.getNextCode(),
                   cycl: "",
                   kind: "",
-                  desciption: "",
-                  number: "",
+                  name: "",
+                  quantity: "",
                   price: "",
                   showAdd: true,
                   showEdit: false,
@@ -112,58 +101,113 @@
               store.showEdit = false;
           }
           $scope.saveRow = function(store) {
-              
+              store.editable = false;
+              store.showEdit = true;
+              if($scope.isValidate(store)) {
+                  save(store);
+              }
           };
-          return  $scope.searchKeywords = "",
-              $scope.filteredStores = [],
-              $scope.row = "", $scope.type = "",
-              $scope.select = function(page) {
-                  var end, start;
-                  if($scope.numPerPage == "tất cả") {
-                     start = 0, end = $scope.filteredStores.length;
-                  } else if($scope.numPerPage == "chưa lưu") {
-                      $scope.currentPageStores = [];
-                      for(var i = 0; i < $scope.filteredStores.length; i++) {
-                          if($scope.filteredStores[i].editable == true) {
-                              $scope.stores[i].stt = i+1;
-                              $scope.currentPageStores.push($scope.stores[i]);
-                          }
-                      }
-                      return $scope.currentPageStores;
-                  } else {
-                     start = (page - 1) * $scope.numPerPage,
-                     end = start + $scope.numPerPage;
+          $scope.isValidate = function(store) {
+              return true;
+          };
+          var save = function(store) {
+              store[ICONFIG.CSRF_TOKEN] = localStorage.getItem(ICONFIG.CSRF_TOKEN);
+              $.ajax({
+                  type    : "POST",
+                  url     : $scope.config.push,
+                  cache   : false,
+                  async   : false,
+                  data    : store,
+                  success : function(respones) {
+                  },
+                  error   : function(ex) {
                   }
-                  $scope.currentPageStores = $scope.filteredStores.slice(start, end);
-                  for(var i = 1; i <= $scope.currentPageStores.length; i++) {
-                      $scope.currentPageStores[i-1].stt = start+i;
+              }).done(function() {
+              });
+          };
+
+
+          $scope.searchKeywords = "";
+          $scope.filteredStores = [];
+          $scope.row = "";
+          $scope.type = "";
+          $scope.select = function(page) {
+              var end, start;
+              if($scope.numPerPage == "tất cả") {
+                 start = 0, end = $scope.filteredStores.length;
+              } else if($scope.numPerPage == "chưa lưu") {
+                  $scope.currentPageStores = [];
+                  for(var i = 0; i < $scope.filteredStores.length; i++) {
+                      if($scope.filteredStores[i].editable == true) {
+                          $scope.stores[i].stt = i+1;
+                          $scope.currentPageStores.push($scope.stores[i]);
+                      }
                   }
                   return $scope.currentPageStores;
-              },
-              $scope.onFilterChange = function() {
-                  return $scope.select(1), $scope.currentPage = 1, $scope.row = ""
-              },
-              $scope.onNumPerPageChange = function() {
-                  return $scope.select(1), $scope.currentPage = 1
-              },
-              $scope.onOrderChange = function() {
-                  return $scope.select(1), $scope.currentPage = 1
-              },
-              $scope.search = function() {
-                  return $scope.filteredStores = $filter("filter")($scope.stores, $scope.searchKeywords), $scope.onFilterChange()
-              },
-              $scope.order = function(rowName, type) {
-                  return ( $scope.row !== rowName || type !== $scope.type ) 
-                         ? ($scope.row = rowName, $scope.type = type, 
-                            $scope.filteredStores = $filter("orderBy")($scope.stores, rowName, $scope.type == "desc" ? true : false), $scope.onOrderChange()) : void 0
-              },
-              $scope.numPerPageOpt = [10, 15, 20, "tất cả", "chưa lưu"],
-              $scope.numPerPage = $scope.numPerPageOpt[2],
-              $scope.currentPage = 1,
-              $scope.currentPageStores = [],
-              (init = function() {
-                  return $scope.search(), $scope.select($scope.currentPage)
-              })();
+              } else {
+                 start = (page - 1) * $scope.numPerPage,
+                 end = start + $scope.numPerPage;
+              }
+              $scope.currentPageStores = $scope.filteredStores.slice(start, end);
+              for(var i = 1; i <= $scope.currentPageStores.length; i++) {
+                  $scope.currentPageStores[i-1].stt = start+i;
+              }
+              return $scope.currentPageStores;
+          };
+          $scope.onFilterChange = function() {
+              return $scope.select(1), $scope.currentPage = 1, $scope.row = ""
+          };
+          $scope.onNumPerPageChange = function() {
+              return $scope.select(1), $scope.currentPage = 1
+          };
+          $scope.onOrderChange = function() {
+              return $scope.select(1), $scope.currentPage = 1
+          };
+          $scope.search = function() {
+              return $scope.filteredStores = $filter("filter")($scope.stores, $scope.searchKeywords), $scope.onFilterChange()
+          };
+          $scope.order = function(rowName, type) {
+              return ( $scope.row !== rowName || type !== $scope.type ) 
+                     ? ($scope.row = rowName, $scope.type = type, 
+                        $scope.filteredStores = $filter("orderBy")($scope.stores, rowName, $scope.type == "desc" ? true : false), $scope.onOrderChange()) : void 0
+          };
+          $scope.numPerPageOpt = [10, 15, 20, "tất cả", "chưa lưu"];
+          $scope.numPerPage = $scope.numPerPageOpt[1];
+          $scope.currentPage = 1;
+          $scope.currentPageStores = [];
+          (init = function() {
+             $.ajax({
+                  type    : "GET",
+                  url     : $scope.config.pull,
+                  cache   : false,
+                  async   : false,
+                  success : function(res) {
+                      if(res.length > 0) {
+                         for(var i = 0; i < res.length; i++) {
+                           res[i].showAdd = true;
+                           res[i].showEdit = true;
+                           res[i].showDelete = false;
+                           res[i].editable = false;
+                            $scope.stores.push(res[i]);
+                         }
+                      } else {
+                          $scope.stores = [{
+                              code: Ctrl.getNextCode(),
+                              cycl: "",
+                              kind: "",
+                              name: "",
+                              quantity: "",
+                              price: "",
+                              showAdd: true,
+                              showEdit: false,
+                              showDelete: true,
+                              editable: true,
+                            }];
+                      }
+                  }
+              });
+              return $scope.search(), $scope.select($scope.currentPage)
+          })();
       }])
   }.call(this),
   function() {

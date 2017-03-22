@@ -47,4 +47,16 @@ module.exports = {
                     }] };
         this.find($cond).sort('order ASC').exec(cb);
     },
+    checkValidType: function(type, com_cd, id, cb) {
+        var $cond = {
+                sys_cat_type: type,
+                or : [ {
+                  com_cd: com_cd,
+                  id: id
+                  }, {
+                  is_system : true,
+                  id: id
+                }] };
+        this.find($cond).exec(cb);
+    },
 };

@@ -8,3 +8,5 @@ ICONFIG = {
     IPOPUP_CURRENT: {},
     CSRF_TOKEN: '_csrf',
 }
+localStorage.removeItem(ICONFIG.ISTORAGE_CAT);
+localStorage.removeItem(ICONFIG.ISTORAGE_BCODE);

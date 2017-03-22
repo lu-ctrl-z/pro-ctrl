@@ -27,7 +27,10 @@
 	color: #31c0be;
 }
 .ico-save {
-	color: #bc2328;
+	color: #337ab7;
+}
+.ico-add {
+	color: rgb(241, 136, 8);
 }
 .table .ico-delete,
 .table .ico-add {

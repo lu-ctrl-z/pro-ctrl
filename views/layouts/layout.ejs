@@ -25,6 +25,7 @@
 <%include ToolbarContainer%>
 <%include LeftSideMainFormControl%>
 <%include RightSidebarContainer%>
+<%include ../_csrf %>
 <div data-ng-controller="tabsCtrl" id="tabsCtrl">
     <div id="tabsList" class="tabsList default-left" style="right: 240px; left: 268px;">
         <ul class="iTabs clearfix" data-ng-if="tabs.length > 0">

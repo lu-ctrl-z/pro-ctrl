@@ -48,27 +48,15 @@
                               ></span>
                           </div>
                         </th>
-                        <th class="size-6">
-                          <div class="sort">Mô tả
-                          <span class="glyphicons icon-sort glyphicons-chevron-up"
-                              data-ng-click=" order('desciption', 'asc') "
-                              data-ng-class="{active: row == 'desciption' && type == 'asc'}"
-                          ></span>
-                          <span class="glyphicons icon-sort glyphicons-chevron-down"
-                              data-ng-click=" order('desciption', 'desc') "
-                              data-ng-class="{active: row == 'desciption' && type == 'desc'}"
-                              ></span>
-                          </div>
-                        </th>
                         <th class="size-2">
                           <div class="sort">Số lượng
                           <span class="glyphicons icon-sort glyphicons-chevron-up"
-                              data-ng-click=" order('number', 'asc') "
-                              data-ng-class="{active: row == 'number' && type == 'asc'}"
+                              data-ng-click=" order('quantity', 'asc') "
+                              data-ng-class="{active: row == 'quantity' && type == 'asc'}"
                           ></span>
                           <span class="glyphicons icon-sort glyphicons-chevron-down"
-                              data-ng-click=" order('number', 'desc') "
-                              data-ng-class="{active: row == 'number' && type == 'desc'}"
+                              data-ng-click=" order('quantity', 'desc') "
+                              data-ng-class="{active: row == 'quantity' && type == 'desc'}"
                               ></span>
                           </div>
                         </th>
@@ -81,6 +69,18 @@
                           <span class="glyphicons icon-sort glyphicons-chevron-down"
                               data-ng-click=" order('price', 'desc') "
                               data-ng-class="{active: row == 'price' && type == 'desc'}"
+                              ></span>
+                          </div>
+                        </th>
+                        <th class="size-6">
+                          <div class="sort">Mô tả
+                          <span class="glyphicons icon-sort glyphicons-chevron-up"
+                              data-ng-click=" order('desciption', 'asc') "
+                              data-ng-class="{active: row == 'name' && type == 'asc'}"
+                          ></span>
+                          <span class="glyphicons icon-sort glyphicons-chevron-down"
+                              data-ng-click=" order('desciption', 'desc') "
+                              data-ng-class="{active: row == 'name' && type == 'desc'}"
                               ></span>
                           </div>
                         </th>
@@ -109,12 +109,12 @@
                                 <option value="00"><%-__("select.option")%></option>
                             </select>
                         </td>
-                        <td class="string" data-ng-if="! store.editable">{{store.desciption}}</td>
-                        <td class="string" data-ng-if="store.editable"><input type="text" data-ng-model="store.desciption" /></td>
-                        <td class="number" data-ng-if="! store.editable">{{store.number}}</td>
-                        <td class="number" data-ng-if="store.editable"><input type="text" data-ng-model="store.number" /></td>
+                        <td class="number" data-ng-if="! store.editable">{{store.quantity}}</td>
+                        <td class="number" data-ng-if="store.editable"><input type="text" data-ng-model="store.quantity" /></td>
                         <td class="money" data-ng-if="! store.editable">{{store.price}}</td>
                         <td class="money" data-ng-if="store.editable"><input type="text" data-ng-model="store.price"  onkeyup="Ctrl.numberWithDot(this)" /></td>
+                        <td class="string" data-ng-if="! store.editable">{{store.name}}</td>
+                        <td class="string" data-ng-if="store.editable"><input type="text" data-ng-model="store.name" /></td>
                     </tr>
                 </tbody>
             </table>

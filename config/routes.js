@@ -221,16 +221,16 @@ module.exports.routes = {
           layout: 'layouts/layout'
       }
   },
+  'POST /nhapkho/matcan': {
+      controller: 'product/ProductController',
+      action: 'saveImportMatCan',
+  },
   'GET /product/import': {
       controller: 'product/ProductController',
       action: 'importProduct',
       locals: {
           layout: 'layouts/layout'
       }
-  },
-  'POST /product/import': {
-      controller: 'product/ProductController',
-      action: 'importProductDo',
   },
   '/product/cat.new': {
       controller: 'product/ProductController',
@@ -250,4 +250,11 @@ module.exports.routes = {
           layout: null
       }
   },
+  '/pull/matcan' : {
+      controller: 'product/ProductController',
+      action: 'pullMatCan',
+      locals: {
+          layout: null
+      }
+  }
 };

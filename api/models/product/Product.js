@@ -9,7 +9,6 @@
 module.exports = {
     connection: 'mysql',
     tableName: 't_product',
-    autosubscribe: ['destroy', 'update', 'add', 'remove'],
     attributes: {
         id : {
             type: 'integer',
@@ -22,32 +21,7 @@ module.exports = {
         },
         cat_id: {
             type: 'integer',
-            model: 'categories'
-        },
-        product_name: {
-            type: 'string',
-            required: true,
-        },
-        quantity: {
-            type: 'integer',
-            required: true,
-        },
-        price: {
-            type: 'integer',
-            required: true,
-            max: 99999999999
-        },
-        private_price: {
-            type: 'integer',
-            max: 99999999999
-        },
-        image_default: {
-            type: 'string',
-        },
-        delete_flg: {
-            type: 'integer',
-            in: [0,1],
-            defaultsTo: 0
+            model: 'SysCat'
         },
         user_id: {
            model: 'user' 
@@ -70,17 +44,53 @@ module.exports = {
     getMaxBarcodeByComCD: function(com_cd, cb) {
         this.findOne({com_cd: com_cd}).max('barcode').exec(cb);
     },
-    searchProduct: function(com_cd, condition) {
-        this.query({
-            text: 'SELECT p.barcode, p.cat_id, m.cat_name p.product_name, p.quantity, p.price, p.user_id \
-                   FROM t_product p \
-                   INNER JOIN m_categories m ON m.cat_id = p.cat_id \
-                   WHERE p.delete_flg = 0 \
-                     AND p.com_cd = $1',
-            values: [ "dog" ]
-          }, function(err, results) {
-            if (err) return res.serverError(err);
-            return res.json(results.rows);
-          });
+    addMatCan: function(req, res, cb) {
+        var catId = sails.config.Constants.OPTIC_MAT_CAN; // Mắt cận
+        var com_cd = req.session.user.currentCom.com_cd;
+        var user_id = req.session.user.id;
+        var barcode = com_cd.toString() + req.param('code').toString();
+        this.find({barcode: barcode}).exec(function(err, product) {
+            if(product && product.length > 0) {
+                throw new Error("Mã barcode đã tồn tại không thể thêm mới");
+            }
+            var kindType = sails.config.Constants.OPTIC_KIND;
+            SysCat.checkValidType(kindType, com_cd, req.param('kind'), function(err, data) {
+                if(err) {
+                    throw new Error("Loại mắt kính không có trong hệ thống");
+                }
+                if(!data) return cb(false);
+                Product.query("START TRANSACTION;", function(err) {
+                    if (err) { 
+                        throw new Error(err);
+                    }
+                    Product.create({
+                        barcode: barcode,
+                        cat_id : catId,
+                        user_id: user_id,
+                        com_cd : com_cd
+                    }).exec(function(err, product) {
+                        if(err) {
+                            throw new Error(err);
+                        }
+                        OpticClass.create({
+                            product_id: product.id,
+                            class: sails.config.Constants.OPTIC_CLASS,
+                            kind: req.param('kind'),
+                            c_cycl: req.param('cycl'),
+                            quantity: req.param('number'),
+                            price: req.param('price'),
+                            create_user: user_id
+                        }).exec(function(err, opticClass) {
+                            if(err) {
+                                throw new Error(err);
+                            }
+                            Product.query("COMMIT;");
+                            OpticClass.query("COMMIT;");
+                            cb(true);
+                        })
+                    })
+                });
+            });
+        })
     }
 };

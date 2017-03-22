@@ -49,6 +49,6 @@ module.exports.policies = {
         'login': ['authenticate'],
     },
     'product/ProductController': {
-        'importProduct': ['authenticate', 'useIO'],
+        'importProduct': ['authenticate', 'useIO', 'isLogin'],
     },
 };

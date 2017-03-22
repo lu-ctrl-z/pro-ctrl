@@ -44,6 +44,44 @@ module.exports = {
         var catId = 1; // Mắt cận
         this.importProduct(req, res, catId);
     },
+    //hiển thị màn hình nhập kho mat can
+    saveImportMatCan: function(req, res) {
+        var id = req.param('id');
+        if( id && id > 0 ) {
+            Product.findOne({com_cd: com_cd, id: id})
+            .exec(function(err, product) {
+                if (err) { 
+                    throw new Error(err);
+                }
+                if(product) {
+                    OpticClass.find({product_id: product.id})
+                }
+            })
+        } else {
+            Product.addMatCan(req, res, function(ok) {
+                if(!ok) {
+                    res.json(200, {
+                        status: sails.config.const.STATUS_NG,
+                        message: "Có lỗi xẩy ra",
+                        content: ""
+                    });
+                } else {
+                    res.json(200, {
+                        status: sails.config.const.STATUS_OK,
+                        message: "Thêm mới mắt kính thành công",
+                        content: ""
+                    });
+                }
+            })
+        }
+        //var catId = 1; // Mắt cận
+        //this.importProduct(req, res, catId);
+    },
+    pullMatCan : function(req, res) {
+        OpticClass.getListMatCan(req, res,function(data) {
+                res.json(data);
+        });
+    },
     // hiển thị form thêm categories bằng popup
     saveCategory: function(req, res) {
         var showList = function(notify) {

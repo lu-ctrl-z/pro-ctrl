@@ -10,7 +10,8 @@ __d('submit', 'form[data-form-csrf]', function() {
                      + localStorage.getItem(ICONFIG.CSRF_TOKEN) + '">';
         $(this).append(inputToken);
     }
-})
+});
+
 /**
  * 
  */
@@ -204,8 +205,9 @@ Ctrl =
     getNextCode: function() {
         var curentCode = this.getBarCode();
         if(!isNaN(curentCode)) {
-            localStorage.setItem(ICONFIG.ISTORAGE_BCODE, JSON.stringify(curentCode + 1));
-            return curentCode + 1;
+            var nextCode = curentCode + 1;
+            localStorage.setItem(ICONFIG.ISTORAGE_BCODE, JSON.stringify(nextCode));
+            return nextCode;
         } else {
             return '';
         }

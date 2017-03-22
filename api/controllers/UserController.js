@@ -18,7 +18,7 @@ module.exports = {
                 //#########################
                 var redirect = function() {
                     if ($data.user.auth_type == 2 && !$next)
-                        return res.redirect('/admin/');
+                        return res.redirect('/product/import');
                     else
                         return res.redirect($next);
                 }
