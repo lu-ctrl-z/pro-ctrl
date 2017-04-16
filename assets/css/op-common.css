@@ -21,9 +21,26 @@
 .table .td {
 	display: table-cell;
 }
+.table .free-col {
+	width: 100%;
+}
 .bg-white {
 	background-color: #fff;
 }
 .border-bottom{
 	border-bottom: 1px #e8e8e8 solid;
+}
+.op-ux-button {
+	background-color: transparent;
+	border: 1px solid transparent;
+	padding: 4px 8px;
+	cursor: pointer;
+	color: #333;
+	height: 30px;
+}
+.op-ux-button > .glyphicons {
+	font-size: 15px;
+}
+.op-ux-button:HOVER {
+	border: 1px solid #e8e8e8;
 }

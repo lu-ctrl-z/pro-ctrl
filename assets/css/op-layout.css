@@ -2,6 +2,7 @@
 * {
 	margin: 0px;
 	padding: 0px;
+	box-sizing: border-box;
 }
 body {
     background: #f1f1f1 none repeat scroll 0 0;
@@ -9,6 +10,7 @@ body {
 body {
 	font: 13px Roboto,arial,sans-serif;
 	word-wrap: break-word;
+	font-size: 13px;
 }
 #head-container {
     left: 0;
@@ -22,4 +24,11 @@ body {
 }
 .head-offset-inner {
 	padding: 7px 30px;
+}
+.head-top .td{
+	vertical-align: middle;
+}
+.logo-image {
+	height: 30px;
+	margin-left: 10px;
 }
