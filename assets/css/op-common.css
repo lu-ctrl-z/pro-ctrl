@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+.clearfix::before {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.w100 {
+	width: 100%;
+}
+.table {
+	display: table;
+}
+.table .td {
+	display: table-cell;
+}
+.bg-white {
+	background-color: #fff;
+}
+.border-bottom{
+	border-bottom: 1px #e8e8e8 solid;
+}

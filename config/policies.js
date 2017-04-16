@@ -34,14 +34,7 @@ module.exports.policies = {
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
-    AdminController: {
-        '*' : ['authenticate', 'isAdmin'],
-        'login': ['authenticate'],
-    },
-    MainController: {
-        '*' : ['authenticate', 'isLogin'],
-        'index': ['authdata', 'authenticate', 'isLogin'],
-    },
-    IOController: {
-    },
+    HomeController: {
+        '*' : ['authenticate'],
+    }
 };
