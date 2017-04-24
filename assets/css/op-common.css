@@ -12,6 +12,12 @@
     height: 0;
     visibility: hidden;
 }
+input, textarea, button {
+	font-family: Roboto,arial,sans-serif;
+}
+table {
+	border-collapse: collapse;
+}
 .w100 {
 	width: 100%;
 }
@@ -37,10 +43,25 @@
 	cursor: pointer;
 	color: #333;
 	height: 30px;
+	outline: none;
 }
 .op-ux-button > .glyphicons {
 	font-size: 15px;
 }
 .op-ux-button:HOVER {
 	border: 1px solid #e8e8e8;
+}
+.op-ux-input {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 2px #eee inset;
+    height: 28px;
+    padding: 0px 8px;
+    transition: all 0.2s ease 0s;
+    font-size: 14px;
+    outline: none;
+}
+.op-ux-input:FOCUS {
+    border: 1px solid #1c62b9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
 }

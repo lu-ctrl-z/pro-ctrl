@@ -5,25 +5,32 @@
 <title>VNOPTICAL</title>
 <link rel="canonical" href="https://www.vnoptical.com/">
 <link rel="alternate" media="handheld" href="https://m.vnoptical.com/">
-<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.youtube.com/">
+<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.vnoptical.com/">
 <meta name="description" content="">
 <meta name="keywords" 
     content="kính mắt, kính cận, kính thuốc, kính viễn thị, kính thời trang, kính hàng hiệu, cận thị, viễn thị, tật khúc xạ, kính mắt uy tín, tin cậy, kính mắt online">
 <link rel="search" type="application/opensearchdescription+xml"
-    href="https://www.youtube.com/opensearch?locale=vi_VN"
+    href="https://www.vnoptical.com/opensearch?locale=vi_VN"
     title="Tìm kiếm Kính mắt trên vnoptical">
 <meta name="theme-color" content="#e62117">
 <link href="/css/op-Roboto.css" rel="stylesheet" />
 <link href="/css/font/Glyphicons/glyphicons.css" rel="stylesheet" />
 <link href="/css/op-common.css" rel="stylesheet" />
 <link href="/css/op-layout.css" rel="stylesheet" />
+<script src="/js/jquery.min.js"></script>
 </head>
-<body>
+<body id="body" class="show-fluid">
     <div id="body-container">
         <%include _header%>
-    <%- body %>
+        <div id="page-container">
+            <%include _menu_fluid%>
+            <div id="content-wrapper" class="wrapper">
+                <%- body %>
+            </div>
+        </div>
     </div>
     <div id="footer-container">
     </div>
 </body>
+<script src="/js/op.document.ready.js"></script>
 </html>
