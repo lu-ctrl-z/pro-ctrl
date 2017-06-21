@@ -89,3 +89,53 @@ body {
 	max-width: 1260px;
 	margin: 0 auto;
 }
+#top-content {
+	background-color: #fff;
+	/* border: 1px solid #e8e8e8; */
+}
+.section {
+	padding: 15px 18px;
+}
+.module-title {
+	font-size: 15px;
+	font-weight: 500;
+	color: #333;
+}
+.module-title a {
+	color: inherit;
+}
+.module-title a:HOVER {
+	color: #167ac6;
+}
+.section-title {
+	padding-bottom: 10px;
+}
+.top-of-product {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+}
+.top-of-product .product-row,
+.top-of-product {
+	border: 1px solid #e8e8e8;
+}
+.top-of-product .product-row{
+	display: table-row;
+}
+.section-list-item {
+    display: inline-block;
+}
+.section-list {
+    font-size: 0px;
+}
+.section-list-item > .item {
+	width: 195px;
+	height: 195px;
+	background-color: #e1e1e1;
+}
+.section-list-item {
+	margin-left: 10px;
+}
+.section-list-item:FIRST-CHILD {
+	margin-left: 0px;
+}
