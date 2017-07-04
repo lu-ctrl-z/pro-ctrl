@@ -32,4 +32,11 @@ module.exports.routes = {
           layout: 'layouts/layout'
       }
   },
+  '/customer': {
+      controller: 'customer/CustomerController',
+      action: 'index',
+      locals: {
+          layout: 'layouts/layout'
+      }
+  },
 };

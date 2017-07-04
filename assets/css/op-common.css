@@ -28,13 +28,13 @@ table {
 .w100 {
 	width: 100%;
 }
-.table {
+._table {
 	display: table;
 }
-.table .td {
-	display: table-cell;
+._table .td {
+	display: table-cell; 
 }
-.table .free-col {
+._table .free-col {
 	width: 100%;
 }
 .bg-white {
@@ -126,4 +126,53 @@ table {
 [data-title]:HOVER:BEFORE{
     opacity: 1;
     visibility: visible;
+}
+.alignRight {
+	text-align: right;
+}
+.alignLeft {
+	text-align: left;
+}
+.alignCenter {
+	text-align: center;
+}
+.control-label {
+	padding-top: 5px;
+	text-align: right;
+}
+.input-group-addon {
+	padding: 5px 11px;
+}
+.cs-page {
+	position: inherit; 
+}
+.btn {
+	border-radius: 0px;
+	line-height: 1em;
+}
+.btn-info {
+	background: #3b5998;
+	border: 1px solid #29487d;
+}
+.btn-info:FOCUS,
+.btn-info:ACTIVE,
+.btn-info:HOVER {
+	background: #29487d;
+	border: 1px solid #3b5998;
+}
+.btn-danger {
+	background: #bc2328;
+	border: 1px solid #902328;
+}
+.btn-danger:FOCUS,
+.btn-danger:ACTIVE,
+.btn-danger:HOVER {
+	background: #902328;
+	border: 1px solid #bc2328;
+}
+.btn-area{
+	text-align: center;
+}
+.btn-area .btn {
+	margin: 10px;
 }

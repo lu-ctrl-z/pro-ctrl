@@ -1,4 +1,8 @@
 {
+  "button.next" : "Tiếp tục <span class=\"glyphicons glyphicons-arrow-right\"></span>",
+  "button.back" : "<span class=\"glyphicons glyphicons-arrow-left\"></span> Quay lại",
+  "button.search" : "<span class=\"glyphicons glyphicons-search\"></span> Tìm kiếm",
+  "button.add" : "<span class=\"glyphicons glyphicons-plus\"></span> Thêm mới",
   "user.user_name.required": "Tên đăng nhập chưa đúng",
   "user.user_name.unique": "Tên đăng nhập đã có",
   "user.user_name.maxLength": "Tên đăng nhập tối đa 45 ký tự",
@@ -28,5 +32,18 @@
   "Username or password in correct": "Tên đăng nhập hoặc mật khẩu không đúng.",
   "DB Error!": "Lỗi DB!",
   "Username in correct": "Tên đăng nhập không đúng.",
-  "Keep me login": "Duy trì đăng nhập."
+  "Keep me login": "Duy trì đăng nhập.",
+  
+  "customer.customerInfo" : "<span class=\"glyphicons glyphicons-calendar\"></span> <span>Thông tin khách hàng</span>",
+  "customer.customerSearchInfo" : "<span class=\"glyphicons glyphicons-search\"></span> <span>Tìm kiếm thông tin khách hàng</span>",
+  "customer.customerSaveInfo" : "<span class=\"glyphicons glyphicons-floppy-disk\"></span> <span>Tìm kiếm thông tin khách hàng</span>",
+  "customer.customerInfoList" : "<span class=\"glyphicons glyphicons-show-big-thumbnails\"></span> <span>Danh sách thông tin khách hàng</span>",
+  "customer.phoneNumber" : "Số điện thoại",
+  "customer.fullName" : "Tên",
+  "customer.address" : "Địa chỉ",
+  
+  
+  
+  
+  "eof": "END OF FILE"
 }

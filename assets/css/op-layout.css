@@ -8,9 +8,10 @@ body {
     background: #f1f1f1 none repeat scroll 0 0;
 }
 body {
-	font: 13px Roboto,arial,sans-serif;
+	font-family: Helvetica,Arial,sans-serif;
 	word-wrap: break-word;
 	font-size: 13px;
+	line-height: 1.42857;
 }
 #head-container {
     left: 0;
@@ -23,7 +24,7 @@ body {
 	height: 50px;
 }
 .head-offset-inner {
-	padding: 7px 30px 8px;
+	padding: 9px 30px 11px;
 }
 .head-top .td{
 	vertical-align: middle;
@@ -90,7 +91,6 @@ body {
 	margin: 0 auto;
 }
 #top-content {
-	background-color: #fff;
 	/* border: 1px solid #e8e8e8; */
 }
 .section {
@@ -138,4 +138,38 @@ body {
 }
 .section-list-item:FIRST-CHILD {
 	margin-left: 0px;
+}
+#top-content {
+	margin: 0 10px;
+}
+.panel-heading > strong {
+	font-family: arial;
+}
+.panel-heading span {
+	line-height: 1;
+	vertical-align: middle;
+}
+.form-control {
+	border-radius: 0px;
+}
+.fluid-nav {
+	font-size: 13px;
+	font-weight: bold;
+}
+.fluid-nav a{
+	display: block;
+	padding: 8px 10px;
+	color: #222;
+}
+.fluid-nav a:HOVER{
+    color: #fff;
+    background-color: #555; 
+}
+.h-i {
+	line-height: 1.2em;
+}
+.h-i > .glyphicons,
+.h-i > .fa {
+	line-height: 1em;
+	font-size: 115%;
 }
