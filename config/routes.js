@@ -32,6 +32,72 @@ module.exports.routes = {
           layout: 'layouts/layout'
       }
   },
+  '/admin': {
+      controller: 'admin/AdminController',
+      action: 'index',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'get /login': {
+      controller: 'admin/AdminController',
+      action: 'login',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'post /login': {
+      controller: 'admin/UserController',
+      action: 'doLoginAdmin',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  '/logout': {
+      controller: 'admin/UserController',
+      action: 'doLogout',
+  },
+  '/admin/user': {
+      controller: 'admin/AdminController',
+      action: 'index',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  //create user in admin
+  'get /admin/user/add': {
+      controller: 'admin/AdminController',
+      action: 'userForm',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'get /admin/user/edit': {
+      controller: 'admin/AdminController',
+      action: 'userFormEdit',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'post /admin/user/edit': {
+      controller: 'admin/AdminController',
+      action: 'userEdit',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  'post /admin/user/add': {
+      controller: 'admin/AdminController',
+      action: 'addUser',
+      locals: {
+          layout: 'layouts/admin_layout'
+      }
+  },
+  
+  
+  
+  
+  
   '/customer': {
       controller: 'customer/CustomerController',
       action: 'index',
