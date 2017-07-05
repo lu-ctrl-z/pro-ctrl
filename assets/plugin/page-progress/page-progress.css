@@ -1,0 +1,225 @@
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+/*------------------------------------*\
+    #CS-PAGEPROGRESS
+\*------------------------------------*/
+
+.cs-pageprogress {
+    border: 1px solid #999;
+    
+    padding: 2px;
+    width: 300px;
+    height: 25px;
+    border-radius: 11px;
+    
+    font-family: Tahoma;
+    font-size: 11px;
+    line-height: 18px;
+
+    margin: 0px auto;
+}
+
+.cs-pageprogress__number {
+    position: absolute;
+}
+
+.cs-pageprogress__number-item {
+    display: inline-block;
+    position: relative;
+    width: 18px;
+    height: 17px;
+    margin: 1px;
+    border-radius: 9px;
+    
+    cursor: default;
+    text-align: center;
+    
+    color: #efefef;
+    background: #bcbcbc;
+}
+
+.cs-pageprogress__number-item--clickable {
+    cursor: pointer;
+}
+
+.cs-pagegrogress__number-item--active {
+    transition: background 0.5s, color 0.5s;
+
+    color: #666;
+    background: #d9edf7;
+}
+
+.cs-pageprogress__bar {
+    overflow: hidden;
+    border-radius: 10px;
+    height: 20px;
+    background: #efefef;
+}
+
+.cs-pageprogress__bar-indicator {
+    width: 0;
+    height: 20px;
+    border-radius: 10px;
+    transition: width 0.5s;
+    background: #5bc0de;
+}
+
+
+
+
+
+.cs-pageprogress--thinline {}
+.cs-pageprogress--thinline .cs-pageprogress__number-item {
+    color: #333;
+    background: white;
+}
+.cs-pageprogress--thinline .cs-pagegrogress__number-item--active {
+    color: white;
+    background: #00dd33;
+}
+.cs-pageprogress--thinline .cs-pageprogress__bar {
+    height: 3px;
+    margin: 8px 2px 0 0;
+    background: white;
+}
+.cs-pageprogress--thinline .cs-pageprogress__bar-indicator {
+    height: 3px;
+    background: #00dd33;
+}
+
+
+
+
+
+.cs-pageprogress--thinline-blue {}
+.cs-pageprogress--thinline-blue .cs-pageprogress__number-item {
+    color: #333;
+    background: white;
+}
+.cs-pageprogress--thinline-blue .cs-pagegrogress__number-item--active {
+    color: white;
+    background: #109BDC;
+}
+.cs-pageprogress--thinline-blue .cs-pageprogress__bar {
+    height: 3px;
+    margin: 8px 2px 0 0;
+    background: #bbb;
+}
+.cs-pageprogress--thinline-blue .cs-pageprogress__bar-indicator {
+    height: 3px;
+    background: #109BDC;
+}
+
+
+
+
+
+.cs-pageprogress--noborder { }
+.cs-pageprogress--noborder .cs-pageprogress {
+    border: 0;
+}
+
+
+
+
+
+/*------------------------------------*\
+    #CS-PAGE
+\*------------------------------------*/
+
+.cs_page__container {
+    position: relative;
+}
+
+.cs-page {
+    position: absolute;
+}
+
+
+
+
+
+/*------------------------------------*\
+    #CS-PAGE__ANIMATION (DEFAULT)
+\*------------------------------------*/
+
+.cs-page__animation {
+    opacity: 0;
+	transform: translate(20%, 0);
+    transition: opacity 0.3s linear, transform 0.3s ease-in;
+}
+
+.cs-page__animation--in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.cs-page__animation--out {
+    opacity: 0;
+    transform: scale(0.6);
+}
+
+
+
+
+
+/*-------------------------------------------*\
+    #CS-PAGE__ANIMATION (SLIDE RIGHT->LEFT)
+\*-------------------------------------------*/
+
+.cs-page__animation-slide {
+    opacity: 0;
+	transform: translate(40px, 0);
+    transition: opacity 0.3s linear, transform 0.3s ease-in;
+}
+
+.cs-page__animation-slide--in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.cs-page__animation-slide--out {
+    opacity: 0;
+    transform: translate(-40px, 0);
+}
+
+
+
+
+
+/*-----------------------------------------*\
+    #CS-PAGE__ANIMATION (SLIDE BOTTOM-UP)
+\*-----------------------------------------*/
+
+.cs-page__animation-slideup {
+    opacity: 0;
+	transform: translate(0, 40px);
+    transition: opacity 0.3s linear, transform 0.3s ease-in;
+}
+
+.cs-page__animation-slideup--in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.cs-page__animation-slideup--out {
+    opacity: 0;
+    transform: translate(0, -40px);
+}
+
+
+
+

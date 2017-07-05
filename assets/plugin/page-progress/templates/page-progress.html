@@ -1,0 +1,8 @@
+<div class="cs-pageprogress" ng-cloak>
+    <div class="cs-pageprogress__number" ng-if="showNumber">
+        <span class="cs-pageprogress__number-item" ng-repeat="n in numbers" ng-style="{left:(numberStep * $index)}" ng-class="{'cs-pagegrogress__number-item--active': (pageIndex >= $index), 'cs-pageprogress__number-item--clickable': enableClick}" ng-click="pageClick({ index: $index })">{{ (pageIndex > $index)? '&#10003;' : n}}</span>
+    </div>
+    <div class="cs-pageprogress__bar">
+        <div class="cs-pageprogress__bar-indicator"></div>
+    </div>
+</div>

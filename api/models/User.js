@@ -44,7 +44,10 @@ module.exports = {
             type: 'integer',
             required: false,
             in: [1,2],
-        }
+        },
+        organization_id : {
+            type: 'integer',
+        },
     },
     formAttr: {
         user_name: {

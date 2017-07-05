@@ -1,0 +1,19 @@
+<div id="content-body"
+    ng-app="homeApp"
+    ng-controller="HomeController"
+>
+    <%include ../customer/customerSearchForm%>
+    <%include ../customer/customerList%>
+</div>
+<script type="text/javascript">
+var homeApp = angular.module('homeApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
+homeApp.controller('HomeController', function( $scope, $http, $filter) {
+    //Khoi tao trang
+    $scope.currentPage = 0;
+});
+$(document).ready( function() {
+    if (!angular.element(document.getElementById('content-body')).scope()) {
+        angular.bootstrap(document.getElementById("content-body"), [ 'homeApp' ]);
+    }
+});
+</script>
