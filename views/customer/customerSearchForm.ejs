@@ -5,7 +5,8 @@
         </strong>
     </div>
     <div class="panel-body">
-        <form id="frmSearch" class="form-horizontal">
+        <form action="/customer/list/" csrf method="post" id="frmSearch" class="form-horizontal">
+            <input type='hidden' name='_csrf' value='<%- _csrf %>'>
             <div class="form-group">
                 <label class="col-sm-4 control-label">
                     <%=__('customer.phoneNumber')%>
@@ -35,7 +36,7 @@
             </div>
             <div class="btn-area">
                 <button type="button" class="btn btn-danger"><%-__('button.back')%></button>
-                <button type="submit" class="btn btn-info"><%-__('button.search')%></button>
+                <button type="submit" onclick="pressSearchListCustomer(); return false;" class="btn btn-info"><%-__('button.search')%></button>
                 <button type="button" class="btn btn-info"><%-__('button.add')%></button>
             </div>
         </form>

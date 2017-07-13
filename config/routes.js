@@ -105,7 +105,7 @@ module.exports.routes = {
           layout: 'layouts/layout'
       }
   },
-  '/customer/getCustomerList': {
+  '/customer/list': {
       controller: 'customer/CustomerController',
       action: 'getCustomerList',
       locals: {

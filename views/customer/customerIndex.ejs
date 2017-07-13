@@ -10,7 +10,7 @@
                 <%-__('customer.customerInfoList')%>
             </strong>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="divListCustomer">
         </div>
     </div>
     
@@ -21,9 +21,16 @@ homeApp.controller('HomeController', function( $scope, $http, $filter) {
     //Khoi tao trang
     $scope.currentPage = 0;
 });
+function pressSearchListCustomer() {
+	var areaId = 'divListCustomer';
+	var actionUrl = '/customer/list';
+	var formData = getFormAsString('frmSearch');
+	d2tUpdateAjax(areaId, actionUrl, formData);
+}
 $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
         angular.bootstrap(document.getElementById("content-body"), [ 'homeApp' ]);
     }
+    pressSearchListCustomer();
 });
 </script>
