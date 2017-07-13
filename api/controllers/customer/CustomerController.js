@@ -8,5 +8,12 @@
 module.exports = {
 	index: function (req, res) {
 		res.view('customer/customerIndex', {});
-	}
+	},
+	getCustomerList: function(req, res) {
+		CustomerDAO.getCustomerList(req, res, function(resultList) {
+			res.view('customer/customerList', 
+				{ 'resultList': resultList }
+			);
+		})
+	},
 }

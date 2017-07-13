@@ -3,7 +3,17 @@
     ng-controller="HomeController"
 >
     <%include ../customer/customerSearchForm%>
-    <%include ../customer/customerList%>
+
+    <div id="divList" class="panel panel-default">
+        <div class="panel-heading">
+            <strong class="h-i">
+                <%-__('customer.customerInfoList')%>
+            </strong>
+        </div>
+        <div class="panel-body">
+        </div>
+    </div>
+    
 </div>
 <script type="text/javascript">
 var homeApp = angular.module('homeApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);

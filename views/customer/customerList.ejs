@@ -1,12 +1,20 @@
-<div id="divList" class="panel panel-default">
-    <div class="panel-heading">
-        <strong class="h-i">
-            <%-__('customer.customerInfoList')%>
-        </strong>
-    </div>
-    <div class="panel-body">
-        <div class="table-responsive">
-            
-        </div>
-    </div>
+<div class="table-responsive">
+    <table>
+        <tr>
+          <th>customer_id</th>
+          <th>phone_number</th>
+          <th>full_name</th>
+          <th>address</th>
+          <th>Roles</th>
+        </tr>
+        <% resultList.forEach(function(customer){ %>
+        <tr>
+          <td><%= customer.customer_id %></td>
+          <td><%= customer.phone_number %></td>
+          <td><%= customer.full_name %></td>
+          <td><%= customer.address %></td>
+          <td><a href="/user/edit/<%= customer.id%>">Edit</a></td>
+        </tr>
+        <% }); %>
+    </table>
 </div>

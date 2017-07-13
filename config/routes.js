@@ -105,4 +105,11 @@ module.exports.routes = {
           layout: 'layouts/layout'
       }
   },
+  '/customer/getCustomerList': {
+      controller: 'customer/CustomerController',
+      action: 'getCustomerList',
+      locals: {
+          layout: null
+      }
+  }
 };

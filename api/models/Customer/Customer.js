@@ -30,7 +30,10 @@ module.exports = {
         },
         address: {
             type: 'string',
-        }
+        },
+        organization_id : {
+            type: 'integer',
+        },
     },
     formAttr: {
         full_name: {
