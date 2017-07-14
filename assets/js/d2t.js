@@ -1,4 +1,28 @@
-TOKEN_NAME = '_csrf';
+function confirmAction() {
+	return confirm(MSG.confirmAction);
+}
+function confirmCollectData() {
+	return confirm(MSG.confirmCollectData);
+}
+function confirmCreate() {
+	return confirm(MSG.confirmCreate);
+}
+function confirmDelete() {
+	return confirm(MSG.confirmDelete);
+}
+function confirmImport() {
+	return confirm(MSG.confirmImport);
+}
+function confirmSave() {
+	return confirm(MSG.confirmSave);
+}
+function confirmSync() {
+	return confirm(MSG.confirmSync);
+}
+function confirmUpdate() {
+	return confirm(MSG.confirmUpdate);
+}
+
 /**
  * Update Ajax.
  * Can loai bo tham so callback.
@@ -10,12 +34,17 @@ TOKEN_NAME = '_csrf';
  */
 function d2tUpdateAjax(areaId, actionUrl, formData, callback) {
     try {
+        var method = "POST";
         d2tInitProgress();
         if ((callback !== null) && (callback !== undefined)) {
-            actionUrl += "&callback=" + callback;
+            if(callback != "GET" && callback != 'POST') {
+                actionUrl += "&callback=" + callback;
+            } else {
+                method = callback;
+            }
         }
         jQuery.ajax({
-            type: "POST",
+            type: method,
             url: actionUrl,
             data: formData,
             cache: false,
@@ -39,7 +68,7 @@ function d2tInitProgress() {
  * An anh loading.
  */
 function d2tResetProgress() {
-    //$("#processer").hide();
+    $("#processer").hide();
 }
 /**
  * Cap nhat token moi nhat.

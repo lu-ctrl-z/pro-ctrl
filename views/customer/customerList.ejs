@@ -4,13 +4,15 @@
           <th class="size-4 alignCenter"><%=__('customer.phoneNumber')%></th>
           <th class="size-6 alignCenter"><%=__('customer.fullName')%></th>
           <th class="size-7 alignCenter"><%=__('customer.address')%></th>
-          <th>Roles</th>
+          <th class="size-5 alignCenter"><%=__('customer.orgName')%></th>
+          <th class="size-5 alignCenter"><%=__('common.action')%></th>
         </tr>
         <% resultList.forEach(function(customer){ %>
         <tr>
           <td class="alignCenter"><%= customer.phone_number %></td>
           <td class="alignLeft"><%= customer.full_name %></td>
           <td class="alignLeft"><%= customer.address %></td>
+          <td class="alignLeft"><%= customer.organization_name %></td>
           <td><a href="/user/edit/<%= customer.id%>">Edit</a></td>
         </tr>
         <% }); %>

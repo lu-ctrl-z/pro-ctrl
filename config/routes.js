@@ -111,5 +111,12 @@ module.exports.routes = {
       locals: {
           layout: null
       }
-  }
+  },
+  'post /customer/save-and-invoice': {
+      controller: 'customer/CustomerController',
+      action: 'saveAndInvoice',
+      locals: {
+          layout: null
+      }
+  },
 };

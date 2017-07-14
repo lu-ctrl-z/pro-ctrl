@@ -2,8 +2,10 @@
     ng-app="homeApp"
     ng-controller="HomeController"
 >
+<div class="cs-page__container" ng-cloak>
     <%include ../customer/customerSearchForm%>
-
+    <%include ../customer/customerForm%>
+</div>
     <div id="divList" class="panel panel-default">
         <div class="panel-heading">
             <strong class="h-i">
@@ -14,23 +16,38 @@
         </div>
     </div>
     
+    <%- include ../common/saveResultDisplay%>
 </div>
 <script type="text/javascript">
 var homeApp = angular.module('homeApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
+
 homeApp.controller('HomeController', function( $scope, $http, $filter) {
+    $scope.CS_PAGE = {
+        SEARCH: 0,
+        FORM: 1,
+        INVOICE: 2,
+    }
     //Khoi tao trang
-    $scope.currentPage = 0;
+    $scope.currentPage = $scope.CS_PAGE.SEARCH;
 });
-function pressSearchListCustomer() {
-	var areaId = 'divListCustomer';
-	var actionUrl = '/customer/list';
-	var formData = getFormAsString('frmSearch');
-	d2tUpdateAjax(areaId, actionUrl, formData);
+function pressSearchButton() {
+    var areaId = 'divListCustomer';
+    var actionUrl = '/customer/list';
+    var formData = getFormAsString('frmSearch');
+    d2tUpdateAjax(areaId, actionUrl, formData, "GET");
+}
+function pressSaveAndInvoice() {
+	if($('#frmSave').validationEngine('validate') && confirmCreate()) {
+		var areaId = 'saveResultDisplayTag';
+	    var actionUrl = '/customer/save-and-invoice';
+	    var formData = getFormAsString('frmSave');
+	    d2tUpdateAjax(areaId, actionUrl, formData, "POST");
+	}
 }
 $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
         angular.bootstrap(document.getElementById("content-body"), [ 'homeApp' ]);
     }
-    pressSearchListCustomer();
+    pressSearchButton();
 });
 </script>

@@ -37,5 +37,8 @@ module.exports.policies = {
     HomeController: {
         '*' : ['authenticate', 'isLogin'],
     },
+    'customer/CustomerController': {
+        '*' : ['authenticate', 'isLogin'],
+    },
     
 };

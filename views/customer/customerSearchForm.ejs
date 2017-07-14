@@ -1,4 +1,4 @@
-<div id="divSearch" class="panel panel-default">
+<div id="divSearch" class="panel panel-default" data-cs-page="0" data-page-index="currentPage">
     <div class="panel-heading">
         <strong class="h-i">
             <%-__('customer.customerSearchInfo')%>
@@ -14,7 +14,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicons glyphicons-earphone" aria-hidden="true"></i></span>
-                      <input type="text" style="z-index:1" name="phoneNumber" class="op-ux-input form-control" id="phoneNumber">
+                      <input type="text" style="z-index:1" name="phoneNumber" class="op-ux-input form-control" id="filterPhoneNumber">
                  </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <%=__('customer.fullName')%>
                 </label>
                 <div class="col-sm-4">
-                    <input type="text" class="op-ux-input form-control" name="fullName">
+                    <input type="text" id="filterFullName" class="op-ux-input form-control" name="fullName">
                 </div>
             </div>
             <div class="form-group">
@@ -31,13 +31,12 @@
                     <%=__('customer.address')%>
                 </label>
                 <div class="col-sm-4">
-                    <textarea class="op-ux-input form-control" name="address"></textarea>
+                    <textarea id="filterAddress" class="op-ux-input form-control" name="address"></textarea>
                 </div>
             </div>
             <div class="btn-area">
-                <button type="button" class="btn btn-danger"><%-__('button.back')%></button>
-                <button type="submit" onclick="pressSearchListCustomer(); return false;" class="btn btn-info"><%-__('button.search')%></button>
-                <button type="button" class="btn btn-info"><%-__('button.add')%></button>
+                <button type="submit" onclick="pressSearchButton(); return false;" class="btn btn-info"><%-__('button.search')%></button>
+                <button type="button" class="btn btn-info" data-ng-click="currentPage=CS_PAGE.FORM"><%-__('button.add')%></button>
             </div>
         </form>
     </div>

@@ -56,6 +56,7 @@ module.exports = {
           ", c.phone_number " +
           ", c.full_name " +
           ", c.address " +
+          ", org1.organization_name " +
           " FROM CUSTOMER c " +
           "    INNER JOIN ORGANIZATION org1 ON org1.organization_id = c.organization_id " +
           "    INNER JOIN ORGANIZATION org2 ON org1.path LIKE CONCAT(org2.path, '%')" +

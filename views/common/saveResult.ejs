@@ -1,0 +1,13 @@
+<div id="saveResultDisplayTag">
+    <script>
+        d2tResetToken('<%=_csrf%>');
+        <logic:present name="returnCode">
+            <logic:present name="message">
+                tctProcessReturnMessage(<bean:write name="returnCode"/>, '<bean:write name="message"/>', '${callback}', '${extraValue}');
+            </logic:present>
+            <logic:notPresent name="message">
+                tctProcessReturnMessage(<bean:write name="returnCode"/>, '', '${callback}', '${extraValue}');
+            </logic:notPresent>
+        </logic:present>
+    </script>
+</div>
