@@ -22,7 +22,40 @@ function confirmSync() {
 function confirmUpdate() {
 	return confirm(MSG.confirmUpdate);
 }
+/**
+ * Xu ly Ajax server tra ve.
+ * @param returnCode Ma tra ve (0 - thanh cong, 1 - that bai)
+ * @param msg Xau thong bao
+ * @param callback Ham Javascript can thuc hien
+ * @param extraValue ID truong loi tren form can focus
+ */
+function d2tProcessReturnMessage(returnCode, msg, callback, extraValue) {
+    try {
+        d2tUpdateMessage(returnCode, msg, extraValue);
+        eval(callback + '(returnCode, extraValue)');
+    } catch (ex) {
+        alert(ex.message);
+    }
+}
+/**
+ * Display success message.
+ * @param returnCode
+ * @param msg
+ * @param extraValue
+ */
+function d2tUpdateMessage(returnCode, msg, extraValue) {
+    if (msg !== "") {
+        if (returnCode === 0) {
+        } else {
+            alert(msg);
 
+            try {
+                $("#" + extraValue).focus();
+            } catch (ex) {
+            }
+        }
+    }
+}
 /**
  * Update Ajax.
  * Can loai bo tham so callback.

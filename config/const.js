@@ -11,7 +11,7 @@ module.exports.const = {
         SAVE_RESULT: "common/saveResult",
     },
     COMMON: {
-        SUCCESS_CODE: 0,
-        ERROR_CODE: 1,
+        SUCCESS_CODE: "0",
+        ERROR_CODE: "1",
     }
 };
