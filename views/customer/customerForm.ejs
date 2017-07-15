@@ -1,4 +1,7 @@
-<div id="divSave" class="panel panel-default" data-cs-page="1" data-page-index="currentPage">
+<%if(typeof customer === 'undefined') {
+    customer = {};
+}%>
+<div class="panel panel-default">
     <div class="panel-heading">
         <strong class="h-i">
             <%-__('customer.customerSaveInfo')%>
@@ -7,6 +10,7 @@
     <div class="panel-body">
         <form id="frmSave" class="form-horizontal">
             <input type='hidden' name='_csrf' value='<%- _csrf %>'>
+            <input type='hidden' name='customerId' value='<%=form_value("customer_id", req, customer)%>'>
             <div class="form-group">
                 <label class="col-sm-4 control-label">
                     <%=__('customer.phoneNumber')%>
@@ -14,7 +18,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicons glyphicons-earphone" aria-hidden="true"></i></span>
-                      <input type="text" style="z-index:1" maxlength="20" name="phoneNumber" class="op-ux-input form-control validate[maxSize[20],custom[phone]]" id="phoneNumber">
+                      <input type="text" style="z-index:1" maxlength="20" value='<%=form_value("phone_number", req, customer)%>' name="phoneNumber" class="op-ux-input form-control validate[maxSize[20],custom[phone]]" id="phoneNumber">
                  </div>
                 </div>
             </div>
@@ -23,7 +27,7 @@
                     <%=__('customer.fullName')%><%-__('common.mandatory')%>
                 </label>
                 <div class="col-sm-4">
-                    <input type="text" maxlength="255" class="op-ux-input form-control validate[required,maxSize[255]]" name="fullName">
+                    <input type="text" maxlength="255" value='<%=form_value("full_name", req, customer)%>' class="op-ux-input form-control validate[required,maxSize[255]]" name="fullName">
                 </div>
             </div>
             <div class="form-group">
@@ -31,12 +35,13 @@
                     <%=__('customer.address')%>
                 </label>
                 <div class="col-sm-4">
-                    <textarea maxlength="255" class="op-ux-input form-control validate[maxSize[255]]" name="address"></textarea>
+                    <textarea maxlength="255" class="op-ux-input form-control validate[maxSize[255]]" name="address"><%=form_value("address", req, customer)%></textarea>
                 </div>
             </div>
             <div class="btn-area">
                 <button type="button" class="btn btn-danger" data-ng-click="currentPage=CS_PAGE.SEARCH"><%-__('button.back')%></button>
-                <button type="submit" class="btn btn-info" onclick="pressSaveAndInvoice();"><%-__('button.saveAndInvoice')%></button>
+                <button type="submit" class="btn btn-info" onclick="pressSaveButton();"><%-__('button.save')%></button>
+                <button type="button" class="btn btn-info" onclick="pressSaveAndInvoice();"><%-__('button.saveAndInvoice')%></button>
             </div>
         </form>
     </div>

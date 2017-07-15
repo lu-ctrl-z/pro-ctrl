@@ -36,6 +36,9 @@ module.exports = {
         },
     },
     formAttr: {
+        customer_id: {
+            form_type: sails.config.const.FORM_TYPE_HIDDEN
+        },
         full_name: {
             form_type: sails.config.const.FORM_TYPE_TEXT
         },

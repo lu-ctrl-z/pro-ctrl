@@ -3,8 +3,12 @@
     ng-controller="HomeController"
 >
 <div class="cs-page__container" ng-cloak>
-    <%include ../customer/customerSearchForm%>
-    <%include ../customer/customerForm%>
+    <div id="divSearch" data-cs-page="0" data-page-index="currentPage">
+        <%include ../customer/customerSearchForm%>
+    </div>
+    <div id="divSave" data-cs-page="1" data-page-index="currentPage">
+        <%include ../customer/customerForm%>
+    </div>
 </div>
     <div id="divList" class="panel panel-default">
         <div class="panel-heading">
@@ -21,7 +25,7 @@
 <script type="text/javascript">
 var homeApp = angular.module('homeApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
 
-homeApp.controller('HomeController', function( $scope, $http, $filter) {
+homeApp.controller('HomeController', function( $scope, $http, $filter, $compile) {
     $scope.CS_PAGE = {
         SEARCH: 0,
         FORM: 1,
@@ -29,6 +33,10 @@ homeApp.controller('HomeController', function( $scope, $http, $filter) {
     }
     //Khoi tao trang
     $scope.currentPage = $scope.CS_PAGE.SEARCH;
+    
+    $scope.compileAreaId = function(areaId) {
+        $compile($('#'+areaId).contents())($scope);
+    }
 });
 function pressSearchButton() {
     if($('#frmSearch').validationEngine('validate')) {
@@ -38,16 +46,55 @@ function pressSearchButton() {
         d2tUpdateAjax(areaId, actionUrl, formData, "GET");
     }
 }
+function pressAddButton() {
+    d2tResetForm('frmSave');
+}
 function pressSaveAndInvoice() {
-    if($('#frmSave').validationEngine('validate') && confirmCreate()) {
+    if($('#frmSave').validationEngine('validate') && confirmSave()) {
         var areaId = 'saveResultDisplayTag';
-        var actionUrl = '/customer/save-and-invoice';
+        var actionUrl = '/customer/save-and-invoice?';
         var formData = getFormAsString('frmSave');
-        d2tUpdateAjax(areaId, actionUrl, formData, "POST");
+        d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSaveAndInvoice");
+    }
+}
+function pressSaveButton() {
+    if($('#frmSave').validationEngine('validate') && confirmSave()) {
+        var areaId = 'saveResultDisplayTag';
+        var actionUrl = '/customer/save-and-invoice?';
+        var formData = getFormAsString('frmSave');
+        d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSave");
+    }
+}
+function pressEditIcon(customerId) {
+    var areaId = 'divSave';
+    var actionUrl = '/customer/edit';
+    d2tDeferredAjax(areaId, actionUrl, "customerId=" + customerId, "GET").done(function() {
+        var $scope = angular.element(document.getElementById('content-body')).scope();
+        $scope.compileAreaId(areaId);
+        $scope.currentPage = $scope.CS_PAGE.FORM;
+        $scope.$apply();
+        setTimeout(function() {
+            d2tScrollTo(areaId);
+        }, 300);
+    });
+}
+function pressDeleteIcon(customerId) {
+    if(confirmDelete()) {
+        var areaId = 'saveResultDisplayTag';
+        var actionUrl = '/customer/delete?';
+        var formData = "customerId=" + customerId + d2tGetToken();
+        d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSave");
     }
 }
 function callbackAfterSaveAndInvoice(returnCode, extraValue) {
     d2tResetForm('frmSave');
+    pressSearchButton();
+}
+function callbackAfterSave(returnCode, extraValue) {
+    d2tResetForm('frmSave');
+    var $scope = angular.element(document.getElementById('content-body')).scope();
+    $scope.currentPage = $scope.CS_PAGE.SEARCH;
+    $scope.$apply();
     pressSearchButton();
 }
 $(document).ready( function() {

@@ -111,6 +111,20 @@ table {
 .spin {
     animation: 2s linear 0s normal none infinite running fa-spin;
 }
+.icon-edit {
+	font-size: 17px;
+	color: #337ab7;
+}
+.icon-delete {
+	font-size: 15px;
+	margin-top: 3px;
+	color: #bc2328;
+}
+.icon-invoice {
+	font-size: 15px;
+	margin-top: 3px;
+	color: #3b5998;
+}
 ._table {
 	display: table;
 }
@@ -135,10 +149,22 @@ table {
 	height: 30px;
 	outline: none;
 }
+.op-ux-icon-table {
+	background-color: transparent;
+	border: 1px solid transparent;
+	cursor: pointer;
+	outline: none;
+	display: inline-block;
+	height: 23px;
+	width: 23px;
+	text-align: center;
+	vertical-align: middle;
+}
 .op-ux-icon > .glyphicons,
 .op-ux-button > .glyphicons {
 	font-size: 15px;
 }
+.op-ux-icon-table:HOVER,
 .op-ux-button:HOVER {
 	border: 1px solid #e8e8e8;
 }
@@ -225,6 +251,12 @@ table {
 }
 .input-group-addon {
 	padding: 5px 11px;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{
+	vertical-align: middle;
+}
+.table td {
+	word-break: break-all;
 }
 .cs-page {
 	position: inherit; 

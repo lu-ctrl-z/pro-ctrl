@@ -38,6 +38,9 @@ module.exports = {
         }
     },
     formAttr: {
+        organization_id: {
+            form_type: sails.config.const.FORM_TYPE_HIDDEN
+        },
         organization_name: {
             form_type: sails.config.const.FORM_TYPE_TEXT
         },

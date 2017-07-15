@@ -68,6 +68,7 @@ function d2tUpdateMessage(returnCode, msg, extraValue) {
 function d2tUpdateAjax(areaId, actionUrl, formData, callback) {
     try {
         var method = "POST";
+        d2tSetTokenByLocalStorage();
         d2tInitProgress();
         if ((callback !== null) && (callback !== undefined)) {
             if(callback != "GET" && callback != 'POST') {
@@ -89,6 +90,39 @@ function d2tUpdateAjax(areaId, actionUrl, formData, callback) {
     } catch (ex) {
         alert(ex.message);
     }
+}
+/**
+ * Update Ajax.
+ * @param areaId ID vung DIV cap nhat
+ * @param actionUrl Xau URL
+ * @param formData Tham so gui len server
+ * @param callback Ham goi khi thuc hien thanh cong
+ * @author
+ * @return deferred call ajax
+ */
+function d2tDeferredAjax(areaId, actionUrl, formData, method) {
+    var dfd = $.Deferred();
+    if(typeof method === 'undefined') method = "POST";
+    try {
+       d2tSetTokenByLocalStorage();
+       d2tInitProgress();
+       dfd = jQuery.ajax({
+            type: method,
+            url: actionUrl,
+            data: formData,
+            cache: false,
+            success: function(html) {
+                d2tResetProgress();
+                jQuery("#" + areaId).html(html);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.error(thrownError);
+            }
+        });
+    } catch (ex) {
+        alert(ex.message);
+    }
+    return dfd;
 }
 /**
  * Hien thi anh loading.
@@ -176,7 +210,7 @@ function d2tResetForm(formId) {
                 case "text":
                 case "password":
                 case "textarea":
-                    //case "hidden":
+                case "hidden":
                 case "file":
                     e.value = "";
                     break;
@@ -200,7 +234,7 @@ function d2tResetForm(formId) {
  * Ham chuan hoa chuoi khi nhap.
  * @param str Xau dau vao
  * @return Xau da duoc cat
- * @author Ta Minh Tuan
+ * @author
  */
 function trim(str) {
     str = str.replace(/^\s\s*/, '');
@@ -209,4 +243,9 @@ function trim(str) {
     while (ws.test(str.charAt(--i)))
         ;
     return str.slice(0, i + 1);
+}
+function d2tScrollTo(areaId) {
+    $("html, body").animate({
+        scrollTop : $('#' + areaId).offset().top - $('#head-height-offset').height()
+    }, 600);
 }

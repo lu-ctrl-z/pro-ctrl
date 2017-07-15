@@ -1,6 +1,7 @@
 module.exports.Constants = {
     PAGE_FORWARD : {
         SAVE_RESULT: "common/saveResult",
+        INVALID_PERMISSION: "common/invalidPermission",
     },
     COMMON: {
         SUCCESS_CODE: 1,

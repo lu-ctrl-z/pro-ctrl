@@ -1,4 +1,4 @@
-<div id="divSearch" class="panel panel-default" data-cs-page="0" data-page-index="currentPage">
+<div class="panel panel-default">
     <div class="panel-heading">
         <strong class="h-i">
             <%-__('customer.customerSearchInfo')%>
@@ -36,7 +36,7 @@
             </div>
             <div class="btn-area">
                 <button type="submit" onclick="pressSearchButton(); return false;" class="btn btn-info"><%-__('button.search')%></button>
-                <button type="button" class="btn btn-info" data-ng-click="currentPage=CS_PAGE.FORM"><%-__('button.add')%></button>
+                <button type="button" class="btn btn-info" onclick="pressAddButton();" data-ng-click="currentPage=CS_PAGE.FORM"><%-__('button.add')%></button>
             </div>
         </form>
     </div>

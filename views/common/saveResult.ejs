@@ -2,7 +2,13 @@
     <script>
         d2tResetToken('<%=_csrf%>');
         <%if(typeof message === 'undefined') { message = ""; }
-          if(typeof callback === 'undefined') { callback = ""; }
+          if(typeof callback === 'undefined') {
+              if(typeof req.param('callback') !== 'undefined') {
+                  callback = req.param('callback'); 
+              } else {
+                  callback = "";
+              }
+          }
           if(typeof extraValue === 'undefined') { extraValue = "";}%>
         <%if(typeof returnCode !== 'undefined') {%>
         d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>');
