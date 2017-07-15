@@ -67,8 +67,12 @@ body {
     padding-left: 0px;
     transition: all 0.35s ease 0s;
 }
+.show-fluid #footer-container,
 .show-fluid #page-container {
     padding-left: 240px;
+}
+#footer-container {
+    transition: all 0.35s ease 0s;
 }
 .fluid-container {
 	border-right: 1px solid #e8e8e8;
@@ -141,6 +145,14 @@ body {
 }
 #top-content {
 	margin: 0 10px;
+}
+#footer-container .footer-content {
+	padding: 10px;
+	background-color: #fff;
+	border-top: 1px solid #e8e8e8;
+}
+#footer-container .footer-content p{
+	margin-bottom: 3px;
 }
 .panel-heading > strong {
 	font-family: arial;

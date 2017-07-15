@@ -12,6 +12,84 @@
     height: 0;
     visibility: hidden;
 }
+.vmiddle {
+	vertical-align: middle; 
+}
+.d2tSoftware {
+	background-color: #bc2328;
+	height: 60px;
+	width: 60px;
+	display: inline-block;
+	color: #fff;
+	border-radius: 50%;
+	position: relative;
+	border: 1px solid transparent;
+	font-family: HelveticaNeueLTStd-Bd,"HelveticaNeueLTStd-Bd","Helvetica Neue",Helvetica,"Arial CE",Arial,sans-serif;
+}
+.d2tSoftware .d2t{
+	display: block;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 6px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 0px 1px #222;
+}
+.d2tSoftware i {
+	line-height: 1em;
+	text-shadow: 0px 1px #222;
+	font-weight: bold;
+}
+.d2tSoftware > .software {
+	display: inline-block;
+	top: 25px;
+	left: 0px;
+    right: 0px;
+    text-align: center;
+	position: absolute;
+}
+/* .d2tSoftware > i.s {
+	left: 4px;
+    top: 23px;
+    transform: rotate(55deg);
+}
+.d2tSoftware > i.o {
+	left: 7px;
+    top: 32px;
+    transform: rotate(40deg);
+}
+.d2tSoftware > i.f {
+	left: 13px;
+    top: 37px;
+    transform: rotate(35deg);
+}
+.d2tSoftware > i.t {
+	left: 18px;
+    top: 41px;
+    transform: rotate(30deg);
+}
+.d2tSoftware > i.w {
+	left: 30px;
+    top: 37px;
+    transform: rotate(35deg);
+}
+.d2tSoftware > i.a {
+	left: 30px;
+    top: 37px;
+    transform: rotate(35deg);
+}
+.d2tSoftware > i.r {
+	left: 30px;
+    top: 37px;
+    transform: rotate(35deg);
+}
+.d2tSoftware > i.e {
+	left: 30px;
+    top: 37px;
+    transform: rotate(35deg);
+} */
 input, textarea, button {
 	font-family: Roboto,arial,sans-serif;
 }

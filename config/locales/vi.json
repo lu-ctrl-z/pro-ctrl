@@ -58,7 +58,7 @@
     ,"Username in correct": "Tên đăng nhập không đúng."
     ,"Keep me login": "Duy trì đăng nhập."
 
-    ,"customer.customerInfo" : "<span class=\"glyphicons glyphicons-calendar\"></span> <span>Thông tin khách hàng</span>"
+    ,"customer.customerInfo" : "<span class=\"glyphicons glyphicons-family\"></span> <span>Thông tin khách hàng</span>"
     ,"customer.customerSearchInfo" : "<span class=\"glyphicons glyphicons-search\"></span> <span>Tìm kiếm thông tin khách hàng</span>"
     ,"customer.customerSaveInfo" : "<span class=\"glyphicons glyphicons-floppy-disk\"></span> <span>Thêm - sửa thông tin khách hàng</span>"
     ,"customer.customerInfoList" : "<span class=\"glyphicons glyphicons-show-big-thumbnails\"></span> <span>Danh sách thông tin khách hàng</span>"
@@ -67,4 +67,5 @@
     ,"customer.address" : "Địa chỉ"
     ,"customer.orgName" : "Cửa hàng/công ty"
     ,"customer.updatedAt" : "<span class='glyphicons glyphicons-clock' title='Thời gian cập nhật cuối cùng'></span>"
+    ,"invoice.invoiceInfo" : "<span class=\"glyphicons glyphicons-notes-2\"></span> <span>Hóa đơn bán hàng</span>"
 }
