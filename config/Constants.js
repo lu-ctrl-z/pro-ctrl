@@ -1,4 +1,11 @@
 module.exports.Constants = {
+    PAGE_FORWARD : {
+        SAVE_RESULT: "common/saveResult",
+    },
+    COMMON: {
+        SUCCESS_CODE: 1,
+        ERROR_CODE: -1,
+    },
     OPTIC_CLASS:    1, // cận/ viễn/ loạn
     OPTIC_KIND: 2,     // mắt 1.56, 1.61 ...
     OPTIC_MAT_CAN: 1,

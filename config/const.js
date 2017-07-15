@@ -7,11 +7,4 @@ module.exports.const = {
     FORM_TYPE_HIDDEN:     6,
     FORM_TYPE_PASSWORD:   7,
 
-    PAGE_FORWARD : {
-        SAVE_RESULT: "common/saveResult",
-    },
-    COMMON: {
-        SUCCESS_CODE: "0",
-        ERROR_CODE: "1",
-    }
 };

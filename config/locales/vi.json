@@ -7,7 +7,6 @@
     ,"button.save" :             "<span class=\"glyphicons glyphicons-plus\"></span> Lưu lại"
     ,"button.saveAndInvoice" :   "<span class=\"glyphicons glyphicons-plus\"></span> Lưu và tạo hóa đơn hàng"
     ,"button.invoice" :          "<span class=\"glyphicons glyphicons-plus\"></span> Tạo hóa đơn hàng"
-    ,"common.action" :           "Thao tác"
     ,"common.mandatory" :        "<font style=\"color:red; font-size:12px;\">*</font>"
     ,"MSG.confirmAction":        "Bạn có thực sự muốn thực hiện thao tác?"
     ,"MSG.confirmCollectData":   "Bạn có muốn tổng hợp dữ liệu?"
@@ -17,6 +16,11 @@
     ,"MSG.confirmSave":          "Bạn có muốn lưu các thay đổi?"
     ,"MSG.confirmSync":          "Bạn có muốn đồng bộ dữ liệu?"
     ,"MSG.confirmUpdate":        "Bạn có thực sự muốn thực hiện cập nhật dữ liệu?"
+    ,"global.stt":               "STT"
+    ,"global.action":            "action"
+    ,"global.success":           "Thực hiện thao tác thành công"
+    ,"global.error":             "Có lỗi xảy ra"
+    ,"global.lastUpdated":       "Thời gian cập nhật cuối lúc"
   
     ,"user.user_name.required": "Tên đăng nhập chưa đúng"
     ,"user.user_name.unique": "Tên đăng nhập đã có"
@@ -57,4 +61,5 @@
     ,"customer.fullName" : "Tên"
     ,"customer.address" : "Địa chỉ"
     ,"customer.orgName" : "Cửa hàng/công ty"
+    ,"customer.updatedAt" : "<span class='glyphicons glyphicons-clock' title='Thời gian cập nhật cuối cùng'></span>"
 }

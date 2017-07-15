@@ -1,18 +1,23 @@
 <div class="table-responsive">
     <table class="table table-striped table-bordered ">
         <tr>
+          <th class="size-1 alignCenter"><%=__('global.stt')%></th>
           <th class="size-4 alignCenter"><%=__('customer.phoneNumber')%></th>
           <th class="size-6 alignCenter"><%=__('customer.fullName')%></th>
           <th class="size-7 alignCenter"><%=__('customer.address')%></th>
           <th class="size-5 alignCenter"><%=__('customer.orgName')%></th>
-          <th class="size-5 alignCenter"><%=__('common.action')%></th>
+          <th class="size-5 alignCenter"><%-__('customer.updatedAt')%></th>
+          <th class="size-5 alignCenter"><%=__('global.action')%></th>
         </tr>
+        <% var i = 1; %>
         <% resultList.forEach(function(customer){ %>
         <tr>
+          <td class="alignCenter"><%= i++ %></td>
           <td class="alignCenter"><%= customer.phone_number %></td>
           <td class="alignLeft"><%= customer.full_name %></td>
           <td class="alignLeft"><%= customer.address %></td>
           <td class="alignLeft"><%= customer.organization_name %></td>
+          <td class="alignCenter"><span title="<%-__('global.lastUpdated')%> <%= sails.moment(customer.updatedAt).format('YYYY/MM/DD HH:MM') %>"><%= sails.moment(customer.updatedAt).fromNow() %></span></td>
           <td><a href="/user/edit/<%= customer.id%>">Edit</a></td>
         </tr>
         <% }); %>

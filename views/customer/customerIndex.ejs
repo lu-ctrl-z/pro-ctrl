@@ -31,18 +31,24 @@ homeApp.controller('HomeController', function( $scope, $http, $filter) {
     $scope.currentPage = $scope.CS_PAGE.SEARCH;
 });
 function pressSearchButton() {
-    var areaId = 'divListCustomer';
-    var actionUrl = '/customer/list';
-    var formData = getFormAsString('frmSearch');
-    d2tUpdateAjax(areaId, actionUrl, formData, "GET");
+    if($('#frmSearch').validationEngine('validate')) {
+        var areaId = 'divListCustomer';
+        var actionUrl = '/customer/list';
+        var formData = getFormAsString('frmSearch');
+        d2tUpdateAjax(areaId, actionUrl, formData, "GET");
+    }
 }
 function pressSaveAndInvoice() {
-	if($('#frmSave').validationEngine('validate') && confirmCreate()) {
-		var areaId = 'saveResultDisplayTag';
-	    var actionUrl = '/customer/save-and-invoice';
-	    var formData = getFormAsString('frmSave');
-	    d2tUpdateAjax(areaId, actionUrl, formData, "POST");
-	}
+    if($('#frmSave').validationEngine('validate') && confirmCreate()) {
+        var areaId = 'saveResultDisplayTag';
+        var actionUrl = '/customer/save-and-invoice';
+        var formData = getFormAsString('frmSave');
+        d2tUpdateAjax(areaId, actionUrl, formData, "POST");
+    }
+}
+function callbackAfterSaveAndInvoice(returnCode, extraValue) {
+    d2tResetForm('frmSave');
+    pressSearchButton();
 }
 $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {

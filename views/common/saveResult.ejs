@@ -1,6 +1,11 @@
 <div id="saveResultDisplayTag">
     <script>
         d2tResetToken('<%=_csrf%>');
-        tctProcessReturnMessage('<%=returnCode || ""%>', '<%=message || ""%>', '<%=callback || ""%>', '<%=extraValue || ""%>');
+        <%if(typeof message === 'undefined') { message = ""; }
+          if(typeof callback === 'undefined') { callback = ""; }
+          if(typeof extraValue === 'undefined') { extraValue = "";}%>
+        <%if(typeof returnCode !== 'undefined') {%>
+        d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>');
+        <%}%>
     </script>
 </div>

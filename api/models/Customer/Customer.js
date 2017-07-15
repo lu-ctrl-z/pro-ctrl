@@ -57,25 +57,28 @@ module.exports = {
           ", c.full_name " +
           ", c.address " +
           ", org1.organization_name " +
+          ", c.updatedAt " +
           " FROM CUSTOMER c " +
           "    INNER JOIN ORGANIZATION org1 ON org1.organization_id = c.organization_id " +
           "    INNER JOIN ORGANIZATION org2 ON org1.path LIKE CONCAT(org2.path, '%')" +
           "    INNER JOIN M_USERS u ON u.organization_id = org2.organization_id " +
           " WHERE " +
           "    u.id = ? ";
+          
         paramList.push(req.session.user['id']);
-        if(req.param('phoneNumber')) {
+        if(!CommonUtils.isNullOrEmpty(req.param('phoneNumber'))) {
             sql += " AND c.phone_number LIKE ? ";
             paramList.push(req.param('phoneNumber') + '%');
         }
-        if(req.param('fullName')) {
+        if(!CommonUtils.isNullOrEmpty(req.param('fullName'))) {
             sql += " AND c.full_name LIKE ? ";
             paramList.push('%' + req.param('fullName') + '%');
         }
-        if(req.param('address')) {
+        if(!CommonUtils.isNullOrEmpty(req.param('address'))) {
             sql += " AND c.address LIKE ? ";
             paramList.push('%' + req.param('address') + '%');
         }
+        sql += " ORDER BY c.updatedAt DESC ";
         Customer.query(sql, paramList ,function(err, resultList) {
             if (err) { return res.serverError(err); }
             callback(resultList);

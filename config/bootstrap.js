@@ -11,6 +11,11 @@
 
 module.exports.bootstrap = function(cb) {
   sails.moment = require('moment');
+  sails.moment.locale('vi');
+  //#003: Tao bien config 
+  CONFIG = sails.config;
+  Constants = sails.config.Constants;
+  //#033: End
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();

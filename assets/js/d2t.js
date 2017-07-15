@@ -34,7 +34,7 @@ function d2tProcessReturnMessage(returnCode, msg, callback, extraValue) {
         d2tUpdateMessage(returnCode, msg, extraValue);
         eval(callback + '(returnCode, extraValue)');
     } catch (ex) {
-        alert(ex.message);
+        console.error(ex.message);
     }
 }
 /**
@@ -45,10 +45,10 @@ function d2tProcessReturnMessage(returnCode, msg, callback, extraValue) {
  */
 function d2tUpdateMessage(returnCode, msg, extraValue) {
     if (msg !== "") {
-        if (returnCode === 0) {
+        if (returnCode === "-1") {
+            toastr["warning"](msg)
         } else {
-            alert(msg);
-
+            toastr["success"](msg)
             try {
                 $("#" + extraValue).focus();
             } catch (ex) {
@@ -160,4 +160,53 @@ function d2tSetTokenByLocalStorage() {
     } catch (ex) {
         alert(ex.message);
     }
+}
+/**
+ * Reset form bang Javascript.
+ * Khong reset truong hidden, vi truong hidden thuong la truong de cau hinh.
+ */
+function d2tResetForm(formId) {
+    var formObject = document.getElementById(formId);
+    var formElements = formObject.elements;
+    for (var i = 0; i < formElements.length; i++) {
+        var e = formElements[i];
+        if (e.type !== undefined) {
+            var fieldType = e.type.toLowerCase();
+            switch (fieldType) {
+                case "text":
+                case "password":
+                case "textarea":
+                    //case "hidden":
+                case "file":
+                    e.value = "";
+                    break;
+                case "radio":
+                case "checkbox":
+                    if (e.checked) {
+                        e.checked = false;
+                    }
+                    break;
+                case "select-one":
+                case "select-multi":
+                    e.selectedIndex = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+/**
+ * Ham chuan hoa chuoi khi nhap.
+ * @param str Xau dau vao
+ * @return Xau da duoc cat
+ * @author Ta Minh Tuan
+ */
+function trim(str) {
+    str = str.replace(/^\s\s*/, '');
+    var ws = /\s/,
+            i = str.length;
+    while (ws.test(str.charAt(--i)))
+        ;
+    return str.slice(0, i + 1);
 }
