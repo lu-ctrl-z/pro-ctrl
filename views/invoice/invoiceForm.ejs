@@ -5,9 +5,9 @@
     ng-app="invoiceApp"
     ng-controller="InvoiceController"
 >
-    <div class="btn-area hideOnPrint invoiceWrapper">
-        <button onclick="pressSaveButton();" class="btn btn-info" type="submit"><span class="glyphicons glyphicons-floppy-disk"></span> Ghi lại</button>
-        <button onclick="pressSaveAndInvoice();" class="btn btn-info" type="button"><span class="glyphicons glyphicons-disk-saved"></span> Lưu và tạo hóa đơn hàng</button>
+    <div class="btn-area btn-right-area hideOnPrint invoiceWrapper">
+        <button type="button" onclick="pressBackButton();" class="btn btn-danger cmd-shortcut-form" data-form-shortcut-key="ESC"><%-__('button.back')%> (ESC)</button>
+        <button onclick="pressExportInvoice();" class="btn btn-info cmd-shortcut-form" type="button" data-form-shortcut-key="Ctrl+L"><%-__('button.exportInvoice')%> (Ctrl+L)</button>
     </div>
     <div class="invoice">
         <table class="invoice-head">
@@ -99,7 +99,7 @@
             <tr class="rows" ng-repeat="cart in cartList">
                 <td align="center">{{cart.stt}}</td>
                 <td>
-                    <input type="text" title="{{cart.productName}}" data-ng-model="cart.productName" name="productName" class="opacity textarea hideOnPrint" />
+                    <input type="text" autofocus="autofocus" title="{{cart.productName}}" data-ng-model="cart.productName" name="productName" class="opacity textarea hideOnPrint" />
                     <b class="showOnPrint">{{cart.productName}}</b>
                 </td>
                 <td>
@@ -192,4 +192,11 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
              return (input)? input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
      };
 }]);
+function pressBackButton() {
+    window.close();
+}
+function pressExportInvoice() {
+    window.print();
+    window.close();
+}
 </script>

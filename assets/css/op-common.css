@@ -218,6 +218,7 @@ table {
 }
 .money {
 	text-align: right;
+	padding-right: 5px;
 }
 .panel {
 	margin-bottom: 10px;

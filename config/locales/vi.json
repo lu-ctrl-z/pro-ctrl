@@ -1,6 +1,6 @@
 {
     "null": ""
-    ,"config.invoiceFormatPopup":"location=yes,height=882,width=635,scrollbars=yes,status=yes"
+    ,"config.invoiceFormatPopup":"location=yes,fullscreen=yes,scrollbars=yes,status=yes"
     ,"button.next" :             "Tiếp tục <span class=\"glyphicons glyphicons-arrow-right\"></span>"
     ,"button.back" :             "<span class=\"glyphicons glyphicons-arrow-left\"></span> Quay lại"
     ,"button.search" :           "<span class=\"glyphicons glyphicons-search\"></span> Tìm kiếm"
@@ -8,6 +8,7 @@
     ,"button.save" :             "<span class=\"glyphicons glyphicons-floppy-disk\"></span> Ghi lại"
     ,"button.saveAndInvoice" :   "<span class=\"glyphicons glyphicons-disk-saved\"></span> Lưu và tạo hóa đơn hàng"
     ,"button.invoice" :          "<span class=\"glyphicons glyphicons-plus\"></span> Tạo hóa đơn hàng"
+    ,"button.exportInvoice" :    "<span class=\"glyphicons glyphicons-inbox-out\"></span> Xuất hóa đơn"
     ,"common.mandatory" :        "<font style=\"color:red; font-size:12px;\">*</font>"
     ,"common.edit" :             "<span title='Sửa' class='icon-edit glyphicons glyphicons-edit'></span>"
     ,"common.invoice" :          "<span title='Thêm hóa đơn hàng' class='icon-invoice glyphicons glyphicons-file-plus'></span>"

@@ -16,6 +16,12 @@
 	position: relative;
     margin: 0 auto;
 }
+.btn-right-area {
+	text-align: right;
+}
+.btn-right-area > button:LAST-CHILD {
+	margin-right: 0px;
+}
 .invoice-head {
 	width: 100%;
 	font-size: 13px;
@@ -80,6 +86,9 @@ hr.border {
 	background-color: rgba(59, 89, 152, 0.05);
 	resize: none;
 	height: 20px;
+}
+.invoice .opacity:FOCUS {
+	background-color: rgba(59, 89, 152, 0.3);
 }
 .table-detail {
 	width: 100%;

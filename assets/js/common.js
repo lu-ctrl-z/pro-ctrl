@@ -28,3 +28,19 @@ etCookie.setCookie = function(name, value) {
 etCookie.removeCookie = function(name) {
     document.cookie = encodeURIComponent(name) + "=deleted; expires=" + new Date(0).toUTCString();
 };
+
+function initShortCutByAreaId(areaId) {
+    $('#' + areaId + ' .cmd-shortcut-form').each(function() {
+        var $this = $(this);
+        shortcut.add($this.attr('data-form-shortcut-key'), function(event) {
+            if($this.is(":visible")) {
+                if($this.attr('onclick')) {
+                    $this.trigger('click');
+                } else if($this.attr('href')){
+                    location.href = $this.attr('href');
+                }
+            }
+            return false;
+        } , {propagate: false} );
+    });
+}
