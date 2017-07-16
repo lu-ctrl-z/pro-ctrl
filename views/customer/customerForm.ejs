@@ -35,7 +35,7 @@
                     <%=__('customer.address')%>
                 </label>
                 <div class="col-sm-4">
-                    <textarea maxlength="255" class="op-ux-input form-control validate[maxSize[255]]" name="address"><%=form_value("address", req, customer)%></textarea>
+                    <textarea maxlength="255" id="address" class="op-ux-input form-control validate[maxSize[255]]" name="address"><%=form_value("address", req, customer)%></textarea>
                 </div>
             </div>
             <div class="btn-area">
@@ -46,3 +46,8 @@
         </form>
     </div>
 </div>
+<script>
+$(function() {
+    autosize(document.getElementById('address'));
+})
+</script>

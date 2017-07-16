@@ -1,318 +1,195 @@
 <%if(typeof customer === 'undefined') {
     customer = {};
 }%>
-<div class="invoice">
-    <table class="invoice-head">
-        <tr>
-            <th>Đơn vị bán hàng</th>
-            <td class="uc" colspan="3">: <strong>CÔNG TY TNHH DỊCH VỤ THƯƠNG MẠI</strong></td>
-        </tr>
-        <tr>
-            <th>Mã số thuế</th>
-            <td colspan="3">:</td>
-        </tr>
-        <tr>
-            <th>Địa chỉ</th>
-            <td colspan="3">: 196/ Đường Phạm Ngọc Thạch - Hà Nội.</td>
-        </tr>
-        <tr>
-            <th>Điện thoại</th>
-            <td class="tdic">: 0984.330.249 <hr class="bbottom"/></td>
-            <th style="width: 75px;">&nbsp;&nbsp;Fax:</th>
-            <td class="tdic">&nbsp;0984.330.249<hr class="bbottom"/></td>
-        </tr>
-        <tr>
-            <th>Số tài khoản</th>
-            <td class="tdic">: <hr class="bbottom"/></td>
-            <th style="width: 75px;">&nbsp;&nbsp;Ngân hàng:</th>
-            <td class="tdic">&nbsp;<hr class="bbottom"/></td>
-        </tr>
-    </table>
-    <hr class="border"/>
-    <div class="invoice-descript">
-        <h4>BIÊN NHẬN - BẢO HÀNH</h4>
-        <div>Liên 2: Giao cho người mua</div>
-        <div><i>Ngày 16 tháng 07 năm 2017</i></div>
-        <div class="version">
-            <p>Mẫu số: <b>01GTKT3/001</b></p>
-            <p>Ký hiệu: <b>KL/13P</b></p>
-            <p>Số: <b>00000000</b></p>
-        </div>
+<div id="invoice-body"
+    ng-app="invoiceApp"
+    ng-controller="InvoiceController"
+>
+    <div class="btn-area hideOnPrint invoiceWrapper">
+        <button onclick="pressSaveButton();" class="btn btn-info" type="submit"><span class="glyphicons glyphicons-floppy-disk"></span> Ghi lại</button>
+        <button onclick="pressSaveAndInvoice();" class="btn btn-info" type="button"><span class="glyphicons glyphicons-disk-saved"></span> Lưu và tạo hóa đơn hàng</button>
     </div>
-    <table class="invoice-mid">
-        <tr>
-            <th>Họ tên người mua hàng:</th>
-            <td>
-                <input type="text" value="Nguyễn Văn A" name="fullName" class="opacity" />
-                <hr class="bbottom"/>
-            </td>
-        </tr>
-    </table>
-    <table class="invoice-mid">
-        <tr>
-            <th>Địa chỉ:</th>
-            <td>
-                <input type="text" value="Nguyễn Văn A" name="fullName" class="opacity" />
-                <hr class="bbottom"/>
-            </td>
-        </tr>
-    </table>
-    <table class="invoice-mid">
-        <tr>
-            <th>Hình thức thanh toán:</th>
-            <td style="width: 35%;">
-                <input type="text" value="Tiền mặt" name="fullName" class="opacity" />
-                <hr class="bbottom"/>
-            </td>
-            <th>Số tài khoản:</th>
-            <td style="width: 35%;">
-                <input type="text" value="" name="fullName" class="opacity" />
-                <hr class="bbottom"/>
-            </td>
-        </tr>
-    </table>
-    <table class="table-detail">
-        <tr>
-            <th>STT</th>
-            <th>Tên hàng hóa, dịch vụ</th>
-            <th>Đơn vị tính</th>
-            <th>Số lượng</th>
-            <th>Đơn giá</th>
-            <th>Thành tiền</th>
-        </tr>
-        <tr class="mark">
-            <th>(1)</th>
-            <th>(2)</th>
-            <th>(3)</th>
-            <th>(4)</th>
-            <th>(5)</th>
-            <th>(6) = (4) x (5)</th>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td></td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td colspan="5" align="right">Cộng tiền hàng:</td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td colspan="5" align="right">Chiết khấu:</td>
-            <td>
-                <input type="text" value="0" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows">
-            <td colspan="5" align="right">Tổng cộng tiền thanh toán:</td>
-            <td>
-                <input type="text" value="" name="fullName" class="opacity" />
-            </td>
-        </tr>
-        <tr class="rows rowsLast">
-            <td colspan="6">Số tiền viết bằng chữ: </td>
-        </tr>
-    </table>
-    <table class="invoice-bottom" style="margin-top:5px;">
-        <tr>
-            <td align="center"><b>Người mua hàng</b> <br /> (Ký và ghi rõ họ tên)</td>
-            <th></th>
-            <td align="center"><b>Người bán hàng</b> <br /> (Ký, đóng dấu và ghi rõ họ tên)</td>
-        </tr>
-    </table>
+    <div class="invoice">
+        <table class="invoice-head">
+            <tr>
+                <th>Đơn vị bán hàng</th>
+                <td class="uc" colspan="3">: <strong>CÔNG TY TNHH DỊCH VỤ THƯƠNG MẠI</strong></td>
+            </tr>
+            <tr>
+                <th>Mã số thuế</th>
+                <td colspan="3">:</td>
+            </tr>
+            <tr>
+                <th>Địa chỉ</th>
+                <td colspan="3">: 196/ Đường Phạm Ngọc Thạch - Hà Nội.</td>
+            </tr>
+            <tr>
+                <th>Điện thoại</th>
+                <td class="tdic">: 0984.330.249 <hr class="bbottom"/></td>
+                <th style="width: 75px;">&nbsp;&nbsp;Fax:</th>
+                <td class="tdic">&nbsp;0984.330.249<hr class="bbottom"/></td>
+            </tr>
+            <tr>
+                <th>Số tài khoản</th>
+                <td class="tdic">: <hr class="bbottom"/></td>
+                <th style="width: 75px;">&nbsp;&nbsp;Ngân hàng:</th>
+                <td class="tdic">&nbsp;<hr class="bbottom"/></td>
+            </tr>
+        </table>
+        <hr class="border"/>
+        <div class="invoice-descript">
+            <h4>BIÊN NHẬN - BẢO HÀNH</h4>
+            <div>Liên 2: Giao cho người mua</div>
+            <div><i>Ngày 16 tháng 07 năm 2017</i></div>
+            <div class="version">
+                <p>Mẫu số: <b>01GTKT3/001</b></p>
+                <p>Ký hiệu: <b>KL/13P</b></p>
+                <p>Số: <b>00000000</b></p>
+            </div>
+        </div>
+        <table class="invoice-mid">
+            <tr>
+                <th>Họ tên người mua hàng:</th>
+                <td>
+                    <input type="text" ng-model="customer.full_name" name="fullName" class="opacity" />
+                    <hr class="bbottom"/>
+                </td>
+            </tr>
+        </table>
+        <table class="invoice-mid">
+            <tr>
+                <th>Địa chỉ:</th>
+                <td>
+                    <input type="text" ng-model="customer.address" name="address" class="opacity" />
+                    <hr class="bbottom"/>
+                </td>
+            </tr>
+        </table>
+        <table class="invoice-mid">
+            <tr>
+                <th>Hình thức thanh toán:</th>
+                <td style="width: 35%;">
+                    <input type="text" value="Tiền mặt" name="fullName" class="opacity" />
+                    <hr class="bbottom"/>
+                </td>
+                <th>Số tài khoản:</th>
+                <td style="width: 35%;">
+                    <input type="text" value="" name="fullName" class="opacity" />
+                    <hr class="bbottom"/>
+                </td>
+            </tr>
+        </table>
+        <table class="table-detail">
+            <tr>
+                <th>STT</th>
+                <th>Tên hàng hóa, dịch vụ</th>
+                <th>Đơn vị tính</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+            <tr class="mark">
+                <th>(1)</th>
+                <th>(2)</th>
+                <th>(3)</th>
+                <th>(4)</th>
+                <th>(5)</th>
+                <th>(6) = (4) x (5)</th>
+            </tr>
+            <tr class="rows" ng-repeat="cart in cartList">
+                <td align="center">{{cart.stt}}</td>
+                <td>
+                    <input type="text" title="{{cart.productName}}" data-ng-model="cart.productName" name="productName" class="opacity textarea hideOnPrint" />
+                    <b class="showOnPrint">{{cart.productName}}</b>
+                </td>
+                <td>
+                    <input type="text" data-ng-model="cart.unitName" name="unitName" class="opacity alignCenter" />
+                </td>
+                <td>
+                    <input type="text" data-ng-model="cart.number" ui-number-mask="0" name="number" class="opacity money" />
+                </td>
+                <td>
+                    <input type="text" data-ng-model="cart.unitPrice" ui-number-mask="0" name="unitPrice" class="opacity money" />
+                </td>
+                <td align="right">
+                   <b>{{intoMoney(cart) | number2Decimal}}</b>
+                </td>
+            </tr>
+            <tr class="rows">
+                <td colspan="5" align="right">Cộng tiền hàng:</td>
+                <td align="right">
+                   <b>{{totalMoney() | number2Decimal}}</b>
+                </td>
+            </tr>
+            <tr class="rows">
+                <td colspan="5" align="right">Chiết khấu:</td>
+                <td>
+                    <input type="text" ui-number-mask="0" ng-model="totalDiscount" name="totalDiscount" class="opacity money" />
+                </td>
+            </tr>
+            <tr class="rows">
+                <td colspan="5" align="right">Tổng cộng tiền thanh toán:</td>
+                <td align="right">
+                   <b>{{totalPayMoney() | number2Decimal}}</b>
+                </td>
+            </tr>
+            <tr class="rows rowsLast">
+                <td colspan="6">Số tiền viết bằng chữ: </td>
+            </tr>
+        </table>
+        <table class="invoice-bottom" style="margin-top:5px;">
+            <tr>
+                <td align="center"><b>Người mua hàng</b> <br /> (Ký và ghi rõ họ tên)</td>
+                <th></th>
+                <td align="center"><b>Người bán hàng</b> <br /> (Ký, đóng dấu và ghi rõ họ tên)</td>
+            </tr>
+        </table>
+    </div>
 </div>
+<script type="text/javascript">
+var invoiceApp = angular.module('invoiceApp', ['ngAnimate', 'ngSanitize', 'ui.utils.masks' ]);
+invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $compile) {
+    $scope.customer = <%-JSON.stringify(customer)%>;
+    $scope.cartList = [];
+    var numberOfRow = 10;
+    for(var i = 1; i <= numberOfRow; i++) {
+        var cartItem = {stt: i};
+        $scope.cartList.push(cartItem);
+    }
+    $scope.intoMoney = function(cart) {
+        try {
+            if(cart.number && cart.unitPrice) {
+                return parseFloat(cart.number) * parseFloat(cart.unitPrice);
+            }
+            return "";
+        } catch(e) {
+            console.log(e)
+            return "";
+        }
+        return "";
+    }
+    $scope.totalMoney = function() {
+        var total = 0;
+        for(var i = 0; i < $scope.cartList.length; i++) {
+            var cart = $scope.cartList[i];
+            if(cart.number && cart.unitPrice) {
+                total += parseFloat(cart.number) * parseFloat(cart.unitPrice);
+            }
+        }
+        return total;
+    }
+    $scope.totalPayMoney = function() {
+        var total = $scope.totalMoney();
+        if($scope.totalDiscount) {
+            total -= parseFloat($scope.totalDiscount);
+        }
+        return total;
+    }
+    
+}).filter('number2Decimal', [
+     function() { // should be altered to suit your needs
+         return function(input) {
+             return (input)? input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
+     };
+}]);
+</script>

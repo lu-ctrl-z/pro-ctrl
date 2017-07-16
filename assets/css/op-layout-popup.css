@@ -3,11 +3,18 @@
     background-color: #fff;
 }
 .invoice {
-	min-height: 842px;
+	min-height: 802px;
 	width: 595px;
 	border: solid 2px #bbb;
-	margin-bottom: 20px;
 	padding: 15px;
+	position: relative;
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+.invoiceWrapper {
+	width: 595px;
+	position: relative;
+    margin: 0 auto;
 }
 .invoice-head {
 	width: 100%;
@@ -70,6 +77,9 @@ hr.border {
 	font-family: Helvetica,Arial,sans-serif;
 	padding-left: 5px;
 	font-weight: bold;
+	background-color: rgba(59, 89, 152, 0.05);
+	resize: none;
+	height: 20px;
 }
 .table-detail {
 	width: 100%;
@@ -100,4 +110,20 @@ hr.border {
 }
 .invoice-bottom{
 	width: 100%;
+}
+.showOnPrint {
+	display: none;
+}
+@media print {
+    @page { margin: 0; }
+    .invoice {
+	    border: none;
+	    margin-bottom: 0px;
+    }
+    .showOnPrint {
+        display: block;
+    }
+    .hideOnPrint {
+        display: none;
+    }
 }

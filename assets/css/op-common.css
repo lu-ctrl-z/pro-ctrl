@@ -216,6 +216,9 @@ table {
 ._table .free-col {
 	width: 100%;
 }
+.money {
+	text-align: right;
+}
 .panel {
 	margin-bottom: 10px;
 }
