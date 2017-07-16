@@ -7,7 +7,7 @@
           <th class="size-7 alignCenter"><%=__('customer.address')%></th>
           <th class="size-7 alignCenter"><%=__('customer.orgName')%></th>
           <th class="size-5 alignCenter"><%-__('customer.updatedAt')%></th>
-          <th class="size-3 alignCenter"><%=__('global.action')%></th>
+          <th class="size-4 alignCenter"><%=__('global.action')%></th>
         </tr>
         <% var i = 1; %>
         <% resultList.forEach(function(customer){ %>
@@ -19,8 +19,9 @@
           <td class="alignLeft"><%= customer.organization_name %></td>
           <td class="alignCenter"><span title="<%-__('global.lastUpdated')%> <%= sails.moment(customer.updatedAt).format('YYYY/MM/DD HH:MM') %>"><%= sails.moment(customer.updatedAt).fromNow() %></span></td>
           <td>
+              <a class="op-ux-icon-table" onclick="pressDetailIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.view')%></a>
               <a class="op-ux-icon-table" onclick="pressEditIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.edit')%></a>
-              <a class="op-ux-icon-table" onclick="pressInvoiceIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.invoice')%></a>
+              <a class="op-ux-icon-table" onclick="window.open('/invoice/form/?customerId=<%=customer.customer_id%>', '_blank', '<%=__("config.invoiceFormatPopup")%>');" href="javascript:void(0);"><%-__('common.invoice')%></a>
               <a class="op-ux-icon-table" onclick="pressDeleteIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.delete')%></a>
           </td>
         </tr>

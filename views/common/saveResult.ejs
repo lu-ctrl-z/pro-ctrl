@@ -4,7 +4,7 @@
         <%if(typeof message === 'undefined') { message = ""; }
           if(typeof callback === 'undefined') {
               if(typeof req.param('callback') !== 'undefined') {
-                  callback = req.param('callback'); 
+                  callback = req.param('callback');
               } else {
                   callback = "";
               }

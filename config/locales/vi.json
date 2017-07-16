@@ -1,5 +1,6 @@
 {
     "null": ""
+    ,"config.invoiceFormatPopup":"location=yes,height=882,width=635,scrollbars=yes,status=yes"
     ,"button.next" :             "Tiếp tục <span class=\"glyphicons glyphicons-arrow-right\"></span>"
     ,"button.back" :             "<span class=\"glyphicons glyphicons-arrow-left\"></span> Quay lại"
     ,"button.search" :           "<span class=\"glyphicons glyphicons-search\"></span> Tìm kiếm"
@@ -11,6 +12,7 @@
     ,"common.edit" :             "<span title='Sửa' class='icon-edit glyphicons glyphicons-edit'></span>"
     ,"common.invoice" :          "<span title='Thêm hóa đơn hàng' class='icon-invoice glyphicons glyphicons-file-plus'></span>"
     ,"common.delete" :           "<span title='Xóa' class='icon-delete glyphicons glyphicons-bin'></span>"
+    ,"common.view" :             "<span title='Chi tiết' class='icon-view glyphicons glyphicons-eye-open'></span>"
     ,"common.invalidPermission": "Lỗi phân quyền: \\n- Có thể bạn chưa được phân quyền chức năng này \\n- Hoặc bạn không được phân quyền với miền dữ liệu này!"
     ,"MSG.confirmAction":        "Bạn có thực sự muốn thực hiện thao tác?"
     ,"MSG.confirmCollectData":   "Bạn có muốn tổng hợp dữ liệu?"
@@ -68,4 +70,5 @@
     ,"customer.orgName" : "Cửa hàng/công ty"
     ,"customer.updatedAt" : "<span class='glyphicons glyphicons-clock' title='Thời gian cập nhật cuối cùng'></span>"
     ,"invoice.invoiceInfo" : "<span class=\"glyphicons glyphicons-notes-2\"></span> <span>Hóa đơn bán hàng</span>"
+    ,"invoice.name" : "Hóa đơn khách hàng:"
 }

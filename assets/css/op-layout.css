@@ -73,6 +73,7 @@ body {
 }
 #footer-container {
     transition: all 0.35s ease 0s;
+    margin-top: 20px;
 }
 .fluid-container {
 	border-right: 1px solid #e8e8e8;

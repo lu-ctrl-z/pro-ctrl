@@ -86,9 +86,18 @@ function pressDeleteIcon(customerId) {
         d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSave");
     }
 }
+function pressInvoiceIcon(customerId) {
+    if(confirmDelete()) {
+        var areaId = 'saveResultDisplayTag';
+        var actionUrl = '/customer/delete?';
+        var formData = "customerId=" + customerId + d2tGetToken();
+        d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSave");
+    }
+}
 function callbackAfterSaveAndInvoice(returnCode, extraValue) {
     d2tResetForm('frmSave');
     pressSearchButton();
+    window.open('/invoice/form/?customerId=' + extraValue, '_blank', '<%=__("config.invoiceFormatPopup")%>');
 }
 function callbackAfterSave(returnCode, extraValue) {
     d2tResetForm('frmSave');

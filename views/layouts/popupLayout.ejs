@@ -1,0 +1,34 @@
+<%if(typeof siteTitle === 'undefined') {
+    siteTitle = "";
+}%>
+
+<!DOCTYPE html>
+<html class="" lang="vi">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title><%=siteTitle%> - VNOPTICAL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://www.vnoptical.com/">
+<link rel="alternate" media="handheld" href="https://m.vnoptical.com/">
+<meta name="description" content="">
+<meta name="keywords" 
+    content="kính mắt, kính cận, kính thuốc, kính viễn thị, kính thời trang, kính hàng hiệu, cận thị, viễn thị, tật khúc xạ, kính mắt uy tín, tin cậy, kính mắt online">
+<link rel="search" type="application/opensearchdescription+xml"
+    href="https://www.vnoptical.com/opensearch?locale=vi_VN"
+    title="Tìm kiếm Kính mắt trên vnoptical">
+<meta name="theme-color" content="#e62117">
+<%include importCssJs%>
+<link href="/css/op-layout-popup.css" rel="stylesheet" />
+</head>
+<body id="bodyPopup" >
+    <div id="body-container">
+        <div id="page-container">
+            <div id="content-wrapper" class="wrapper">
+                <div id="top-content">
+                <%- body %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

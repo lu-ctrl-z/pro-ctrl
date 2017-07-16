@@ -203,6 +203,10 @@ table {
 	margin-top: 3px;
 	color: #3b5998;
 }
+.icon-view {
+	font-size: 15px;
+	margin-top: 3px;
+}
 ._table {
 	display: table;
 }
@@ -211,6 +215,9 @@ table {
 }
 ._table .free-col {
 	width: 100%;
+}
+.panel {
+	margin-bottom: 10px;
 }
 .bg-white {
 	background-color: #fff;

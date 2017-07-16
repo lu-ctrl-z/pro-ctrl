@@ -94,6 +94,7 @@ module.exports.routes = {
         }
     },
 
+    //QL thông tin khách hàng
     '/customer' : {
         controller : 'customer/CustomerController',
         action : 'index',
@@ -127,6 +128,14 @@ module.exports.routes = {
         action : 'actionDelete',
         locals : {
             layout : null
+        }
+    },
+    //QL thông tin đơn hàng
+    '/invoice/form' : { // load form nhập đơn hàng
+        controller : 'invoice/InvoiceController',
+        action : 'actionPrepareUpdate',
+        locals : {
+            layout : 'layouts/popupLayout'
         }
     },
 };

@@ -38,16 +38,15 @@ module.exports = {
             address : req.param('address'),
             organization_id : req.session.user.organization_id,
         };
-
         var callbackAfterSaveOrUpdate = function(err, customer){
             if (err) {
-                var messages = message.of('customer', err.ValidationError, res.i18n);
-                console.log(messages);
                 result.message = res.i18n("global.error");
                 result.returnCode = Constants.COMMON.ERROR_CODE;
             } else {
                 result.message = res.i18n('global.success');
                 result.returnCode = Constants.COMMON.SUCCESS_CODE;
+                result.extraValue = customer.customer_id;
+                result.callback = req.param('callback');
             }
             res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
         };
@@ -125,6 +124,7 @@ module.exports = {
                                 result.message = res.i18n('delete.succcess');
                                 result.returnCode = Constants.COMMON.SUCCESS_CODE;
                             }
+                            console.log(result)
                             res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
                         });
                     } else {
