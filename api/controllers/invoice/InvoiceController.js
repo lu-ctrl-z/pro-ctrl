@@ -12,7 +12,6 @@ module.exports = {
     actionPrepareUpdate : function(req, res) {
         var result = {};
         var customerId = req.param('customerId');
-        console.log(customerId)
         Customer.findOne({
             customer_id: customerId
         }, function(err, customer) {
@@ -22,14 +21,24 @@ module.exports = {
                 CommonUtils.havePermissionWithOrg(req, customer.organization_id, function(boolean) {
                     if(boolean) {
                         var siteTitle = res.i18n("invoice.name") + " " + customer.full_name;
-                        res.view('invoice/invoiceForm', {
-                            'customer' : customer,
-                            'siteTitle' : siteTitle
+                        var orgId = req.session.user.organization_id;
+                        Organization.findOne({
+                            organizationId: orgId
+                        }, function(err, organization) {
+                            if (err) {
+                                console.log(err);
+                            } else if (organization) {
+                                res.view('invoice/invoiceForm', {
+                                    'customer' : customer,
+                                    'organization' : organization,
+                                    'siteTitle' : siteTitle
+                                });
+                            }
                         });
                     } else {
                         res.view(Constants.PAGE_FORWARD.INVALID_PERMISSION);
                     }
-                })
+                });
             }
         });
     },

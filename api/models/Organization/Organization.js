@@ -12,29 +12,35 @@ module.exports = {
     types: {
     },
     attributes: {
-        organization_id : {
+        organizationId : {
             type: 'integer',
             autoIncrement: true,
             primaryKey: true,
+            columnName: 'organization_id',
         },
-        organization_name: {
+        organizationName: {
             type: 'string',
             maxLength: 500,
             required: true,
+            columnName: 'organization_name',
         },
         path: {
             type: 'string',
             maxLength: 500,
             required: true,
+            columnName: 'path',
         },
         address: {
             type: 'string',
+            columnName: 'address',
         },
-        phone_number: {
+        phoneNumber: {
             type: 'string',
+            columnName: 'phone_number',
         },
-        image_path: {
+        imagePath: {
             type: 'string',
+            columnName: 'image_path',
         }
     },
     formAttr: {
