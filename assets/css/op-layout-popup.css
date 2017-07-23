@@ -3,131 +3,155 @@
     background-color: #fff;
 }
 .invoice {
-	min-height: 802px;
-	width: 595px;
-	border: solid 2px #bbb;
-	padding: 15px;
-	position: relative;
-	margin: 0 auto;
-	margin-bottom: 50px;
+    min-height: 802px;
+    width: 595px;
+    border: solid 2px #bbb;
+    padding: 15px;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
 .invoiceWrapper {
-	width: 595px;
-	position: relative;
+    width: 595px;
+    position: relative;
     margin: 0 auto;
 }
 .btn-right-area {
-	text-align: right;
+    text-align: right;
 }
 .btn-right-area > button:LAST-CHILD {
-	margin-right: 0px;
+    margin-right: 0px;
 }
 .invoice-head {
-	width: 100%;
-	font-size: 13px;
+    width: 100%;
+    font-size: 13px;
 }
 .invoice-mid td,
 .invoice-head td {
-	padding: 2px 3px;
-	position: relative;
+    padding: 2px 3px;
+    position: relative;
 }
 .invoice-head th{
-	font-weight: normal;
-	width: 115px; 
+    font-weight: normal;
+    width: 115px; 
 }
 .tdic {
-	width: 186px;
+    width: 186px;
 }
 table .bbottom {
-	border-bottom: 1px dotted #222;
-	margin: 0px;
-	position: absolute;
-	left: 8px;
-	bottom: 3px;
-	right: 0px;
+    border-bottom: 1px dotted #222;
+    margin: 0px;
+    position: absolute;
+    left: 8px;
+    bottom: 3px;
+    right: 0px;
 }
 hr.border {
-	border-bottom: 1px solid #bbb;
-	margin: 10px 0px;
+    border-bottom: 1px solid #bbb;
+    margin: 10px 0px;
 }
 .invoice-descript {
-	position: relative;
-	text-align: center;
-	margin-bottom: 15px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 15px;
 }
 .version {
-	text-align: left;
-	position: absolute;
-	right: 0px;
-	width: 150px;
-	top: 4px;  
+    text-align: left;
+    position: absolute;
+    right: 0px;
+    width: 150px;
+    top: 4px;  
 }
 .version p {
-	margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 .invoice-mid {
-	width: 100%;
-	margin-top: 5px;
+    width: 100%;
+    margin-top: 5px;
 }
 .invoice th {
-	white-space: nowrap;
-	font-weight: normal;
+    white-space: nowrap;
+    font-weight: normal;
 }
 .invoice-mid td {
-	width: 100%;
+    width: 100%;
 }
 .invoice .opacity {
-	border: none;
-	background-color: transparent;
-	width: 100%;
-	font-family: Helvetica,Arial,sans-serif;
-	padding-left: 5px;
-	font-weight: bold;
-	background-color: rgba(59, 89, 152, 0.05);
-	resize: none;
-	height: 20px;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    font-family: Helvetica,Arial,sans-serif;
+    padding-left: 5px;
+    font-weight: bold;
+    background-color: rgba(59, 89, 152, 0.05);
+    resize: none;
+    height: 20px;
 }
 .invoice .opacity:FOCUS {
-	background-color: rgba(59, 89, 152, 0.3);
+    background-color: rgba(59, 89, 152, 0.3);
 }
 .table-detail {
-	width: 100%;
-	margin-top: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 .table-detail th {
-	font-weight: bold;
-	border: 1px solid #bbb;
-	padding: 3px 2px;
-	text-align: center;
+    font-weight: bold;
+    border: 1px solid #bbb;
+    padding: 3px 2px;
+    text-align: center;
 }
 .table-detail .rows {
-	border-bottom: 1px dotted #bbb;
+    border-bottom: 1px dotted #bbb;
 }
 .table-detail .rowsLast {
-	border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
 }
 .table-detail .rows > td{
-	border-right: 1px solid #bbb;
-	padding: 2px;
+    border-right: 1px solid #bbb;
+    padding: 2px;
 }
 .table-detail .rows > td:FIRST-CHILD{
-	border-left: 1px solid #bbb;
+    border-left: 1px solid #bbb;
 }
 .mark > th {
-	font-size: 12px;
-	font-weight: normal;
+    font-size: 12px;
+    font-weight: normal;
 }
 .invoice-bottom{
-	width: 100%;
+    width: 100%;
 }
 .showOnPrint {
-	display: none;
+    display: none;
+}
+.addRelationRow a{
+    height: 13px;
+    display: inline-block;
+}
+.addRelationRow{
+    vertical-align: middle;
+    border-right: 1px solid transparent !important;
+    padding-top: 5px !important;
+}
+.table-detail .rows > td.stt {
+    position: relative;
+}
+.table-detail .rows > td.stt > a {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    opacity: 0;
+}
+.table-detail .rows > td.stt:HOVER > span {
+    display: none;
+}
+.table-detail .rows > td.stt:HOVER > a {
+    opacity: 1;
 }
 @media print {
     @page { margin: 0; }
     .invoice {
-	    border: none;
-	    margin-bottom: 0px;
+        border: none;
+        margin-bottom: 0px;
     }
     .showOnPrint {
         display: block;
@@ -135,4 +159,7 @@ hr.border {
     .hideOnPrint {
         display: none;
     }
+    .addRelationRow > a{
+        display: none;
+    }   
 }

@@ -34,6 +34,10 @@ module.exports = {
             type: 'string',
             columnName: 'address',
         },
+        taxNumber: {
+            type: 'string',
+            columnName: 'tax_number',
+        },
         phoneNumber: {
             type: 'string',
             columnName: 'phone_number',

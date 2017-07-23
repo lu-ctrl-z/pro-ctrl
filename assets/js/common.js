@@ -51,9 +51,7 @@ function initShortCutByAreaId(areaId) {
 * @return
 */
 function readNumber(number) {
-console.log(number)
    var billion = parseInt(Math.floor(number / 1000000000));
-console.log(billion)
    number -= billion * 1000000000;
 
    var million = parseInt(Math.floor(number / 1000000));

@@ -1,0 +1,62 @@
+<table class="table-detail">
+    <tr>
+        <th>STT</th>
+        <th>Tên hàng hóa, dịch vụ</th>
+        <th>Đơn vị tính</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th>Thành tiền</th>
+    </tr>
+    <tr class="mark">
+        <th>(1)</th>
+        <th>(2)</th>
+        <th>(3)</th>
+        <th>(4)</th>
+        <th>(5)</th>
+        <th>(6) = (4) x (5)</th>
+    </tr>
+    <tr class="rows" ng-repeat="cart in cartList">
+        <td align="center" class="stt">
+            <span>{{$index+1}}</span>
+            <a title="Xóa" href="javascript:void(0);" ng-click="removeRow($index);"><span class="glyphicons glyphicons-minus color-warning"></span></a>
+        </td>
+        <td>
+            <input type="text" autofocus="autofocus" title="{{cart.productName}}" data-ng-model="cart.productName" name="productName" class="opacity textarea hideOnPrint" />
+            <b class="showOnPrint">{{cart.productName}}</b>
+        </td>
+        <td>
+            <input type="text" data-ng-model="cart.unitName" name="unitName" class="opacity alignCenter" />
+        </td>
+        <td>
+            <input type="text" maxlength="6" data-ng-model="cart.number" ui-number-mask="0" name="number" class="opacity money" />
+        </td>
+        <td>
+            <input type="text" maxlength="11" data-ng-model="cart.unitPrice" ui-number-mask="0" name="unitPrice" class="opacity money" />
+        </td>
+        <td align="right" class="money">
+           <b>{{intoMoney(cart) | number2Decimal}}</b>
+        </td>
+    </tr>
+    <tr class="rows">
+        <td class="addRelationRow" align="center"><a title="thêm" href="javascript:void(0);" ng-click="addRow();"><span class="glyphicons glyphicons-plus"></span></a></td>
+        <td colspan="4" align="right">Cộng tiền hàng:</td>
+        <td align="right" class="money">
+           <b>{{totalMoney() | number2Decimal}}</b>
+        </td>
+    </tr>
+    <tr class="rows">
+        <td colspan="5" align="right">Chiết khấu ({{percent()}}):</td>
+        <td>
+            <input type="text" ui-number-mask="0" ng-model="totalDiscount" name="totalDiscount" class="opacity money" />
+        </td>
+    </tr>
+    <tr class="rows">
+        <td colspan="5" align="right">Tổng cộng tiền thanh toán:</td>
+        <td align="right" class="money">
+           <b>{{totalPayMoney() | number2Decimal}}</b>
+        </td>
+    </tr>
+    <tr class="rows rowsLast">
+        <td colspan="6">Số tiền viết bằng chữ: <b>{{readNumber()}}</b></td>
+    </tr>
+</table>

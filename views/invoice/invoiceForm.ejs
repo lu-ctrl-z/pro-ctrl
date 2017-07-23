@@ -9,28 +9,53 @@
     ng-controller="InvoiceController"
 >
     <ul class="nav nav-tabs hideOnPrint invoiceWrapper" style="margin-bottom: 10px;">
-        <li class="active"><a data-toggle="tab" href="#invoiceOptical">Kính mắt</a></li>
-        <li><a data-toggle="tab" href="#invoiceOther">Phổ biến</a></li>
+        <li class="active"><a data-toggle="tab" href="#invoiceOptical" onclick="onClickTab();">Kính mắt</a></li>
+        <li><a data-toggle="tab" href="#invoiceOther" onclick="onClickTab();">Phổ biến</a></li>
     </ul>
     <div class="tab-content">
         <div id="invoiceOptical" class="tab-pane fade in active">
             <%include invoiceOptical%>
         </div>
         <div id="invoiceOther" class="tab-pane fade">
-            <%include invoiceOptical%>
+            <%include invoiceOther%>
         </div>
     </div>
 </div>
+<script>
+function onClickTab() {
+    setTimeout(function() {
+        autosize.update(document.getElementById('noteOptical'));
+        autosize.update(document.getElementById('noteOther'));
+    }, 600)
+}
+$(function() {
+    autosize(document.getElementById('noteOptical'));
+    autosize(document.getElementById('noteOther'));
+})
+</script>
 <script type="text/javascript">
 var invoiceApp = angular.module('invoiceApp', ['ngAnimate', 'ngSanitize', 'ui.utils.masks' ]);
-invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $compile) {
+invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $compile, $sce) {
     $scope.customer = <%-JSON.stringify(customer)%>;
     $scope.organization = <%-JSON.stringify(organization)%>;
     $scope.cartList = [];
-    var numberOfRow = 10;
-    for(var i = 1; i <= numberOfRow; i++) {
+    $scope.noteList = [{message: '- Kiểm tra lại sau 06 tháng. \n- Khi tái khám nhớ mang theo phiếu này'}];
+    $scope.selectNote = function(index) {
+        var message = $scope.noteList[index].message;
+        $scope.note = $scope.noteList[index].message;
+        onClickTab();
+    }
+    var numberOfRowOptical = 5;
+    for(var i = 1; i <= numberOfRowOptical; i++) {
         var cartItem = {stt: i};
         $scope.cartList.push(cartItem);
+    }
+    $scope.addRow = function() {
+        var cartItem = {stt: $scope.cartList.length + 1};
+        $scope.cartList.push(cartItem);
+    }
+    $scope.removeRow = function($index) {
+        $scope.cartList.splice($index, 1);
     }
     $scope.intoMoney = function(cart) {
         try {
@@ -76,7 +101,9 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
         }
         return percent;
     }
-    
+    $scope.toLineBreak = function(string) {
+        return string.replace(/\n/g, "<br />");
+    }
 }).filter('number2Decimal', [
      function() { // should be altered to suit your needs
          return function(input) {
