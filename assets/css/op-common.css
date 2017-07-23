@@ -368,6 +368,10 @@ table {
 	background: #bc2328;
 	border: 1px solid #902328;
 }
+a.color-danger:HOVER,
+.color-danger {
+	color: #bc2328;
+}
 .btn-danger:FOCUS,
 .btn-danger:ACTIVE,
 .btn-danger:HOVER {

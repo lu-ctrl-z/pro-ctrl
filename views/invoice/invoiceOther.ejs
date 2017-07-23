@@ -78,7 +78,7 @@
             <th style="vertical-align: top;">
                 <div class="dropup">
                     <a href="javascript:void(0);" data-toggle="dropdown"><b>Ghi chú:</b></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <ul class="dropdown-menu hideOnPrint" role="menu" aria-labelledby="menu1">
                       <li role="presentation" class="contentTextarea" ng-repeat="noteItem in noteList">
                         <a role="menuitem" ng-click="selectNote($index)" href="javascript:void(0);" ng-bind-html="toLineBreak(noteItem.message)"></a>
                       </li>

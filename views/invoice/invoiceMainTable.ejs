@@ -18,7 +18,7 @@
     <tr class="rows" ng-repeat="cart in cartList">
         <td align="center" class="stt">
             <span>{{$index+1}}</span>
-            <a title="Xóa" href="javascript:void(0);" ng-click="removeRow($index);"><span class="glyphicons glyphicons-minus color-warning"></span></a>
+            <a title="Loại bỏ" href="javascript:void(0);" ng-click="removeRow($index);"><span class="glyphicons glyphicons-minus color-danger"></span></a>
         </td>
         <td>
             <input type="text" autofocus="autofocus" title="{{cart.productName}}" data-ng-model="cart.productName" name="productName" class="opacity textarea hideOnPrint" />

@@ -157,7 +157,7 @@ hr.border {
         display: block;
     }
     .hideOnPrint {
-        display: none;
+        display: none !important;
     }
     .addRelationRow > a{
         display: none;

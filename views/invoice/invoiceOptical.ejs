@@ -62,12 +62,12 @@
         <tr>
             <th>Hình thức thanh toán:</th>
             <td style="width: 35%;">
-                <input type="text" value="Tiền mặt" name="fullName" class="opacity" />
+                <input type="text" ng-model="dataOptical.paymentMethod" class="opacity" />
                 <hr class="bbottom"/>
             </td>
             <th>Số tài khoản:</th>
             <td style="width: 35%;">
-                <input type="text" value="" name="fullName" class="opacity" />
+                <input type="text" ng-model="dataOptical.bankAccount" class="opacity" />
                 <hr class="bbottom"/>
             </td>
         </tr>
@@ -77,14 +77,14 @@
         <tr>
             <th>- Mắt phải&nbsp;(R):</th>
             <td class="w100">
-                <input type="text" name="fullName" class="opacity" />
+                <input type="text" name="R[refractive]" ng-model="dataOptical.R.refractive" class="opacity" />
                 <hr class="bbottom"/>
             </td>
         </tr>
         <tr>
             <th>- Mắt trái&nbsp;&nbsp;&nbsp;(L):</th>
             <td class="w100">
-                <input type="text" name="fullName" class="opacity" />
+                <input type="text" name="L[refractive]" ng-model="dataOptical.L.refractive" class="opacity" />
                 <hr class="bbottom"/>
             </td>
         </tr>
@@ -103,21 +103,21 @@
         </tr>
         <tr class="rows">
             <td align="center"><b>R</b></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td rowspan="2"><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td rowspan="2"><input type="text" name="unitName" class="opacity alignCenter" /></td>
+            <td><input type="text" name="R[visionNoneClass]" ng-model="dataOptical.R.visionNoneClass" class="opacity alignCenter" /></td>
+            <td><input type="text" name="R[sph]" ng-model="dataOptical.R.sph" class="opacity alignCenter" /></td>
+            <td><input type="text" name="R[cyl]" ng-model="dataOptical.R.cyl" class="opacity alignCenter" /></td>
+            <td><input type="text" name="R[axis]" ng-model="dataOptical.R.axis" class="opacity alignCenter" /></td>
+            <td rowspan="2"><input name="visionHasClass" type="text" ng-model="dataOptical.visionHasClass" class="opacity alignCenter" /></td>
+            <td><input type="text" name="R[add]" ng-model="dataOptical.R.add" class="opacity alignCenter" /></td>
+            <td rowspan="2"><input name="pd" type="text" ng-model="dataOptical.pd" class="opacity alignCenter" /></td>
         </tr>
         <tr class="rows">
             <td align="center"><b>L</b></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
-            <td><input type="text" name="unitName" class="opacity alignCenter" /></td>
+            <td><input type="text" name="L[visionNoneClass]" ng-model="dataOptical.L.visionNoneClass" class="opacity alignCenter" /></td>
+            <td><input type="text" name="L[sph]" ng-model="dataOptical.L.sph" class="opacity alignCenter" /></td>
+            <td><input type="text" name="L[cyl]" ng-model="dataOptical.L.cyl" class="opacity alignCenter" /></td>
+            <td><input type="text" name="L[axis]" ng-model="dataOptical.L.axis" class="opacity alignCenter" /></td>
+            <td><input type="text" name="L[add]" ng-model="dataOptical.L.add" class="opacity alignCenter" /></td>
         </tr>
     </table>
     <%include invoiceMainTable%>
@@ -126,7 +126,7 @@
             <th style="vertical-align: top;">
                 <div class="dropup">
                     <a href="javascript:void(0);" data-toggle="dropdown"><b>Ghi chú:</b></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <ul class="dropdown-menu hideOnPrint" role="menu" aria-labelledby="menu1">
                       <li role="presentation" class="contentTextarea" ng-repeat="noteItem in noteList">
                         <a role="menuitem" ng-click="selectNote($index)" href="javascript:void(0);" ng-bind-html="toLineBreak(noteItem.message)"></a>
                       </li>

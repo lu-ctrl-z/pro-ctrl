@@ -138,4 +138,11 @@ module.exports.routes = {
             layout : 'layouts/popupLayout'
         }
     },
+    'post /invoice/save-invoice' : { // Lưu thông tin đơn hàng
+        controller : 'invoice/InvoiceController',
+        action : 'actionProcessUpdate',
+        locals : {
+            layout : null
+        }
+    },
 };

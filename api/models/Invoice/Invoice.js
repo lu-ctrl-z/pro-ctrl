@@ -29,13 +29,20 @@ module.exports = {
             type: 'float',
             columnName: 'true_total_price',
         },
-        totalDeduct: { // tổng giảm trừ
+        totalDiscount: { // tổng giảm trừ
             type: 'float',
-            columnName: 'total_deduct',
+            columnName: 'total_discount',
+        },
+        cartList: {
+            type: 'json',
+            columnName: 'cart_list',
+        },
+        dataOptical: {
+            type: 'json',
+            columnName: 'data_optical',
         },
         note: {
-            type: 'string',
-            maxLength: 500,
+            type: 'text',
             columnName: 'note',
         },
     },
