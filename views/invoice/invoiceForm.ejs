@@ -8,145 +8,17 @@
     ng-app="invoiceApp"
     ng-controller="InvoiceController"
 >
-    <div class="btn-area btn-right-area hideOnPrint invoiceWrapper">
-        <button type="button" onclick="pressBackButton();" class="btn btn-danger cmd-shortcut-form" data-form-shortcut-key="ESC"><%-__('button.back')%> (ESC)</button>
-        <button onclick="pressExportInvoice();" class="btn btn-info cmd-shortcut-form" type="button" data-form-shortcut-key="Ctrl+L"><%-__('button.exportInvoice')%> (Ctrl+L)</button>
-    </div>
-    <div class="invoice">
-        <table class="invoice-head">
-            <tr>
-                <th>Đơn vị bán hàng</th>
-                <td class="uc" colspan="3">: <strong style="text-transform: uppercase;">{{organization.organizationName}}</strong></td>
-            </tr>
-            <tr>
-                <th>Mã số thuế</th>
-                <td colspan="3">:</td>
-            </tr>
-            <tr>
-                <th>Địa chỉ</th>
-                <td colspan="3">: {{organization.address}}</td>
-            </tr>
-            <tr>
-                <th>Điện thoại</th>
-                <td class="tdic">: {{organization.phoneNumber}} <hr class="bbottom"/></td>
-                <th style="width: 75px;">&nbsp;&nbsp;Fax:</th>
-                <td class="tdic">&nbsp;<hr class="bbottom"/></td>
-            </tr>
-            <tr>
-                <th>Số tài khoản</th>
-                <td class="tdic">: <hr class="bbottom"/></td>
-                <th style="width: 75px;">&nbsp;&nbsp;Ngân hàng:</th>
-                <td class="tdic">&nbsp;<hr class="bbottom"/></td>
-            </tr>
-        </table>
-        <hr class="border"/>
-        <div class="invoice-descript">
-            <h4>BIÊN NHẬN - BẢO HÀNH</h4>
-            <div>Liên 2: Giao cho người mua</div>
-            <div><i><%=sails.moment().format('[Ngày] DD [tháng] MM [năm] YYYY')%></i></div>
-            <div class="version">
-                <p>Mẫu số: <b>01GTKT3/001</b></p>
-                <p>Ký hiệu: <b>KL/13P</b></p>
-                <p>Số: <b>00000000</b></p>
-            </div>
+    <ul class="nav nav-tabs hideOnPrint invoiceWrapper" style="margin-bottom: 10px;">
+        <li class="active"><a data-toggle="tab" href="#invoiceOptical">Kính mắt</a></li>
+        <li><a data-toggle="tab" href="#invoiceOther">Phổ biến</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="invoiceOptical" class="tab-pane fade in active">
+            <%include invoiceOptical%>
         </div>
-        <table class="invoice-mid">
-            <tr>
-                <th>Họ tên người mua hàng:</th>
-                <td>
-                    <input type="text" ng-model="customer.full_name" name="fullName" class="opacity" />
-                    <hr class="bbottom"/>
-                </td>
-            </tr>
-        </table>
-        <table class="invoice-mid">
-            <tr>
-                <th>Địa chỉ:</th>
-                <td>
-                    <input type="text" ng-model="customer.address" name="address" class="opacity" />
-                    <hr class="bbottom"/>
-                </td>
-            </tr>
-        </table>
-        <table class="invoice-mid">
-            <tr>
-                <th>Hình thức thanh toán:</th>
-                <td style="width: 35%;">
-                    <input type="text" value="Tiền mặt" name="fullName" class="opacity" />
-                    <hr class="bbottom"/>
-                </td>
-                <th>Số tài khoản:</th>
-                <td style="width: 35%;">
-                    <input type="text" value="" name="fullName" class="opacity" />
-                    <hr class="bbottom"/>
-                </td>
-            </tr>
-        </table>
-        <table class="table-detail">
-            <tr>
-                <th>STT</th>
-                <th>Tên hàng hóa, dịch vụ</th>
-                <th>Đơn vị tính</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Thành tiền</th>
-            </tr>
-            <tr class="mark">
-                <th>(1)</th>
-                <th>(2)</th>
-                <th>(3)</th>
-                <th>(4)</th>
-                <th>(5)</th>
-                <th>(6) = (4) x (5)</th>
-            </tr>
-            <tr class="rows" ng-repeat="cart in cartList">
-                <td align="center">{{cart.stt}}</td>
-                <td>
-                    <input type="text" autofocus="autofocus" title="{{cart.productName}}" data-ng-model="cart.productName" name="productName" class="opacity textarea hideOnPrint" />
-                    <b class="showOnPrint">{{cart.productName}}</b>
-                </td>
-                <td>
-                    <input type="text" data-ng-model="cart.unitName" name="unitName" class="opacity alignCenter" />
-                </td>
-                <td>
-                    <input type="text" maxlength="6" data-ng-model="cart.number" ui-number-mask="0" name="number" class="opacity money" />
-                </td>
-                <td>
-                    <input type="text" maxlength="11" data-ng-model="cart.unitPrice" ui-number-mask="0" name="unitPrice" class="opacity money" />
-                </td>
-                <td align="right" class="money">
-                   <b>{{intoMoney(cart) | number2Decimal}}</b>
-                </td>
-            </tr>
-            <tr class="rows">
-                <td colspan="5" align="right">Cộng tiền hàng:</td>
-                <td align="right" class="money">
-                   <b>{{totalMoney() | number2Decimal}}</b>
-                </td>
-            </tr>
-            <tr class="rows">
-                <td colspan="5" align="right">Chiết khấu ({{percent()}}):</td>
-                <td>
-                    <input type="text" ui-number-mask="0" ng-model="totalDiscount" name="totalDiscount" class="opacity money" />
-                </td>
-            </tr>
-            <tr class="rows">
-                <td colspan="5" align="right">Tổng cộng tiền thanh toán:</td>
-                <td align="right" class="money">
-                   <b>{{totalPayMoney() | number2Decimal}}</b>
-                </td>
-            </tr>
-            <tr class="rows rowsLast">
-                <td colspan="6">Số tiền viết bằng chữ: <b>{{readNumber()}}</b></td>
-            </tr>
-        </table>
-        <table class="invoice-bottom" style="margin-top:5px;">
-            <tr>
-                <td align="center"><b>Người mua hàng</b> <br /> (Ký và ghi rõ họ tên)</td>
-                <th></th>
-                <td align="center"><b>Người bán hàng</b> <br /> (Ký, đóng dấu và ghi rõ họ tên)</td>
-            </tr>
-        </table>
+        <div id="invoiceOther" class="tab-pane fade">
+            <%include invoiceOptical%>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
