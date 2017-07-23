@@ -109,35 +109,35 @@
                     <input type="text" data-ng-model="cart.unitName" name="unitName" class="opacity alignCenter" />
                 </td>
                 <td>
-                    <input type="text" data-ng-model="cart.number" ui-number-mask="0" name="number" class="opacity money" />
+                    <input type="text" maxlength="6" data-ng-model="cart.number" ui-number-mask="0" name="number" class="opacity money" />
                 </td>
                 <td>
-                    <input type="text" data-ng-model="cart.unitPrice" ui-number-mask="0" name="unitPrice" class="opacity money" />
+                    <input type="text" maxlength="11" data-ng-model="cart.unitPrice" ui-number-mask="0" name="unitPrice" class="opacity money" />
                 </td>
-                <td align="right">
+                <td align="right" class="money">
                    <b>{{intoMoney(cart) | number2Decimal}}</b>
                 </td>
             </tr>
             <tr class="rows">
                 <td colspan="5" align="right">Cộng tiền hàng:</td>
-                <td align="right">
+                <td align="right" class="money">
                    <b>{{totalMoney() | number2Decimal}}</b>
                 </td>
             </tr>
             <tr class="rows">
-                <td colspan="5" align="right">Chiết khấu:</td>
+                <td colspan="5" align="right">Chiết khấu ({{percent()}}):</td>
                 <td>
                     <input type="text" ui-number-mask="0" ng-model="totalDiscount" name="totalDiscount" class="opacity money" />
                 </td>
             </tr>
             <tr class="rows">
                 <td colspan="5" align="right">Tổng cộng tiền thanh toán:</td>
-                <td align="right">
+                <td align="right" class="money">
                    <b>{{totalPayMoney() | number2Decimal}}</b>
                 </td>
             </tr>
             <tr class="rows rowsLast">
-                <td colspan="6">Số tiền viết bằng chữ: </td>
+                <td colspan="6">Số tiền viết bằng chữ: <b>{{readNumber()}}</b></td>
             </tr>
         </table>
         <table class="invoice-bottom" style="margin-top:5px;">
@@ -189,6 +189,21 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
         }
         return total;
     }
+    $scope.readNumber = function() {
+        var total = $scope.totalPayMoney();
+        if(total > 0) {
+            return readNumber(total) + " đồng."
+        }
+        return "";
+    }
+    $scope.percent = function() {
+        var total = $scope.totalMoney();
+        var percent = '0%';
+        if($scope.totalDiscount) {
+            percent = parseInt((parseFloat($scope.totalDiscount)/$scope.totalMoney()) * 100) + '%';
+        }
+        return percent;
+    }
     
 }).filter('number2Decimal', [
      function() { // should be altered to suit your needs
@@ -200,7 +215,9 @@ function pressBackButton() {
     window.close();
 }
 function pressExportInvoice() {
-    window.print();
-    window.close();
+    if(confirmAction()) {
+        window.print();
+        window.close();
+    }
 }
 </script>
