@@ -94,7 +94,7 @@ module.exports = {
                 result.returnCode = Constants.COMMON.SUCCESS_CODE;
                 result.extraValue = invoice.invoiceId;
                 result.callback = req.param('callback');
-                result.json = JSON.stringify(invoice[0]);
+                result.returnData = JSON.stringify(invoice[0]);
             }
             res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
         };

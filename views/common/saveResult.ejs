@@ -9,10 +9,13 @@
                   callback = "";
               }
           }
-          if(typeof extraValue === 'undefined') { extraValue = "";}
-          if(typeof json === 'undefined') { json = null;}%>
+          if(typeof extraValue === 'undefined') { extraValue = "";}%>
         <%if(typeof returnCode !== 'undefined') {%>
-        d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>', <%-json%>);
+            <%if(typeof returnData === 'undefined') {%>
+                d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>');
+            <%} else {%>
+                d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>', <%-returnData%>);
+            <%}%>
         <%}%>
     </script>
 </div>

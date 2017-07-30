@@ -59,6 +59,7 @@ module.exports = {
           ", c.phone_number " +
           ", c.full_name " +
           ", c.address " +
+          ", (SELECT COUNT(*) FROM INVOICE iv WHERE iv.customer_id = c.customer_id ) As countInvoice " +
           ", org1.organization_name " +
           ", c.updatedAt " +
           " FROM CUSTOMER c " +

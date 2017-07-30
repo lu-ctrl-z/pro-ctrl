@@ -141,7 +141,7 @@ function pressExportInvoice() {
                 cartList: scope.cartList, 
                 customer: scope.customer,
                 totalPrice: scope.totalMoney(),
-                totalDiscount: scope.totalDiscount,
+                totalDiscount: scope.invoice.totalDiscount,
                 note: scope.invoice.note,
                 trueTotalPrice: scope.totalPayMoney() };
         if(scope.invoice.invoiceId) {

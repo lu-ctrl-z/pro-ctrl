@@ -19,10 +19,17 @@
           <td class="alignLeft"><%= customer.organization_name %></td>
           <td class="alignCenter"><span title="<%-__('global.lastUpdated')%> <%= sails.moment(customer.updatedAt).format('YYYY/MM/DD HH:MM') %>"><%= sails.moment(customer.updatedAt).fromNow() %></span></td>
           <td>
-              <a class="op-ux-icon-table" onclick="pressDetailIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.view')%></a>
+            <span class="has-notifi">
+                <a class="op-ux-icon-table" onclick="pressDetailIcon(<%=customer.customer_id%>);" href="javascript:void(0);">
+                  <%-__('common.view')%>
+                </a>
+                <span class="notifi" title=""><%=customer.countInvoice%></span>
+            </span>
               <a class="op-ux-icon-table" onclick="pressEditIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.edit')%></a>
               <a class="op-ux-icon-table" onclick="window.open('/invoice/form/?customerId=<%=customer.customer_id%>', '_blank', '<%=__("config.invoiceFormatPopup")%>');" href="javascript:void(0);"><%-__('common.invoice')%></a>
-              <a class="op-ux-icon-table" onclick="pressDeleteIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.delete')%></a>
+              <%if(customer.countInvoice == 0) {%>
+                  <a class="op-ux-icon-table" onclick="pressDeleteIcon(<%=customer.customer_id%>);" href="javascript:void(0);"><%-__('common.delete')%></a>
+              <%}%>
           </td>
         </tr>
         <% }); %>

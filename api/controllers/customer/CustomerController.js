@@ -45,7 +45,7 @@ module.exports = {
             } else {
                 result.message = res.i18n('global.success');
                 result.returnCode = Constants.COMMON.SUCCESS_CODE;
-                result.extraValue = customer.customer_id;
+                result.extraValue = customer[0].customer_id;
                 result.callback = req.param('callback');
             }
             res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);

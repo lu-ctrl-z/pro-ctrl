@@ -97,6 +97,9 @@ function pressInvoiceIcon(customerId) {
 function callbackAfterSaveAndInvoice(returnCode, extraValue) {
     d2tResetForm('frmSave');
     pressSearchButton();
+    var $scope = angular.element(document.getElementById('content-body')).scope();
+    $scope.currentPage = $scope.CS_PAGE.SEARCH;
+    $scope.$apply();
     window.open('/invoice/form/?customerId=' + extraValue, '_blank', '<%=__("config.invoiceFormatPopup")%>');
 }
 function callbackAfterSave(returnCode, extraValue) {

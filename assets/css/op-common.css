@@ -384,3 +384,19 @@ a.color-danger:HOVER,
 .btn-area .btn {
 	margin: 10px;
 }
+.has-notifi {
+	position: relative;
+	display: inline-block;
+}
+.has-notifi .notifi {
+	position: absolute;
+	bottom: 70%;
+	margin-left: -5px; 
+	left: 0px;
+	line-height: 10px;
+	font-size: 10px;
+	background-color: #eee;
+	padding: 1px 2px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
