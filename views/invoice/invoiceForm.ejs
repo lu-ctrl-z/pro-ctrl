@@ -57,7 +57,7 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
     $scope.noteList = [{message: '- Kiểm tra lại sau 06 tháng. \n- Khi tái khám nhớ mang theo phiếu này'}];
     $scope.selectNote = function(index) {
         var message = $scope.noteList[index].message;
-        $scope.note = message;
+        $scope.invoice.note = message;
         onClickTab();
     }
     $scope.addRow = function() {
@@ -142,23 +142,31 @@ function pressExportInvoice() {
                 customer: scope.customer,
                 totalPrice: scope.totalMoney(),
                 totalDiscount: scope.totalDiscount,
-                note: scope.note,
+                note: scope.invoice.note,
                 trueTotalPrice: scope.totalPayMoney() };
         if(scope.invoice.invoiceId) {
             formData.invoiceId = scope.invoice.invoiceId;
         }
         d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice");
-        //window.print();
-        //window.close();
     }
 }
-function callbackAfterSaveInvoice(returnCode, extraValue) {
+function callbackAfterSaveInvoice(returnCode, extraValue, invoice) {
     var scope = angular.element(document.getElementById('invoice-body')).scope();
     if(!scope.invoice.invoiceId) {
-        scope.invoice.invoiceId = extraValue;
+        try {
+            if(typeof invoice === 'object') {
+                scope.invoice = invoice;
+                scope.$apply();
+            }
+            var newUrl = '/invoice/form/?customerId=' + scope.customer.customer_id;
+            newUrl += '&invoiceId=' + scope.invoice.invoiceId;
+            var newTitle = "<%=siteTitle%>";
+            window.history.replaceState({}, newTitle, newUrl);
+            window.print();
+        } catch(e) {
+            console.log(e)
+        }
     }
-    //window.history.replaceState(stateData, 'title', 'page2.html');
-    window.print();
     //window.close();
 }
 </script>

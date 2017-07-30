@@ -12,6 +12,7 @@ module.exports = {
     actionPrepareUpdate : function(req, res) {
         var result = {};
         var customerId = req.param('customerId');
+        var invoiceId = req.param('invoiceId');
         Customer.findOne({
             customer_id: customerId
         }, function(err, customer) {
@@ -28,11 +29,29 @@ module.exports = {
                             if (err) {
                                 console.log(err);
                             } else if (organization) {
-                                res.view('invoice/invoiceForm', {
-                                    'customer' : customer,
-                                    'organization' : organization,
-                                    'siteTitle' : siteTitle
-                                });
+                                if(CommonUtils.NVL(invoiceId, 0) > 0) {
+                                    Invoice.findOne({
+                                        invoiceId: invoiceId,
+                                        customerId: customerId
+                                    }, function(err, invoice) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else if (invoice) {
+                                            res.view('invoice/invoiceForm', {
+                                                'customer' : customer,
+                                                'invoice' : invoice,
+                                                'organization' : organization,
+                                                'siteTitle' : siteTitle
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    res.view('invoice/invoiceForm', {
+                                        'customer' : customer,
+                                        'organization' : organization,
+                                        'siteTitle' : siteTitle
+                                    });
+                                }
                             }
                         });
                     } else {
@@ -69,11 +88,13 @@ module.exports = {
             if (err) {
                 result.message = res.i18n("global.error");
                 result.returnCode = Constants.COMMON.ERROR_CODE;
+                console.log(err);
             } else {
                 result.message = res.i18n('global.success');
                 result.returnCode = Constants.COMMON.SUCCESS_CODE;
                 result.extraValue = invoice.invoiceId;
                 result.callback = req.param('callback');
+                result.json = JSON.stringify(invoice[0]);
             }
             res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
         };
@@ -107,8 +128,12 @@ module.exports = {
                 }
             });
         } else {
-            console.log(formDataInsert);
-            Invoice.create(formDataInsert, callbackAfterSaveOrUpdate);
+            Invoice.create(formDataInsert, function(err, invoice) {
+                var invoiceCode = CommonUtils.sprintf("1%'09s", invoice.invoiceId);
+                console.log(invoiceCode);
+                Invoice.update({ invoiceId: invoice.invoiceId }, {invoiceCode: invoiceCode})
+                    .exec(callbackAfterSaveOrUpdate);
+            });
         }
     }
 

@@ -9,9 +9,10 @@
                   callback = "";
               }
           }
-          if(typeof extraValue === 'undefined') { extraValue = "";}%>
+          if(typeof extraValue === 'undefined') { extraValue = "";}
+          if(typeof json === 'undefined') { json = null;}%>
         <%if(typeof returnCode !== 'undefined') {%>
-        d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>');
+        d2tProcessReturnMessage('<%=returnCode%>', '<%=message%>', '<%=callback%>', '<%=extraValue%>', <%-json%>);
         <%}%>
     </script>
 </div>

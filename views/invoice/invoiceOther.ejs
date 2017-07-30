@@ -37,7 +37,7 @@
         <div class="version">
             <p>Mẫu số: <b>01GTKT3/001</b></p>
             <p>Ký hiệu: <b>KL/13P</b></p>
-            <p>Số: <b>00000000</b></p>
+            <p>Số: <b>{{invoice.invoiceCode || '0000000000'}}</b></p>
         </div>
     </div>
     <table class="invoice-mid">
@@ -89,7 +89,7 @@
                     </ul>
                 </div> 
             </th>
-            <td class="w100"><textarea ng-model="note" id="noteOther" class="op-ux-input form-control opacity" style="font-weight: normal; font-style: italic;"></textarea></td>
+            <td class="w100"><textarea ng-model="invoice.note" id="noteOther" class="op-ux-input form-control opacity" style="font-weight: normal; font-style: italic;"></textarea></td>
         </tr>
     </table>
     <table class="invoice-bottom" style="margin-top:5px;">

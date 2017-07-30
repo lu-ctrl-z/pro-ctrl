@@ -16,6 +16,10 @@ module.exports = {
             primaryKey: true,
             columnName: 'invoice_id',
         },
+        invoiceCode : { // code hóa đơn
+            type: 'integer',
+            columnName: 'invoice_code',
+        },
         customerId : { // id khách hàng
             type: 'integer',
             required: true,

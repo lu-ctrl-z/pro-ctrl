@@ -29,10 +29,10 @@ function confirmUpdate() {
  * @param callback Ham Javascript can thuc hien
  * @param extraValue ID truong loi tren form can focus
  */
-function d2tProcessReturnMessage(returnCode, msg, callback, extraValue) {
+function d2tProcessReturnMessage(returnCode, msg, callback, extraValue, json) {
     try {
         d2tUpdateMessage(returnCode, msg, extraValue);
-        eval(callback + '(returnCode, extraValue)');
+        eval(callback + '(returnCode, extraValue, json)');
     } catch (ex) {
         console.error(ex.message);
     }
