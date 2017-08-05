@@ -159,6 +159,38 @@ function getFormAsString(formId) {
     return $("#" + formId).serialize();
 }
 /**
+ * hàm lấy data form vào object.
+ * truyền vào form ID
+ */
+function getFromAsObject(formName) {
+    d2tSetTokenByLocalStorage();
+    var paramObj = {};
+    $.each($("#" + formName).serializeArray(), function(_, kv) {
+      if (paramObj.hasOwnProperty(kv.name)) {
+        paramObj[kv.name] = $.makeArray(paramObj[kv.name]);
+        paramObj[kv.name].push(kv.value);
+      } else {
+        paramObj[kv.name] = kv.value;
+      }
+    });
+    return paramObj;
+}
+/**
+ * hàm copy thuộc tính của 2 object
+ * object: dest, object: org
+ */
+function d2tCopyProperty(dest, org) {
+    $.each(org, function(k, v) {
+        if (dest.hasOwnProperty(k)) {
+            dest[k] = $.makeArray(dest[k])
+            dest[k].push(v);
+        } else {
+            dest[k] = v;
+        }
+    });
+    return dest;
+}
+/**
  * Cap nhat token moi nhat.
  * @param sessionToken
  */
@@ -243,6 +275,21 @@ function trim(str) {
     while (ws.test(str.charAt(--i)))
         ;
     return str.slice(0, i + 1);
+}
+function escapeHtml(text) {
+    return isNullStr(text) ? '' : String(text)
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;");
+}
+function isNullStr(str){
+    var strVal = String(str);
+    strVal = strVal.trim();
+    if(!strVal || undefined == str){
+        return true;
+    } else {
+        return false;
+    }
 }
 function d2tScrollTo(areaId) {
     $("html, body").animate({

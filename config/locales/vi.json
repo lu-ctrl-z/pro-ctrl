@@ -30,6 +30,20 @@
     ,"global.lastUpdated":       "Thời gian cập nhật cuối lúc"
     ,"delete.succcess":          "Xóa dữ liệu thành công"
   
+    ,"dataTable.processing":     "Đang xử lý..."
+    ,"dataTable.show":           "Hiển thị"
+    ,"dataTable.entries":        "bản ghi"
+    ,"dataTable.emptyTable":     "Không có bản ghi nào"
+    ,"dataTable.total":          "Tổng số"
+    ,"dataTable.to":             "đến"
+    ,"dataTable.from":           "từ"
+    ,"dataTable.next":           ">>"
+    ,"dataTable.previous":       "<<"
+    ,"dataTable.first":          "|<"
+    ,"dataTable.last":           ">|"
+    ,"dataTable.search":         "Tìm kiếm"
+  
+  
     ,"user.user_name.required": "Tên đăng nhập chưa đúng"
     ,"user.user_name.unique": "Tên đăng nhập đã có"
     ,"user.user_name.maxLength": "Tên đăng nhập tối đa 45 ký tự"

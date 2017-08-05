@@ -17,6 +17,7 @@
             </strong>
         </div>
         <div class="panel-body" id="divListCustomer">
+            <%include ../customer/customerList%>
         </div>
     </div>
     
@@ -24,7 +25,7 @@
 </div>
 <script type="text/javascript">
 var homeApp = angular.module('homeApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
-
+var customerTbl;
 homeApp.controller('HomeController', function( $scope, $http, $filter, $compile) {
     $scope.CS_PAGE = {
         SEARCH: 0,
@@ -40,10 +41,7 @@ homeApp.controller('HomeController', function( $scope, $http, $filter, $compile)
 });
 function pressSearchButton() {
     if($('#frmSearch').validationEngine('validate')) {
-        var areaId = 'divListCustomer';
-        var actionUrl = '/customer/list';
-        var formData = getFormAsString('frmSearch');
-        d2tUpdateAjax(areaId, actionUrl, formData, "GET");
+        customerTbl.ajax.reload();
     }
 }
 function pressAddButton() {
@@ -113,6 +111,55 @@ $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
         angular.bootstrap(document.getElementById("content-body"), [ 'homeApp' ]);
     }
+    $.fn.dataTable.ext.legacy.ajax = true;
+    customerTbl = $('#customerTbl').DataTable({
+        processing : true,
+        serverSide : true,
+        deferLoading: 90,
+        ajax : {
+            url : '/customer/list',
+            type : 'GET',
+            dataSrc : 'data',
+            data : function (data) {
+                var formData = getFromAsObject('frmSearch');
+                d2tCopyProperty(data, formData);
+                return data;
+            }
+        },
+        columns : [
+               {
+                   "searchable" : false,
+                   "orderable" : false,
+                   "data" : null,
+                   "targets" : 0,
+                   "className" : "alignCenter",
+                   render : function(data, type, row, cell) {
+                       var info = customerTbl.page.info();
+                       var stt = 1 + (info.page * info.length) + cell.row;
+                       return stt;
+                   }
+               },
+               { "data" : "phoneNumber", },
+               { "data" : "fullName", },
+               { "data" : "address", },
+               { "data" : "organizationName", },
+               {
+                   "data" : "updatedAt",
+                   render : function(data, type, row) {
+                       return null == data ? "" 
+                          : '<span title="<%-__('global.lastUpdated')%> ' + moment(data).format('YYYY/MM/DD HH:MM') + '">' + moment(data).fromNow() + '</span>';
+                   }
+               },
+               {
+                   "orderable" : false,
+                   render : function(data, type, row) {
+                       return null == data ? "" 
+                          : '<span title="<%-__('global.lastUpdated')%> ' + moment(data).format('YYYY/MM/DD HH:MM') + '">' + moment(data).fromNow() + '</span>';
+                   }
+               },
+        ]
+        ,order : []
+    });
     pressSearchButton();
 });
 </script>

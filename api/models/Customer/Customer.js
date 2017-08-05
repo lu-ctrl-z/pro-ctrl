@@ -20,13 +20,11 @@ module.exports = {
         phone_number: {
             type: 'string',
             maxLength: 15,
-            minLength: 8,
         },
         full_name: {
             type: 'string',
             required: true,
             maxLength: 200,
-            minLength: 2,
         },
         address: {
             type: 'string',
@@ -52,41 +50,48 @@ module.exports = {
     /**
      * search danh sách khách hàng theo quyền của user.
      */
-    getCustomerList: function(req, res, callback) {
+    getCustomerList: function(req, res) {
         var paramList = [];
-        var sql = " SELECT " +
-          "  c.customer_id " +
-          ", c.phone_number " +
-          ", c.full_name " +
-          ", c.address " +
-          ", (SELECT COUNT(*) FROM INVOICE iv WHERE iv.customer_id = c.customer_id ) As countInvoice " +
-          ", org1.organization_name " +
-          ", c.updatedAt " +
-          " FROM CUSTOMER c " +
-          "    INNER JOIN ORGANIZATION org1 ON org1.organization_id = c.organization_id " +
-          "    INNER JOIN ORGANIZATION org2 ON org1.path LIKE CONCAT(org2.path, '%')" +
-          "    INNER JOIN M_USERS u ON u.organization_id = org2.organization_id " +
-          " WHERE " +
-          "    u.id = ? ";
-          
+        var column = " SELECT " +
+                     "  c.customer_id As customerId " +
+                     ", c.phone_number As phoneNumber " +
+                     ", c.full_name As fullName " +
+                     ", c.address " +
+                     ", (SELECT COUNT(*) FROM INVOICE iv WHERE iv.customer_id = c.customer_id ) As countInvoice " +
+                     ", org1.organization_name As organizationName " +
+                     ", c.updatedAt ";
+        var from = " FROM CUSTOMER c " +
+                   "    INNER JOIN ORGANIZATION org1 ON org1.organization_id = c.organization_id " +
+                   "    INNER JOIN ORGANIZATION org2 ON org1.path LIKE CONCAT(org2.path, '%')" +
+                   "    INNER JOIN M_USERS u ON u.organization_id = org2.organization_id " +
+                   " WHERE " +
+                   "    u.id = ? ";
         paramList.push(req.session.user['id']);
         if(!CommonUtils.isNullOrEmpty(req.param('phoneNumber'))) {
-            sql += " AND c.phone_number LIKE ? ";
+            from += " AND c.phone_number LIKE ? ";
             paramList.push(req.param('phoneNumber') + '%');
         }
         if(!CommonUtils.isNullOrEmpty(req.param('fullName'))) {
-            sql += " AND c.full_name LIKE ? ";
+            from += " AND c.full_name LIKE ? ";
             paramList.push('%' + req.param('fullName') + '%');
         }
         if(!CommonUtils.isNullOrEmpty(req.param('address'))) {
-            sql += " AND c.address LIKE ? ";
+            from += " AND c.address LIKE ? ";
             paramList.push('%' + req.param('address') + '%');
         }
-        sql += " ORDER BY c.updatedAt DESC ";
-        Customer.query(sql, paramList ,function(err, resultList) {
-            if (err) { return res.serverError(err); }
-            callback(resultList);
-        });
+        var dataTableParam = DataTable.getParam(req);
+        var mapColumns = {
+                customerId: 'c.customer_id',
+                phoneNumber: 'c.phone_number',
+                fullName: 'c.full_name',
+                address: 'c.address',
+                organizationName: 'org1.organization_name',
+                updatedAt: 'c.updatedAt',
+            };
+        var sortStr = DataTable.buildOrder(mapColumns, "c.updatedAt DESC ", req);
+        var query = column + from + sortStr;
+        var countQuery = "SELECT COUNT(*) As count " + from;
+        DataTable.toJson(req, res, query, countQuery, paramList);
     },
 };
 

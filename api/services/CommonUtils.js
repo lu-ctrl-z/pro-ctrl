@@ -2,6 +2,28 @@ module.exports = {};
 /**
  * check null hoac rong
  */
+module.exports.getParameterLong = function(req, name) {
+    var value = req.param(name);
+    var typeOf = typeof value;
+    if (typeOf === "undefined") {
+        return null;
+    }
+    if (typeOf === "string") {
+        if(value.trim() === "") {
+            return null;
+        } else {
+            value = parseInt(value);
+        }
+    } else if(typeOf === "number"){
+        value = parseInt(value);
+    } else {
+        value = null;
+    }
+    return value;
+}
+/**
+ * check null hoac rong
+ */
 module.exports.isNullOrEmpty = function(checkValue) {
     var typeOf = typeof checkValue;
     if (typeOf === "undefined") {
@@ -9,6 +31,13 @@ module.exports.isNullOrEmpty = function(checkValue) {
     }
     if (typeOf === "string") {
         return checkValue.trim() == "";
+    }
+    return false;
+}
+module.exports.isNull = function(checkValue) {
+    var typeOf = typeof checkValue;
+    if (typeOf === "undefined") {
+        return true;
     }
     return false;
 }

@@ -19,12 +19,8 @@ module.exports = {
     /**
      * lấy danh sách khách hàng
      */
-    actionLoadCustomer : function(req, res) {
-        Customer.getCustomerList(req, res, function(resultList) {
-            res.view('customer/customerList', {
-                'resultList' : resultList
-            });
-        })
+    actionLoadCustomer : function(req, res, next) {
+        Customer.getCustomerList(req, res);
     },
     /**
      * xử lý lưu thông tin khách hàng
@@ -40,12 +36,17 @@ module.exports = {
         };
         var callbackAfterSaveOrUpdate = function(err, customer){
             if (err) {
+                console.log(err)
                 result.message = res.i18n("global.error");
                 result.returnCode = Constants.COMMON.ERROR_CODE;
             } else {
                 result.message = res.i18n('global.success');
                 result.returnCode = Constants.COMMON.SUCCESS_CODE;
-                result.extraValue = customer[0].customer_id;
+                if(typeof customer == "object") {
+                    result.extraValue = customer.customer_id;
+                } else {
+                    result.extraValue = customer[0].customer_id;
+                }
                 result.callback = req.param('callback');
             }
             res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);

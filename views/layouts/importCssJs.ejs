@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="/js/inlineValidation/validationEngine.jquery.css"/>
+<link rel="stylesheet" type="text/css" href="/plugin/datatables/jquery.dataTables.css"/>
 <link href="/css/op-Roboto.css" rel="stylesheet" />
 <link href="/css/font/Glyphicons/glyphicons.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="/plugin/page-progress/page-progress.css" />
@@ -20,6 +21,7 @@ MSG.confirmUpdate = "<%-__('MSG.confirmUpdate')%>";
 var TOKEN_NAME = '_csrf';
 </script>
 <script src="/js/jquery.min.js"></script>
+<script src="/js/moment.js"></script>
 <script src="/js/common.js"></script>
 <script src="/js/toastr/toastr.js"></script>
 <script src="/js/inlineValidation/jquery.validationEngine.js"></script>
@@ -27,6 +29,7 @@ var TOKEN_NAME = '_csrf';
 <script src="/js/d2t.js"></script>
 <script type="text/javascript" src="/js/autosize.min.js"></script>
 <script type="text/javascript" src="/js/shortcut.js"></script>
+<script type="text/javascript" src="/plugin/datatables/jquery.dataTables.js"></script>
 <script src="/js/angular.min.js"></script>
 <script src="/js/angular-animate.min.js"></script>
 <script src="/js/angular-sanitize.min.js"></script>
@@ -34,3 +37,61 @@ var TOKEN_NAME = '_csrf';
 <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/plugin/page-progress/page-progress.js"></script>
 <script type="text/javascript"> d2tResetToken('<%-_csrf%>'); </script>
+<script type="text/javascript">
+    $.extend(true, $.fn.dataTable.defaults, {
+        "pagingType": "full_numbers",
+        searching: false,
+        drawCallback: function(settings) {
+            var pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+            pagination.toggle(this.api().page.info().pages > 1);
+            var paginationView = $(this).closest('.dataTables_wrapper').find('.dataTables_info');
+            paginationView.toggle(this.api().page.info().recordsTotal > 0);
+
+            var paginationButton = $(this).closest('.dataTables_wrapper').find('.paginate_button');
+            $(paginationButton).each(function() {
+                var text = $(this).text(), title = '';
+                if (isNaN(text)) {
+                    if (text == '<%-__("dataTable.first")%>') {
+                        title = 'Trang đầu';
+                    }
+                    if (text == '<%-__("dataTable.last")%>') {
+                        title = 'Trang cuối';
+                    }
+                    if (text == '<%-__("dataTable.next")%>') {
+                        title = 'Trang tiếp theo';
+                    }
+                    if (text == '<%-__("dataTable.previous")%>') {
+                        title = 'Trang trước';
+                    }
+                } else {
+                    title = 'Trang ' + text;
+                }
+                $(this).attr('title', title);
+            });
+            
+            $(this).closest('.dataTables_wrapper').find('.dataTables_paginate').find('.disabled, .active').find('a').removeAttr('href').removeAttr('tabindex');
+        },
+        language: {
+            "sProcessing": "<%-__('dataTable.processing')%>",
+            "sLengthMenu": "<%-__('dataTable.show')%> _MENU_ <%-__('dataTable.entries')%>",
+                                "sZeroRecords": "<%-__('dataTable.emptyTable')%>",
+                                "sEmptyTable": "<%-__('dataTable.emptyTable')%>",
+                                "sInfo": ["<%-__('dataTable.total')%> _TOTAL_ <%-__('dataTable.entries')%>, ",
+                                    "<%-__('dataTable.show')%> <%-__('dataTable.from')%> ",
+                                    "_START_ <%-__('dataTable.to')%> _END_"
+                                ].join(''),
+                                "sInfoEmpty": ["<%-__('dataTable.total')%> 0 <%-__('dataTable.entries')%>,",
+                                    "<%-__('dataTable.show')%>  0 <%-__('dataTable.to')%> 0"
+                                ].join(''),
+                                "sSearch": "<%-__('dataTable.search')%>:",
+                                "sInfoThousands": ",",
+                                "sLoadingRecords": "<%-__('dataTable.processing')%>",
+                                "oPaginate": {
+                                    "sFirst": "<%-__('dataTable.first')%>",
+                                    "sLast": "<%-__('dataTable.last')%>",
+                                    "sNext": "<%-__('dataTable.next')%>",
+                                    "sPrevious": "<%-__('dataTable.previous')%>"
+                                }
+        }
+    });
+</script>

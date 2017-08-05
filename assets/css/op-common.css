@@ -400,3 +400,20 @@ a.color-danger:HOVER,
 	border-radius: 3px;
 	border: 1px solid #ccc;
 }
+table.dataTable thead td {
+    padding: 5px; 
+}
+table.dataTable thead td,
+table.dataTable thead th,
+table.dataTable.no-footer {
+	border-bottom: none;
+}
+table.dataTable {
+	border-collapse: collapse; 
+}
+.dataTables_info {
+	font-weight: bold;
+}
+.dataTables_paginate {
+	font-weight: bold;
+}
