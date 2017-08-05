@@ -168,7 +168,7 @@ function renderActionColumn(data, type, row) {
         html += '<span class="notifi">' + data.countInvoice + '</span>';
         html += '</span>';
         html += '<a class="op-ux-icon-table" onclick="pressEditIcon(' + data.customerId + ');" href="javascript:void(0);">' + "<%-__('common.edit')%></a>";
-        html += '<a class="op-ux-icon-table" onclick="window.open(\"/invoice/form/?customerId=' + data.customerId + '\", \"_blank\", \"' + "<%=__('config.invoiceFormatPopup')%>" + '\");" href="javascript:void(0);">' + "<%-__('common.invoice')%></a>";
+        html += '<a class="op-ux-icon-table" onclick="window.open(\'/invoice/form/?customerId=' + data.customerId + '\', \'_blank\', \'' + "<%=__('config.invoiceFormatPopup')%>" + '\');" href="javascript:void(0);">' + "<%-__('common.invoice')%></a>";
         if(data.countInvoice == 0) {
             html += '<a class="op-ux-icon-table" onclick="pressDeleteIcon(' + data.customerId + ');" href="javascript:void(0);">' + "<%-__('common.delete')%></a>";
         }
