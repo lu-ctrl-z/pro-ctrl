@@ -128,38 +128,50 @@ $(document).ready( function() {
         },
         columns : [
                {
-                   "searchable" : false,
-                   "orderable" : false,
-                   "data" : null,
-                   "targets" : 0,
-                   "className" : "alignCenter",
+                   searchable : false,
+                   orderable : false,
+                   data : null,
+                   targets : 0,
+                   className : "alignCenter",
                    render : function(data, type, row, cell) {
                        var info = customerTbl.page.info();
                        var stt = 1 + (info.page * info.length) + cell.row;
                        return stt;
                    }
                },
-               { "data" : "phoneNumber", },
-               { "data" : "fullName", },
-               { "data" : "address", },
-               { "data" : "organizationName", },
+               { data : "phoneNumber", },
+               { data : "fullName", },
+               { data : "address", },
+               { data : "organizationName", },
                {
-                   "data" : "updatedAt",
+                   data : "updatedAt",
                    render : function(data, type, row) {
                        return null == data ? "" 
                           : '<span title="<%-__('global.lastUpdated')%> ' + moment(data).format('YYYY/MM/DD HH:MM') + '">' + moment(data).fromNow() + '</span>';
                    }
                },
                {
-                   "orderable" : false,
-                   render : function(data, type, row) {
-                       return null == data ? "" 
-                          : '<span title="<%-__('global.lastUpdated')%> ' + moment(data).format('YYYY/MM/DD HH:MM') + '">' + moment(data).fromNow() + '</span>';
-                   }
+                   orderable : false,
+                   data: null,
+                   render : renderActionColumn,
                },
         ]
         ,order : []
     });
     pressSearchButton();
 });
+function renderActionColumn(data, type, row) {
+    var html =  '<span class="has-notifi">';
+        html += '<a class="op-ux-icon-table" onclick="pressDetailIcon(' + data.customerId + ');" href="javascript:void(0);">';
+        html += "<%-__("common.view")%>";
+        html += '</a>';
+        html += '<span class="notifi">' + data.countInvoice + '</span>';
+        html += '</span>';
+        html += '<a class="op-ux-icon-table" onclick="pressEditIcon(' + data.customerId + ');" href="javascript:void(0);">' + "<%-__('common.edit')%></a>";
+        html += '<a class="op-ux-icon-table" onclick="window.open(\"/invoice/form/?customerId=' + data.customerId + '\", \"_blank\", \"' + "<%=__('config.invoiceFormatPopup')%>" + '\");" href="javascript:void(0);">' + "<%-__('common.invoice')%></a>";
+        if(data.countInvoice == 0) {
+            html += '<a class="op-ux-icon-table" onclick="pressDeleteIcon(' + data.customerId + ');" href="javascript:void(0);">' + "<%-__('common.delete')%></a>";
+        }
+        return html;
+}
 </script>
