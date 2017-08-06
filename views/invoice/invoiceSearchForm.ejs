@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <strong class="h-i">
-            <%-__('customer.customerSearchInfo')%>
+            <%-__('invoice.invoiceSearchInfo')%>
         </strong>
     </div>
     <div class="panel-body">
@@ -9,18 +9,18 @@
             <input type='hidden' name='_csrf' value='<%- _csrf %>'>
             <div class="form-group">
                 <label class="col-sm-4 control-label">
-                    <%=__('customer.phoneNumber')%>
+                    <%=__('invoice.invoiceCode')%>
                 </label>
                 <div class="col-sm-4">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicons glyphicons-earphone" aria-hidden="true"></i></span>
-                      <input type="text" style="z-index:1" name="phoneNumber" class="op-ux-input form-control" id="filterPhoneNumber">
+                      <span class="input-group-addon"><i class="glyphicons glyphicons-search" aria-hidden="true"></i></span>
+                      <input type="text" style="z-index:1" name="invoiceCode" class="op-ux-input form-control" id="filterInvoiceCode">
                  </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label">
-                    <%=__('customer.fullName')%>
+                    <%=__('invoice.customerFullName')%>
                 </label>
                 <div class="col-sm-4">
                     <input type="text" id="filterFullName" class="op-ux-input form-control" name="fullName">
@@ -28,10 +28,13 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label">
-                    <%=__('customer.address')%>
+                    <%=__('invoice.invoiceDate')%>
                 </label>
                 <div class="col-sm-4">
-                    <textarea id="filterAddress" class="op-ux-input form-control" name="address"></textarea>
+                    <%if(true) {
+                        var dateChooser = {name: 'createdAt', id: 'filterCreatedAt', class: 'op-ux-input form-control'}; %>
+                    <%- include ../common/dateChooser%>
+                    <%}%>
                 </div>
             </div>
             <div class="btn-area">

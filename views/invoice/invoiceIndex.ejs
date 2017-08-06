@@ -91,7 +91,7 @@ $(document).ready( function() {
                    data : "createdAt",
                    render : function(data, type, row) {
                        return null == data ? "" 
-                          : moment(data).format('YYYY/MM/DD HH:MM');
+                          : moment(data).format('DD/MM/YYYY HH:MM');
                    }
                },
                { data : "organizationName", },

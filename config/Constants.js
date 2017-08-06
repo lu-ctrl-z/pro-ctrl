@@ -6,6 +6,8 @@ module.exports.Constants = {
     COMMON: {
         SUCCESS_CODE: 1,
         ERROR_CODE: -1,
+        DATE_FORMAT: "dd/MM/yyyy",
+        DATE_TIME_FORMAT: "dd/MM/yyyy HH:mm:ss",
     },
     OPTIC_CLASS:    1, // cận/ viễn/ loạn
     OPTIC_KIND: 2,     // mắt 1.56, 1.61 ...

@@ -78,13 +78,17 @@ module.exports = {
                    " WHERE " +
                    "    u.id = ? ";
         paramList.push(req.session.user['id']);
-        if(!CommonUtils.isNullOrEmpty(req.param('phoneNumber'))) {
-            from += " AND c.phone_number LIKE ? ";
-            paramList.push('%' + req.param('phoneNumber') + '%');
+        if(!CommonUtils.isNullOrEmpty(req.param('invoiceCode'))) {
+            from += " AND i.invoice_code LIKE ? ";
+            paramList.push('%' + req.param('invoiceCode') + '%');
         }
         if(!CommonUtils.isNullOrEmpty(req.param('fullName'))) {
             from += " AND c.full_name LIKE ? ";
             paramList.push('%' + req.param('fullName') + '%');
+        }
+        if(!CommonUtils.isNullOrEmpty(req.param('createdAt'))) {
+            from += " AND DATE_FORMAT(i.createdAt, '%d/%m/%Y') = ? ";
+            paramList.push(req.param('createdAt'));
         }
         var dataTableParam = DataTable.getParam(req);
         var mapColumns = {

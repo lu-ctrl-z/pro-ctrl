@@ -1,0 +1,29 @@
+<%
+    dateChooser.id = CommonUtils.isNull(dateChooser.id) ? dateChooser.name : dateChooser.id;
+%>
+<input type="text" name="<%=dateChooser.name%>" id="<%=dateChooser.id%>" 
+       class="validate[dateChooser] <%=dateChooser.class || ''%>"
+       value="<%=dateChooser.value || ''%>"
+       onblur="d2tChangeDateFormat(this)"
+       onchange="d2tChangeDateFormat(this);<%=dateChooser.onchange || ''%>"
+       />
+<script>
+    $(function() {
+        $("#<%=dateChooser.id%>").datetimepicker({
+            lang:'vi',
+            format: 'd/m/Y',
+            timepicker:false,
+            closeOnDateSelect: true,
+            scrollInput: false
+        });
+    });
+    // kiểm tra ngày có hợp lệ không
+    $("#<%=dateChooser.id%>").focusout(function() {
+        var dateStr= $("#<%=dateChooser.id%>").val();
+        if (dateStr != "" && !moment(dateStr, "DD/MM/YYYY").isValid()) {
+            alert("<%=__('alert.invalidDate')%>");
+            $("#<%=dateChooser.id%>").val("");
+            $("#<%=dateChooser.id%>").focus();
+        }
+    });
+</script>

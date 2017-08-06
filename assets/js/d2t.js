@@ -299,3 +299,84 @@ function d2tScrollTo(areaId) {
         scrollTop : $('#' + areaId).offset().top - $('#head-height-offset').height()
     }, 600);
 }
+/**
+ * chuyen gia tri nguoi dung nhap vao sang format chuan (dd/mm/yyyy)
+ * @param obj
+ * @author TienCB
+ */
+function d2tChangeDateFormat(obj) {
+    var data = obj.value;
+    var day;
+    var month;
+    var year;
+    var convertedData = "";
+
+    /** dinh dang ddmmyyyy  */
+    var regex1 = /^\d{8}$/;
+    /** dinh dang ddmmyy  */
+    var regex2 = /^\d{6}$/;
+    /* dinh dang dd-mm-yyyy */
+    var regex3 = /^\d{2}-\d{2}-\d{4}$/;
+    /* dinh dang dd/mm/yyyy */
+    var regex4 = /^\d{2}\/\d{2}\/\d{4}$/;
+
+    if (regex1.test(data)) {
+        day = data.substring(0, 2);
+        month = data.substring(2, 4);
+        year = data.substring(4, 8);
+        convertedData = day + "/" + month + "/" + year;
+    } else if (regex2.test(data)) {
+        day = data.substring(0, 2);
+        month = data.substring(2, 4);
+        year = data.substring(4, 6);
+        convertedData = day + "/" + month + "/" + "20" + year;
+    } else if (regex3.test(data)) {
+        day = data.substring(0, 2);
+        month = data.substring(3, 5);
+        year = data.substring(6, 10);
+        convertedData = day + "/" + month + "/" + year;
+    } else if (regex4.test(data)) {
+        convertedData = data;
+    } else {
+         var value = d2tIsDateFormat(data);
+         if (value == 2) {
+            alert("Ngày không đúng định dạng (dd/mm/yyyy)");
+         } else if (value == 3) {
+            alert("Ngày không hợp lệ");
+         }
+         convertedData = "";
+    }
+    obj.value = convertedData;
+}
+/**
+ * Kiem tra xem xau co phai la dinh dang ngay thang khong (dd/mm/yyyy).
+ * @param value Xau
+ * @return 0 neu khac rong va dinh dang ngay thang, 1 neu rong, 2 neu khong dung dinh dang, 3 neu khong hop le.
+ * @author HuyenNV
+ */
+function d2tIsDateFormat(value) {
+    value = trim(value);
+    if (value.length === 0) {
+        return 1;
+    } else {
+        var regex = /^\d{1,2}(\-|\/|\.)\d{1,2}\1\d{4}$/;
+        if (!value.match(regex)) {
+            return 2;
+        } else {
+
+            var dateArray = value.split('/');
+            var day = dateArray[0];
+            var month = dateArray[1] - 1; // Javascript consider months in the range 0 - 11
+            var year = dateArray[2];
+            var sourceDate = new Date(year, month, day);
+            //alert("day: " + day + "; month: " + month + "; year: " + year);
+            if ((year !== sourceDate.getFullYear())
+                    || (month !== sourceDate.getMonth())
+                    || (day !== sourceDate.getDate())) {
+                return 3;
+            } else {
+                return 0;
+            }
+        }
+    }
+}

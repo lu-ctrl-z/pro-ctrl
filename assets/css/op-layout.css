@@ -186,3 +186,6 @@ body {
 	line-height: 1em;
 	font-size: 115%;
 }
+.xdsoft_datetimepicker {
+    z-index: 2000000000;
+}

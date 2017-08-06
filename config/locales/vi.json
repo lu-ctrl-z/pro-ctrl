@@ -15,6 +15,7 @@
     ,"common.delete" :           "<span title='Xóa' class='icon-delete glyphicons glyphicons-bin'></span>"
     ,"common.view" :             "<span title='Chi tiết' class='icon-view glyphicons glyphicons-eye-open'></span>"
     ,"common.invalidPermission": "Lỗi phân quyền: \\n- Có thể bạn chưa được phân quyền chức năng này \\n- Hoặc bạn không được phân quyền với miền dữ liệu này!"
+    ,"alert.invalidDate":         "Ngày không tồn tại. Hãy điền lại ngày theo định dạng DD/MM/YYYY"
     ,"MSG.confirmAction":        "Bạn có thực sự muốn thực hiện thao tác?"
     ,"MSG.confirmCollectData":   "Bạn có muốn tổng hợp dữ liệu?"
     ,"MSG.confirmCreate":        "Bạn có thực sự muốn thực hiện thêm mới dữ liệu?"
@@ -85,6 +86,7 @@
     ,"customer.orgName" : "Cửa hàng/công ty"
     ,"customer.updatedAt" : "<span class='glyphicons glyphicons-clock' title='Thời gian cập nhật cuối cùng'></span>"
     ,"invoice.invoiceInfo" : "<span class=\"glyphicons glyphicons-notes-2\"></span> <span>Hóa đơn bán hàng</span>"
+    ,"invoice.invoiceSearchInfo" : "<span class='glyphicons glyphicons-search'></span> <span>Tìm kiếm hóa đơn</span>"
     ,"invoice.invoiceInfoList" : "<span class=\"glyphicons glyphicons-show-big-thumbnails\"></span> <span>Danh sách hóa đơn</span>"
     ,"invoice.name" : "Hóa đơn khách hàng:"
     ,"invoice.invoiceCode" : "Số hóa đơn"
@@ -93,4 +95,6 @@
     ,"invoice.totalPrice" : "Tổng giá trị HĐ"
     ,"invoice.trueTotalPrice" : "Thực nhận"
     ,"invoice.createdAt" : "Giờ tạo"
+    ,"invoice.invoiceDate" : "Ngày xuất hóa đơn"
+    ,"invoice.customerFullName" : "Họ tên khách hàng"
 }
