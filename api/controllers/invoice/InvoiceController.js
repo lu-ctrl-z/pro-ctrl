@@ -6,6 +6,48 @@
  */
 
 module.exports = {
+    actionIndexPage: function(req, res) {
+        res.view('invoice/invoiceIndex');
+    },
+    actionLoadInvoice: function(req, res) {
+        Invoice.getInvoiceList(req, res);
+    },
+    actionProcessDelete: function(req, res) {
+        var result = {};
+        var invoiceId = req.param('invoiceId');
+        Invoice.findOne({
+            invoiceId: invoiceId
+        }, function(err, invoice) {
+            if (err) {
+                console.log(err);
+            } else if (invoice) {
+                Customer.findOne({
+                    customer_id: invoice.customerId
+                }, function(err, customer) {
+                    CommonUtils.havePermissionWithOrg(req, customer.organization_id, function(boolean) {
+                        if(boolean) {
+                            Invoice.destroy({
+                                invoiceId : invoiceId
+                            }, function(err, ret) {
+                                if (err) {
+                                    console.log(err);
+                                    result.message = res.i18n('global.error');
+                                    result.returnCode = Constants.COMMON.ERROR_CODE;
+                                } else {
+                                    result.message = res.i18n('delete.succcess');
+                                    result.returnCode = Constants.COMMON.SUCCESS_CODE;
+                                }
+                                console.log(result)
+                                res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
+                            });
+                        } else {
+                            res.view(Constants.PAGE_FORWARD.INVALID_PERMISSION);
+                        }
+                    })
+                });
+            }
+        });
+    },
     /**
      * hàm thực hiện load form them moi / update don hang
      */

@@ -131,6 +131,20 @@ module.exports.routes = {
         }
     },
     //QL thông tin đơn hàng
+    '/invoice' : { // danh sach don hang
+        controller : 'invoice/InvoiceController',
+        action : 'actionIndexPage',
+        locals : {
+            layout : 'layouts/layout'
+        }
+    },
+    '/invoice/list' : {
+        controller : 'invoice/InvoiceController',
+        action : 'actionLoadInvoice',
+        locals : {
+            layout : null
+        }
+    },
     '/invoice/form' : { // load form nhập đơn hàng
         controller : 'invoice/InvoiceController',
         action : 'actionPrepareUpdate',
@@ -141,6 +155,13 @@ module.exports.routes = {
     'post /invoice/save-invoice' : { // Lưu thông tin đơn hàng
         controller : 'invoice/InvoiceController',
         action : 'actionProcessUpdate',
+        locals : {
+            layout : null
+        }
+    },
+    '/invoice/delete' : { // Lưu thông tin đơn hàng
+        controller : 'invoice/InvoiceController',
+        action : 'actionProcessDelete',
         locals : {
             layout : null
         }

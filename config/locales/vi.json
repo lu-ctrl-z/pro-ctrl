@@ -85,5 +85,12 @@
     ,"customer.orgName" : "Cửa hàng/công ty"
     ,"customer.updatedAt" : "<span class='glyphicons glyphicons-clock' title='Thời gian cập nhật cuối cùng'></span>"
     ,"invoice.invoiceInfo" : "<span class=\"glyphicons glyphicons-notes-2\"></span> <span>Hóa đơn bán hàng</span>"
+    ,"invoice.invoiceInfoList" : "<span class=\"glyphicons glyphicons-show-big-thumbnails\"></span> <span>Danh sách hóa đơn</span>"
     ,"invoice.name" : "Hóa đơn khách hàng:"
+    ,"invoice.invoiceCode" : "Số hóa đơn"
+    ,"invoice.customerName" : "Khách hàng"
+    ,"invoice.organizationName" : "Nơi bán hàng"
+    ,"invoice.totalPrice" : "Tổng giá trị HĐ"
+    ,"invoice.trueTotalPrice" : "Thực nhận"
+    ,"invoice.createdAt" : "Giờ tạo"
 }

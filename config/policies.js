@@ -40,5 +40,8 @@ module.exports.policies = {
     'customer/CustomerController': {
         '*' : ['authenticate', 'isLogin'],
     },
+    'invoice/InvoiceController': {
+        '*' : ['authenticate', 'isLogin'],
+    },
     
 };

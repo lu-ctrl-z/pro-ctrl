@@ -69,7 +69,7 @@ module.exports = {
         paramList.push(req.session.user['id']);
         if(!CommonUtils.isNullOrEmpty(req.param('phoneNumber'))) {
             from += " AND c.phone_number LIKE ? ";
-            paramList.push(req.param('phoneNumber') + '%');
+            paramList.push('%' + req.param('phoneNumber') + '%');
         }
         if(!CommonUtils.isNullOrEmpty(req.param('fullName'))) {
             from += " AND c.full_name LIKE ? ";

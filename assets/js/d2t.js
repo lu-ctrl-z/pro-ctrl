@@ -291,6 +291,9 @@ function isNullStr(str){
         return false;
     }
 }
+function formatMoney(input) {
+    return (input)? input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
+}
 function d2tScrollTo(areaId) {
     $("html, body").animate({
         scrollTop : $('#' + areaId).offset().top - $('#head-height-offset').height()

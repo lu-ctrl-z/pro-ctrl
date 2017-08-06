@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong class="h-i">
+            <%-__('customer.customerSearchInfo')%>
+        </strong>
+    </div>
+    <div class="panel-body">
+        <form action="/customer/list/" csrf method="post" id="frmSearch" class="form-horizontal">
+            <input type='hidden' name='_csrf' value='<%- _csrf %>'>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    <%=__('customer.phoneNumber')%>
+                </label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicons glyphicons-earphone" aria-hidden="true"></i></span>
+                      <input type="text" style="z-index:1" name="phoneNumber" class="op-ux-input form-control" id="filterPhoneNumber">
+                 </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    <%=__('customer.fullName')%>
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" id="filterFullName" class="op-ux-input form-control" name="fullName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    <%=__('customer.address')%>
+                </label>
+                <div class="col-sm-4">
+                    <textarea id="filterAddress" class="op-ux-input form-control" name="address"></textarea>
+                </div>
+            </div>
+            <div class="btn-area">
+                <button type="submit" onclick="pressSearchButton(); return false;" class="btn btn-info"><%-__('button.search')%></button>
+                <button type="button" class="btn btn-info" onclick="pressAddButton();" data-ng-click="currentPage=CS_PAGE.FORM"><%-__('button.add')%></button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+$(function() {
+    autosize(document.getElementById('filterAddress'));
+})
+</script>
