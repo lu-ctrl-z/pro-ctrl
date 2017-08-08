@@ -166,4 +166,11 @@ module.exports.routes = {
             layout : null
         }
     },
+    '/invoice/approve' : { // phê duyệt thông tin
+        controller : 'invoice/InvoiceController',
+        action : 'actionProcessApprove',
+        locals : {
+            layout : null
+        }
+    },
 };

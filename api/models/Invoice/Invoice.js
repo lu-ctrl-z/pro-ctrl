@@ -62,6 +62,7 @@ module.exports = {
         var paramList = [];
         var column = " SELECT " +
                      "  i.invoice_id As invoiceId " +
+                     ", c.customer_id As customerId " +
                      ", i.invoice_code As invoiceCode " +
                      ", i.total_price As totalPrice " +
                      ", i.true_total_price As trueTotalPrice " +

@@ -15,6 +15,43 @@ module.exports = {
     actionProcessDelete: function(req, res) {
         var result = {};
         var invoiceId = req.param('invoiceId');
+        this.havePermissionWithInvoice(req, res, function(boolean) {
+            Invoice.destroy({
+                invoiceId : invoiceId
+            }, function(err, ret) {
+                if (err) {
+                    console.log(err);
+                    result.message = res.i18n('global.error');
+                    result.returnCode = Constants.COMMON.ERROR_CODE;
+                } else {
+                    result.message = res.i18n('delete.succcess');
+                    result.returnCode = Constants.COMMON.SUCCESS_CODE;
+                }
+                console.log(result)
+                res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
+            });
+        });
+    },
+    actionProcessApprove : function(req, res) {
+        var invoiceId = req.param('invoiceId');
+        this.havePermissionWithInvoice(req, res, function(boolean) {
+            Invoice.update({ invoiceId: invoiceId }, {status: 1})
+            .exec(function(err, ret) {
+                result = {};
+                if (err) {
+                    result.message = res.i18n('global.error');
+                    result.returnCode = Constants.COMMON.ERROR_CODE;
+                } else {
+                    result.message = res.i18n('approve.succcess');
+                    result.returnCode = Constants.COMMON.SUCCESS_CODE;
+                }
+                res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
+            });
+        })
+    },
+    havePermissionWithInvoice: function(req, res, callback) {
+        var result = {};
+        var invoiceId = req.param('invoiceId');
         Invoice.findOne({
             invoiceId: invoiceId
         }, function(err, invoice) {
@@ -26,20 +63,7 @@ module.exports = {
                 }, function(err, customer) {
                     CommonUtils.havePermissionWithOrg(req, customer.organization_id, function(boolean) {
                         if(boolean) {
-                            Invoice.destroy({
-                                invoiceId : invoiceId
-                            }, function(err, ret) {
-                                if (err) {
-                                    console.log(err);
-                                    result.message = res.i18n('global.error');
-                                    result.returnCode = Constants.COMMON.ERROR_CODE;
-                                } else {
-                                    result.message = res.i18n('delete.succcess');
-                                    result.returnCode = Constants.COMMON.SUCCESS_CODE;
-                                }
-                                console.log(result)
-                                res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
-                            });
+                            callback(boolean);
                         } else {
                             res.view(Constants.PAGE_FORWARD.INVALID_PERMISSION);
                         }
