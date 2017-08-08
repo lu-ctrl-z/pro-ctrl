@@ -62,7 +62,7 @@ function pressDetailIcon(customerId, invoiceId) {
 }
 $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
-        angular.bootstrap(document.getElementById("content-body"), [ 'homeApp' ]);
+        angular.bootstrap(document.getElementById("content-body"), [ 'invoiceApp' ]);
     }
     $.fn.dataTable.ext.legacy.ajax = true;
     invoiceTbl = $('#invoiceTbl').DataTable({
@@ -109,9 +109,9 @@ $(document).ready( function() {
                    data: 'status',
                    render : function(status, type, row) {
                        if(status == 0) {
-                           return 'Chưa phê duyệt';
+                           return "<%=__('global.noneApprove')%>";
                        } else {
-                           return 'Đã phê duyệt';
+                           return "<%=__('global.approved')%>";
                        }
                    },
                },

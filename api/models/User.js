@@ -45,8 +45,9 @@ module.exports = {
             required: false,
             in: [1,2],
         },
-        organization_id : {
+        organizationId : {
             type: 'integer',
+            columnName: 'organization_id',
         },
     },
     formAttr: {

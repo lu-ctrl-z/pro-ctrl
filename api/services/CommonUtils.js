@@ -58,7 +58,7 @@ module.exports.NVL = function(checkValue, nullValue) {
  * check quyền đối với id đơn vị
  */
 module.exports.havePermissionWithOrg = function(req, orgId, cb) {
-    var orgId1 = req.session.user.organization_id;
+    var orgId1 = req.session.user.organizationId;
     Organization.findOne({organization_id: orgId1}, function(err, org1) {
         if(err) {
             console.log(err);

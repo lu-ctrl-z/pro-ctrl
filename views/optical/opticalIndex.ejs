@@ -1,143 +1,99 @@
+<style type="text/css">
+.btn-edit-syscat {
+    position: absolute;
+    top: 3px;
+    right: 2px;
+}
+.btn-edit-syscat > .glyphicons {
+    font-size: 11px !important;
+    color: rgb(174, 175, 179);
+}
+.sysCatType td {
+    position: relative;
+}
+</style>
+
 <div id="content-body"
-    ng-app="invoiceApp"
-    ng-controller="InvoiceController"
+    ng-app="opticalApp"
+    ng-controller="OpticalController"
 >
-<div class="cs-page__container" ng-cloak>
-    <div id="divSearch" data-cs-page="0" data-page-index="currentPage">
-        <%include ../invoice/invoiceSearchForm%>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong class="h-i">
+                    <%-__('optical.opticalSysCatType')%>
+                </strong>
+            </div>
+	        <div class="panel-body no-padding">
+	             <table class="table table-striped sysCatType">
+	                 <thead>
+	                     <tr>
+	                         <th class="size-1 stt alignCenter">STT</th>
+	                         <th class="alignCenter">Tên</th>
+	                     </tr>
+	                 </thead>
+	                 <tbody>
+	                     <tr ng-repeat="sysCatType in lstSysCatType">
+                             <td class="size-1 alignCenter stt">{{$index+1}}</th>
+                             <td>
+                                <a ng-click="loadSysCatByType(sysCatType)" href="javascript:void(0);">{{sysCatType.name}}</a>
+                                <button ng-if="sysCatType.countSysCat > 0" class="clear-button btn-edit-syscat"><span class="glyphicons glyphicons-pencil"></span></button>
+                             </th>
+                         </tr>
+	                 </tbody>
+	                 <tfoot>
+	                     <tr>
+                             <th class="size-1 stt alignCenter">
+                                <button ng-click="showAdd = !showAdd;" class="op-ux-button transitor-button" ng-class="{in: showAdd}"><span class="glyphicons glyphicons-plus"></span></button>
+                             </th>
+                             <th class="alignCenter" >
+                                <form>
+                                <div class="transitor-input" style="height: 28px;" ng-class="{in: showAdd}">
+                                    <div class="input-group">
+				                      <input title="{{nameAdd}}" name="name" type="text" ng-model="nameAdd" placeholder="Nhập tên mắt kính" class="form-control op-ux-input" style="z-index:1">
+				                      <span style="cursor: pointer;" class="input-group-addon">
+				                          <i class="glyphicons glyphicons-ok"></i>
+			                          </span>
+					                </div>
+                                </div>
+                                </form>
+                             </th>
+                         </tr>
+	                 </tfoot>
+	             </table>
+	        </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong class="h-i">
+                    <%-__('optical.opticalSysCat')%>
+                </strong>
+            </div>
+        </div>
     </div>
 </div>
-    <div id="divList" class="panel panel-default">
-        <div class="panel-heading">
-            <strong class="h-i">
-                <%-__('invoice.invoiceInfoList')%>
-            </strong>
-        </div>
-        <div class="panel-body" id="divListCustomer">
-            <%include ../invoice/invoiceList%>
-        </div>
-    </div>
-    
-    <%- include ../common/saveResultDisplay%>
+<%- include ../common/saveResultDisplay%>
 </div>
 <script type="text/javascript">
-var invoiceApp = angular.module('invoiceApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
-var invoiceTbl;
-invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $compile) {
-    $scope.CS_PAGE = {
-        SEARCH: 0,
-        FORM: 1,
-        INVOICE: 2,
+var opticalApp = angular.module('opticalApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
+opticalApp.controller('OpticalController', function( $scope, $http, $filter, $compile) {
+    $scope.lstSysCatType = [];
+    //lay danh sach loai mat kinh
+    $scope.loadSysCatType = function() {
+        var actionUrl = "/optical/listOpticalType";
+        d2tDeferredAjax("", actionUrl, "", "GET").done(function(data) {
+            $scope.lstSysCatType = data;
+            $scope.$apply();
+        });
     }
-    //Khoi tao trang
-    $scope.currentPage = $scope.CS_PAGE.SEARCH;
-    
-    $scope.compileAreaId = function(areaId) {
-        $compile($('#'+areaId).contents())($scope);
-    }
+    $scope.loadSysCatType();
 });
-function pressSearchButton() {
-    if($('#frmSearch').validationEngine('validate')) {
-        invoiceTbl.ajax.reload();
-    }
-}
-function pressDeleteIcon(invoiceId) {
-    if(confirmDelete()) {
-        var areaId = 'saveResultDisplayTag';
-        var actionUrl = '/invoice/delete?';
-        var formData = "invoiceId=" + invoiceId + d2tGetToken();
-        d2tUpdateAjax(areaId, actionUrl, formData, "pressSearchButton");
-    }
-}
-function pressApproveIcon(invoiceId) {
-    if(confirmAction()) {
-        var areaId = 'saveResultDisplayTag';
-        var actionUrl = '/invoice/approve?';
-        var formData = "invoiceId=" + invoiceId + d2tGetToken();
-        d2tUpdateAjax(areaId, actionUrl, formData, "pressSearchButton");
-    }
-}
-function pressDetailIcon(customerId, invoiceId) {
-    window.open('/invoice/form/?customerId=' + customerId + '&invoiceId=' + invoiceId, '_blank', '<%=__("config.invoiceFormatPopup")%>');
-}
 $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
-        angular.bootstrap(document.getElementById("content-body"), [ 'homeApp' ]);
+        angular.bootstrap(document.getElementById("content-body"), [ 'opticalApp' ]);
     }
-    $.fn.dataTable.ext.legacy.ajax = true;
-    invoiceTbl = $('#invoiceTbl').DataTable({
-        processing : true,
-        serverSide : true,
-        deferLoading: 90,
-        ajax : {
-            url : '/invoice/list',
-            type : 'GET',
-            dataSrc : 'data',
-            data : function (data) {
-                var formData = getFromAsObject('frmSearch');
-                d2tCopyProperty(data, formData);
-                return data;
-            }
-        },
-        columns : [
-               {
-                   searchable : false,
-                   orderable : false,
-                   data : null,
-                   targets : 0,
-                   className : "alignCenter",
-                   render : function(data, type, row, cell) {
-                       var info = invoiceTbl.page.info();
-                       var stt = 1 + (info.page * info.length) + cell.row;
-                       return stt;
-                   }
-               },
-               { data : "invoiceCode", className : "alignCenter", },
-               { data : "fullName", },
-               
-               { data : "totalPrice", className : "alignRight", render: formatMoney},
-               { data : "trueTotalPrice", className : "alignRight", render: formatMoney},
-               {
-                   data : "createdAt",
-                   render : function(data, type, row) {
-                       return null == data ? "" 
-                          : moment(data).format('DD/MM/YYYY HH:MM');
-                   }
-               },
-               { data : "organizationName", },
-               {
-                   data: 'status',
-                   render : function(status, type, row) {
-                       if(status == 0) {
-                           return 'Chưa phê duyệt';
-                       } else {
-                           return 'Đã phê duyệt';
-                       }
-                   },
-               },
-               {
-                   orderable : false,
-                   data: null,
-                   render : renderActionColumn,
-               },
-        ]
-        ,order : []
-    });
-    pressSearchButton();
 });
-function renderActionColumn(data, type, row) {
-    var html = '';
-    if(data.status == 0) {
-        html += '<a class="op-ux-icon-table" onclick="pressApproveIcon(' + data.invoiceId + ');" href="javascript:void(0);">' + '<%-__("common.approve")%></a>';
-    }
-        html +=  '<span class="has-notifi">';
-        html += '<a class="op-ux-icon-table" onclick="pressDetailIcon(' + data.customerId + ',' + data.invoiceId + ');" href="javascript:void(0);">';
-        html += "<%-__("common.view")%>";
-        html += '</a>';
-        html += '</span>';
-        if(data.status == 0) {
-            html += '<a class="op-ux-icon-table" onclick="pressDeleteIcon(' + data.invoiceId + ');" href="javascript:void(0);">' + "<%-__('common.delete')%></a>";
-        }
-        return html;
-}
 </script>

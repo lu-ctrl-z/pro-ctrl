@@ -27,7 +27,11 @@ module.exports.policies = {
   ***************************************************************************/
 
   '*': ['authenticate'],
-
+  //for admin
+  'admin/AdminController': {
+      '*' : ['authenticate', 'isAdmin'],
+  },
+  //End
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
@@ -43,5 +47,7 @@ module.exports.policies = {
     'invoice/InvoiceController': {
         '*' : ['authenticate', 'isLogin'],
     },
-    
+    'sysCat/SysCatController': {
+        '*' : ['authenticate', 'isLogin'],
+    },
 };

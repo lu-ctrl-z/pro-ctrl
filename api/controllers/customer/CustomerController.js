@@ -32,7 +32,7 @@ module.exports = {
             phone_number : req.param('phoneNumber'),
             full_name : req.param('fullName'),
             address : req.param('address'),
-            organization_id : req.session.user.organization_id,
+            organization_id : req.session.user.organizationId,
         };
         var callbackAfterSaveOrUpdate = function(err, customer){
             if (err) {

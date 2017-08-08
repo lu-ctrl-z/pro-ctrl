@@ -1,0 +1,26 @@
+<div id="content-body"
+    ng-app="sysCatApp"
+    ng-controller="SysCatController"
+>
+<div class="cs-page__container" ng-cloak>
+    
+</div>
+<%- include ../../common/saveResultDisplay%>
+</div>
+<script type="text/javascript">
+var sysCatApp = angular.module('sysCatApp', ['ngAnimate', 'ngSanitize', 'csProgress' ]);
+var invoiceTbl;
+sysCatApp.controller('SysCatController', function( $scope, $http, $filter, $compile) {
+    $scope.CS_PAGE = {
+        SEARCH: 0,
+        FORM: 1,
+        INVOICE: 2,
+    }
+    //Khoi tao trang
+    $scope.currentPage = $scope.CS_PAGE.SEARCH;
+    
+    $scope.compileAreaId = function(areaId) {
+        $compile($('#'+areaId).contents())($scope);
+    }
+});
+</script>

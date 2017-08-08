@@ -9,8 +9,18 @@ module.exports = {
     /**
      * hiển thị màn hình index
      */
-    index : function(req, res) {
+    actionIndexPage : function(req, res) {
         res.view('optical/opticalIndex');
     },
+    /**
+     * hiển thị màn hình index
+     */
+    actionLoadListOpticalType : function(req, res) {
+        var callback = function(returnData) {
+            res.json(returnData);
+        };
+        SysCatType.getListByParentId(req, Constants.SYS_CAT_TYPE.SYS_CAT_TYPE_OPTICAL, callback);
+    },
+    
 
 }

@@ -173,4 +173,26 @@ module.exports.routes = {
             layout : null
         }
     },
+    //QL thông tin đơn hàng
+    '/optical' : { // danh sach don hang
+        controller : 'optical/OpticalController',
+        action : 'actionIndexPage',
+        locals : {
+            layout : 'layouts/layout'
+        }
+    },
+    '/optical/listOpticalType' : { // danh mục loại mắt kính
+        controller : 'optical/OpticalController',
+        action : 'actionLoadListOpticalType',
+        locals : {
+            layout : null
+        }
+    },
+    '/sysCat' : {
+        controller : 'sysCat/SysCatController',
+        action : 'actionSysCatIndex',
+        locals : {
+            layout : 'layouts/layout'
+        }
+    },
 };

@@ -15,6 +15,15 @@
 .vmiddle {
 	vertical-align: middle; 
 }
+.no-padding {
+	padding: 0px;
+}
+.striped > .li:nth-child(odd) {
+	background: #fff;
+}
+.striped > .li:nth-child(even) {
+	background: #eeeeee;
+}
 .d2tSoftware {
 	background-color: #bc2328;
 	height: 60px;
@@ -91,7 +100,7 @@
     transform: rotate(35deg);
 } */
 input, textarea, button {
-	font-family: Roboto,arial,sans-serif;
+	/* font-family: Roboto,arial,sans-serif; */
 }
 ul,li {
 	list-style-type: none;
@@ -257,6 +266,13 @@ table {
 .op-ux-button:HOVER {
 	border: 1px solid #e8e8e8;
 }
+.clear-button {
+	display: inline-block;
+	background: transparent;
+	border: none;
+	padding: 0px;
+	margin: 0px;
+}
 .op-ux-input {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -266,6 +282,7 @@ table {
     transition: all 0.2s ease 0s;
     font-size: 14px;
     outline: none;
+    font-weight: normal;
 }
 .op-ux-input:FOCUS {
     border: 1px solid #1c62b9;
@@ -416,4 +433,42 @@ table.dataTable {
 }
 .dataTables_paginate {
 	font-weight: bold;
+}
+.sysCatType a{
+	display: block; 
+}
+.sysCatType {
+	margin: 0px;
+}
+.sysCatType .stt{
+	border-right: 1px solid #ddd;
+}
+.transitor-input {
+	position: relative;
+	overflow: hidden;
+}
+.transitor-input > .input-group,
+.transitor-input > input[type="text"]{
+	position: absolute;
+	top: -100%;
+	left: 0px;
+	transition: all 0.2s ease 0s;
+}
+.transitor-input.in > .input-group,
+.transitor-input.in > input[type="text"]{
+	top: 0px;
+	left: 0px;
+}
+.transitor-button.in > .glyphicons{
+	transition: all 0.2s ease 0s;
+	transform: rotate(45deg);
+	color: #bc2328; 
+}
+.transitor-button {
+	height: 26px;
+	height: 26px;
+}
+.transitor-button > .glyphicons{
+	transition: all 0.2s ease 0s;
+	color: rgb(174, 175, 179);
 }

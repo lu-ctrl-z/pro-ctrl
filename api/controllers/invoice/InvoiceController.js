@@ -88,7 +88,7 @@ module.exports = {
                 CommonUtils.havePermissionWithOrg(req, customer.organization_id, function(boolean) {
                     if(boolean) {
                         var siteTitle = res.i18n("invoice.name") + " " + customer.full_name;
-                        var orgId = req.session.user.organization_id;
+                        var orgId = req.session.user.organizationId;
                         Organization.findOne({
                             organizationId: orgId
                         }, function(err, organization) {
