@@ -147,7 +147,7 @@ function pressExportInvoice() {
         if(scope.invoice.invoiceId) {
             formData.invoiceId = scope.invoice.invoiceId;
         }
-        d2tDefferedAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice").done(function() {
+        d2tDeferredAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice").done(function() {
             window.print();
         });
     }
