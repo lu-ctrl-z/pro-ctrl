@@ -147,9 +147,7 @@ function pressExportInvoice() {
         if(scope.invoice.invoiceId) {
             formData.invoiceId = scope.invoice.invoiceId;
         }
-        d2tDeferredAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice").done(function() {
-            window.print();
-        });
+        d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice");
     }
 }
 function callbackAfterSaveInvoice(returnCode, extraValue, invoice) {
@@ -164,6 +162,7 @@ function callbackAfterSaveInvoice(returnCode, extraValue, invoice) {
             newUrl += '&invoiceId=' + scope.invoice.invoiceId;
             var newTitle = "<%=siteTitle%>";
             window.history.replaceState({}, newTitle, newUrl);
+            $('#print1').trigger('click');
         } catch(e) {
             console.log(e)
         }

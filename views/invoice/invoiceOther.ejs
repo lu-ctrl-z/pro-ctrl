@@ -1,6 +1,7 @@
 <div class="btn-area btn-right-area hideOnPrint invoiceWrapper">
     <button type="button" onclick="pressBackButton();" class="btn btn-danger cmd-shortcut-form" data-form-shortcut-key="ESC"><%-__('button.back')%> (ESC)</button>
     <button ng-if="!invoice.status || invoice.status==0" onclick="pressExportInvoice();" class="btn btn-info cmd-shortcut-form" type="button" data-form-shortcut-key="Ctrl+L"><%-__('button.exportInvoice')%> (Ctrl+L)</button>
+    <button id="print2" onclick="window.print();" class="btn btn-info cmd-shortcut-form" type="button" data-form-shortcut-key="Ctrl+P">In hóa đơn (Ctrl+P)</button>
 </div>
 <div class="invoice">
     <table class="invoice-head">
