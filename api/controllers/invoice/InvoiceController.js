@@ -195,10 +195,14 @@ module.exports = {
             });
         } else {
             Invoice.create(formDataInsert, function(err, invoice) {
-                var invoiceCode = CommonUtils.sprintf("1%'09s", invoice.invoiceId);
-                console.log(invoiceCode);
-                Invoice.update({ invoiceId: invoice.invoiceId }, {invoiceCode: invoiceCode})
-                    .exec(callbackAfterSaveOrUpdate);
+                if(err) {
+                    console.log(err);
+                } else if (invoice) {
+                    var invoiceCode = CommonUtils.sprintf("1%'09s", invoice.invoiceId);
+                    console.log(invoiceCode);
+                    Invoice.update({ invoiceId: invoice.invoiceId }, {invoiceCode: invoiceCode})
+                        .exec(callbackAfterSaveOrUpdate);
+                }
             });
         }
     }
