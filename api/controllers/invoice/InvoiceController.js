@@ -148,6 +148,7 @@ module.exports = {
                 cartList: JSON.stringify(req.param('cartList')),
                 note: req.param('note'),
                 customerId: customerForm.customer_id,
+                status: 0,
         };
         var callbackAfterSaveOrUpdate = function(err, invoice){
             var result = {};
