@@ -91,8 +91,8 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
     }
     $scope.totalPayMoney = function() {
         var total = $scope.totalMoney();
-        if($scope.totalDiscount) {
-            total -= parseFloat($scope.totalDiscount);
+        if($scope.invoice.totalDiscount) {
+            total -= parseFloat($scope.invoice.totalDiscount);
         }
         return total;
     }
@@ -106,8 +106,8 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
     $scope.percent = function() {
         var total = $scope.totalMoney();
         var percent = '0%';
-        if($scope.totalDiscount) {
-            percent = Math.round((parseFloat($scope.totalDiscount)/$scope.totalMoney()) * 100) + '%';
+        if($scope.invoice.totalDiscount) {
+            percent = Math.round((parseFloat($scope.invoice.totalDiscount)/$scope.totalMoney()) * 100) + '%';
         }
         return percent;
     }
@@ -147,7 +147,9 @@ function pressExportInvoice() {
         if(scope.invoice.invoiceId) {
             formData.invoiceId = scope.invoice.invoiceId;
         }
-        d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice");
+        d2tDefferedAjax(areaId, actionUrl, formData, "callbackAfterSaveInvoice").done(function() {
+            window.print();
+        });
     }
 }
 function callbackAfterSaveInvoice(returnCode, extraValue, invoice) {
@@ -162,7 +164,6 @@ function callbackAfterSaveInvoice(returnCode, extraValue, invoice) {
             newUrl += '&invoiceId=' + scope.invoice.invoiceId;
             var newTitle = "<%=siteTitle%>";
             window.history.replaceState({}, newTitle, newUrl);
-            window.print();
         } catch(e) {
             console.log(e)
         }
