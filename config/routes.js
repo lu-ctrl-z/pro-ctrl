@@ -40,7 +40,7 @@ module.exports.routes = {
         }
     },
     'get /login' : {
-        controller : 'admin/AdminController',
+        controller : 'admin/UserController',
         action : 'login',
         locals : {
             layout : 'layouts/admin_layout'

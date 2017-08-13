@@ -56,4 +56,14 @@ module.exports = {
             doLogout();
         }
     },
+    login : function(req, res) {
+        if (req.session.authenticated && req.session.user['auth_type'] == 2) {
+            res.redirect('/admin/');
+            return;
+        }
+        var $next = req.param('next');
+        res.view('admin/login', {
+            next : $next
+        });
+    },
 };
