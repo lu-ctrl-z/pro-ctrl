@@ -48,7 +48,7 @@ invoiceApp.controller('InvoiceController', function( $scope, $http, $filter, $co
     if($scope.invoice.cartList) {
         $scope.cartList = $scope.invoice.cartList;
     } else {
-        var numberOfRowOptical = 5;
+        var numberOfRowOptical = 3;
         for(var i = 1; i <= numberOfRowOptical; i++) {
             var cartItem = {stt: i};
             $scope.cartList.push(cartItem);
