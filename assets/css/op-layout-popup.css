@@ -150,7 +150,7 @@ hr.border {
 @media print {
     @page { margin: 5px; }
     .invoice {
-        /* border: none; */
+        border: none;
         margin-bottom: 0px;
     }
     .showOnPrint {
