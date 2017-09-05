@@ -5,6 +5,9 @@
     height: 0;
     visibility: hidden;
 }
+.fff {
+	color: #fff;
+}
 .clearfix::after {
     clear: both;
     content: ".";
@@ -459,6 +462,16 @@ table.dataTable {
 	top: 0px;
 	left: 0px;
 }
+/* .transitor-input.in {
+	overflow: visible;
+} */
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 100%;
+}
 .transitor-button.in > .glyphicons{
 	transition: all 0.2s ease 0s;
 	transform: rotate(45deg);
@@ -471,4 +484,14 @@ table.dataTable {
 .transitor-button > .glyphicons{
 	transition: all 0.2s ease 0s;
 	color: rgb(174, 175, 179);
+}
+.tableLayoutFixed {
+	table-layout: fixed;
+}
+.catName {
+	display: block;
+	padding: 10px 8px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

@@ -177,6 +177,10 @@ module.exports = {
                     Customer.findOne({customer_id: invoice.customerId}, function(err, customer) {
                         if (err) {
                             console.log(err);
+                            var result = {};
+                            result.message = res.i18n("global.error");
+                            result.returnCode = Constants.COMMON.ERROR_CODE;
+                            res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
                         } else if(customer) {
                             CommonUtils.havePermissionWithOrg(req, customer.organization_id, function(boolean) {
                                 if(boolean) {
@@ -198,6 +202,10 @@ module.exports = {
             Invoice.create(formDataInsert, function(err, invoice) {
                 if(err) {
                     console.log(err);
+                    var result = {};
+                    result.message = res.i18n("global.error");
+                    result.returnCode = Constants.COMMON.ERROR_CODE;
+                    res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
                 } else if (invoice) {
                     var invoiceCode = CommonUtils.sprintf("1%'09s", invoice.invoiceId);
                     console.log(invoiceCode);

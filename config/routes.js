@@ -188,6 +188,13 @@ module.exports.routes = {
             layout : null
         }
     },
+    '/optical/add-sys-cat-type' : { // danh mục loại mắt kính
+        controller : 'optical/OpticalController',
+        action : 'actionProcessSave',
+        locals : {
+            layout : null
+        }
+    },
     '/sysCat' : {
         controller : 'sysCat/SysCatController',
         action : 'actionSysCatIndex',

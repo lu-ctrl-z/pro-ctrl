@@ -21,6 +21,34 @@ module.exports = {
         };
         SysCatType.getListByParentId(req, Constants.SYS_CAT_TYPE.SYS_CAT_TYPE_OPTICAL, callback);
     },
-    
+    /**
+     * Xử lý lưu thông tin syscattype
+     */
+    actionProcessSave : function(req, res) {
+        var formData = {
+                name: req.param('name'),
+                organizationId: req.session.user.organizationId,
+                parentId: Constants.SYS_CAT_TYPE.SYS_CAT_TYPE_OPTICAL,
+        };
+        var callback = function(returnData) {
+            res.json(returnData);
+        };
+        SysCatType.create(formData, function(err, sysCatType) {
+            if(err) {
+                console.log(err);
+                var result = {};
+                result.message = res.i18n("global.error");
+                result.returnCode = Constants.COMMON.ERROR_CODE;
+                res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
+            } else {
+                var result = {};
+                result.message = res.i18n('global.success');
+                result.returnCode = Constants.COMMON.SUCCESS_CODE;
+                result.callback = req.param('callback');
+                result.returnData = JSON.stringify(sysCatType);
+                res.view(Constants.PAGE_FORWARD.SAVE_RESULT, result);
+            }
+        });
+    },
 
 }

@@ -25,44 +25,62 @@
                     <%-__('optical.opticalSysCatType')%>
                 </strong>
             </div>
-	        <div class="panel-body no-padding">
-	             <table class="table table-striped sysCatType">
-	                 <thead>
-	                     <tr>
-	                         <th class="size-1 stt alignCenter">STT</th>
-	                         <th class="alignCenter">Tên</th>
-	                     </tr>
-	                 </thead>
-	                 <tbody>
-	                     <tr ng-repeat="sysCatType in lstSysCatType">
-                             <td class="size-1 alignCenter stt">{{$index+1}}</th>
-                             <td>
-                                <a ng-click="loadSysCatByType(sysCatType)" href="javascript:void(0);">{{sysCatType.name}}</a>
-                                <button ng-if="sysCatType.countSysCat > 0" class="clear-button btn-edit-syscat"><span class="glyphicons glyphicons-pencil"></span></button>
-                             </th>
+            <div class="panel-body no-padding">
+                <ol class="ol-number">
+                    <li ng-repeat="sysCatType in lstSysCatType" class="rel">
+                        <a href="#" class="catName border-bottom" style="padding-right:35px;">
+                        {{$index+1}}. {{sysCatType.name}} ({{0}})
+                        </a>
+                        <a ng-click="showAdd = !showAdd;" class="abs op-ux-button transitor-button">
+                            <span class="glyphicons glyphicons-option-horizontal"></span>
+                        </a>
+                    </li>
+                </ol>
+                 <table class="table tableLayoutFixed table-striped sysCatType">
+                     <thead>
+                         <tr>
+                             <th class="size-1 stt alignCenter"><%-__('global.stt')%></th>
+                             <th class="alignCenter"><%-__('global.title')%></th>
+                             <th class="alignCenter"></th>
                          </tr>
-	                 </tbody>
-	                 <tfoot>
-	                     <tr>
+                     </thead>
+                     <tbody>
+                         <tr ng-repeat="sysCatType in lstSysCatType">
+                             <td style="width: 32px;" class="size-1 alignCenter stt">{{$index+1}}</td>
+                             <td style="width: 250px;">
+                                    {{sysCatType.name}} ({{0}})
+                                <!-- <button ng-if="sysCatType.countSysCat <= 0" class="clear-button btn-edit-syscat"><span class="glyphicons glyphicons-pencil"></span></button> -->
+                             </td>
+                             <td style="width: 32px;" class="size-1 alignCenter stt">
+                                <a ng-click="showAdd = !showAdd;" class="op-ux-button transitor-button">
+                                    <span class="glyphicons glyphicons-option-horizontal"></span>
+                                </a>
+                             </td>
+                         </tr>
+                     </tbody>
+                     <tfoot>
+                         <tr>
                              <th class="size-1 stt alignCenter">
                                 <button ng-click="showAdd = !showAdd;" class="op-ux-button transitor-button" ng-class="{in: showAdd}"><span class="glyphicons glyphicons-plus"></span></button>
                              </th>
-                             <th class="alignCenter" >
-                                <form>
+                             <th class="alignCenter" colspan="2">
+                                <form id="frmSysCatType">
+                                <input type='hidden' name='_csrf' value='<%- _csrf %>'>
                                 <div class="transitor-input" style="height: 28px;" ng-class="{in: showAdd}">
                                     <div class="input-group">
-				                      <input title="{{nameAdd}}" name="name" type="text" ng-model="nameAdd" placeholder="Nhập tên mắt kính" class="form-control op-ux-input" style="z-index:1">
-				                      <span style="cursor: pointer;" class="input-group-addon">
-				                          <i class="glyphicons glyphicons-ok"></i>
-			                          </span>
-					                </div>
+                                      <input title="{{nameAdd}}" name="name" type="text" ng-model="nameAdd" placeholder="Nhập tên mắt kính" maxlength="255" class="form-control op-ux-input validate[required,maxSize[255]]" style="z-index:1">
+                                      <label style="cursor: pointer; display:table-cell !important;" class="input-group-addon btn-info">
+                                          <button type="submit" style="position:absolute; visibility: hidden;" ng-click="addNewSysCatType();"></button>
+                                          <i class="glyphicons glyphicons-ok fff"></i>
+                                      </label>
+                                    </div>
                                 </div>
                                 </form>
                              </th>
                          </tr>
-	                 </tfoot>
-	             </table>
-	        </div>
+                     </tfoot>
+                 </table>
+            </div>
         </div>
     </div>
     <div class="col-sm-8">
@@ -90,7 +108,22 @@ opticalApp.controller('OpticalController', function( $scope, $http, $filter, $co
         });
     }
     $scope.loadSysCatType();
+    $scope.addNewSysCatType = function() {
+        if($('#frmSysCatType').validationEngine('validate')) {
+            var areaId = 'saveResultDisplayTag';
+            var actionUrl = '/optical/add-sys-cat-type?';
+            var formData = getFormAsString('frmSysCatType');
+            d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSaveType");
+        }
+    }
 });
+function callbackAfterSaveType(returnCode, extraValue, sysCatType) {
+    var scope = angular.element(document.getElementById('content-body')).scope();
+    scope.lstSysCatType.push(sysCatType);
+    scope.showAdd = !1;
+    scope.$apply();
+    d2tResetForm('frmSysCatType');
+}
 $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
         angular.bootstrap(document.getElementById("content-body"), [ 'opticalApp' ]);

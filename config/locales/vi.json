@@ -35,6 +35,7 @@
     ,"global.approved":          "Đã phê duyệt"
     ,"delete.succcess":          "Xóa dữ liệu thành công"
     ,"approve.succcess":         "Phê duyệt dữ liệu thành công"
+    ,"global.title":             "Danh mục"
   
     ,"dataTable.processing":     "Đang xử lý..."
     ,"dataTable.show":           "Hiển thị"
