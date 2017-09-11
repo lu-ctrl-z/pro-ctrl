@@ -50,5 +50,25 @@ module.exports = {
             }
         });
     },
+    /**
+     * lấy thông tin detail
+     */
+    actionLoadDetail: function(req, res) {
+        SysCatType.loadSysCatList(req, res);
+    },
+    /**
+     * lấy thông tin màn hình searh
+     */
+    actionPrepareSearch: function(req, res) {
+        var sysCatTypeId = CommonUtils.getParameterLong(req, "sysCatTypeId");
+        SysCatType.findOne({sysCatTypeId: sysCatTypeId}).exec(function(err, sysCatTypeBO) {
+            if(err) {
+                console.log(err);
+            }
+            res.view('optical/opticalForm', {
+                'sysCatTypeBO' : sysCatTypeBO
+            });
+        });
+    }
 
 }

@@ -181,7 +181,7 @@ module.exports.routes = {
             layout : 'layouts/layout'
         }
     },
-    '/optical/listOpticalType' : { // danh mục loại mắt kính
+    '/optical/list-optical-type' : { // danh mục loại mắt kính
         controller : 'optical/OpticalController',
         action : 'actionLoadListOpticalType',
         locals : {
@@ -191,6 +191,20 @@ module.exports.routes = {
     '/optical/add-sys-cat-type' : { // danh mục loại mắt kính
         controller : 'optical/OpticalController',
         action : 'actionProcessSave',
+        locals : {
+            layout : null
+        }
+    },
+    '/optical/load-detail' : { // danh chi tiết
+        controller : 'optical/OpticalController',
+        action : 'actionLoadDetail',
+        locals : {
+            layout : null
+        }
+    },
+    '/optical/prepare-search' : { // load form search
+        controller : 'optical/OpticalController',
+        action : 'actionPrepareSearch',
         locals : {
             layout : null
         }

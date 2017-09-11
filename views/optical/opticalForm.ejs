@@ -1,53 +1,42 @@
-<%if(typeof customer === 'undefined') {
-    customer = {};
+<%if(typeof sysCat === 'undefined') {
+    sysCat = {};
 }%>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <strong class="h-i">
-            <%-__('customer.customerSaveInfo')%>
-        </strong>
+<%if(typeof sysCatTypeBO === 'undefined') {
+    sysCatTypeBO = {};
+}%>
+<%if(typeof isSearch === 'undefined') {
+    isSearch = true;
+}%>
+<form id="frmSave" class="form-horizontal">
+    <input type='hidden' name='_csrf' value='<%- _csrf %>'>
+    <input type='hidden' name='sysCatId' value='<%=form_value("sysCatId", req, sysCat)%>'>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            <%=__('global.title')%>
+        </label>
+        <div class="col-sm-9">
+            <input type="text" <%if(!isSearch) {%> disabled="disabled" <%}%> value='<%=sysCatTypeBO.name%>' class="op-ux-input form-control">
+        </div>
     </div>
-    <div class="panel-body">
-        <form id="frmSave" class="form-horizontal">
-            <input type='hidden' name='_csrf' value='<%- _csrf %>'>
-            <input type='hidden' name='customerId' value='<%=form_value("customer_id", req, customer)%>'>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    <%=__('customer.phoneNumber')%>
-                </label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicons glyphicons-earphone" aria-hidden="true"></i></span>
-                      <input type="text" style="z-index:1" maxlength="20" value='<%=form_value("phone_number", req, customer)%>' name="phoneNumber" class="op-ux-input form-control validate[maxSize[20],custom[phone]]" id="phoneNumber">
-                 </div>
-                </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">
+            <%=__('global.code')%>
+        </label>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicons glyphicons-barcode" aria-hidden="true"></i></span>
+                <input disabled="disabled" type="text" style="z-index:1" maxlength="20" value='<%=form_value("phone_number", req, sysCat)%>' name="phoneNumber" class="op-ux-input form-control validate[maxSize[20],custom[phone]]" id="phoneNumber">
             </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    <%=__('customer.fullName')%><%-__('common.mandatory')%>
-                </label>
-                <div class="col-sm-4">
-                    <input type="text" maxlength="255" value='<%=form_value("full_name", req, customer)%>' class="op-ux-input form-control validate[required,maxSize[255]]" name="fullName">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">
-                    <%=__('customer.address')%>
-                </label>
-                <div class="col-sm-4">
-                    <textarea maxlength="255" id="address" class="op-ux-input form-control validate[maxSize[255]]" name="address"><%=form_value("address", req, customer)%></textarea>
-                </div>
-            </div>
-            <div class="btn-area">
-                <button type="button" class="btn btn-danger" data-ng-click="currentPage=CS_PAGE.SEARCH"><%-__('button.back')%></button>
-                <button type="submit" class="btn btn-info" onclick="pressSaveButton();"><%-__('button.save')%></button>
-                <button type="button" class="btn btn-info" onclick="pressSaveAndInvoice();"><%-__('button.saveAndInvoice')%></button>
-            </div>
-        </form>
+        </div>
+        <label class="col-sm-1 control-label">
+            <%=__('global.name')%>
+        </label>
+        <div class="col-sm-4">
+            <input type="text" style="z-index:1" maxlength="20" value='<%=form_value("phone_number", req, sysCat)%>' name="phoneNumber" class="op-ux-input form-control validate[maxSize[20],custom[phone]]" id="phoneNumber">
+        </div>
     </div>
-</div>
-<script>
-$(function() {
-    autosize(document.getElementById('address'));
-})
-</script>
+    <div class="btn-area">
+        <button type="submit" class="btn btn-info" onclick="pressSaveButton();"><%-__('button.save')%></button>
+        <button type="button" class="btn btn-danger" ><%-__('button.back')%></button>
+    </div>
+</form>

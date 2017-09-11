@@ -59,5 +59,52 @@ module.exports = {
             callback(resultList);
         });
     },
+    /**
+     * ham lay danh muc theo loai danh muc
+     */
+    getSysCatList: function(sysCatTypeId, callback) {
+        var paramList = [];
+        var column = " SELECT " +
+                     "  sc.sys_cat_id As sysCatId " +
+                     "  ,sc.sys_cat_type_id As sysCatTypeId " +
+                     "  ,sc.code As code " +
+                     "  ,sc.name As name " +
+                     "  ,sc.description As description ";
+        var from =   " FROM SYS_CAT sc " +
+                     " WHERE " +
+                     "     sc.sys_cat_type_id = ? ";
+        paramList.push(sysCatTypeId);
+        var query = column + from;
+        Dual.query(query, paramList, function(err, resultList) {
+            callback(resultList);
+        });
+    },
+    /**
+     * ham lay danh muc theo loai danh muc
+     */
+    loadSysCatList: function(req, res, callback) {
+        var paramList = [];
+        var column = " SELECT " +
+                     "  sc.sys_cat_id As sysCatId " +
+                     "  ,sc.sys_cat_type_id As sysCatTypeId " +
+                     "  ,sc.code As code " +
+                     "  ,sc.name As name " +
+                     "  ,( SELECT COUNT(*) FROM PRODUCT p WHERE p.sys_cat_id = sc.sys_cat_id AND p.is_sold = 0 ) As totalProduct " +
+                     "  ,sc.description As description ";
+        var from =   " FROM SYS_CAT sc WHERE sc.sys_cat_type_id = ? ";
+        paramList.push(CommonUtils.getParameterLong(req, "sysCatTypeId"));
+        var dataTableParam = DataTable.getParam(req);
+        var mapColumns = {
+                sysCatId: 'sc.sys_cat_id',
+                sysCatTypeId: 'sc.sys_cat_type_id',
+                code: 'sc.code',
+                name: 'sc.name',
+                description: 'sc.description',
+            };
+        var query = column + from;
+        var countQuery = "SELECT COUNT(*) As count " + from;
+        DataTable.toJson(req, res, query, countQuery, paramList, callback);
+    },
+    
 };
 

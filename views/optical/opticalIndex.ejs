@@ -27,37 +27,17 @@
             </div>
             <div class="panel-body no-padding">
                 <ol class="ol-number">
-                    <li ng-repeat="sysCatType in lstSysCatType" class="rel">
-                        <a href="#" class="catName border-bottom" style="padding-right:35px;">
+                    <li ng-repeat="sysCatType in lstSysCatType" class="rel border-bottom">
+                        <a href="javascript:void(0);" ng-click="loadDetailByType(sysCatType);" class="catName" style="padding-right:35px;">
                         {{$index+1}}. {{sysCatType.name}} ({{0}})
                         </a>
-                        <a ng-click="showAdd = !showAdd;" class="abs op-ux-button transitor-button">
-                            <span class="glyphicons glyphicons-option-horizontal"></span>
+                        <a class="abs more" href="javascript:void(0);">
+                            <span class="glyphicons glyphicons-option-horizontal" ng-if="isActive != sysCatType.sysCatTypeId"></span>
+                            <span class="glyphicons glyphicons-ok" ng-if="isActive == sysCatType.sysCatTypeId" style="color: #bc2328;"></span>
                         </a>
                     </li>
                 </ol>
                  <table class="table tableLayoutFixed table-striped sysCatType">
-                     <thead>
-                         <tr>
-                             <th class="size-1 stt alignCenter"><%-__('global.stt')%></th>
-                             <th class="alignCenter"><%-__('global.title')%></th>
-                             <th class="alignCenter"></th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                         <tr ng-repeat="sysCatType in lstSysCatType">
-                             <td style="width: 32px;" class="size-1 alignCenter stt">{{$index+1}}</td>
-                             <td style="width: 250px;">
-                                    {{sysCatType.name}} ({{0}})
-                                <!-- <button ng-if="sysCatType.countSysCat <= 0" class="clear-button btn-edit-syscat"><span class="glyphicons glyphicons-pencil"></span></button> -->
-                             </td>
-                             <td style="width: 32px;" class="size-1 alignCenter stt">
-                                <a ng-click="showAdd = !showAdd;" class="op-ux-button transitor-button">
-                                    <span class="glyphicons glyphicons-option-horizontal"></span>
-                                </a>
-                             </td>
-                         </tr>
-                     </tbody>
                      <tfoot>
                          <tr>
                              <th class="size-1 stt alignCenter">
@@ -83,12 +63,17 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8">
-        <div class="panel panel-default">
+    <div class="col-sm-8" id="detailArea" ng-show="isActive">
+         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong class="h-i">
                     <%-__('optical.opticalSysCat')%>
                 </strong>
+            </div>
+            <div class="panel-body border-bottom" id="formArea">
+            </div>
+            <div class="panel-body">
+                <%include ../optical/opticalList%>
             </div>
         </div>
     </div>
@@ -101,7 +86,7 @@ opticalApp.controller('OpticalController', function( $scope, $http, $filter, $co
     $scope.lstSysCatType = [];
     //lay danh sach loai mat kinh
     $scope.loadSysCatType = function() {
-        var actionUrl = "/optical/listOpticalType";
+        var actionUrl = "/optical/list-optical-type";
         d2tDeferredAjax("", actionUrl, "", "GET").done(function(data) {
             $scope.lstSysCatType = data;
             $scope.$apply();
@@ -116,7 +101,18 @@ opticalApp.controller('OpticalController', function( $scope, $http, $filter, $co
             d2tUpdateAjax(areaId, actionUrl, formData, "callbackAfterSaveType");
         }
     }
+    $scope.loadDetailByType = function(sysCatType) {
+        if($scope.isActive && $scope.isActive == sysCatType.sysCatTypeId) return;
+        $scope.isActive = sysCatType.sysCatTypeId;
+        prepareSearch(sysCatType.sysCatTypeId);
+        opticalTbl.ajax.reload();
+    }
 });
+function prepareSearch(sysCatTypeId) {
+    var areaId = 'formArea';
+    var actionUrl = '/optical/prepare-search?sysCatTypeId=' + sysCatTypeId;
+    d2tUpdateAjax(areaId, actionUrl, '', "GET");
+}
 function callbackAfterSaveType(returnCode, extraValue, sysCatType) {
     var scope = angular.element(document.getElementById('content-body')).scope();
     scope.lstSysCatType.push(sysCatType);
@@ -128,5 +124,49 @@ $(document).ready( function() {
     if (!angular.element(document.getElementById('content-body')).scope()) {
         angular.bootstrap(document.getElementById("content-body"), [ 'opticalApp' ]);
     }
+});
+$(document).ready( function() {
+    $.fn.dataTable.ext.legacy.ajax = true;
+    opticalTbl = $('#opticalTbl').DataTable({
+        processing : true,
+        serverSide : true,
+        deferLoading: 90,
+        ajax : {
+            url : '/optical/load-detail?',
+            type : 'GET',
+            dataSrc : 'data',
+            data : function (data) {
+                var scope = angular.element(document.getElementById('content-body')).scope();
+                var formData = {sysCatTypeId: scope.isActive};
+                d2tCopyProperty(data, formData);
+                return data;
+            }
+        },
+        columns : [
+               {
+                   searchable : false,
+                   orderable : false,
+                   data : null,
+                   targets : 0,
+                   className : "alignCenter",
+                   render : function(data, type, row, cell) {
+                       var info = opticalTbl.page.info();
+                       var stt = 1 + (info.page * info.length) + cell.row;
+                       return stt;
+                   }
+               },
+               { data : "code", },
+               { data : "name", },
+               { data : "totalProduct",
+                   searchable : false,
+                   orderable : false,
+               },
+               {
+                   orderable : false,
+                   data: null,
+               },
+        ]
+        ,order : []
+    });
 });
 </script>

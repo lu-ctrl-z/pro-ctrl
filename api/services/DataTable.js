@@ -43,7 +43,7 @@ module.exports.buildOrder = function(columnsOrder, defaultSort, req) {
     return sort;
 };
 
-module.exports.toJson = function(req, res, query, countQuery, paramList) {
+module.exports.toJson = function(req, res, query, countQuery, paramList, callback) {
     var param = DataTable.getParam(req);
 
     var returnData = {};
@@ -69,7 +69,11 @@ module.exports.toJson = function(req, res, query, countQuery, paramList) {
                         }
                         returnData.recordsTotal = recordsTotal;
                         returnData.recordsFiltered = recordsTotal;
-                        res.json(returnData);
+                        if(callback) {
+                            callback(returnData);
+                        } else {
+                            res.json(returnData);
+                        }
                     }
                 });
             }

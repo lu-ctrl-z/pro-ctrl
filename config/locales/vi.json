@@ -36,6 +36,8 @@
     ,"delete.succcess":          "Xóa dữ liệu thành công"
     ,"approve.succcess":         "Phê duyệt dữ liệu thành công"
     ,"global.title":             "Danh mục"
+    ,"global.code":              "Mã"
+    ,"global.name":              "Tên"
   
     ,"dataTable.processing":     "Đang xử lý..."
     ,"dataTable.show":           "Hiển thị"
@@ -104,7 +106,8 @@
     ,"invoice.invoiceDate" : "Ngày xuất hóa đơn"
     ,"invoice.customerFullName" : "Họ tên khách hàng"
     ,"optical.opticalInfo" : "<span class=\"glyphicons glyphicons-zoom-in\"></span> Quản lý mắt kính"
-    ,"optical.opticalSysCatType" : "<span class=\"glyphicons glyphicons-zoom-in\"></span> Loại mắt kính"
-    ,"optical.opticalSysCat" : "<span class=\"glyphicons glyphicons-zoom-in\"></span> Danh sách mắt kính"
+    ,"optical.opticalSysCatType" : "<span class=\"glyphicons glyphicons-zoom-in\"></span> Danh mục"
+    ,"optical.opticalSysCat" : "<span class=\"glyphicons glyphicons-zoom-in\"></span> Chi tiết "
+    ,"optical.totalProduct" : "Số lượng"
     
 }
