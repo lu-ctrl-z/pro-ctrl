@@ -113,7 +113,7 @@ module.exports = {
                 }, function(err, user) {
                     if (err) {
                         cb();
-                    } else if(user) {
+                    } else {
                         cb(user);
                     }
                 });
